@@ -283,12 +283,15 @@ export function Navbar() {
                             className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 rounded-xl p-1"
                             aria-label="ReCiclo - Ir al inicio"
                         >
-                            <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }} className="flex items-center">
+                            <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }} className="flex items-center gap-2">
                                 <img
                                     src={isOverHero || isDarkMode ? LOGO_DARK : LOGO_LIGHT}
                                     alt="ReCiclo"
                                     className="h-7 w-auto object-contain select-none transition-all duration-300"
                                 />
+                                <span className="text-[10px] font-bold tracking-wider uppercase px-1.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">
+                                    v2.0
+                                </span>
                             </motion.div>
                         </Link>
                         <LiteModeBadge tier={perfTier} source={perfSource} onRequestFull={requestImmersive} />

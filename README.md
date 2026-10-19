@@ -1,54 +1,42 @@
-# React + TypeScript + Vite
+# ReCiclo v2.0 ♻️
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![Compilar y Validar ReCiclo Web](https://github.com/Harry224-hue/ReCiclo-v2/actions/workflows/build.yml/badge.svg)](https://github.com/Harry224-hue/ReCiclo-v2/actions/workflows/build.yml)
 
-Currently, two official plugins are available:
+> **ReCiclo — Visión Inteligente para Reciclaje en el IT Morelia**  
+> Aplicación web progresiva multiplataforma con IA para reconocimiento y clasificación automatizada de residuos sólidos.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Novedades de la Versión 2.0
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Arquitectura Web Pura:** Eliminada la dependencia pesada de contenedores nativos (Android/Capacitor y Windows/Electron), operando con estándares web modernos (`MediaDevices API`, `ServiceWorker`, interfaces fluidas con Framer Motion).
+- **Integración Continua (CI):** Pipeline automatizado con **GitHub Actions** para comprobación de linting y compilación en cada cambio.
+- **Rendimiento Mejorado:** Cargas dinámicas con `React.lazy`, optimización de bundle con Vite y Tailwind CSS v4.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🛠️ Tecnologías Principales
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **Frontend:** React 19 + TypeScript + Vite
+- **Estilos:** Tailwind CSS v4 + Framer Motion + Lenis Smooth Scroll
+- **Visión por Computadora / IA:** TensorFlow.js MobileNet + Google Gemini Vision API
+- **Backend / Datos:** Firebase Authentication & Cloud Firestore
+- **Mapas:** Leaflet / OpenStreetMap
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+---
+
+## 💻 Desarrollo Local
+
+```bash
+# 1. Instalar dependencias
+npm install
+
+# 2. Iniciar servidor de desarrollo
+npm run dev
+
+# 3. Compilar para producción
+npm run build
+
+# 4. Validar linter
+npm run lint
 ```
