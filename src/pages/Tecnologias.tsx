@@ -36,288 +36,288 @@ interface TechSection {
 const TECH_CATEGORIES: TechSection[] = [
   {
     id: "ai",
-    title: "Inteligencia Artificial y Visión Computacional",
+    title: "Inteligencia Artificial y Visión",
     shortTitle: "IA & Visión",
     icon: Brain,
-    description: "Modelos neuronales de vanguardia y motores de inferencia multimodal tanto en la nube como en el dispositivo.",
+    description: "Modelos visuales para reconocer qué tipo de residuo tienes frente a ti y cómo debes separarlo.",
     items: [
       {
         name: "Google Gemini Vision API",
-        category: "IA Multimodal en la Nube",
-        description: "Modelo Gemini 1.5/2.0 Flash para reconocimiento visual de empaques, estimación del estado del residuo, cálculo de biodegradabilidad y sugerencias ecológicas contextuales.",
-        badge: "Google AI Studio",
+        category: "IA en la Nube",
+        description: "Modelo multimodal en la nube que analiza la foto del residuo, reconoce el material, estima su degradación y te da consejos prácticos para reciclarlo.",
+        badge: "Google AI",
       },
       {
-        name: "TensorFlow.js (TF.js v4.22)",
-        category: "Motor de Aprendizaje en Navegador",
-        description: "Plataforma de machine learning de código abierto acelerada por WebGL para ejecutar redes neuronales convolucionales directamente en el cliente.",
-        badge: "WebGL Acceleration",
+        name: "TensorFlow.js",
+        category: "Motor de IA en Navegador",
+        description: "Permite ejecutar redes neuronales directamente en la página web usando el procesador o tarjeta gráfica de tu dispositivo.",
+        badge: "TensorFlow.js",
       },
       {
-        name: "MobileNet v2 (Alpha 1.0)",
-        category: "Red Neuronal en Dispositivo",
-        description: "Red neuronal convolucional compacta optimizada para teléfonos móviles, permitiendo preclasificación de residuos instantánea y 100% offline sin consumir datos.",
-        badge: "Edge / Offline AI",
+        name: "MobileNet v2",
+        category: "IA Local / Offline",
+        description: "Red neuronal ligera que identifica residuos directamente en tu teléfono, rápido y sin necesidad de gastar datos móviles ni tener internet.",
+        badge: "Offline Ready",
       },
     ],
   },
   {
     id: "mobile",
-    title: "Experiencia Móvil, PWA y Sensores de Hardware",
+    title: "Experiencia Móvil y Web (Mobile)",
     shortTitle: "Mobile & PWA",
     icon: Smartphone,
-    description: "APIs web nativas para acceso a hardware, interacción táctil de baja fricción y funcionamiento como aplicación instalable.",
+    description: "Herramientas pensadas para que la app se sienta como una aplicación nativa en tu teléfono.",
     items: [
       {
-        name: "PWA (Progressive Web App)",
-        category: "Arquitectura Móvil Instalable",
-        description: "Capacidad de instalación en pantalla de inicio (Android e iOS) operando en modo pantalla completa sin barra de navegación, con carga instantánea.",
-        badge: "W3C PWA Standards",
+        name: "PWA (Aplicación Web Progresiva)",
+        category: "Instalación en Celular",
+        description: "Puedes agregar ReCiclo a la pantalla de inicio de tu celular (Android o iPhone); abre a pantalla completa y sin barras de navegador.",
+        badge: "PWA Web",
       },
       {
-        name: "Web MediaDevices API",
-        category: "Hardware / Cámara Trasera",
-        description: "Conexión directa y de baja latencia con el sensor óptico del smartphone mediante `getUserMedia` con enfoque continuo y control ambiental.",
-        badge: "MediaStream API",
+        name: "Web MediaDevices (Cámara)",
+        category: "Cámara del Teléfono",
+        description: "Se conecta a la cámara trasera de tu teléfono con enfoque automático para tomar la foto del residuo al instante.",
+        badge: "Cámara Web",
       },
       {
         name: "Vibration API (Respuesta Háptica)",
-        category: "Sensor Táctil / Haptics",
-        description: "Pulsos de microvibración háptica (`navigator.vibrate`) en dispositivos móviles al confirmar la detección y clasificación de un residuo sólido.",
-        badge: "Web Haptics API",
+        category: "Vibración Táctil",
+        description: "El teléfono vibra suavemente cuando la cámara detecta y clasifica el residuo con éxito, confirmando la acción.",
+        badge: "Vibración",
       },
       {
-        name: "Geolocation API (GPS en Tiempo Real)",
-        category: "Sensores de Posicionamiento",
-        description: "Ubicación satelital del alumno para calcular la distancia y orientación hacia los contenedores de acopio más cercanos dentro de Campus 1 y 2.",
-        badge: "W3C Geolocation",
+        name: "Geolocation API (GPS)",
+        category: "Ubicación en Vivo",
+        description: "Usa la ubicación de tu celular dentro del campus para mostrarte en el mapa cuál es el bote adecuado más cercano a ti.",
+        badge: "GPS Campus",
       },
       {
-        name: "Touch Gestures & Bottom Dock",
-        category: "Ergonomía Móvil Touch",
-        description: "Navegación inferior tipo cápsula flotante diseñada ergonómicamente para operación natural con el pulgar a una sola mano en pantallas táctiles.",
-        badge: "Mobile-First UI",
+        name: "Diseño Mobile-First",
+        category: "Uso a una Mano",
+        description: "Interfaz ergonómica con barra de navegación inferior tipo cápsula, pensada para usarse cómodamente con el pulgar.",
+        badge: "Touch UI",
       },
       {
-        name: "Web Storage & Caching Local",
-        category: "Persistencia sin Conexión",
-        description: "Almacenamiento persistente en cliente con `localStorage` e IndexedDB para conservar historiales, preferencias, fotos en base64 y estados offline.",
-        badge: "Client Storage",
+        name: "Almacenamiento Local (Offline)",
+        category: "Memoria del Dispositivo",
+        description: "Guarda tu historial de escaneos y preferencias en la memoria del celular para que puedas revisarlos aunque no tengas señal.",
+        badge: "Sin Conexión",
       },
     ],
   },
   {
     id: "frontend",
-    title: "Arquitectura y Desarrollo Frontend",
-    shortTitle: "Frontend Web",
+    title: "Desarrollo Frontend y Navegación",
+    shortTitle: "Frontend",
     icon: Code2,
-    description: "Infraestructura moderna para garantizar rendimiento instantáneo, accesibilidad y bajo consumo de batería.",
+    description: "La base sobre la que está construida toda la página web y la experiencia de usuario.",
     items: [
       {
         name: "React 19",
-        category: "Librería Principal de UI",
-        description: "Última generación de React con concurrencia nativa, Suspense dinámico, transiciones fluidas y renderizado ultraoptimizado.",
-        badge: "v19.0.0",
+        category: "Librería Principal",
+        description: "La versión más reciente de React para crear pantallas interactivas que cargan al instante y consumen poca batería.",
+        badge: "React 19",
       },
       {
         name: "TypeScript 5.7",
-        category: "Tipado Estático Riguroso",
-        description: "Seguridad de tipos estricta (`strict: true`) para modelos de residuos, esquemas de Firebase, coordenadas cartográficas y autenticación.",
-        badge: "Strict Mode",
+        category: "Código Seguro",
+        description: "Ayuda a que el código no tenga errores de programación en los datos de residuos, usuarios y coordenadas del campus.",
+        badge: "TypeScript",
       },
       {
         name: "Tailwind CSS v4",
-        category: "Motor de Diseño y Estilos",
-        description: "Motor de utilidades CSS de alto rendimiento con tokens y variables dinámicas para paletas cromáticas intercambiables en caliente.",
+        category: "Diseño y Estilos",
+        description: "Sistema de diseño rápido y moderno para que la aplicación se adapte a cualquier pantalla y soporte temas de color.",
         badge: "Tailwind v4",
       },
       {
         name: "Framer Motion 12",
-        category: "Física y Animación Reactiva",
-        description: "Animaciones de resortes realistas, cápsulas deslizantes elásticas en menús, efectos parallax reactivos al scroll y transiciones de estado.",
-        badge: "Motion Engine",
+        category: "Animaciones Fluidas",
+        description: "Maneja las animaciones suaves, los botones elásticos y las transiciones entre pantallas.",
+        badge: "Framer Motion",
       },
       {
         name: "Lenis Smooth Scroll",
-        category: "Cinemática de Desplazamiento",
-        description: "Normalización de desplazamiento suave para una navegación táctil y de escritorio precisa a 60/120 FPS sin alterar el scroll nativo.",
-        badge: "60/120 FPS",
+        category: "Scroll Suave",
+        description: "Hace que el desplazamiento al deslizar hacia arriba o hacia abajo se sienta súper suave a 60 y 120 cuadros por segundo.",
+        badge: "Scroll 120Hz",
       },
       {
         name: "React Router v7",
-        category: "Enrutamiento SPA Declarativo",
-        description: "Gestión de rutas del lado del cliente con carga diferida (`React.lazy`) para aislar los paquetes pesados como TensorFlow en sus propias vistas.",
-        badge: "Client Routing",
+        category: "Navegación entre Páginas",
+        description: "Permite cambiar entre Inicio, Escáner, Mapa y Perfil sin recargar la página, descargando cada módulo solo cuando se visita.",
+        badge: "React Router",
       },
     ],
   },
   {
     id: "graphics",
-    title: "Física 2D, Gráficos e Iconografía",
-    shortTitle: "Física & UI",
+    title: "Física Interactiva y Gráficos",
+    shortTitle: "Física & Gráficos",
     icon: Boxes,
-    description: "Simuladores cinemáticos interactivos, iconografía accesible y herramientas espectrales de personalización.",
+    description: "Elementos visuales, animaciones interactivas e iconografía que acompañan cada pantalla.",
     items: [
       {
-        name: "Matter.js (v0.20)",
-        category: "Motor de Física 2D",
-        description: "Simulador físico de cuerpos rígidos con gravedad interactiva, colisiones elásticas y masa para la animación de residuos cayendo en el Hero.",
-        badge: "2D Physics",
+        name: "Matter.js",
+        category: "Física en 2D",
+        description: "Simula gravedad, rebotes y choques realistas en los residuos que caen en la pantalla de bienvenida.",
+        badge: "Física 2D",
       },
       {
-        name: "Lucide React & Lucide Animated",
-        category: "Iconografía Vectorial SVG",
-        description: "Colección extensa de iconos limpios, accesibles y consistentes en diseño para enriquecer visualmente cada sección y botón de acción.",
-        badge: "SVG Vectors",
+        name: "Lucide Icons",
+        category: "Iconos Vectoriales",
+        description: "Iconos limpios y claros para que cada botón y opción se entienda de un vistazo.",
+        badge: "Iconos SVG",
       },
       {
         name: "React Icons (Remix Icons)",
-        category: "Iconografía Móvil Outline / Solid",
-        description: "Iconos con estados alternables lineales y sólidos para representar de manera inequívoca la pantalla activa en la barra de navegación móvil.",
-        badge: "Remix Icons (ri)",
+        category: "Iconos Móviles",
+        description: "Iconos especiales con versión de línea y relleno para resaltar en qué pestaña estás en tu teléfono.",
+        badge: "Iconos Móvil",
       },
       {
-        name: "UIW Color Wheel & Color Convert",
-        category: "Manipulación de Color HSV/RGB",
-        description: "Selectores cromáticos interactivos y conversores matemáticos de color que potencian el configurador de acento temático del usuario.",
-        badge: "Color Wheel",
+        name: "Selector de Color Espectral",
+        category: "Personalización",
+        description: "Rueda de color interactiva que te permite cambiar el color de acento de toda la app a tu gusto.",
+        badge: "Colores",
       },
     ],
   },
   {
     id: "backend",
-    title: "Backend Cloud, Infraestructura y DevOps",
-    shortTitle: "Cloud & Backend",
+    title: "Servicios en la Nube y DevOps",
+    shortTitle: "Nube & DevOps",
     icon: Server,
-    description: "Servicios en la nube, microservicios serverless, bases de datos reactivas y automatización de despliegues.",
+    description: "Servicios en internet que guardan la información, ejecutan la IA con seguridad y compilan el proyecto.",
     items: [
       {
         name: "Firebase Authentication",
-        category: "Seguridad y Gestión de Sesiones",
-        description: "Gestión de sesiones protegidas con Firebase Auth, cifrado en tránsito SSL, tokens JWT y persistencia segura de estado de usuarios ponys.",
-        badge: "Firebase v12",
+        category: "Cuentas y Seguridad",
+        description: "Permite registrarte e iniciar sesión de forma segura sin poner en riesgo tus contraseñas.",
+        badge: "Firebase",
       },
       {
         name: "Cloud Firestore",
-        category: "Base de Datos NoSQL Distribuida",
-        description: "Almacenamiento reactivo de perfiles de usuario, campus predilecto, bitácora de escaneos y sincronización de preferencias en la nube de Google.",
+        category: "Base de Datos",
+        description: "Base de datos en la nube de Google que sincroniza tu perfil de estudiante, tus puntos y tu historial de escaneos.",
         badge: "Google Cloud",
       },
       {
         name: "Vercel Serverless Functions",
-        category: "Microservicios Serverless Backend",
-        description: "Función serverless `/api/gemini` que resguarda la variable de entorno `GEMINI_API_KEY` en el servidor, evitando exponer claves secretas en el cliente.",
-        badge: "Serverless Edge",
+        category: "Servidor Seguro",
+        description: "Microservidor en la nube (`/api/gemini`) que conecta con la IA de Google protegiendo la clave secreta de la API.",
+        badge: "Vercel API",
       },
       {
-        name: "GitHub Actions (CI/CD)",
-        category: "Integración Continua Automatizada",
-        description: "Flujo de trabajo automatizado que ejecuta comprobación de tipos (`tsc`), validación de linter y compilación de producción en cada push.",
-        badge: "CI / CD Pipeline",
+        name: "GitHub Actions",
+        category: "Revisión Automática",
+        description: "Revisa automáticamente que el código no tenga fallas y compila la versión de prueba en cada cambio guardado.",
+        badge: "GitHub CI",
       },
       {
         name: "Vite 6.2 Bundler",
-        category: "Empaquetador y Servidor Local",
-        description: "Empaquetador ultrarrápido con Hot Module Replacement (HMR) y compresión Rollup para generación eficiente de trozos estáticos.",
-        badge: "ESM Bundler",
+        category: "Empaquetador",
+        description: "Compila el código en paquetes pequeños y ligeros para que la página abra rápido incluso con datos móviles.",
+        badge: "Vite ESM",
       },
       {
         name: "ESLint 9",
-        category: "Control de Calidad Estática",
-        description: "Configuración moderna de linter (Flat Config) para garantizar buenas prácticas de código limpio, hooks de React y estándares de accesibilidad.",
-        badge: "Code Quality",
+        category: "Calidad de Código",
+        description: "Audita que el código esté escrito con buenas prácticas y sin funciones innecesarias que hagan lenta la aplicación.",
+        badge: "ESLint",
       },
     ],
   },
   {
     id: "gis",
-    title: "Cartografía y Sistemas de Información Geográfica",
-    shortTitle: "Cartografía SIG",
+    title: "Mapas y Georreferenciación",
+    shortTitle: "Mapas",
     icon: Compass,
-    description: "Herramientas de georreferenciación y renderizado de mapas abiertos para la ubicación espacial de contenedores.",
+    description: "Planos y mapas interactivos del Instituto Tecnológico de Morelia para ubicar los botes.",
     items: [
       {
-        name: "Leaflet API (v1.9)",
-        category: "Librería Cartográfica Interactiva",
-        description: "Renderizado interactivo de mapas para móviles y computadoras, con marcadores personalizados por color de bote, áreas y ventanas emergentes.",
-        badge: "Leaflet.js",
+        name: "Leaflet.js",
+        category: "Visor de Mapas",
+        description: "Librería ligera de mapas interactivos que muestra los puntos de reciclaje, andadores y edificios del campus.",
+        badge: "Leaflet",
       },
       {
-        name: "OpenStreetMap & CartoDB Tiles",
-        category: "Capas de Teselas Cartográficas",
-        description: "Servidor de teselas cartográficas abiertas de alta resolución para geolocalizar con fidelidad edificios, andadores y cafeterías del ITM.",
+        name: "OpenStreetMap",
+        category: "Mapas Libres",
+        description: "Mapa abierto y colaborativo que sirve de fondo para ubicar las instalaciones de Campus 1 y Campus 2.",
         badge: "OpenStreetMap",
       },
     ],
   },
   {
     id: "normativity",
-    title: "Normatividad Ambiental y Procedimientos Oficiales del ITM",
+    title: "Normatividad Ambiental y del ITM",
     shortTitle: "Normativa & SGI",
     icon: Scale,
-    description: "Bases de conocimiento oficiales que sustentan la veracidad de los datos de degradación, colores de botes y clasificación.",
+    description: "Normas oficiales y reglamentos institucionales en los que se basan los colores y categorías de los botes.",
     items: [
       {
-        name: "Procedimiento ITMORELIA-IT-AM-007 Rev. 2",
-        category: "Procedimiento Oficial SGI ITM",
-        description: "Instrucción de trabajo del Sistema de Gestión Integrado del ITM para la separación de RSU: Bote Verde (Orgánicos), Amarillo (Inorgánicos reciclables) y Naranja (Pilas/Manejo especial).",
+        name: "Procedimiento ITMORELIA-IT-AM-007 (Rev. 2)",
+        category: "Regla Oficial del ITM",
+        description: "Instrucción oficial del Sistema de Gestión Integrado del ITM: Bote Verde (Orgánicos), Amarillo (Inorgánicos reciclables) y Naranja (Pilas).",
         badge: "SGI IT Morelia",
       },
       {
-        name: "LGPGIR (Ley General para la Prevención y Gestión Integral)",
-        category: "Marco Jurídico Federal Vigente",
-        description: "Artículos 5, 19 y subsecuentes que definen residuos sólidos urbanos, valorización y economía circular (última reforma DOF 19-01-2026).",
-        badge: "DOF Federal 2026",
+        name: "LGPGIR (Ley General de Residuos)",
+        category: "Ley Federal Mexicana",
+        description: "Ley nacional que define qué es un residuo sólido urbano, qué se puede valorizar y cómo reciclar en México (DOF 2026).",
+        badge: "Ley Federal",
       },
       {
         name: "NOM-161-SEMARNAT-2011",
-        category: "Norma Oficial Mexicana",
-        description: "Criterios para clasificar los residuos de manejo especial y determinación de planes de manejo ambiental responsable.",
+        category: "Norma Mexicana",
+        description: "Criterios oficiales para clasificar los residuos que requieren un plan de manejo especial.",
         badge: "SEMARNAT",
       },
       {
         name: "NOM-052-SEMARNAT-2005",
         category: "Norma de Residuos Peligrosos",
-        description: "Identificación de características de toxicidad y corrosividad ambiental aplicadas al acopio de baterías y componentes electrónicos.",
-        badge: "Norma Oficial",
+        description: "Define las características de toxicidad y riesgo ambiental aplicadas al desecho de pilas y electrónicos.",
+        badge: "Peligrosos",
       },
       {
-        name: "INEGI - Censo de Gestión de Residuos",
-        category: "Estadística Oficial del Estado",
-        description: "Datos sobre tasas de recolección y sitios de disposición final en el estado de Michoacán y el municipio de Morelia.",
-        badge: "INEGI Michoacán",
+        name: "INEGI Michoacán",
+        category: "Datos Estadísticos",
+        description: "Estadísticas oficiales sobre la generación y disposición final de basura en Morelia y Michoacán.",
+        badge: "INEGI",
       },
       {
-        name: "PNUMA / Agenda 2030 (ODS)",
-        category: "Directrices Internacionales ONU",
-        description: "Metas prioritarias para ODS 12 (Producción y Consumo Responsables), ODS 13 (Acción por el Clima) y directrices para erradicar plásticos de un solo uso.",
+        name: "Agenda 2030 (ODS 12)",
+        category: "Objetivos ONU",
+        description: "Metas de la ONU para el consumo responsable, reducción del desperdicio y cuidado del medio ambiente.",
         badge: "ODS 12 / ONU",
       },
     ],
   },
   {
     id: "academic",
-    title: "Entorno Institucional y Académico",
+    title: "Entorno Académico e Institucional",
     shortTitle: "Academia ITM",
     icon: GraduationCap,
-    description: "Contexto académico donde se fundamenta la investigación y el prototipo de Desarrollo Sustentable.",
+    description: "La sede y el contexto escolar en el que nació la propuesta de ReCiclo.",
     items: [
       {
         name: "Instituto Tecnológico de Morelia (ITM)",
-        category: "Sede Académica del Proyecto",
-        description: "Campus 1 (Av. Tecnológico #1500) y Campus 2 (Salida Salamanca). Levantamiento preliminar georreferenciado de contenedores y andadores.",
+        category: "Sede del Proyecto",
+        description: "Nuestra casa de estudios. El proyecto toma en cuenta la distribución de botes tanto de Campus 1 como de Campus 2.",
         badge: "TecNM / ITM",
       },
       {
         name: "Materia de Desarrollo Sustentable (ACD-0908)",
-        category: "Asignatura Curricular Rectora",
-        description: "Proyecto integrador que vincula las dimensiones ambiental, social y económica de la sustentabilidad en la formación de ingenieros.",
-        badge: "TecNM 2026",
+        category: "Materia de Origen",
+        description: "Asignatura escolar donde los integrantes del equipo desarrollaron este proyecto integrador para generar impacto ambiental positivo.",
+        badge: "Materia DS",
       },
       {
         name: "Departamento de Química y Bioquímica",
-        category: "Convocatoria Institucional",
-        description: "Comité organizador de la 18° Semana de Oxigena tus Ideas, fomentando el desarrollo de iniciativas sustentables con rigor metodológico.",
+        category: "Convocatoria Oficial",
+        description: "Comité organizador de la 18° Semana de Oxigena tus Ideas, certamen donde se presenta y evalúa este proyecto.",
         badge: "Oxigena 2026",
       },
     ],
@@ -383,7 +383,7 @@ export default function Tecnologias() {
           Tecnologías, APIs y Recursos Oficiales
         </h1>
         <p className="mt-2 text-sm md:text-base text-zinc-600 dark:text-zinc-400 font-normal leading-relaxed max-w-3xl">
-          Inventario exhaustivo de herramientas de desarrollo, librerías frontend, modelos de inteligencia artificial, capacidades móviles PWA, microservicios serverless y normativas institucionales utilizadas en <strong className="text-zinc-900 dark:text-zinc-200">ReCiclo</strong> para el Instituto Tecnológico de Morelia ({totalItemsCount} recursos documentados).
+          Inventario transparente de las herramientas digitales, modelos de inteligencia artificial, servicios en la nube y normativas oficiales que utilizamos para hacer realidad <strong className="text-zinc-900 dark:text-zinc-200">ReCiclo</strong> en el Instituto Tecnológico de Morelia ({totalItemsCount} recursos documentados).
         </p>
 
         {/* Barra de Filtros y Búsqueda Interactiva (Optimizada para Móvil y Escritorio) */}
@@ -420,7 +420,7 @@ export default function Tecnologias() {
           </div>
         </div>
 
-        {/* Chips de Categorías (Scroll horizontal suave en móviles) */}
+        {/* Chips de Categorías (Scroll horizontal táctil en móviles) */}
         <div className="mt-4 flex items-center gap-1.5 overflow-x-auto pb-2 scrollbar-none no-scrollbar">
           <button
             onClick={() => setSelectedFilter("all")}
@@ -460,10 +460,10 @@ export default function Tecnologias() {
         <div className="text-center py-16 px-4 bg-zinc-50 dark:bg-zinc-900/50 rounded-3xl border border-dashed border-zinc-200 dark:border-zinc-800">
           <Filter className="size-8 mx-auto text-zinc-400 mb-2 opacity-50" />
           <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">
-            No se encontraron tecnologías que coincidan con tu búsqueda
+            No encontramos ninguna coincidencia con tu búsqueda
           </p>
           <p className="text-xs text-zinc-400 mt-1">
-            Intenta con otro término o selecciona "Todas" en los filtros superiores.
+            Intenta con otra palabra o selecciona "Todas" en los botones superiores.
           </p>
           <button
             onClick={() => {
@@ -472,7 +472,7 @@ export default function Tecnologias() {
             }}
             className="mt-4 px-4 py-1.5 text-xs rounded-xl font-medium bg-emerald-500 text-white hover:bg-emerald-600 transition-colors"
           >
-            Restablecer filtros
+            Ver todas las tecnologías
           </button>
         </div>
       ) : (
@@ -535,7 +535,7 @@ export default function Tecnologias() {
                           </div>
                         </div>
 
-                        {/* Descripción técnica */}
+                        {/* Descripción técnica en lenguaje natural */}
                         <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
                           {item.description}
                         </p>
@@ -553,10 +553,10 @@ export default function Tecnologias() {
       <div className="mt-10 p-6 rounded-3xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 text-xs sm:text-sm text-emerald-900 dark:text-emerald-200 leading-relaxed">
         <div className="flex items-center gap-2 font-bold mb-1.5">
           <ShieldCheck className="size-4.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
-          <span>Compromiso de Transparencia y Rigor Científico</span>
+          <span>Compromiso de Honestidad y Rigor Académico</span>
         </div>
         <p>
-          ReCiclo no emplea cifras inventadas ni pretende resolver el manejo integral de residuos de manera aislada. La tecnología se implementa como un vehículo educativo accesible para respaldar mejores decisiones cotidianas dentro de la comunidad ponys del IT Morelia, respetando las normas ambientales de México y el procedimiento institucional ITMORELIA-IT-AM-007.
+          ReCiclo es una propuesta estudiantil desarrollada para el Instituto Tecnológico de Morelia. No inventamos cifras de precisión ni prometemos soluciones mágicas; combinamos herramientas web modernas, inteligencia artificial y las normas ambientales oficiales de México para apoyar a nuestra comunidad de ponys a separar mejor sus residuos día con día.
         </p>
       </div>
 
