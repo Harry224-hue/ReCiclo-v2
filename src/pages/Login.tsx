@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, Lock, Eye, EyeOff, ArrowRight, ArrowLeft, Shield, Sparkles } from "lucide-react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { loginWithEmail, loginWithGoogle, loginWithGithub, setAuthPersistence, sendPasswordReset } from "../firebase";
+import { loginWithEmail, loginWithGoogle, loginWithGithub, setAuthPersistence, sendPasswordReset, getAuthErrorMessage } from "../firebase";
 import { useTheme } from "../context/ThemeContext";
 import { useAuth } from "../context/AuthContext";
 import { AuthSuccessOverlay } from "../components/AuthSuccessOverlay";
@@ -115,17 +115,7 @@ export default function Login() {
             setAuthOverlay((prev) => ({ ...prev, show: false }));
             setIsPasswordError(true);
             setShakeKey((prev) => prev + 1);
-
-            const code = (err as { code?: string }).code;
-            if (code === "auth/user-not-found") {
-                setError("No existe una cuenta registrada con este correo.");
-            } else if (code === "auth/wrong-password" || code === "auth/invalid-credential") {
-                setError("Contraseña incorrecta. Verifica tus datos.");
-            } else if (code === "auth/invalid-email") {
-                setError("Correo electrónico inválido.");
-            } else {
-                setError("Error al iniciar sesión. Intenta de nuevo.");
-            }
+            setError(getAuthErrorMessage(err, "Error al iniciar sesión. Intenta de nuevo."));
         } finally {
             setLoading(false);
         }
@@ -152,8 +142,7 @@ export default function Login() {
         } catch (err: unknown) {
             setAuthOverlay((prev) => ({ ...prev, show: false }));
             console.error("Error en Google login:", err);
-            const msg = err instanceof Error ? err.message : (err as { message?: string })?.message || "Error al iniciar sesión con Google.";
-            setError(msg);
+            setError(getAuthErrorMessage(err, "Error al iniciar sesión con Google."));
         } finally {
             setLoading(false);
         }
@@ -180,8 +169,7 @@ export default function Login() {
         } catch (err: unknown) {
             setAuthOverlay((prev) => ({ ...prev, show: false }));
             console.error("Error en GitHub login:", err);
-            const msg = err instanceof Error ? err.message : (err as { message?: string })?.message || "Error al iniciar sesión con GitHub.";
-            setError(msg);
+            setError(getAuthErrorMessage(err, "Error al iniciar sesión con GitHub."));
         } finally {
             setLoading(false);
         }
@@ -199,15 +187,9 @@ export default function Login() {
             await sendPasswordReset(emailTrim);
             setForgotStatus({ type: "sent", message: "Te enviamos un enlace de recuperación a tu correo." });
         } catch (err) {
-            const code = (err as { code?: string })?.code;
             setForgotStatus({
                 type: "error",
-                message:
-                    code === "auth/user-not-found"
-                        ? "No existe una cuenta registrada con ese correo."
-                        : code === "auth/invalid-email"
-                        ? "El correo no es válido."
-                        : "No se pudo enviar el enlace. Inténtalo de nuevo.",
+                message: getAuthErrorMessage(err, "No se pudo enviar el enlace. Inténtalo de nuevo."),
             });
         }
     };

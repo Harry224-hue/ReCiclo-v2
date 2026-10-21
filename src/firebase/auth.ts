@@ -195,3 +195,46 @@ export async function updateUserProfile(uid: string, patch: ProfileUpdate): Prom
         }
     }
 }
+
+// ─── Traducción amigable de errores de Firebase Auth ───────
+export function getAuthErrorMessage(err: unknown, defaultMessage = "Ocurrió un error al procesar la solicitud."): string {
+    const code = (err as { code?: string })?.code || "";
+
+    switch (code) {
+        case "auth/unauthorized-domain": {
+            const currentHost = typeof window !== "undefined" ? window.location.hostname : "tu dominio";
+            return `Dominio no autorizado (${currentHost}). Agrégalo en Firebase Console > Authentication > Settings > Dominios autorizados.`;
+        }
+        case "auth/popup-closed-by-user":
+            return "Se cerró la ventana emergente antes de completar el inicio de sesión.";
+        case "auth/cancelled-popup-request":
+            return "Operación cancelada debido a otra solicitud de acceso concurrente.";
+        case "auth/popup-blocked":
+            return "El navegador bloqueó la ventana emergente de inicio de sesión. Permite ventanas emergentes para continuar.";
+        case "auth/account-exists-with-different-credential":
+            return "Ya existe una cuenta vinculada a este correo con otro método de acceso.";
+        case "auth/user-not-found":
+            return "No existe una cuenta registrada con este correo.";
+        case "auth/wrong-password":
+        case "auth/invalid-credential":
+            return "Credenciales incorrectas. Verifica tus datos e intenta nuevamente.";
+        case "auth/invalid-email":
+            return "El formato del correo electrónico no es válido.";
+        case "auth/email-already-in-use":
+            return "Este correo ya está registrado en ReCiclo.";
+        case "auth/weak-password":
+        case "auth/password-does-not-meet-requirements":
+            return "La contraseña no cumple con los requisitos mínimos de seguridad.";
+        case "auth/network-request-failed":
+            return "Error de red. Verifica tu conexión a internet.";
+        case "auth/too-many-requests":
+            return "Demasiados intentos fallidos. Por seguridad, espera un momento antes de reintentar.";
+        case "auth/operation-not-allowed":
+            return "Este método de inicio de sesión no está habilitado en Firebase Console.";
+        default:
+            if (err instanceof Error && err.message && !err.message.startsWith("Firebase:")) {
+                return err.message;
+            }
+            return defaultMessage;
+    }
+}

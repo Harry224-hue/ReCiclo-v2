@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, Lock, Eye, EyeOff, User, ArrowRight, ArrowLeft, Check, Shield, Sparkles } from "lucide-react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { registerWithEmail, loginWithGoogle, loginWithGithub } from "../firebase";
+import { registerWithEmail, loginWithGoogle, loginWithGithub, getAuthErrorMessage } from "../firebase";
 import { useTheme } from "../context/ThemeContext";
 import { useAuth } from "../context/AuthContext";
 import { AuthSuccessOverlay } from "../components/AuthSuccessOverlay";
@@ -131,17 +131,7 @@ export default function Registro() {
             setAuthOverlay((prev) => ({ ...prev, show: false }));
             setIsPasswordError(true);
             setShakeKey((prev) => prev + 1);
-
-            const code = (err as { code?: string }).code;
-            if (code === "auth/email-already-in-use") {
-                setError("Este correo ya está registrado en ReCiclo.");
-            } else if (code === "auth/invalid-email") {
-                setError("Correo electrónico inválido.");
-            } else if (code === "auth/weak-password" || code === "auth/password-does-not-meet-requirements") {
-                setError("La contraseña no cumple con los requisitos de seguridad de Firebase.");
-            } else {
-                setError("Error al crear la cuenta. Intenta de nuevo.");
-            }
+            setError(getAuthErrorMessage(err, "Error al crear la cuenta. Intenta de nuevo."));
         } finally {
             setLoading(false);
         }
@@ -168,8 +158,7 @@ export default function Registro() {
         } catch (err: unknown) {
             setAuthOverlay((prev) => ({ ...prev, show: false }));
             console.error("Error en Google register:", err);
-            const msg = err instanceof Error ? err.message : (err as { message?: string })?.message || "Error al registrarse con Google.";
-            setError(msg);
+            setError(getAuthErrorMessage(err, "Error al registrarse con Google."));
         } finally {
             setLoading(false);
         }
@@ -196,8 +185,7 @@ export default function Registro() {
         } catch (err: unknown) {
             setAuthOverlay((prev) => ({ ...prev, show: false }));
             console.error("Error en GitHub register:", err);
-            const msg = err instanceof Error ? err.message : (err as { message?: string })?.message || "Error al registrarse con GitHub.";
-            setError(msg);
+            setError(getAuthErrorMessage(err, "Error al registrarse con GitHub."));
         } finally {
             setLoading(false);
         }

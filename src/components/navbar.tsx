@@ -45,9 +45,12 @@ const DESKTOP_NAV_LINKS = [
 ];
 
 export function Navbar() {
-    const [scrolled, setScrolled] = useState(false);
+    const location = useLocation();
+    const isHome = location.pathname === "/";
+    const [scrolled, setScrolled] = useState(() => (typeof window !== "undefined" ? window.scrollY > 20 : false));
+    const [scrollY, setScrollY] = useState(() => (typeof window !== "undefined" ? window.scrollY : 0));
     const [notchVisible, setNotchVisible] = useState(true);
-    const lastScrollY = useRef(0);
+    const lastScrollY = useRef(typeof window !== "undefined" ? window.scrollY : 0);
 
     const { user, profile, isLoggedIn } = useAuth();
     const currentUser = {
@@ -126,15 +129,15 @@ export function Navbar() {
 
     const navTheme = getThemeClasses("navbar");
     const dockTheme = getThemeClasses("dock");
-    const location = useLocation();
 
     const pillSpring = { type: "spring" as const, stiffness: 600, damping: 38, mass: 0.4 };
     const accentStyle = ACCENT_STYLES[accentColor as keyof typeof ACCENT_STYLES] ?? ACCENT_STYLES.emerald;
     const scrollTransition = visualMode === "immersive" ? "transition-all duration-500 ease-out" : "transition-none";
 
-    const [scrollY, setScrollY] = useState(0);
-    const isOverHero = location.pathname === "/" && scrollY < 80;
-    const shouldShowGlassNavbar = scrolled;
+    const isOverHero = isHome && scrollY < 80;
+    // La barra de cristal debe estar siempre visible en páginas internas (como /mapa, /escanear, etc.),
+    // y en la página de inicio debe mostrarse cuando el usuario se desplaza fuera del hero.
+    const shouldShowGlassNavbar = !isHome || scrolled;
 
     // Lógica para auto-hide al bajar y REAPARICIÓN INMEDIATA al hacer scroll hacia arriba
     useEffect(() => {
@@ -157,9 +160,17 @@ export function Navbar() {
             lastScrollY.current = currentY;
         };
 
+        handleScroll();
         window.addEventListener("scroll", handleScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
+
+    // Sincronizar scroll y visibilidad al navegar entre rutas
+    useEffect(() => {
+        const currentY = window.scrollY;
+        setScrollY(currentY);
+        setScrolled(currentY > 20);
+    }, [location.pathname]);
 
     const pathnameRef = useRef(location.pathname);
     pathnameRef.current = location.pathname;
@@ -210,6 +221,7 @@ export function Navbar() {
     useEffect(() => {
         const rafId = requestAnimationFrame(updatePills);
         window.addEventListener("resize", updatePills);
+        document.fonts?.ready?.then(updatePills);
         return () => {
             cancelAnimationFrame(rafId);
             window.removeEventListener("resize", updatePills);
@@ -259,7 +271,7 @@ export function Navbar() {
             {/* 1. MODO PC (Inicio, Escáner, Mapa, Perfil + Botón Ajustes + Menú) */}
             <motion.header
                 initial={{ y: -30, opacity: 0 }}
-                animate={{ y: 0, opacity: 1, scale: scrolled ? 1 : 1.015 }}
+                animate={{ y: 0, opacity: 1, scale: shouldShowGlassNavbar ? 1 : 1.015 }}
                 transition={{
                     default: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
                     scale: { type: "spring", stiffness: 170, damping: 26, mass: 0.9 },

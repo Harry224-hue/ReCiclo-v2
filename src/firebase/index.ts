@@ -16,6 +16,7 @@ export {
     updateUserProfile,
     setAuthPersistence,
     sendPasswordReset,
+    getAuthErrorMessage,
 } from "./auth";
 export type { ProfileUpdate } from "./auth";
 
