@@ -1,200 +1,383 @@
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Globe, Leaf, ShieldCheck, TreePine, Droplets, Wind, ArrowRight } from "lucide-react";
+import {
+  Globe2,
+  Leaf,
+  Users,
+  TrendingUp,
+  CheckCircle2,
+  FileCheck2,
+  ShieldCheck,
+  ArrowRight,
+  MapPin,
+  Sparkles,
+  Scale,
+} from "lucide-react";
 import { Link } from "react-router-dom";
-import CountUp from "../components/count-number";
 import { useTheme } from "../context/ThemeContext";
-import { Footer } from "../components/footer";
-
-const ACCENT_STYLES = {
-    emerald: {
-        text: "text-emerald-600 dark:text-emerald-400",
-        gradient: "from-emerald-500 to-teal-600 dark:from-emerald-400 dark:to-teal-300",
-        badge: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20",
-        btn: "bg-emerald-600 hover:bg-emerald-500 text-white shadow-emerald-500/20",
-    },
-    blue: {
-        text: "text-blue-600 dark:text-blue-400",
-        gradient: "from-blue-500 to-cyan-600 dark:from-blue-400 dark:to-cyan-300",
-        badge: "bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20",
-        btn: "bg-blue-600 hover:bg-blue-500 text-white shadow-blue-500/20",
-    },
-    purple: {
-        text: "text-purple-600 dark:text-purple-400",
-        gradient: "from-purple-500 to-fuchsia-600 dark:from-purple-400 dark:to-fuchsia-300",
-        badge: "bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20",
-        btn: "bg-purple-600 hover:bg-purple-500 text-white shadow-purple-500/20",
-    },
-    rose: {
-        text: "text-rose-600 dark:text-rose-400",
-        gradient: "from-rose-500 to-pink-600 dark:from-rose-400 dark:to-pink-300",
-        badge: "bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20",
-        btn: "bg-rose-600 hover:bg-rose-500 text-white shadow-rose-500/20",
-    },
-};
-
-const PILLARS = [
-    {
-        icon: TreePine,
-        title: "Preservación Forestal",
-        desc: "Cada tonelada de papel y cartón reciclado a través de nuestra comunidad salva hasta 17 árboles maduros y evita la deforestación.",
-        metric: "12,400+ árboles protegidos",
-    },
-    {
-        icon: Droplets,
-        title: "Ahorro de Agua",
-        desc: "Guiamos a las personas a limpiar y separar envases sin desperdiciar agua potable mediante técnicas de enjuague eficiente.",
-        metric: "1.8M de litros ahorrados",
-    },
-    {
-        icon: Wind,
-        title: "Reducción de CO₂",
-        desc: "Al desviar residuos plásticos y metálicos de los vertederos reducimos las emisiones directas de metano y dióxido de carbono.",
-        metric: "25 Toneladas mitigadas",
-    },
-    {
-        icon: ShieldCheck,
-        title: "Trazabilidad Circular",
-        desc: "Conectamos con plantas de reciclaje aliadas para garantizar que los residuos clasificados se conviertan efectivamente en materia prima.",
-        metric: "99% destino verificado",
-    },
-];
+import {
+  SUSTAINABLE_DIMENSIONS,
+  ODS_ALIGNMENT,
+  ITM_RSU_PROCEDURE,
+  WASTE_DATABASE,
+  ITM_DISPOSAL_POINTS,
+  CAMPUS_CONTAINERS_CATALOG,
+} from "../data/wasteData";
+import { getScanHistory } from "../data/historyStorage";
 
 export default function Impacto() {
-    const { accentColor, getThemeClasses } = useTheme();
-    const currentTheme = ACCENT_STYLES[accentColor as keyof typeof ACCENT_STYLES] ?? ACCENT_STYLES.emerald;
-    const cardTheme = getThemeClasses("dropdown");
+  const { accent } = useTheme();
+  const [localScansCount, setLocalScansCount] = useState<number>(0);
 
-    return (
-        <div className="min-h-screen flex flex-col justify-between pt-24 md:pt-32">
-            <main className="max-w-6xl mx-auto px-5 md:px-8 w-full flex-1">
-                {/* Encabezado */}
-                <div className="flex flex-col items-center text-center max-w-4xl mx-auto mb-16 md:mb-20">
-                    <motion.div
-                        className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wide border mb-6 ${currentTheme.badge}`}
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                    >
-                        <Globe size={15} />
-                        <span>Métricas de Sostenibilidad Global</span>
-                    </motion.div>
+  useEffect(() => {
+    const sync = () => setLocalScansCount(getScanHistory().length);
+    sync();
+    window.addEventListener("reciclo-history-updated", sync);
+    return () => window.removeEventListener("reciclo-history-updated", sync);
+  }, []);
 
-                    <motion.h1
-                        className="text-4xl sm:text-5xl md:text-6xl font-medium tracking-tight text-zinc-900 dark:text-zinc-100 mb-6"
-                        initial={{ opacity: 0, y: 15 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.1 }}
-                    >
-                        El resultado de hacerlo{" "}
-                        <span className={`text-transparent bg-clip-text bg-gradient-to-r ${currentTheme.gradient}`}>
-                            simple y colectivo.
-                        </span>
-                    </motion.h1>
+  const dimensionIcons = {
+    ambiental: Leaf,
+    social: Users,
+    economica: TrendingUp,
+  };
 
-                    <motion.p
-                        className="text-zinc-600 dark:text-zinc-400 text-lg md:text-xl max-w-2xl font-light"
-                        initial={{ opacity: 0, y: 15 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 }}
-                    >
-                        Monitoreamos en tiempo real el efecto de cada envase escaneado, separado y recuperado por nuestra comunidad.
-                    </motion.p>
-                </div>
-
-                {/* Métricas Principales */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-                    {[
-                        { val: 150, suf: "k", label: "Objetos Escaneados", delay: 0.1 },
-                        { val: 25, suf: "T", label: "Emisiones Reducidas", delay: 0.2 },
-                        { val: 99, suf: "%", label: "Precisión Analítica", delay: 0.3 },
-                    ].map((stat, i) => (
-                        <motion.div
-                            key={i}
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: stat.delay, type: "spring", stiffness: 300, damping: 25 }}
-                            className={`flex flex-col items-center justify-center p-8 rounded-3xl border text-center ${cardTheme}`}
-                        >
-                            <span className="text-6xl md:text-7xl font-bold tracking-tight text-zinc-900 dark:text-white mb-2">
-                                <CountUp from={0} to={stat.val} />{stat.suf}
-                            </span>
-                            <span className="text-xs text-zinc-500 dark:text-zinc-400 uppercase tracking-widest font-semibold">
-                                {stat.label}
-                            </span>
-                        </motion.div>
-                    ))}
-                </div>
-
-                {/* Pilares de Impacto */}
-                <div className="mb-20">
-                    <div className="text-center mb-12">
-                        <h2 className="text-2xl md:text-3xl font-semibold text-zinc-800 dark:text-zinc-100">
-                            Nuestros Pilares de Regeneración
-                        </h2>
-                        <p className="text-zinc-500 dark:text-zinc-400 text-sm mt-2 max-w-md mx-auto">
-                            Transformamos la clasificación de residuos cotidiana en métricas verificables para el medio ambiente.
-                        </p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {PILLARS.map((pillar, i) => {
-                            const Icon = pillar.icon;
-                            return (
-                                <motion.div
-                                    key={i}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: i * 0.1 }}
-                                    className={`p-6 sm:p-8 rounded-3xl border flex flex-col justify-between ${cardTheme}`}
-                                >
-                                    <div>
-                                        <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-5 ${currentTheme.badge}`}>
-                                            <Icon size={24} />
-                                        </div>
-                                        <h3 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-2">
-                                            {pillar.title}
-                                        </h3>
-                                        <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed mb-6">
-                                            {pillar.desc}
-                                        </p>
-                                    </div>
-                                    <div className="pt-4 border-t border-black/5 dark:border-white/10 flex items-center justify-between text-xs font-semibold">
-                                        <span className="text-zinc-500 dark:text-zinc-400">Logro verificado</span>
-                                        <span className={currentTheme.text}>{pillar.metric}</span>
-                                    </div>
-                                </motion.div>
-                            );
-                        })}
-                    </div>
-                </div>
-
-                {/* Banner CTA */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className={`rounded-[2.5rem] p-8 md:p-12 mb-16 text-center border relative overflow-hidden ${cardTheme}`}
-                >
-                    <div className="max-w-2xl mx-auto relative z-10">
-                        <Leaf size={32} className={`mx-auto mb-4 ${currentTheme.text}`} />
-                        <h2 className="text-2xl md:text-3xl font-bold text-zinc-900 dark:text-white mb-4">
-                            Sé parte del cambio hoy
-                        </h2>
-                        <p className="text-zinc-600 dark:text-zinc-400 text-sm md:text-base mb-8">
-                            Cada botella, caja o lata cuenta. Usa el escáner ahora y descubre a qué contenedor va cada material.
-                        </p>
-                        <Link
-                            to="/escanear"
-                            className={`inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-sm font-semibold transition-transform active:scale-95 shadow-lg ${currentTheme.btn}`}
-                        >
-                            <span>Escanear un residuo</span>
-                            <ArrowRight size={16} />
-                        </Link>
-                    </div>
-                </motion.div>
-            </main>
-
-            <Footer />
+  return (
+    <div className="min-h-screen pt-24 pb-28 md:pt-28 md:pb-16 px-4 md:px-8 max-w-5xl mx-auto transition-colors duration-300">
+      {/* Encabezado alineado con Tecnologias y Perfil */}
+      <motion.div
+        initial={{ opacity: 0, y: 14 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="border-b border-zinc-200 dark:border-zinc-800 pb-6 mb-8"
+      >
+        <div
+          className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border mb-3 ${accent.badge}`}
+        >
+          <Globe2 className="size-3.5" aria-hidden="true" />
+          <span>Sustentabilidad · Agenda 2030 · SGI ITM</span>
         </div>
-    );
+
+        <h1 className="text-3xl md:text-4xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
+          Fundamento Ambiental y Alineación ODS
+        </h1>
+
+        <p className="mt-2 text-sm md:text-base text-zinc-600 dark:text-zinc-400 font-normal leading-relaxed max-w-3xl">
+          Marco ambiental, social y normativo de <strong className="text-zinc-900 dark:text-zinc-200">ReCiclo</strong> para el Instituto Tecnológico de Morelia. Presentamos únicamente la estructura real del proyecto, los lineamientos oficiales del plantel y las metas de los Objetivos de Desarrollo Sostenible a las que contribuye.
+        </p>
+      </motion.div>
+
+      <div className="flex flex-col gap-10">
+        {/* Aviso de Transparencia: Proyecto en Fase de Prototipo (Sin cifras inventadas) */}
+        <motion.section
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          aria-label="Estado actual del proyecto"
+          className="p-5 sm:p-6 rounded-3xl bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 shadow-xs space-y-5"
+        >
+          <div className="flex items-start gap-3.5">
+            <div className={`p-2.5 rounded-2xl ${accent.badge} shrink-0`}>
+              <ShieldCheck className="size-5" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2 flex-wrap">
+                <h2 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-100">
+                  Estado Actual: Prototipo Funcional sin Cifras Simuladas
+                </h2>
+                <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">
+                  Oxigena tus Ideas 2026
+                </span>
+              </div>
+              <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mt-1 leading-relaxed">
+                ReCiclo se encuentra en etapa de desarrollo y presentación académica, por lo que <strong>aún no se ha desplegado en pruebas de campo masivas</strong> y no exhibimos contadores ficticios de toneladas ni de usuarios. Los indicadores de abajo reflejan únicamente la base técnica real integrada en la plataforma y los registros guardados en tu propio navegador.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div className="p-4 rounded-2xl bg-zinc-50/70 dark:bg-zinc-950/60 border border-zinc-200/60 dark:border-zinc-800/80">
+              <p className="text-2xl font-bold text-zinc-900 dark:text-zinc-100 tabular-nums">
+                {localScansCount}
+              </p>
+              <p className="text-xs font-semibold text-zinc-700 dark:text-zinc-300 mt-0.5">
+                Tus escaneos locales
+              </p>
+              <p className="text-[11px] text-zinc-500 mt-0.5">
+                Guardados en este dispositivo
+              </p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-zinc-50/70 dark:bg-zinc-950/60 border border-zinc-200/60 dark:border-zinc-800/80">
+              <p className="text-2xl font-bold text-zinc-900 dark:text-zinc-100 tabular-nums">
+                {WASTE_DATABASE.length}
+              </p>
+              <p className="text-xs font-semibold text-zinc-700 dark:text-zinc-300 mt-0.5">
+                Residuos catalogados
+              </p>
+              <p className="text-[11px] text-zinc-500 mt-0.5">
+                Con ficha ACV y regla 3R
+              </p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-zinc-50/70 dark:bg-zinc-950/60 border border-zinc-200/60 dark:border-zinc-800/80">
+              <p className="text-2xl font-bold text-zinc-900 dark:text-zinc-100 tabular-nums">
+                {ITM_DISPOSAL_POINTS.length}
+              </p>
+              <p className="text-xs font-semibold text-zinc-700 dark:text-zinc-300 mt-0.5">
+                Estaciones mapeadas
+              </p>
+              <p className="text-[11px] text-zinc-500 mt-0.5">
+                En Campus 1 y Campus 2 ITM
+              </p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-zinc-50/70 dark:bg-zinc-950/60 border border-zinc-200/60 dark:border-zinc-800/80">
+              <p className="text-2xl font-bold text-zinc-900 dark:text-zinc-100 tabular-nums">
+                {CAMPUS_CONTAINERS_CATALOG.length}
+              </p>
+              <p className="text-xs font-semibold text-zinc-700 dark:text-zinc-300 mt-0.5">
+                Tipos de contenedor
+              </p>
+              <p className="text-[11px] text-zinc-500 mt-0.5">
+                Norma {ITM_RSU_PROCEDURE.code}
+              </p>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* 1. Las Tres Dimensiones de la Sustentabilidad */}
+        <section
+          aria-label="Las tres dimensiones de la sustentabilidad"
+          className="p-5 sm:p-7 md:p-8 rounded-3xl bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 shadow-xs space-y-6"
+        >
+          <div>
+            <h2 className="text-lg md:text-xl font-bold text-zinc-900 dark:text-zinc-100">
+              Las Tres Dimensiones de la Sustentabilidad
+            </h2>
+            <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mt-0.5">
+              Equilibrio entre protección ecológica, educación comunitaria y aprovechamiento circular de materiales en el campus.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {SUSTAINABLE_DIMENSIONS.map((dim) => {
+              const Icon = dimensionIcons[dim.id as keyof typeof dimensionIcons] || Leaf;
+              return (
+                <div
+                  key={dim.id}
+                  className="p-5 rounded-2xl bg-zinc-50/70 dark:bg-zinc-950/60 border border-zinc-200/60 dark:border-zinc-800/80 flex flex-col justify-between gap-4"
+                >
+                  <div>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className={`p-2.5 rounded-xl ${accent.badge} shrink-0`}>
+                        <Icon className="size-4.5" />
+                      </div>
+                      <div>
+                        <h3 className="text-sm font-bold text-zinc-900 dark:text-zinc-100">
+                          {dim.title}
+                        </h3>
+                        <p className={`text-[11px] font-semibold ${accent.text}`}>
+                          {dim.subtitle}
+                        </p>
+                      </div>
+                    </div>
+
+                    <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed mb-4">
+                      {dim.description}
+                    </p>
+
+                    <div className="space-y-2 border-t border-zinc-200/60 dark:border-zinc-800 pt-3">
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">
+                        Objetivos en el campus
+                      </p>
+                      {dim.indicators.map((ind) => (
+                        <div
+                          key={ind}
+                          className="flex items-start gap-2 text-xs text-zinc-700 dark:text-zinc-300 leading-snug"
+                        >
+                          <CheckCircle2 className={`size-3.5 ${accent.text} shrink-0 mt-0.5`} />
+                          <span>{ind}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="pt-3 border-t border-zinc-200/60 dark:border-zinc-800 text-[10px] text-zinc-500">
+                    Referencia: {dim.verifiedSource}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* 2. Alineación con los Objetivos de Desarrollo Sostenible (Agenda 2030) */}
+        <section
+          aria-label="Alineación con los Objetivos de Desarrollo Sostenible"
+          className="p-5 sm:p-7 md:p-8 rounded-3xl bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 shadow-xs space-y-6"
+        >
+          <div>
+            <h2 className="text-lg md:text-xl font-bold text-zinc-900 dark:text-zinc-100">
+              Alineación con la Agenda 2030 (ODS)
+            </h2>
+            <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mt-0.5">
+              Nos enfocamos únicamente en los tres Objetivos de Desarrollo Sostenible donde el proyecto tiene incidencia directa y justificable.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {ODS_ALIGNMENT.map((ods) => (
+              <div
+                key={ods.code}
+                className="p-5 rounded-2xl bg-zinc-50/70 dark:bg-zinc-950/60 border border-zinc-200/60 dark:border-zinc-800/80 flex flex-col justify-between gap-4"
+              >
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <span className={`text-base font-bold font-mono ${accent.text}`}>
+                      {ods.code}
+                    </span>
+                    <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-md ${accent.badge}`}>
+                      {ods.badge}
+                    </span>
+                  </div>
+
+                  <h3 className="text-sm font-bold text-zinc-900 dark:text-zinc-100 mb-2">
+                    {ods.name}
+                  </h3>
+
+                  <div className="space-y-2.5 text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                    <p>
+                      <strong className="text-zinc-800 dark:text-zinc-200">Por qué aplica:</strong>{" "}
+                      {ods.whyItMatters}
+                    </p>
+                    <p>
+                      <strong className="text-zinc-800 dark:text-zinc-200">Aporte del proyecto:</strong>{" "}
+                      {ods.howWeContribute}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* 3. Procedimiento SGI ITM y Normatividad Aplicable */}
+        <section
+          aria-label="Procedimiento oficial SGI del IT Morelia"
+          className="p-5 sm:p-7 md:p-8 rounded-3xl bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 shadow-xs space-y-6"
+        >
+          <div className="flex items-start gap-3.5">
+            <div className={`p-2.5 rounded-2xl ${accent.badge} shrink-0`}>
+              <Scale className="size-5" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2 flex-wrap">
+                <h2 className="text-lg md:text-xl font-bold text-zinc-900 dark:text-zinc-100">
+                  Marco Normativo Institucional ({ITM_RSU_PROCEDURE.code})
+                </h2>
+                <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400">
+                  {ITM_RSU_PROCEDURE.revision}
+                </span>
+              </div>
+              <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mt-1 leading-relaxed">
+                {ITM_RSU_PROCEDURE.objective}
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Registros del SGI */}
+            <div className="p-4 sm:p-5 rounded-2xl bg-zinc-50/70 dark:bg-zinc-950/60 border border-zinc-200/60 dark:border-zinc-800/80 space-y-3">
+              <div className="flex items-center gap-2 text-xs font-bold text-zinc-900 dark:text-zinc-100">
+                <FileCheck2 className={`size-4 ${accent.text} shrink-0`} />
+                <span>Formatos Oficiales de Seguimiento en el ITM</span>
+              </div>
+              <p className="text-[11px] text-zinc-500 dark:text-zinc-400">
+                Instrumentos con los que el Departamento de Recursos Materiales y el SGI documentan el manejo real de residuos en el campus:
+              </p>
+              <div className="space-y-2 pt-1">
+                {ITM_RSU_PROCEDURE.documentedRecords.map((rec) => (
+                  <div
+                    key={rec.code}
+                    className="p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800 flex items-start justify-between gap-3"
+                  >
+                    <div>
+                      <p className="text-xs font-bold text-zinc-900 dark:text-zinc-100">
+                        {rec.name}
+                      </p>
+                      <p className="text-[11px] text-zinc-500 mt-0.5">
+                        Responsable: {rec.responsible}
+                      </p>
+                    </div>
+                    <span className={`text-[10px] font-mono font-semibold px-2 py-0.5 rounded-md shrink-0 ${accent.badge}`}>
+                      {rec.code}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Normas Oficiales y Estándares */}
+            <div className="p-4 sm:p-5 rounded-2xl bg-zinc-50/70 dark:bg-zinc-950/60 border border-zinc-200/60 dark:border-zinc-800/80 flex flex-col justify-between gap-4">
+              <div className="space-y-3">
+                <div className="flex items-center gap-2 text-xs font-bold text-zinc-900 dark:text-zinc-100">
+                  <ShieldCheck className={`size-4 ${accent.text} shrink-0`} />
+                  <span>Normas Mexicanas e Internacionales de Referencia</span>
+                </div>
+                <p className="text-[11px] text-zinc-500 dark:text-zinc-400">
+                  Estándares técnicos en los que se apoya la clasificación y cuantificación de subproductos:
+                </p>
+                <ul className="space-y-2 pt-1">
+                  {ITM_RSU_PROCEDURE.normativeStandards.map((std) => (
+                    <li
+                      key={std}
+                      className="text-xs text-zinc-700 dark:text-zinc-300 flex items-start gap-2 leading-relaxed"
+                    >
+                      <CheckCircle2 className={`size-3.5 ${accent.text} shrink-0 mt-0.5`} />
+                      <span>{std}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="p-3.5 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800 text-[11px] text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                <strong className="text-zinc-800 dark:text-zinc-200">Alcance institucional:</strong>{" "}
+                {ITM_RSU_PROCEDURE.scope}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA final coherente con el resto de la app */}
+        <div className="p-6 rounded-3xl bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="space-y-1 max-w-xl">
+            <div className="flex items-center gap-2 text-xs font-bold text-zinc-900 dark:text-zinc-100">
+              <Leaf className={`size-4 ${accent.text} shrink-0`} />
+              <span>Explora las herramientas del proyecto</span>
+            </div>
+            <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+              Clasifica un residuo desde tu navegador para consultar su Análisis de Ciclo de Vida o revisa la ubicación de los contenedores en el mapa del campus.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+            <Link
+              to="/escanear"
+              className={`inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold text-white shadow-xs transition-transform active:scale-95 ${accent.btn}`}
+            >
+              <Sparkles size={14} />
+              <span>Escanear Residuo</span>
+              <ArrowRight size={13} />
+            </Link>
+            <Link
+              to="/mapa"
+              className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
+            >
+              <MapPin size={14} />
+              <span>Ver Mapa ITM</span>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }

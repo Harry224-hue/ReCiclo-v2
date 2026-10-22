@@ -103,80 +103,61 @@ export function ProfileResourcesSection({ accent }: { accent: AccentTokens }) {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <Link
-                    to="/tecnologias"
-                    className="p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-950/60 border border-zinc-200/80 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all flex flex-col justify-between gap-2 group cursor-pointer"
-                >
-                    <div>
-                        <div className="flex items-center justify-between mb-1.5">
-                            <span className={`p-2 rounded-xl ${accent.badge} shrink-0`}>
-                                <Layers size={16} />
+                {[
+                    {
+                        to: "/tecnologias",
+                        icon: Layers,
+                        badge: `${TOTAL_TECH_RESOURCES} Recursos`,
+                        title: "Tecnologías y APIs",
+                        desc: "Stack técnico, modelos de IA (Gemini y MobileNet), PWA y normas oficiales.",
+                        cta: "Ver ficha técnica →",
+                    },
+                    {
+                        to: "/como-funciona",
+                        icon: BookOpen,
+                        badge: "Guía Práctica",
+                        title: "Cómo Funciona",
+                        desc: "Flujo de clasificación, regla de las 4V y código oficial de contenedores ITM.",
+                        cta: "Ver guía de uso →",
+                    },
+                    {
+                        to: "/impacto",
+                        icon: Sparkles,
+                        badge: "Sustentabilidad y ODS",
+                        title: "Fundamento e Impacto",
+                        desc: "Dimensiones ambiental, social y económica, ODS 12 y norma ITMORELIA-IT-AM-007.",
+                        cta: "Ver marco ambiental →",
+                    },
+                ].map((item) => {
+                    const Icon = item.icon;
+                    return (
+                        <Link
+                            key={item.to}
+                            to={item.to}
+                            className="p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-950/60 border border-zinc-200/80 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all flex flex-col justify-between gap-2 group cursor-pointer"
+                        >
+                            <div>
+                                <div className="flex items-center justify-between gap-2 mb-2">
+                                    <span className={`p-2 rounded-xl ${accent.badge} shrink-0`}>
+                                        <Icon size={16} />
+                                    </span>
+                                    <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-md ${accent.badge}`}>
+                                        {item.badge}
+                                    </span>
+                                </div>
+                                <h3 className="text-xs sm:text-sm font-bold text-zinc-900 dark:text-zinc-100">
+                                    {item.title}
+                                </h3>
+                                <p className="text-[11px] text-zinc-600 dark:text-zinc-400 mt-1 leading-relaxed">
+                                    {item.desc}
+                                </p>
+                            </div>
+                            <span className={`text-[11px] font-semibold flex items-center gap-1 ${accent.text} mt-2 group-hover:translate-x-0.5 transition-transform`}>
+                                {item.cta}
                             </span>
-                            <span className="text-[10px] font-semibold text-emerald-700 dark:text-emerald-400">
-                                {TOTAL_TECH_RESOURCES} Recursos
-                            </span>
-                        </div>
-                        <h3 className="text-xs sm:text-sm font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
-                            Tecnologías y APIs
-                        </h3>
-                        <p className="text-[11px] text-zinc-500 mt-1 leading-snug">
-                            Modelos de IA (Gemini/MobileNet), PWA, APIs web y normas oficiales del SGI ITM.
-                        </p>
-                    </div>
-                    <span className={`text-[11px] font-semibold flex items-center gap-1 ${accent.text} mt-2`}>
-                        Ver apartado completo →
-                    </span>
-                </Link>
-
-                <Link
-                    to="/como-funciona"
-                    className="p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-950/60 border border-zinc-200/80 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all flex flex-col justify-between gap-2 group cursor-pointer"
-                >
-                    <div>
-                        <div className="flex items-center justify-between mb-1.5">
-                            <span className="p-2 rounded-xl bg-sky-50 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400 shrink-0">
-                                <BookOpen size={16} />
-                            </span>
-                            <span className="text-[10px] font-semibold text-sky-700 dark:text-sky-400">
-                                Guía Paso a Paso
-                            </span>
-                        </div>
-                        <h3 className="text-xs sm:text-sm font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">
-                            Cómo Funciona
-                        </h3>
-                        <p className="text-[11px] text-zinc-500 mt-1 leading-snug">
-                            Aprende a preparar tus envases y usar el código tricolor oficial de botes.
-                        </p>
-                    </div>
-                    <span className="text-[11px] font-semibold flex items-center gap-1 text-sky-700 dark:text-sky-400 mt-2">
-                        Ver instrucciones →
-                    </span>
-                </Link>
-
-                <Link
-                    to="/impacto"
-                    className="p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-950/60 border border-zinc-200/80 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all flex flex-col justify-between gap-2 group cursor-pointer"
-                >
-                    <div>
-                        <div className="flex items-center justify-between mb-1.5">
-                            <span className="p-2 rounded-xl bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 shrink-0">
-                                <Sparkles size={16} />
-                            </span>
-                            <span className="text-[10px] font-semibold text-purple-700 dark:text-purple-400">
-                                Agenda 2030
-                            </span>
-                        </div>
-                        <h3 className="text-xs sm:text-sm font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
-                            Impacto y ODS 12
-                        </h3>
-                        <p className="text-[11px] text-zinc-500 mt-1 leading-snug">
-                            Dimensiones de sustentabilidad y metas de reducción de residuos en Morelia.
-                        </p>
-                    </div>
-                    <span className="text-[11px] font-semibold flex items-center gap-1 text-purple-700 dark:text-purple-400 mt-2">
-                        Conocer impacto →
-                    </span>
-                </Link>
+                        </Link>
+                    );
+                })}
             </div>
         </section>
     );

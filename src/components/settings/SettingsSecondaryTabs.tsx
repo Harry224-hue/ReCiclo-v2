@@ -86,17 +86,17 @@ export function SettingsResourcesTab({ accent, onClose, navigate }: ResourcesTab
                         onClose();
                         navigate("/como-funciona");
                     }}
-                    className="p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all text-left flex items-start gap-3 cursor-pointer"
+                    className="p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/60 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all text-left flex items-start gap-3 cursor-pointer"
                 >
-                    <div className="p-2 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-emerald-500 shrink-0">
+                    <div className={`p-2 rounded-xl ${accent.badge} shrink-0`}>
                         <BookOpen size={16} />
                     </div>
                     <div>
                         <span className="text-xs font-bold text-zinc-900 dark:text-zinc-100">
                             Cómo Funciona ReCiclo
                         </span>
-                        <p className="text-[11px] text-zinc-500 mt-0.5 leading-snug">
-                            Guía visual en 3 pasos para escanear y clasificar.
+                        <p className="text-[11px] text-zinc-600 dark:text-zinc-400 mt-0.5 leading-snug">
+                            Flujo de clasificación, regla de las 4V y código oficial de contenedores ITM.
                         </p>
                     </div>
                 </button>
@@ -107,17 +107,17 @@ export function SettingsResourcesTab({ accent, onClose, navigate }: ResourcesTab
                         onClose();
                         navigate("/impacto");
                     }}
-                    className="p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all text-left flex items-start gap-3 cursor-pointer"
+                    className="p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/60 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all text-left flex items-start gap-3 cursor-pointer"
                 >
-                    <div className="p-2 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-sky-500 shrink-0">
+                    <div className={`p-2 rounded-xl ${accent.badge} shrink-0`}>
                         <Sparkles size={16} />
                     </div>
                     <div>
                         <span className="text-xs font-bold text-zinc-900 dark:text-zinc-100">
-                            Impacto y ODS 12
+                            Fundamento e Impacto Ambiental
                         </span>
-                        <p className="text-[11px] text-zinc-500 mt-0.5 leading-snug">
-                            Métricas ambientales y sustentabilidad ITM.
+                        <p className="text-[11px] text-zinc-600 dark:text-zinc-400 mt-0.5 leading-snug">
+                            Dimensiones de sustentabilidad, ODS 12 y procedimiento SGI del IT Morelia.
                         </p>
                     </div>
                 </button>
