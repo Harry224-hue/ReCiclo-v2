@@ -38,13 +38,13 @@ export const TECH_CATEGORIES: TechSection[] = [
       "Herramientas base con las que se desarrolla, tipa, estiliza y empaqueta toda la aplicación web.",
     items: [
       {
-        name: "Vite 6.4 + @vitejs/plugin-react",
+        name: "Vite 8.3 + @vitejs/plugin-react",
         category: "Empaquetador y Servidor de Desarrollo",
-        badge: "Vite v6.4.5",
+        badge: "Vite v8.3.5",
         description:
-          "Herramienta de compilación frontend de nueva generación basada en módulos ES nativos (ESM) para desarrollo instantáneo con Hot Module Replacement (HMR) y empaquetado optimizado de producción con Rollup.",
+          "Herramienta de compilación frontend de última generación basada en módulos ES nativos (ESM) para desarrollo instantáneo con Hot Module Replacement (HMR) y empaquetado ultra rápido de producción con Rolldown.",
         usedFor:
-          "Motor central de desarrollo (`npm run dev`) y compilación (`vite build`). Configurado en `vite.config.ts` para integrar el compilador de React y el plugin nativo de Tailwind CSS v4, además de dividir automáticamente en fragmentos independientes (*code-splitting*) los módulos pesados como el escáner con IA y el visor de mapas.",
+          "Motor central de desarrollo (`npm run dev`) y compilación (`vite build`). Configurado en `vite.config.ts` para integrar el compilador de React (`@vitejs/plugin-react` v6) y el plugin nativo de Tailwind CSS v4, compilando la aplicación en menos de 2 segundos con división de código (*code-splitting*) automática.",
         url: "https://vite.dev/",
         urlLabel: "vite.dev",
       },

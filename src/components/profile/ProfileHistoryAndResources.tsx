@@ -14,7 +14,7 @@ import { type AccentTokens } from "../../context/ThemeContext";
 import { type ScanHistoryEntry } from "../../data/historyStorage";
 import { CATEGORY_INFO } from "../../data/wasteData";
 import { WasteVisual } from "../WasteVisual";
-import { TOTAL_TECH_RESOURCES } from "../../pages/Tecnologias";
+import { TOTAL_TECH_RESOURCES } from "../../data/techCategories";
 
 export const PAGE_SIZE = 8;
 

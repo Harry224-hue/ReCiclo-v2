@@ -19,7 +19,7 @@ import {
 } from "lucide-react";
 import { type AccentTokens } from "../../context/ThemeContext";
 import { updateUserProfile } from "../../firebase";
-import { TOTAL_TECH_RESOURCES } from "../../pages/Tecnologias";
+import { TOTAL_TECH_RESOURCES } from "../../data/techCategories";
 
 interface ResourcesTabProps {
     accent: AccentTokens;
