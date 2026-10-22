@@ -19,6 +19,7 @@ import {
   Trophy,
   Leaf,
   Layers,
+  BookOpen,
   Flame,
   UserCheck,
   GraduationCap,
@@ -850,6 +851,103 @@ export default function Perfil() {
                 );
               })}
             </ul>
+          </div>
+        </section>
+
+        {/* ================================================= */}
+        {/* RECURSOS Y DOCUMENTACIÓN (Accesible en Móvil y PC) */}
+        {/* ================================================= */}
+        <section
+            aria-label="Recursos oficiales"
+            className="p-5 sm:p-6 rounded-3xl bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 shadow-sm space-y-4"
+        >
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2.5">
+              <Layers size={18} className={accent.text} />
+              <h2 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-100">
+                Recursos y Documentación
+              </h2>
+            </div>
+            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${accent.badge}`}>
+              Oficial ITM
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <Link
+                to="/tecnologias"
+                className="p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-950/60 border border-zinc-200/80 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all flex flex-col justify-between gap-2 group cursor-pointer"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-1.5">
+                  <span className={`p-2 rounded-xl ${accent.badge} shrink-0`}>
+                    <Layers size={16} />
+                  </span>
+                  <span className="text-[10px] font-semibold text-emerald-600 dark:text-emerald-400">
+                    31 Recursos
+                  </span>
+                </div>
+                <h3 className="text-xs sm:text-sm font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                  Tecnologías y APIs
+                </h3>
+                <p className="text-[11px] text-zinc-500 mt-1 leading-snug">
+                  Modelos de IA (Gemini/MobileNet), PWA, APIs web y normas oficiales del SGI ITM.
+                </p>
+              </div>
+              <span className={`text-[11px] font-semibold flex items-center gap-1 ${accent.text} mt-2`}>
+                Ver apartado completo →
+              </span>
+            </Link>
+
+            <Link
+                to="/como-funciona"
+                className="p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-950/60 border border-zinc-200/80 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all flex flex-col justify-between gap-2 group cursor-pointer"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-1.5">
+                  <span className="p-2 rounded-xl bg-sky-50 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400 shrink-0">
+                    <BookOpen size={16} />
+                  </span>
+                  <span className="text-[10px] font-semibold text-sky-600 dark:text-sky-400">
+                    Guía Paso a Paso
+                  </span>
+                </div>
+                <h3 className="text-xs sm:text-sm font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">
+                  Cómo Funciona
+                </h3>
+                <p className="text-[11px] text-zinc-500 mt-1 leading-snug">
+                  Aprende a preparar tus envases y usar el código tricolor oficial de botes.
+                </p>
+              </div>
+              <span className="text-[11px] font-semibold flex items-center gap-1 text-sky-600 dark:text-sky-400 mt-2">
+                Ver instrucciones →
+              </span>
+            </Link>
+
+            <Link
+                to="/impacto"
+                className="p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-950/60 border border-zinc-200/80 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all flex flex-col justify-between gap-2 group cursor-pointer"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-1.5">
+                  <span className="p-2 rounded-xl bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 shrink-0">
+                    <Sparkles size={16} />
+                  </span>
+                  <span className="text-[10px] font-semibold text-purple-600 dark:text-purple-400">
+                    Agenda 2030
+                  </span>
+                </div>
+                <h3 className="text-xs sm:text-sm font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                  Impacto y ODS 12
+                </h3>
+                <p className="text-[11px] text-zinc-500 mt-1 leading-snug">
+                  Dimensiones de sustentabilidad y metas de reducción de residuos en Morelia.
+                </p>
+              </div>
+              <span className="text-[11px] font-semibold flex items-center gap-1 text-purple-600 dark:text-purple-400 mt-2">
+                Conocer impacto →
+              </span>
+            </Link>
           </div>
         </section>
 

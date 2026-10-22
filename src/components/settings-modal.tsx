@@ -24,9 +24,11 @@ import {
     Lock,
     ExternalLink,
     Smartphone,
-    Zap
+    Zap,
+    Layers,
+    BookOpen
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { NotchIsland } from "./NotchIsland";
 
 interface SettingsModalProps {
@@ -34,7 +36,7 @@ interface SettingsModalProps {
     onClose: () => void;
 }
 
-type SettingsTab = "aspecto" | "notch" | "cuenta" | "privacidad";
+type SettingsTab = "aspecto" | "notch" | "recursos" | "cuenta" | "privacidad";
 
 const presetAccents: {
     id: AccentColor;
@@ -69,6 +71,7 @@ const colorSchemeOptions: {
 ];
 
 export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
+    const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState<SettingsTab>("aspecto");
 
     const {
@@ -227,6 +230,7 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                                 {[
                                     { id: "aspecto", label: "Aspecto", icon: Palette },
                                     { id: "notch", label: "Notch", icon: Smartphone },
+                                    { id: "recursos", label: "Tecnologías", icon: Layers },
                                     { id: "cuenta", label: "Cuenta", icon: User },
                                     { id: "privacidad", label: "Privacidad", icon: Shield },
                                 ].map((tab) => {
@@ -271,6 +275,7 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                             <div className="flex flex-col gap-1.5 flex-1">
                                 {[
                                     { id: "aspecto", label: "Aspecto & Color", desc: "Temas, acento y rueda HEX", icon: Palette },
+                                    { id: "recursos", label: "Tecnologías & APIs", desc: "Stack, IA y normas oficiales", icon: Layers },
                                     { id: "cuenta", label: "Cuenta & Campus", desc: "Comunidad IT Morelia", icon: User },
                                     { id: "privacidad", label: "Privacidad & Datos", desc: "Cámara local y caché", icon: Shield },
                                 ].map((tab) => {
@@ -614,6 +619,13 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                                                         color: "text-sky-500",
                                                     },
                                                     {
+                                                        id: "tech",
+                                                        title: "Tecnologías y Recursos",
+                                                        desc: "Ficha técnica completa, IA y normativas oficiales.",
+                                                        icon: Layers,
+                                                        color: "text-emerald-500",
+                                                    },
+                                                    {
                                                         id: "theme",
                                                         title: "Modo Oscuro / Claro",
                                                         desc: "Alternar iluminación del dispositivo al instante.",
@@ -664,6 +676,118 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                                                     );
                                                 })}
                                             </div>
+                                        </div>
+                                    </motion.div>
+                                )}
+
+                                {/* ================================================= */}
+                                {/* TAB: TECNOLOGÍAS Y RECURSOS                       */}
+                                {/* ================================================= */}
+                                {activeTab === "recursos" && (
+                                    <motion.div
+                                        key="recursos"
+                                        initial={{ opacity: 0, y: 8 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -8 }}
+                                        transition={{ duration: 0.2 }}
+                                        className="space-y-6"
+                                    >
+                                        <div>
+                                            <span className="text-xs font-bold uppercase tracking-wider text-zinc-900 dark:text-zinc-200">
+                                                Ficha Técnica y Recursos
+                                            </span>
+                                            <p className="text-xs text-zinc-500 mt-0.5">
+                                                Herramientas digitales, inteligencia artificial y marco normativo oficial del proyecto.
+                                            </p>
+                                        </div>
+
+                                        {/* TARJETA PRINCIPAL A /tecnologias */}
+                                        <div className="p-5 rounded-2xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 space-y-3">
+                                            <div className="flex items-start gap-3.5">
+                                                <div className={`p-2.5 rounded-xl ${accent.badge} shrink-0`}>
+                                                    <Layers size={20} />
+                                                </div>
+                                                <div className="flex-1">
+                                                    <div className="flex items-center gap-2">
+                                                        <h3 className="text-sm font-bold text-zinc-950 dark:text-white">
+                                                            Tecnologías, APIs y Recursos Oficiales
+                                                        </h3>
+                                                        <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-md ${accent.badge}`}>
+                                                            v2.0
+                                                        </span>
+                                                    </div>
+                                                    <p className="text-xs text-zinc-600 dark:text-zinc-400 mt-1 leading-relaxed">
+                                                        Explora el inventario de más de 30 recursos: IA en la nube (Gemini), IA local (MobileNet), estándares PWA, mapas abiertos y normativas ambientales de México.
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            <button
+                                                type="button"
+                                                onClick={() => {
+                                                    onClose();
+                                                    navigate("/tecnologias");
+                                                }}
+                                                className={`w-full py-2.5 px-4 rounded-xl text-xs font-bold text-white shadow-xs transition-transform active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2 ${accent.btn}`}
+                                            >
+                                                <Layers size={14} />
+                                                <span>Ver apartado completo de Tecnologías</span>
+                                            </button>
+                                        </div>
+
+                                        {/* ACCESOS DIRECTOS ADICIONALES */}
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                            <button
+                                                type="button"
+                                                onClick={() => {
+                                                    onClose();
+                                                    navigate("/como-funciona");
+                                                }}
+                                                className="p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all text-left flex items-start gap-3 cursor-pointer"
+                                            >
+                                                <div className="p-2 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-emerald-500 shrink-0">
+                                                    <BookOpen size={16} />
+                                                </div>
+                                                <div>
+                                                    <span className="text-xs font-bold text-zinc-900 dark:text-zinc-100">
+                                                        Cómo Funciona ReCiclo
+                                                    </span>
+                                                    <p className="text-[11px] text-zinc-500 mt-0.5 leading-snug">
+                                                        Guía visual en 3 pasos para escanear y clasificar.
+                                                    </p>
+                                                </div>
+                                            </button>
+
+                                            <button
+                                                type="button"
+                                                onClick={() => {
+                                                    onClose();
+                                                    navigate("/impacto");
+                                                }}
+                                                className="p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all text-left flex items-start gap-3 cursor-pointer"
+                                            >
+                                                <div className="p-2 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-sky-500 shrink-0">
+                                                    <Sparkles size={16} />
+                                                </div>
+                                                <div>
+                                                    <span className="text-xs font-bold text-zinc-900 dark:text-zinc-100">
+                                                        Impacto y ODS 12
+                                                    </span>
+                                                    <p className="text-[11px] text-zinc-500 mt-0.5 leading-snug">
+                                                        Métricas ambientales y sustentabilidad ITM.
+                                                    </p>
+                                                </div>
+                                            </button>
+                                        </div>
+
+                                        {/* COMPROMISO INSTITUCIONAL */}
+                                        <div className="p-4 rounded-2xl bg-zinc-100/70 dark:bg-zinc-900/40 border border-zinc-200/60 dark:border-zinc-800 text-[11px] text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                                            <p className="font-semibold text-zinc-700 dark:text-zinc-300 mb-1">
+                                                Tecnológico Nacional de México / Instituto Tecnológico de Morelia
+                                            </p>
+                                            <p>
+                                                Proyecto presentado para la 18° Semana de Oxigena tus Ideas (Semestre Enero - Junio 2026), basado en el procedimiento SGI ITMORELIA-IT-AM-007 y normatividad ambiental aplicable.
+                                            </p>
                                         </div>
                                     </motion.div>
                                 )}

@@ -117,7 +117,7 @@ function isNightHour(): boolean {
     return hour >= NIGHT_START_HOUR || hour < DAY_START_HOUR;
 }
 
-const DEFAULT_NOTCH_SHORTCUTS: string[] = ["scan", "map", "theme"];
+const DEFAULT_NOTCH_SHORTCUTS: string[] = ["scan", "map", "tech", "theme", "settings"];
 
 import { CLOUDINARY_HERO_BASE } from "../constants/hero-videos";
 
@@ -177,7 +177,13 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
             const saved = localStorage.getItem("reciclo_notch_shortcuts");
             if (saved) {
                 const parsed = JSON.parse(saved);
-                if (Array.isArray(parsed)) return parsed as string[];
+                if (Array.isArray(parsed)) {
+                    if (!parsed.includes("tech")) {
+                        parsed.push("tech");
+                        localStorage.setItem("reciclo_notch_shortcuts", JSON.stringify(parsed));
+                    }
+                    return parsed as string[];
+                }
             }
         } catch {
             // localStorage o JSON no disponibles: se usan los accesos por defecto.

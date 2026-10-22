@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { ScanLine, MapPin, Sun, Moon, Settings } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import { ScanLine, MapPin, Sun, Moon, Settings, Layers } from "lucide-react";
 
 interface NotchIslandProps {
     shortcuts?: string[];
@@ -11,13 +11,14 @@ interface NotchIslandProps {
 }
 
 export function NotchIsland({
-    shortcuts = ["scan", "map", "theme", "settings"],
+    shortcuts = ["scan", "map", "tech", "theme", "settings"],
     isDarkMode = true,
     isTransparent = false,
     onToggleTheme,
     onOpenSettings,
     isStaticPreview = false,
 }: NotchIslandProps) {
+    const location = useLocation();
     const handleLogoClick = (e: React.MouseEvent) => {
         if (isStaticPreview) return;
         if (window.location.pathname === "/") {
@@ -109,10 +110,35 @@ export function NotchIsland({
                         ) : (
                             <Link
                                 to="/mapa"
-                                className={`size-7 rounded-full active:scale-90 flex items-center justify-center text-sky-500 dark:text-sky-400 transition-all cursor-pointer ${buttonClasses}`}
+                                className={`size-7 rounded-full active:scale-90 flex items-center justify-center text-sky-500 dark:text-sky-400 transition-all cursor-pointer ${buttonClasses} ${
+                                    location.pathname === "/mapa" ? "ring-1 ring-sky-500/40 bg-sky-500/10" : ""
+                                }`}
                                 title="Ver Mapa"
                             >
                                 <MapPin size={14} />
+                            </Link>
+                        ))}
+
+                    {(shortcuts.includes("tech") || shortcuts.includes("tecnologias")) &&
+                        (isStaticPreview ? (
+                            <span
+                                className={`size-7 rounded-full flex items-center justify-center text-emerald-500 dark:text-emerald-400 ${buttonClasses}`}
+                                title="Tecnologías"
+                            >
+                                <Layers size={14} />
+                            </span>
+                        ) : (
+                            <Link
+                                to="/tecnologias"
+                                className={`size-7 rounded-full active:scale-90 flex items-center justify-center text-emerald-500 dark:text-emerald-400 transition-all cursor-pointer ${buttonClasses} ${
+                                    location.pathname === "/tecnologias"
+                                        ? "ring-1 ring-emerald-500/40 bg-emerald-500/15 font-bold"
+                                        : ""
+                                }`}
+                                title="Tecnologías y Recursos Oficiales"
+                                aria-label="Tecnologías y Recursos Oficiales"
+                            >
+                                <Layers size={14} />
                             </Link>
                         ))}
 
