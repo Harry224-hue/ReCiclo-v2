@@ -25,9 +25,9 @@ import {
 const WORKFLOW_STEPS = [
   {
     num: "01",
-    badge: "IA + Catálogo Local",
+    badge: "IA + Catálogo Integrado",
     title: "Identifica tu residuo con cámara o buscador",
-    desc: `Enfoca el envase desde tu teléfono, sube una foto o búscalo por nombre entre los ${WASTE_DATABASE.length} residuos documentados del campus. El sistema utiliza Gemini 2.5 Flash en la nube y cuenta con respaldo local en el navegador mediante TensorFlow.js (MobileNet v2) si no hay conexión o se agota la cuota.`,
+    desc: `Enfoca el envase desde tu teléfono, sube una foto o búscalo por nombre entre los ${WASTE_DATABASE.length} residuos documentados del campus. Con conexión a internet, el sistema analiza la imagen con Gemini 2.5 Flash y, si el servicio en la nube no está disponible o agota su cuota, recurre a TensorFlow.js (MobileNet v2) en el navegador.`,
     detail: "Reconoce botellas PET, latas de aluminio y hojalata, papel, cartón, unicel, envolturas metalizadas, restos orgánicos y pilas.",
     icon: Camera,
   },
@@ -70,8 +70,8 @@ const REGLA_4V = [
 
 const FAQS = [
   {
-    q: "¿Qué pasa si no tengo internet o falla el servicio en la nube?",
-    a: "ReCiclo incluye un sistema de respaldo en tres niveles: primero intenta analizar la imagen con Gemini 2.5 Flash; si no hay red o clave configurada, ejecuta el modelo MobileNet v2 directamente en tu navegador con TensorFlow.js; y en todo momento puedes consultar el catálogo manual de residuos del campus.",
+    q: "¿Se necesita conexión a internet para usar ReCiclo?",
+    a: "Sí. Al ser una aplicación web servida en línea, requiere conexión a internet para cargar la interfaz (incluso si agregaste un acceso directo en tu pantalla de inicio), descargar las teselas del mapa y consultar los modelos de inteligencia artificial. Si durante tu sesión falla el servicio principal de Gemini 2.5 Flash o se alcanza el límite de peticiones, el escáner cambia automáticamente al modelo MobileNet v2 en el navegador o al buscador del catálogo.",
   },
   {
     q: "¿Es obligatorio crear una cuenta para usar el escáner o el mapa?",

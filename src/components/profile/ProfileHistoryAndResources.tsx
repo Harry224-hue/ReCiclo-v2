@@ -109,7 +109,7 @@ export function ProfileResourcesSection({ accent }: { accent: AccentTokens }) {
                         icon: Layers,
                         badge: `${TOTAL_TECH_RESOURCES} Recursos`,
                         title: "Tecnologías y APIs",
-                        desc: "Stack técnico, modelos de IA (Gemini y MobileNet), PWA y normas oficiales.",
+                        desc: "Vite 6, React 19, IA (Gemini y MobileNet), mapas y normas oficiales con enlaces.",
                         cta: "Ver ficha técnica →",
                     },
                     {

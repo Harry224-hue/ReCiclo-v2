@@ -61,7 +61,7 @@ export function SettingsResourcesTab({ accent, onClose, navigate }: ResourcesTab
                             </span>
                         </div>
                         <p className="text-xs text-zinc-600 dark:text-zinc-400 mt-1 leading-relaxed">
-                            Explora el inventario de {TOTAL_TECH_RESOURCES} recursos: IA en la nube (Gemini), IA local (MobileNet), estándares PWA, mapas abiertos y normativas ambientales de México.
+                            Explora el inventario completo de {TOTAL_TECH_RESOURCES} recursos con sus enlaces oficiales y uso específico en el proyecto: Vite 6, React 19, IA (Gemini y MobileNet), mapas y normativas ambientales.
                         </p>
                     </div>
                 </div>
