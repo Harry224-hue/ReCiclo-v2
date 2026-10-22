@@ -175,16 +175,21 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const [notchShortcuts, setNotchShortcutsState] = useState<string[]>(() => {
         try {
             const saved = localStorage.getItem("reciclo_notch_shortcuts");
+            const migratedTech = localStorage.getItem("reciclo_notch_tech_migrated_v1");
             if (saved) {
                 const parsed = JSON.parse(saved);
                 if (Array.isArray(parsed)) {
-                    if (!parsed.includes("tech")) {
-                        parsed.push("tech");
-                        localStorage.setItem("reciclo_notch_shortcuts", JSON.stringify(parsed));
+                    if (!migratedTech) {
+                        localStorage.setItem("reciclo_notch_tech_migrated_v1", "true");
+                        if (!parsed.includes("tech")) {
+                            parsed.push("tech");
+                            localStorage.setItem("reciclo_notch_shortcuts", JSON.stringify(parsed));
+                        }
                     }
                     return parsed as string[];
                 }
             }
+            localStorage.setItem("reciclo_notch_tech_migrated_v1", "true");
         } catch {
             // localStorage o JSON no disponibles: se usan los accesos por defecto.
             return DEFAULT_NOTCH_SHORTCUTS;
@@ -338,6 +343,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         setAccentColor("emerald");
         setColorSchemeMode("system");
         setHeroVideo(`${CLOUDINARY_HERO_BASE}/video-hero.mp4`);
+        setNotchShortcuts(DEFAULT_NOTCH_SHORTCUTS);
         clearPerfOverride();
     };
 

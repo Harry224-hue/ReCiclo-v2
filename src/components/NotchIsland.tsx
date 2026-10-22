@@ -94,6 +94,7 @@ export function NotchIsland({
                                 to="/escanear"
                                 className={`size-7 rounded-full active:scale-90 flex items-center justify-center text-emerald-500 dark:text-emerald-400 transition-all cursor-pointer ${buttonClasses}`}
                                 title="Abrir Escáner"
+                                aria-label="Abrir Escáner"
                             >
                                 <ScanLine size={14} />
                             </Link>
@@ -114,6 +115,7 @@ export function NotchIsland({
                                     location.pathname === "/mapa" ? "ring-1 ring-sky-500/40 bg-sky-500/10" : ""
                                 }`}
                                 title="Ver Mapa"
+                                aria-label="Ver Mapa"
                             >
                                 <MapPin size={14} />
                             </Link>
@@ -152,9 +154,11 @@ export function NotchIsland({
                             </span>
                         ) : (
                             <button
+                                type="button"
                                 onClick={onToggleTheme}
                                 className={`size-7 rounded-full active:scale-90 flex items-center justify-center text-amber-500 transition-all cursor-pointer ${buttonClasses}`}
                                 title="Alternar Tema"
+                                aria-label="Alternar Tema"
                             >
                                 {isDarkMode ? <Sun size={14} /> : <Moon size={14} />}
                             </button>
@@ -170,9 +174,11 @@ export function NotchIsland({
                             </span>
                         ) : (
                             <button
+                                type="button"
                                 onClick={onOpenSettings}
                                 className={`size-7 rounded-full active:scale-90 flex items-center justify-center transition-all cursor-pointer ${buttonClasses}`}
                                 title="Configuración"
+                                aria-label="Configuración"
                             >
                                 <Settings size={14} />
                             </button>

@@ -324,6 +324,8 @@ const TECH_CATEGORIES: TechSection[] = [
   },
 ];
 
+export const TOTAL_TECH_RESOURCES = TECH_CATEGORIES.reduce((acc, sec) => acc + sec.items.length, 0);
+
 export default function Tecnologias() {
   const { accent } = useTheme();
   const [selectedFilter, setSelectedFilter] = useState<string>("all");
@@ -397,12 +399,13 @@ export default function Tecnologias() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Buscar tecnología, API, norma o biblioteca..."
-              className="w-full pl-10 pr-4 py-2 text-xs sm:text-sm rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all"
+              className="w-full pl-10 pr-16 py-2 text-xs sm:text-sm rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all"
             />
             {searchQuery && (
               <button
+                type="button"
                 onClick={() => setSearchQuery("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200"
               >
                 Limpiar
               </button>

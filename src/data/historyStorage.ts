@@ -45,6 +45,7 @@ export function addScanToHistory(entry: Omit<ScanHistoryEntry, "id" | "timestamp
     // Mantener los últimos 50 registros para optimizar memoria
     const updated = [newEntry, ...current].slice(0, 50);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+    window.dispatchEvent(new Event("reciclo-history-updated"));
     return newEntry;
   } catch (error) {
     console.error("Error al guardar en el historial:", error);
@@ -59,6 +60,7 @@ export function addScanToHistory(entry: Omit<ScanHistoryEntry, "id" | "timestamp
 export function clearScanHistory(): void {
   try {
     localStorage.removeItem(STORAGE_KEY);
+    window.dispatchEvent(new Event("reciclo-history-updated"));
   } catch (error) {
     console.error("Error al limpiar historial:", error);
   }
@@ -69,6 +71,7 @@ export function removeScanFromHistory(id: string): ScanHistoryEntry[] {
   try {
     const updated = getScanHistory().filter((entry) => entry.id !== id);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+    window.dispatchEvent(new Event("reciclo-history-updated"));
     return updated;
   } catch (error) {
     console.error("Error al eliminar el registro del historial:", error);
