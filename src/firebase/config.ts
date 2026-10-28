@@ -1,7 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-import { getAnalytics, isSupported } from "firebase/analytics";
 
 // Configuración de Firebase (usa variables de entorno con fallback directo al proyecto)
 const firebaseConfig = {
@@ -21,9 +20,8 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 
-// Analytics (solo en navegador, capturando silenciosamente bloqueos de adblockers)
-export const analytics = isSupported()
-    .then((supported) => (supported ? getAnalytics(app) : null))
-    .catch(() => null);
+// Desactivado para evitar bloqueos por extensiones de privacidad (adblockers)
+// que generan errores ERR_BLOCKED_BY_CLIENT en la consola.
+export const analytics = Promise.resolve(null);
 
 export default app;
