@@ -1,0 +1,26 @@
+# Diseño de Integración: ReCiclo Versión 1 en Versión 2
+
+## 1. Intención y Propósito
+Unificar en `ReCiclo-versión-de-pruebas-v2` todo el trabajo de evolución académica, visual y de archivo histórico desarrollado en `ReCiclo-version-1`, preservando íntegramente las mejoras funcionales y de experiencia de usuario que ya existen en las vistas internas de la Versión 2.
+
+## 2. Metas, No Metas y Restricciones
+- **Metas:**
+  1. Integrar el flujo de portada (`Home`) de la Versión 1: [`Hero`](file:///home/juanpa/Documentos/ReCiclo-version-1/ReCiclo-version-1/src/sections/hero.tsx), [`HowItWorks`](file:///home/juanpa/Documentos/ReCiclo-version-1/ReCiclo-version-1/src/sections/how-it-works.tsx), [`CampusShowcase`](file:///home/juanpa/Documentos/ReCiclo-versión-de-pruebas-v2/src/sections/campus-showcase.tsx), [`ProjectFrameworkTabs`](file:///home/juanpa/Documentos/ReCiclo-version-1/ReCiclo-version-1/src/components/ProjectFrameworkTabs.tsx), [`MuseumTeaser`](file:///home/juanpa/Documentos/ReCiclo-version-1/ReCiclo-version-1/src/sections/museum-teaser.tsx), [`ScannerCTA`](file:///home/juanpa/Documentos/ReCiclo-version-1/ReCiclo-version-1/src/sections/scanner-cta.tsx) y [`Footer`](file:///home/juanpa/Documentos/ReCiclo-version-1/ReCiclo-version-1/src/components/footer.tsx) (con `TeamCredits` y acceso al Museo).
+  2. Incorporar el Museo interactivo de 20 versiones (`/museo`): [`Museo.tsx`](file:///home/juanpa/Documentos/ReCiclo-version-1/ReCiclo-version-1/src/pages/Museo.tsx), `src/components/museum/*` (`Emulator.tsx`, `VersionFrame.tsx`, `DeviceMockup.tsx`, `VersionDialog.tsx`, `useStorageGuard.ts`, `museum-motion.css`), [`museum.ts`](file:///home/juanpa/Documentos/ReCiclo-version-1/ReCiclo-version-1/src/data/museum.ts), estilos `.museum-*` en [`index.css`](file:///home/juanpa/Documentos/ReCiclo-versión-de-pruebas-v2/src/index.css) y activos estáticos (`public/emulador/`, `public/museo/`, `public/capturas/`).
+  3. Mantener intactas las mejoras exclusivas de la Versión 2 en [`Mapa.tsx`](file:///home/juanpa/Documentos/ReCiclo-versión-de-pruebas-v2/src/pages/Mapa.tsx), [`Escanear.tsx`](file:///home/juanpa/Documentos/ReCiclo-versión-de-pruebas-v2/src/pages/Escanear.tsx) (`ScanResultPanel.tsx`, `ContainerGuide.tsx`, `container-ui.tsx`), [`Perfil.tsx`](file:///home/juanpa/Documentos/ReCiclo-versión-de-pruebas-v2/src/pages/Perfil.tsx) (`ProfileHistoryAndResources.tsx`), [`settings-modal.tsx`](file:///home/juanpa/Documentos/ReCiclo-versión-de-pruebas-v2/src/components/settings-modal.tsx) (`SettingsSecondaryTabs.tsx`), [`ComoFunciona.tsx`](file:///home/juanpa/Documentos/ReCiclo-versión-de-pruebas-v2/src/pages/ComoFunciona.tsx), [`Impacto.tsx`](file:///home/juanpa/Documentos/ReCiclo-versión-de-pruebas-v2/src/pages/Impacto.tsx) y [`Tecnologias.tsx`](file:///home/juanpa/Documentos/ReCiclo-versión-de-pruebas-v2/src/pages/Tecnologias.tsx) (`techCategories.ts`).
+  4. Fusionar sin conflicto los archivos compartidos: [`App.tsx`](file:///home/juanpa/Documentos/ReCiclo-versión-de-pruebas-v2/src/App.tsx), [`navbar.tsx`](file:///home/juanpa/Documentos/ReCiclo-versión-de-pruebas-v2/src/components/navbar.tsx), [`assets.ts`](file:///home/juanpa/Documentos/ReCiclo-versión-de-pruebas-v2/src/constants/assets.ts), [`PerformanceOptimizer.tsx`](file:///home/juanpa/Documentos/ReCiclo-versión-de-pruebas-v2/src/components/PerformanceOptimizer.tsx), [`wasteData.ts`](file:///home/juanpa/Documentos/ReCiclo-versión-de-pruebas-v2/src/data/wasteData.ts) e [`index.css`](file:///home/juanpa/Documentos/ReCiclo-versión-de-pruebas-v2/src/index.css).
+  5. Integrar la documentación institucional (`DESIGN.md`, `BITACORA_RECICLO.md`, `HISTORIAL_VERSIONES.md`).
+- **No Metas:**
+  - No copiar las subcarpetas de código fuente `versiones/v1.0` a `versiones/v1.9` ni dependencias nativas (Electron/Capacitor) al árbol principal de la v2.
+- **Anti-Metas:**
+  - Ninguna regresión en el mapa interactivo, el escáner ni el perfil de la v2, y cero errores de compilación TypeScript o Vite.
+
+## 3. Enfoques Considerados
+1. **Integración selectiva de 3 vías sobre la base de v2 (Seleccionado):** Conservar los módulos avanzados de v2, añadir los componentes/activos nuevos de v1 y fusionar quirúrgicamente los archivos compartidos.
+2. **Copia masiva de `v1` sobre `v2` (Descartado):** Perdería las mejoras de v2 en Mapa, Escáner, Perfil y Ajustes.
+3. **Merge directo por Git (Descartado):** Arrastraría las carpetas fuente de `versiones/*` y configuraciones de Electron/Capacitor innecesarias en v2.
+
+## 4. Decisiones de Implementación
+- En [`navbar.tsx`](file:///home/juanpa/Documentos/ReCiclo-versión-de-pruebas-v2/src/components/navbar.tsx) se conserva toda la lógica de sincronización de scroll y visibilidad de la v2 (incluida la insignia `v2.0`) y se añade la condición `location.pathname === "/museo"` para ocultar la barra global dentro del Museo.
+- En [`index.css`](file:///home/juanpa/Documentos/ReCiclo-versión-de-pruebas-v2/src/index.css) se conservan los estilos de marcadores de mapa y escáner de la v2 y se anexan los estilos `.museum-*` de la v1.
+- En [`assets.ts`](file:///home/juanpa/Documentos/ReCiclo-versión-de-pruebas-v2/src/constants/assets.ts) se exporta `MUSEUM_BASE = "${BASE}museo/"`.

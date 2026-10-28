@@ -9,8 +9,8 @@ export function Proposal() {
     {
       num: "01",
       question: "¿Qué residuo tengo?",
-      feature: "Escáner con IA Multimodal Gemini",
-      answer: "Apunta con la cámara o sube una imagen: la inteligencia artificial de Gemini detecta el envase, marca, polímero y categoría exacta en segundos.",
+      feature: "Guía de Identificación Asistida",
+      answer: "Consulta el residuo en el catálogo universitario del ITM o utiliza la asistencia visual ligera para reconocer el material y aplicar la Regla de las 4V.",
       icon: HelpCircle,
     },
     {

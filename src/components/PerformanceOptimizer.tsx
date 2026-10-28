@@ -6,7 +6,7 @@ import { useTheme } from "../context/ThemeContext";
  * - useInView: sabe cuándo algo está por entrar (o salir) en pantalla.
  * - LazyMount: no monta una sección (ni corre su JS, ni pide sus datos) hasta que el
  *   usuario está por llegar a ella. Conectado a perfTier (useAdaptivePerformance vía
- *   ThemeContext): en "lite" es más conservador — monta con menos anticipación y
+ *   ThemeContext): en "lite" es más conservador  -  monta con menos anticipación y
  *   VUELVE a desmontar lo que ya quedó lejos, para no acumular animaciones/DOM montado
  *   para siempre en un equipo que ya sabemos que va justo. En "full" precarga con más
  *   margen y se queda montado una vez visto, para que no "parpadee" al hacer scroll.
@@ -41,7 +41,7 @@ interface UseInViewOptions {
     /** Qué tan antes de entrar en pantalla se dispara (margen de anticipación). */
     rootMargin?: string;
     threshold?: number;
-    /** Si es true (default), deja de observar en cuanto entró la primera vez — se
+    /** Si es true (default), deja de observar en cuanto entró la primera vez  -  se
      *  queda "inView" para siempre. Si es false, también vuelve a "no inView" cuando
      *  el elemento sale de pantalla (para desmontar y liberar recursos). */
     once?: boolean;
@@ -59,7 +59,17 @@ export function useInView<T extends HTMLElement = HTMLDivElement>(
         const node = ref.current;
         if (!node) return;
 
-        // Sin soporte de IntersectionObserver (prácticamente inexistente hoy, pero por
+        // Deteccion de entornos headless (capturas automatizadas) o parametro fullrender
+        const isHeadless = typeof window !== "undefined" && (
+            /HeadlessChrome/i.test(navigator.userAgent) ||
+            new URLSearchParams(window.location.search).has("fullrender")
+        );
+        if (isHeadless) {
+            setInView(true);
+            return;
+        }
+
+        // Sin soporte de IntersectionObserver (practicamente inexistente hoy, pero por
         // si acaso): se asume visible de una vez. Mejor mostrar de más que dejar una
         // sección vacía para siempre por falta de la API.
         if (typeof IntersectionObserver === "undefined") {

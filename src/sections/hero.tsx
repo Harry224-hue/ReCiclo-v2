@@ -76,7 +76,7 @@ export function Hero() {
                         className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium border backdrop-blur-md shadow-sm ${accent.badge}`}
                     >
                         <Leaf className="size-3.5 shrink-0" aria-hidden="true" />
-                        <span>Desarrollo Sustentable · IT Morelia · Norma ITMORELIA-IT-AM-007</span>
+                        <span>Desarrollo Sustentable · IT Morelia · 19º Oxigena tus Ideas</span>
                     </motion.div>
 
                     {/* Titular conciso y directo */}
@@ -92,7 +92,7 @@ export function Hero() {
                         variants={item}
                         className="mt-4 max-w-2xl text-center text-base sm:text-lg text-zinc-300 font-normal leading-relaxed text-balance"
                     >
-                        Identifica envases y residuos al instante con <strong className="text-emerald-400 font-semibold">IA Multimodal Gemini</strong> y localiza los botes oficiales en la <strong className="text-white font-semibold">Pony Plaza, cafeterías y aulas</strong> del IT Morelia (Campus 1 y 2).
+                        Guía interactiva de separación para envases y residuos del campus, con <strong className="text-emerald-400 font-semibold">asistencia visual ética</strong> y localización de contenedores oficiales en la <strong className="text-white font-semibold">Pony Plaza, cafeterías y andadores</strong> del IT Morelia (Campus 1 y 2).
                     </motion.p>
 
                     {/* Botones de acción principales vinculados a las funciones clave */}
@@ -105,7 +105,7 @@ export function Hero() {
                             className={`w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full text-sm font-medium text-white shadow-lg transition-all active:scale-95 ${accent.btn} ${LINK_FOCUS}`}
                         >
                             <ScanLine className="size-4" aria-hidden="true" />
-                            <span>Escanear con IA Gemini</span>
+                            <span>Identificar Residuo</span>
                         </Link>
 
                         <Link

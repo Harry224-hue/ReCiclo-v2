@@ -381,7 +381,7 @@ export default function Perfil() {
   const fade = reduceMotion ? false : { opacity: 0, y: 12 };
 
   return (
-    <div className="min-h-screen pt-20 pb-28 md:pt-24 md:pb-16 px-4 sm:px-6 lg:px-10 max-w-7xl mx-auto transition-colors duration-300 space-y-6">
+    <div className="min-h-screen pt-24 pb-28 md:pt-28 md:pb-16 px-4 sm:px-6 lg:px-10 max-w-7xl mx-auto transition-colors duration-300 space-y-6">
       {/* Cabecera contextual del espacio personal */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-zinc-200 dark:border-zinc-800 pb-5">
         <div>

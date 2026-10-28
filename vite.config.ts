@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
     watch: {
-      ignored: ['**/*.mp4', '**/*.webm', '**/*.mov'],
+      ignored: ['**/*.mp4', '**/*.webm', '**/*.mov', 'public/emulador/**'],
     },
   },
 })

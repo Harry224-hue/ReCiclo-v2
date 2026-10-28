@@ -24,14 +24,14 @@ interface FeatureCard {
 const CARDS: FeatureCard[] = [
   {
     id: "scanner",
-    shortTitle: "IA Gemini",
-    badge: "Diagnóstico Multimodal",
-    title: "Identificación con IA Gemini",
-    description: "Diagnóstico multimodal instantáneo de materiales, cálculo de reciclabilidad y análisis de ciclo de vida (ACV) en tiempo real con visión artificial.",
+    shortTitle: "Guía de Residuos",
+    badge: "Identificación y Catálogo",
+    title: "Identificación de Materiales",
+    description: "Diagnóstico de materiales, cálculo de reciclabilidad y análisis de ciclo de vida (ACV) con el catálogo oficial del ITM y asistencia visual ligera.",
     image: ctaCenter,
     alt: "Escáner móvil ReCiclo IT Morelia",
     link: "/escanear",
-    ctaText: "Escanear con IA Gemini",
+    ctaText: "Identificar Residuo",
     icon: Sparkles,
   },
   {
@@ -88,7 +88,7 @@ export function ScannerCTA() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              Identifica con IA Gemini y ubica el bote exacto en el ITM
+              Identifica el residuo y ubica el contenedor oficial en el ITM
             </motion.h2>
 
             <motion.p

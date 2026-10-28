@@ -12,3 +12,6 @@ export const LOGO_LIGHT = `${BASE}logo.svg`;
 export const LOGO_DARK = `${BASE}logo-dark.svg`;
 export const FAVICON = `${BASE}favicon.svg`;
 export const HERO_POSTER = `${BASE}hero-image.png`;
+
+/** Capturas del museo de versiones (WebP recomprimido a 1200 px de ancho). */
+export const MUSEUM_BASE = `${BASE}museo/`;

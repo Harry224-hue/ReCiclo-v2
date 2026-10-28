@@ -262,7 +262,7 @@ export function Navbar() {
         }
     };
 
-    if (location.pathname === "/login" || location.pathname === "/registro") {
+    if (location.pathname === "/login" || location.pathname === "/registro" || location.pathname === "/museo") {
         return null;
     }
 

@@ -120,7 +120,7 @@ export const ITM_RSU_PROCEDURE = {
 export const CAMPUS_CONTAINERS_CATALOG: CampusContainerSpec[] = [
   {
     id: "bin-verde",
-    name: "Verde — Orgánicos",
+    name: "Verde  -  Orgánicos",
     colorName: "Verde",
     colorHex: "#16a34a",
     badgeBg: "bg-emerald-600 text-white",
@@ -154,7 +154,7 @@ export const CAMPUS_CONTAINERS_CATALOG: CampusContainerSpec[] = [
   },
   {
     id: "bin-amarillo",
-    name: "Amarillo — Reciclables",
+    name: "Amarillo  -  Reciclables",
     colorName: "Amarillo",
     colorHex: "#eab308",
     badgeBg: "bg-amber-500 text-zinc-950",
@@ -186,7 +186,7 @@ export const CAMPUS_CONTAINERS_CATALOG: CampusContainerSpec[] = [
   },
   {
     id: "bin-negro",
-    name: "Negro — No reciclables",
+    name: "Negro  -  No reciclables",
     colorName: "Negro",
     colorHex: "#27272a",
     badgeBg: "bg-zinc-800 text-white",
@@ -219,7 +219,7 @@ export const CAMPUS_CONTAINERS_CATALOG: CampusContainerSpec[] = [
   },
   {
     id: "bin-azul",
-    name: "Azul — Plásticos, hules y PET",
+    name: "Azul  -  Plásticos, hules y PET",
     colorName: "Azul",
     colorHex: "#2563eb",
     badgeBg: "bg-blue-600 text-white",
@@ -250,7 +250,7 @@ export const CAMPUS_CONTAINERS_CATALOG: CampusContainerSpec[] = [
   },
   {
     id: "bin-pilas",
-    name: "Contenedor Oficial — Pilas y RAEE",
+    name: "Contenedor Oficial  -  Pilas y RAEE",
     colorName: "Naranja Especial",
     colorHex: "#ea580c",
     badgeBg: "bg-orange-600 text-white",
@@ -1011,7 +1011,7 @@ export const WASTE_DATABASE: WasteItem[] = [
     examples: ["Boing Mango 250ml", "Boing Guayaba", "Boing Manzana"]
   },
 
-  // ─── PAPELERÍA, CUADERNOS Y CARTÓN (AMARILLO — RECICLABLES) ───
+  // ─── PAPELERÍA, CUADERNOS Y CARTÓN (AMARILLO  -  RECICLABLES) ───
   {
     id: "notebook-paper",
     name: "Hojas de Cuaderno Scribe Profesional",
@@ -1022,7 +1022,7 @@ export const WASTE_DATABASE: WasteItem[] = [
     categoryReason: "Las fibras de celulosa pueden repulparse y transformarse en nuevo papel hasta 5-7 ciclos si se mantienen secas y libres de grasa.",
     recommendedBin: {
       color: "Amarillo",
-      label: "Amarillo — Reciclables",
+      label: "Amarillo  -  Reciclables",
       description: "Papel, cartón, vidrio y metales limpios y secos (ITM Sec. 4.1)."
     },
     handlingInstructions: [
@@ -1056,7 +1056,7 @@ export const WASTE_DATABASE: WasteItem[] = [
     categoryReason: "El cartón corrugado tiene la tasa de reciclaje más alta en la industria de empaque mexicana.",
     recommendedBin: {
       color: "Amarillo",
-      label: "Amarillo — Reciclables",
+      label: "Amarillo  -  Reciclables",
       description: "Papel, cartón, vidrio y metales (cajas desarmadas y aplanadas)."
     },
     handlingInstructions: [
@@ -1158,7 +1158,7 @@ export const WASTE_DATABASE: WasteItem[] = [
     categoryReason: "Contiene sustancias químicas y metales pesados que lixivian en el suelo y contaminan mantos freáticos si se tiran en la basura común.",
     recommendedBin: {
       color: "Naranja Especial",
-      label: "Contenedor Oficial — Pilas y RAEE",
+      label: "Contenedor Oficial  -  Pilas y RAEE",
       description: "Punto verde naranja del ITM para pilas, baterías y electrónicos de manejo especial."
     },
     handlingInstructions: [
@@ -1192,7 +1192,7 @@ export const WASTE_DATABASE: WasteItem[] = [
     categoryReason: "Residuo de Aparato Eléctrico y Electrónico (RAEE). Contiene metales valiosos (cobre) que no deben terminar en el relleno sanitario.",
     recommendedBin: {
       color: "Naranja Especial",
-      label: "Contenedor Oficial — Pilas y RAEE",
+      label: "Contenedor Oficial  -  Pilas y RAEE",
       description: "Cables y electrónicos de manejo especial: entregar en el punto verde naranja o campañas del ITM."
     },
     handlingInstructions: [

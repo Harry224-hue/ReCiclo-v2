@@ -9,15 +9,13 @@ import { Navbar } from "./components/navbar";
 import { Footer } from "./components/footer";
 
 // Secciones de Inicio:
-// Problema → dimensiones sustentables → propuesta → cómo funciona → ODS
+// Hero -> Cómo funciona -> Campus ITM -> Marco en Pestañas -> Museo Teaser -> CTA
 import { Hero } from "./sections/hero";
-import { Problem } from "./sections/problem";
-import { Dimensions } from "./sections/dimensions";
-import { Proposal } from "./sections/proposal";
 import { HowItWorks } from "./sections/how-it-works";
 import { CampusShowcase } from "./sections/campus-showcase";
-import { SDG } from "./sections/sdg";
 import { ScannerCTA } from "./sections/scanner-cta";
+import { ProjectFrameworkTabs } from "./components/ProjectFrameworkTabs";
+import { MuseumTeaser } from "./sections/museum-teaser";
 
 // Páginas diferidas con React.lazy para reducir el bundle inicial: TensorFlow/Firebase
 // (Escanear), Leaflet (Mapa) y el resto se descargan solo cuando se navega a ellas.
@@ -25,6 +23,7 @@ const Escanear = lazy(() => import("./pages/Escanear"));
 const Mapa = lazy(() => import("./pages/Mapa"));
 const Historial = lazy(() => import("./pages/Historial"));
 const Perfil = lazy(() => import("./pages/Perfil"));
+const Museo = lazy(() => import("./pages/Museo"));
 
 // Páginas de apoyo y autenticación diferidas
 const Impacto = lazy(() => import("./pages/Impacto"));
@@ -38,40 +37,26 @@ import { SectionParallax } from "./components/SectionParallax";
 function Home() {
     return (
         <>
-            {/* 1. Hero: Introducción a la iniciativa y 3 preguntas clave (IT Morelia) */}
+            {/* 1. Hero: Acceso directo a Escanear y Mapa con escena interactiva */}
             <Hero />
 
-            {/* 2. El Problema */}
-            <SectionParallax variant="problem">
-                <Problem />
-            </SectionParallax>
-
-            {/* 3. Tres Dimensiones de la Sustentabilidad */}
-            <SectionParallax variant="dimensions">
-                <Dimensions />
-            </SectionParallax>
-
-            {/* 4. Qué propone ReCiclo */}
-            <SectionParallax variant="proposal">
-                <Proposal />
-            </SectionParallax>
-
-            {/* 5. Cómo funciona */}
+            {/* 2. Cómo funciona: Flujo ágil de 3 pasos (Identificación, 4V y Depósito) */}
             <SectionParallax variant="how">
                 <HowItWorks />
             </SectionParallax>
 
-            {/* 6. Cartografía Oficial ITM (Campus 1 y 2) y Código de Botes */}
+            {/* 3. Cartografía Oficial ITM (Campus 1 y 2) y Código de Botes */}
             <SectionParallax variant="campus">
                 <CampusShowcase />
             </SectionParallax>
 
-            {/* 7. Impacto esperado (ODS) */}
-            <SectionParallax variant="sdg">
-                <SDG />
-            </SectionParallax>
+            {/* 4. Marco del Proyecto y Sustento Ambiental (Pestañas interactivas y colapsables) */}
+            <ProjectFrameworkTabs />
 
-            {/* 8. Llamado a la acción: Acceso directo al Escáner y Mapa */}
+            {/* 5. Museo de versiones: evidencias de la v0.0 a la v1.9 */}
+            <MuseumTeaser />
+
+            {/* 6. Llamado a la acción: Acceso directo al Escáner y Mapa */}
             <SectionParallax variant="cta">
                 <ScannerCTA />
             </SectionParallax>
@@ -103,6 +88,7 @@ function App() {
                                 <Route path="/mapa" element={<Mapa />} />
                                 <Route path="/historial" element={<Historial />} />
                                 <Route path="/perfil" element={<Perfil />} />
+                                <Route path="/museo" element={<Museo />} />
 
                                 {/* Rutas Auxiliares */}
                                 <Route path="/impacto" element={<Impacto />} />
