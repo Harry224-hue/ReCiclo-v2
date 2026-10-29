@@ -1,6 +1,10 @@
 import { execSync } from 'node:child_process';
 import { mkdirSync, rmSync, writeFileSync, existsSync, readFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const ROOT = resolve(__dirname, '..');
 
 const COMMITS = [
   {
@@ -75,7 +79,6 @@ const COMMITS = [
   },
 ];
 
-const ROOT = '/home/juanpa/Documentos/ReCiclo-versión-de-pruebas-v2';
 const VERSIONES_DIR = join(ROOT, 'versiones');
 
 for (const v of COMMITS) {

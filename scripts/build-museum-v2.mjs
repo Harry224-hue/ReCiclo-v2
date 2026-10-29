@@ -9,9 +9,11 @@ import {
   unlinkSync,
   writeFileSync,
 } from 'node:fs';
-import { join } from 'node:path';
+import { join, dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const ROOT = '/home/juanpa/Documentos/ReCiclo-versión-de-pruebas-v2';
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const ROOT = resolve(__dirname, '..');
 const VERSIONES_DIR = join(ROOT, 'versiones');
 const EMULADOR_DIR = join(ROOT, 'public', 'emulador');
 const NODE_MODULES = join(ROOT, 'node_modules');

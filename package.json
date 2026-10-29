@@ -10,7 +10,17 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "v2.0": "vite --config versiones/v2.0/vite.config.ts",
+    "v2.1": "vite --config versiones/v2.1/vite.config.ts",
+    "v2.2": "vite --config versiones/v2.2/vite.config.ts",
+    "v2.3": "vite --config versiones/v2.3/vite.config.ts",
+    "v2.4": "vite --config versiones/v2.4/vite.config.ts",
+    "v2.5": "vite --config versiones/v2.5/vite.config.ts",
+    "v2.6": "vite --config versiones/v2.6/vite.config.ts",
+    "v2.7": "vite --config versiones/v2.7/vite.config.ts",
+    "v2.8": "vite --config versiones/v2.8/vite.config.ts",
+    "v2.9": "vite --config versiones/v2.9/vite.config.ts"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",

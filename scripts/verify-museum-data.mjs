@@ -1,8 +1,9 @@
 import { existsSync } from 'node:fs';
-import { join } from 'node:path';
-import { createRequire } from 'node:module';
+import { join, dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const ROOT = '/home/juanpa/Documentos/ReCiclo-versión-de-pruebas-v2';
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const ROOT = resolve(__dirname, '..');
 const museumTsPath = join(ROOT, 'src', 'data', 'museum.ts');
 
 const { MUSEUM_VERSIONS, MUSEUM_COUNT } = await import(museumTsPath);

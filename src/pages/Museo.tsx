@@ -214,7 +214,7 @@ export default function Museo() {
                         Archivo de Versiones de ReCiclo
                     </h1>
                     <p style={{ animationDelay: "280ms" }} className="museum-rise mt-4 text-base sm:text-lg leading-relaxed text-zinc-600 dark:text-zinc-300 font-normal">
-                        Registro cronológico de las veinte entregas del asistente ambiental para el IT Morelia. Desde el primer boceto conceptual del 4 de septiembre hasta la versión registrada en Oxigena tus Ideas el 8 de octubre de 2026.
+                        Registro cronológico de las treinta entregas del asistente ambiental para el IT Morelia. Desde el primer boceto conceptual del 4 de septiembre hasta la consolidación de producción el 28 de octubre de 2026.
                     </p>
                 </div>
 
