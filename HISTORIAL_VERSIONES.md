@@ -1,4 +1,4 @@
-# Historial de Evolucion: ReCiclo (v1.0 a v1.9)
+# Historial de Evolución: ReCiclo (v1.0 a v2.9)
 ### 19º Encuentro de Proyectos para el Desarrollo Sostenible: "Oxigena tus Ideas"
 **Instituto Tecnologico de Morelia · Departamento de Ingenieria Quimica y Bioquimica**  
 **Semestre Agosto - Diciembre 2026**
@@ -223,3 +223,191 @@ Este documento detalla la bitacora y el escalado progresivo de **ReCiclo Version
 | **v1.7** | 04 Oct | Sem 5 | WasteParallax + HowItWorks | Enlace directo al mapa | Campus 1 y 2 + Filtros | Localizacion asistida | Criterio de separacion |
 | **v1.8** | 07 Oct | Sem 6 | WasteParallax + CampusShowcase | Camara web real (getUserMedia) | Campus 1 y 2 + Filtros | Login y Registro ITM | Validacion del usuario |
 | **v1.9** | 08 Oct | Sem 6 | Inicio agil + Marco en pestanas | Guia con asistencia visual ligera | Leaflet + Rutas a pie | Perfil completo (Perfil.tsx) | 100% Etica (Lineamiento 14.2) |
+
+---
+
+# Historial de Evolución: ReCiclo Fase 2 (v2.0 a v2.9)
+### Ciclo de Arquitectura Web Pura, Modularización y Resiliencia en Producción
+**Instituto Tecnológico de Morelia · Semestre Agosto - Diciembre 2026**
+
+Este bloque registra el escalado y optimización de **ReCiclo Versión 2**, abarcando la eliminación de envoltorios nativos pesados, integración continua, arquitectura cloud serverless en Vercel, modularización profunda del perfil y ajustes, y la creación del Museo interactivo de versiones.
+
+## Cronograma Técnico de la Fase 2
+
+| Versión | Fecha | Hito y Alcance Técnico |
+| :---: | :---: | :--- |
+| **v2.0** | 18 de Octubre | **Arquitectura Web Pura y CI:** Eliminación de Electron y Capacitor; CI con GitHub Actions; insignia oficial v2.0 en navbar. |
+| **v2.1** | 18 de Octubre | **Arquitectura Cloud y Serverless:** Despliegue en Vercel, rewrites limpios de SPA y función serverless para proteger API Gemini. |
+| **v2.2** | 21 de Octubre | **Seguridad y Validación Estudiantil:** Validación de matrícula ITM y control de estados de autenticación con Firebase. |
+| **v2.3** | 21 de Octubre | **Interfaz Adaptativa e Isla Dinámica:** Integración de `NotchIsland.tsx`, controles de visualización y contraste reforzado. |
+| **v2.4** | 21 de Octubre | **Modularización de Ajustes y Perfil:** Separación en `ProfileHistoryAndResources.tsx` y `SettingsSecondaryTabs.tsx`. |
+| **v2.5** | 21 de Octubre | **Fundamentación Ambiental y Guía Operativa:** Rediseño editorial profundo de `/como-funciona` e `/impacto`. |
+| **v2.6** | 22 de Octubre | **Catálogo de Tecnologías Institucionales:** Estructuración de `techCategories.ts` en 6 capas técnicas y normativas. |
+| **v2.7** | 22 de Octubre | **Historial Estudiantil y Métricas de Logro:** Panel de estadísticas, racha, medallas y sincronización en Cloud Firestore. |
+| **v2.8** | 28 de Octubre | **El Museo de la Evolución y Marco Institucional:** Integración del visor interactivo con emuladores sandbox de 20 versiones. |
+| **v2.9** | 28 de Octubre | **Consolidación de Producción y Resiliencia:** Protección contra adblockers (GTM/Firebase), suite histórica de 30 versiones y entrega final. |
+
+---
+
+## Desglose Detallado de la Fase 2
+
+### Version 2.0: Arquitectura Web Pura e Integración Continua (CI)
+**Fecha:** 18 de Octubre de 2026  
+**Alcance del sprint:** Retiro definitivo de contenedores nativos (Android/Capacitor y Windows/Electron) para operar como SPA moderna pura.
+
+![Captura Portada ReCiclo v2.0](./capturas/v2.0.png)
+
+- **Características técnicas y metodológicas:**
+  - Migración a estándares web nativos (`MediaDevices API`, `ServiceWorker`, interfaces fluidas con Framer Motion).
+  - Pipeline de Integración Continua (CI) con GitHub Actions (`.github/workflows/build.yml`) para validación de linter y compilación en cada cambio.
+  - Distintivo visual oficial `v2.0` en la barra de navegación de cristal.
+- **Comando de prueba:**
+  ```bash
+  npm run v2.0
+  ```
+
+---
+
+### Version 2.1: Arquitectura Cloud y Funciones Serverless en Vercel
+**Fecha:** 18 de Octubre de 2026  
+**Alcance del sprint:** Despliegue y resguardo de claves API de inteligencia artificial.
+
+![Captura Portada ReCiclo v2.1](./capturas/v2.1.png)
+
+- **Características técnicas y metodológicas:**
+  - Configuración de `vercel.json` con enrutamiento SPA y rewrites limpios.
+  - Creación del endpoint serverless `api/gemini.js` para resguardar la clave `GEMINI_API_KEY` en entorno de servidor.
+- **Comando de prueba:**
+  ```bash
+  npm run v2.1
+  ```
+
+---
+
+### Version 2.2: Seguridad y Validación Estudiantil
+**Fecha:** 21 de Octubre de 2026  
+**Alcance del sprint:** Control de acceso exclusivo para la comunidad del IT Morelia.
+
+![Captura Portada ReCiclo v2.2](./capturas/v2.2.png)
+
+- **Características técnicas y metodológicas:**
+  - Validación estricta de matrícula institucional del IT Morelia en pantallas de `/login` y `/registro`.
+  - Manejo robusto de errores de red y permisos en Firebase Auth.
+- **Comando de prueba:**
+  ```bash
+  npm run v2.2
+  ```
+
+---
+
+### Version 2.3: Interfaz Adaptativa e Isla Dinámica
+**Fecha:** 21 de Octubre de 2026  
+**Alcance del sprint:** Notificaciones superiores y accesibilidad táctil.
+
+![Captura Portada ReCiclo v2.3](./capturas/v2.3.png)
+
+- **Características técnicas y metodológicas:**
+  - Implementación del componente `NotchIsland.tsx` para avisos no intrusivos en la parte superior.
+  - Sincronización de tema y acentos globales con `ThemeContext`.
+- **Comando de prueba:**
+  ```bash
+  npm run v2.3
+  ```
+
+---
+
+### Version 2.4: Modularización de Ajustes y Perfil
+**Fecha:** 21 de Octubre de 2026  
+**Alcance del sprint:** Refactorización modular para mantener alto rendimiento.
+
+![Captura Portada ReCiclo v2.4](./capturas/v2.4.png)
+
+- **Características técnicas y metodológicas:**
+  - Creación de `ProfileHistoryAndResources.tsx` y `SettingsSecondaryTabs.tsx`, aliviando la carga de renderizado.
+  - Optimización de transiciones y manejo de accesibilidad ARIA.
+- **Comando de prueba:**
+  ```bash
+  npm run v2.4
+  ```
+
+---
+
+### Version 2.5: Fundamentación Ambiental y Guía Operativa
+**Fecha:** 21 de Octubre de 2026  
+**Alcance del sprint:** Sustento normativo y pedagógico del acondicionamiento de residuos.
+
+![Captura Portada ReCiclo v2.5](./capturas/v2.5.png)
+
+- **Características técnicas y metodológicas:**
+  - Rediseño editorial profundo de `/como-funciona` e `/impacto` con métricas verificadas de SEMARNAT/INEGI.
+  - Pautas pedagógicas de vaciar, enjuagar, compactar y tapar botellas y empaques.
+- **Comando de prueba:**
+  ```bash
+  npm run v2.5
+  ```
+
+---
+
+### Version 2.6: Catálogo de Tecnologías Institucionales
+**Fecha:** 22 de Octubre de 2026  
+**Alcance del sprint:** Transparencia técnica y gobernanza de software.
+
+![Captura Portada ReCiclo v2.6](./capturas/v2.6.png)
+
+- **Características técnicas y metodológicas:**
+  - Creación de `src/data/techCategories.ts` clasificando las 6 capas del proyecto: IA, Frontend, Backend, Datos, Mapas y Normativa.
+  - Fichas descriptivas de cada biblioteca con licencias de código abierto y propósito institucional.
+- **Comando de prueba:**
+  ```bash
+  npm run v2.6
+  ```
+
+---
+
+### Version 2.7: Historial Estudiantil y Métricas de Logro
+**Fecha:** 22 de Octubre de 2026  
+**Alcance del sprint:** Reconocimiento de participación ambiental estudiantil.
+
+![Captura Portada ReCiclo v2.7](./capturas/v2.7.png)
+
+- **Características técnicas y metodológicas:**
+  - Panel interactivo de estadísticas de reciclaje, rachas y medallas de logro en `Perfil.tsx`.
+  - Persistencia segura y sincronización automática en Cloud Firestore.
+- **Comando de prueba:**
+  ```bash
+  npm run v2.7
+  ```
+
+---
+
+### Version 2.8: El Museo de la Evolución y Marco Institucional
+**Fecha:** 28 de Octubre de 2026  
+**Alcance del sprint:** Archivo interactivo con emulación de 20 versiones.
+
+![Captura Portada ReCiclo v2.8](./capturas/v2.8.png)
+
+- **Características técnicas y metodológicas:**
+  - Ruta `/museo` con emuladores sandbox de 20 versiones históricas (`v0.0` a `v1.9`).
+  - Pestañas `ProjectFrameworkTabs` y guía de contenedores en portada.
+- **Comando de prueba:**
+  ```bash
+  npm run v2.8
+  ```
+
+---
+
+### Version 2.9: Consolidación de Producción y Resiliencia en Campus
+**Fecha:** 28 de Octubre de 2026  
+**Alcance del sprint:** Suite completa de 30 versiones históricas y resiliencia en red.
+
+![Captura Portada ReCiclo v2.9](./capturas/v2.9.png)
+
+- **Características técnicas y metodológicas:**
+  - Blindaje contra bloqueadores de red (GTM/Firebase) para evitar errores `ERR_BLOCKED_BY_CLIENT`.
+  - Integración completa de la Fase 2 en el Museo de Versiones (30 versiones históricas accesibles).
+  - Rendimiento adaptativo optimizado para conectividad en campus.
+- **Comando de prueba:**
+  ```bash
+  npm run v2.9
+  ```
+

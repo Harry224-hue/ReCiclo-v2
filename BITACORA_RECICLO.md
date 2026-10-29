@@ -1,4 +1,4 @@
-# Bitacora de Desarrollo: ReCiclo (v1.0 a v1.9)
+# Bitacora de Desarrollo: ReCiclo (v1.0 a v2.9)
 ### 19º Encuentro de Proyectos para el Desarrollo Sostenible: "Oxigena tus Ideas"
 **Instituto Tecnologico de Morelia · Departamento de Ingenieria Quimica y Bioquimica**  
 **Semestre Agosto - Diciembre 2026**
@@ -221,3 +221,51 @@ Consolidacion definitiva del sistema en apego total a los lineamientos de la con
 | **v1.7** | 04 Oct | Sem 5 | WasteParallax + HowItWorks | Enlace directo a contenedor | Campus 1 y 2 + Filtros | Boton ubicar contenedor |
 | **v1.8** | 07 Oct | Sem 6 | WasteParallax + CampusShowcase | Camara web real (getUserMedia) | Campus 1 y 2 + Filtros | Login y Registro ITM |
 | **v1.9** | 08 Oct | Sem 6 | Inicio agil + Marco en pestanas | Guia etica con MobileNet local | Leaflet + Rutas a pie | Perfil completo (Perfil.tsx) |
+
+---
+
+## 5. Ciclo 3: Escalado a Web Pura, Modularización y Resiliencia (v2.0 a v2.9)
+**Periodo del sprint:** 18 al 28 de octubre de 2026
+
+En esta etapa, el equipo de estudiantes (García Montañez Ulises Jasen, Medina Cuamba Juan Pablo y Solís Calvillo Juan Pablo) abordó la optimización de producción de ReCiclo, prescindiendo de dependencias nativas pesadas e integrando el archivo histórico como evidencia de desarrollo.
+
+### Version 2.0 (18 de Octubre)
+- **Hito:** Arquitectura Web Pura y CI.
+- **Implementación:** Eliminación de Electron y Capacitor. Configuración de GitHub Actions para verificación automatizada en cada commit y distintivo v2.0 en navbar.
+
+### Version 2.1 (18 de Octubre)
+- **Hito:** Despliegue en Vercel y API Serverless.
+- **Implementación:** Configuración de `vercel.json` con SPA rewrites y endpoint `/api/gemini` para proteger la API Key de Gemini en servidor.
+
+### Version 2.2 (21 de Octubre, 12:06)
+- **Hito:** Seguridad en Autenticación.
+- **Implementación:** Validación obligatoria de matrícula institucional del IT Morelia y control de estados de autenticación con Firebase.
+
+### Version 2.3 (21 de Octubre, 21:50)
+- **Hito:** Isla Dinámica y Accesibilidad.
+- **Implementación:** Componente flotante `NotchIsland.tsx`, sincronización global con `ThemeContext` y contraste reforzado en modo claro y oscuro.
+
+### Version 2.4 (21 de Octubre, 23:08)
+- **Hito:** Modularización de Perfil y Ajustes.
+- **Implementación:** Desacoplamiento de `ProfileHistoryAndResources.tsx` y `SettingsSecondaryTabs.tsx` para mejorar la fluidez y mantenibilidad.
+
+### Version 2.5 (21 de Octubre, 23:23)
+- **Hito:** Sustento Ambiental Verificado.
+- **Implementación:** Rediseño editorial profundo de `/como-funciona` e `/impacto` con datos oficiales de SEMARNAT/INEGI y guía pedagógica de acondicionamiento físico.
+
+### Version 2.6 (22 de Octubre, 01:34)
+- **Hito:** Catálogo Tecnológico Institucional.
+- **Implementación:** Creación de `techCategories.ts` organizando las 6 capas del proyecto (IA, Frontend, Backend, Datos, Mapas, Normativa) con licencias y justificación.
+
+### Version 2.7 (22 de Octubre, 02:44)
+- **Hito:** Gamificación e Historial Estudiantil.
+- **Implementación:** Medallas de logro, estadísticas de reciclaje y sincronización automática en Cloud Firestore.
+
+### Version 2.8 (28 de Octubre, 12:15)
+- **Hito:** El Museo de la Evolución.
+- **Implementación:** Creación de la ruta interactiva `/museo` con emuladores sandbox de 20 versiones históricas y pestañas institucionales en portada.
+
+### Version 2.9 (28 de Octubre, 12:22)
+- **Hito:** Consolidación de Producción y Resiliencia en Campus.
+- **Implementación:** Protección contra bloqueadores de anuncios (desactivación de GTM en Firebase para prevenir `ERR_BLOCKED_BY_CLIENT`), catálogo completo de 30 versiones históricas e interfaz optimizada para redes del IT Morelia.
+
