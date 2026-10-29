@@ -10,6 +10,8 @@ import {
 } from "lucide-react";
 import { CAMPUS_CONTAINERS_CATALOG, CampusContainerSpec } from "../data/wasteData";
 import { ContainerGlyph, containerTextOn } from "./container-ui";
+import { triggerHaptic } from "../utils/haptics";
+import { APPLE_SPRING_DEFAULT } from "../utils/springs";
 
 interface ContainerGuideProps {
   open: boolean;
@@ -61,10 +63,10 @@ export function ContainerGuide({ open, onClose, initialBinId }: ContainerGuidePr
           aria-label="Guía de contenedores del ITM"
         >
           <motion.div
-            initial={{ y: 48, opacity: 0, scale: 0.985 }}
+            initial={{ y: 36, opacity: 0, scale: 0.985 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
-            exit={{ y: 48, opacity: 0, scale: 0.985 }}
-            transition={{ type: "spring", stiffness: 320, damping: 32 }}
+            exit={{ y: 36, opacity: 0, scale: 0.985 }}
+            transition={APPLE_SPRING_DEFAULT}
             onClick={(event) => event.stopPropagation()}
             className="flex max-h-[93dvh] w-full flex-col overflow-hidden rounded-t-[2rem] border border-zinc-200 bg-white text-zinc-900 shadow-2xl dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-50 sm:max-w-3xl sm:max-h-[86dvh] sm:rounded-[2rem]"
           >
@@ -103,9 +105,12 @@ export function ContainerGuide({ open, onClose, initialBinId }: ContainerGuidePr
                     <button
                       key={bin.id}
                       type="button"
-                      onClick={() => setActiveId(bin.id)}
+                      onClick={() => {
+                        triggerHaptic("selection");
+                        setActiveId(bin.id);
+                      }}
                       aria-pressed={isActive}
-                      className={`flex shrink-0 items-center gap-1.5 rounded-full border px-3 py-2 text-xs font-bold transition-all active:scale-[0.97] ${
+                      className={`flex shrink-0 items-center gap-1.5 rounded-full border px-3 py-2 text-xs font-bold transition-all active:scale-[0.96] cursor-pointer ${
                         isActive
                           ? "border-transparent shadow-md"
                           : "border-zinc-200 bg-white text-zinc-600 hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800"

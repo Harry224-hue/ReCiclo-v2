@@ -19,6 +19,8 @@ import { CATEGORY_INFO, CampusContainerSpec, WasteItem } from "../../data/wasteD
 import type { AIClassificationResult } from "../../services/aiClassifier";
 import { WasteVisual } from "../WasteVisual";
 import { ContainerGlyph, containerTextOn } from "../container-ui";
+import { triggerHaptic } from "../../utils/haptics";
+import { APPLE_SPRING_PILL } from "../../utils/springs";
 
 type ResultTab = "preparar" | "impacto" | "ficha";
 
@@ -174,16 +176,23 @@ export function ScanResultPanel({
               <button
                 key={item.id}
                 type="button"
-                onClick={() => setTab(item.id)}
+                onClick={() => {
+                  triggerHaptic("selection");
+                  setTab(item.id);
+                }}
                 aria-pressed={isActive}
-                className={`relative min-h-[44px] rounded-lg py-2 text-[12px] font-bold transition-colors ${
+                className={`relative min-h-[44px] rounded-lg py-2 text-[12px] font-bold transition-all active:scale-[0.97] cursor-pointer ${
                   isActive
                     ? "text-emerald-700 dark:text-emerald-300"
                     : "text-zinc-600 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-white"
                 }`}
               >
                 {isActive && (
-                  <span className="absolute inset-0 rounded-lg bg-white shadow-sm dark:bg-zinc-950" />
+                  <motion.span
+                    layoutId="scanResultTabPill"
+                    transition={reduceMotion ? { duration: 0.01 } : APPLE_SPRING_PILL}
+                    className="absolute inset-0 rounded-lg bg-white shadow-sm dark:bg-zinc-950"
+                  />
                 )}
                 <span className="relative z-10">{item.label}</span>
               </button>
@@ -371,26 +380,33 @@ export function ScanResultPanel({
         <div className="flex gap-2">
           <Link
             to={`/mapa?bin=${bin.id}`}
-            className="flex min-h-[44px] flex-1 items-center justify-center gap-1.5 rounded-xl bg-emerald-700 px-3 text-[12.5px] font-bold text-white shadow-sm transition-colors hover:bg-emerald-600 active:scale-[0.99]"
+            onClick={() => triggerHaptic("light")}
+            className="flex min-h-[44px] flex-1 items-center justify-center gap-1.5 rounded-xl bg-emerald-700 px-3 text-[12.5px] font-bold text-white shadow-sm transition-transform duration-100 ease-out hover:bg-emerald-600 active:scale-[0.96]"
           >
             <MapPin size={14} />
             Ver botes en el mapa
           </Link>
           <button
             type="button"
-            onClick={() => onOpenGuide(bin.id)}
+            onClick={() => {
+              triggerHaptic("selection");
+              onOpenGuide(bin.id);
+            }}
             aria-label="Abrir guía de contenedores"
             title="Guía de contenedores"
-            className="flex min-h-[44px] w-11 items-center justify-center rounded-xl border border-zinc-200 text-zinc-600 transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
+            className="flex min-h-[44px] w-11 items-center justify-center rounded-xl border border-zinc-200 text-zinc-600 transition-all duration-100 ease-out hover:bg-zinc-50 active:scale-[0.94] dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
           >
             <BookOpen size={16} />
           </button>
           <button
             type="button"
-            onClick={onRescan}
+            onClick={() => {
+              triggerHaptic("light");
+              onRescan();
+            }}
             aria-label="Escanear otro residuo"
             title="Escanear otro"
-            className="flex min-h-[44px] w-11 items-center justify-center rounded-xl border border-zinc-200 text-zinc-600 transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
+            className="flex min-h-[44px] w-11 items-center justify-center rounded-xl border border-zinc-200 text-zinc-600 transition-all duration-100 ease-out hover:bg-zinc-50 active:scale-[0.94] dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
           >
             <RefreshCw size={16} />
           </button>

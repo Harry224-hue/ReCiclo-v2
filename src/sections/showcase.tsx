@@ -2,6 +2,8 @@ import { useEffect, useId, useRef, useState, useSyncExternalStore, type Keyboard
 import { AnimatePresence, motion, MotionConfig, useInView } from "framer-motion";
 import { Layers } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
+import { triggerHaptic } from "../utils/haptics";
+import { APPLE_SPRING_PILL } from "../utils/springs";
 
 /* ---------- Estilos (mismos tokens que el resto de la página) ---------- */
 
@@ -302,7 +304,7 @@ const products: Product[] = [
     },
 ];
 
-const SPRING = { type: "spring", stiffness: 170, damping: 20 } as const;
+const SPRING = { type: "spring", stiffness: 380, damping: 36, mass: 0.6 } as const;
 
 const fadeUp = {
     initial: { y: 15, opacity: 0 },
@@ -436,8 +438,11 @@ function ProductTabs({
                         aria-selected={isActive}
                         aria-controls="showcase-panel"
                         tabIndex={isActive ? 0 : -1}
-                        onClick={() => onChange(i)}
-                        className={`relative rounded-xl font-medium cursor-pointer transition-colors duration-200 ${
+                        onClick={() => {
+                            triggerHaptic("selection");
+                            onChange(i);
+                        }}
+                        className={`relative rounded-xl font-medium cursor-pointer transition-colors duration-200 active:scale-[0.97] ${
                             compact ? "py-2.5 text-[13px]" : "py-2 text-sm"
                         } ${FOCUS_RING} ${
                             isActive
@@ -450,7 +455,7 @@ function ProductTabs({
                                 layoutId={`${pillId}-pill`}
                                 aria-hidden="true"
                                 className="absolute inset-0 rounded-xl bg-white dark:bg-zinc-800 shadow-sm border border-black/5 dark:border-white/10"
-                                transition={{ type: "spring", stiffness: 500, damping: 34 }}
+                                transition={APPLE_SPRING_PILL}
                             />
                         )}
                         <span className="relative z-10">{p.tab}</span>

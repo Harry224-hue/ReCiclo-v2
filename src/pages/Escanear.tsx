@@ -31,6 +31,8 @@ import { classifyWithGemini } from "../services/geminiClassifier";
 import { addScan, getUserProgress, updateUserProgress } from "../firebase";
 import { ContainerGuide } from "../components/ContainerGuide";
 import { ScanResultPanel } from "../components/scanner/ScanResultPanel";
+import { triggerHaptic } from "../utils/haptics";
+import { APPLE_SPRING_SHEET, projectMomentum } from "../utils/springs";
 
 function getMatchingBin(w: WasteItem) {
   const direct = CAMPUS_CONTAINERS_CATALOG.find(
@@ -320,6 +322,7 @@ export default function Escanear() {
           result = { ...(await classifyWasteImage(img)), engine: "mobilenet" };
         }
         setAiResult(result);
+        triggerHaptic("success");
         showResult(result.wasteItem);
         saveScanRecord(result.wasteItem, result.confidence);
       } catch (error) {
@@ -378,12 +381,14 @@ export default function Escanear() {
     setShowSamples(false);
     window.setTimeout(() => {
       setIsScanning(false);
+      triggerHaptic("success");
       showResult(waste);
       saveScanRecord(waste);
     }, 420);
   };
 
   const resetScan = () => {
+    triggerHaptic("light");
     setSelectedWaste(null);
     setAiResult(null);
     setUploadedPreview(null);
@@ -698,9 +703,16 @@ export default function Escanear() {
               <div className="flex flex-col items-center gap-1.5">
                 <button
                   type="button"
-                  onClick={cameraActive ? handleCaptureFromLiveView : handleNativeCamera}
+                  onClick={() => {
+                    triggerHaptic("medium");
+                    if (cameraActive) {
+                      handleCaptureFromLiveView();
+                    } else {
+                      handleNativeCamera();
+                    }
+                  }}
                   disabled={isScanning}
-                  className="relative flex size-[74px] items-center justify-center rounded-full border-4 border-white p-1 transition-transform active:scale-90 disabled:opacity-50"
+                  className="relative flex size-[74px] items-center justify-center rounded-full border-4 border-white p-1 transition-transform active:scale-90 disabled:opacity-50 touch-manipulation cursor-pointer select-none"
                   aria-label="Capturar y clasificar residuo"
                 >
                   <span className="block h-full w-full rounded-full bg-white" />
@@ -873,18 +885,19 @@ export default function Escanear() {
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
               exit={{ y: "100%" }}
-              transition={reduceMotion ? { duration: 0.01 } : { type: "spring", damping: 30, stiffness: 300 }}
+              transition={reduceMotion ? { duration: 0.01 } : APPLE_SPRING_SHEET}
               drag="y"
               dragControls={resultDragControls}
               dragListener={false}
               dragConstraints={{ top: 0, bottom: 0 }}
-              dragElastic={{ top: 0, bottom: 0.65 }}
+              dragElastic={{ top: 0, bottom: 0.55 }}
               dragMomentum={false}
               dragSnapToOrigin
               onDragEnd={(_, info) => {
-                if (info.offset.y > 96 || info.velocity.y > 520) resetScan();
+                const projectedY = info.offset.y + projectMomentum(info.velocity.y, 0.992);
+                if (projectedY > 120 || info.velocity.y > 350) resetScan();
               }}
-              className="absolute inset-x-0 bottom-0 h-[calc(100dvh-5rem)] overflow-hidden rounded-t-[2rem] border-t border-white/10 bg-white shadow-[0_-20px_60px_rgba(0,0,0,0.45)] dark:bg-zinc-900"
+              className="absolute inset-x-0 bottom-0 h-[calc(100dvh-5rem)] overflow-hidden rounded-t-[2rem] border-t border-white/30 dark:border-white/10 bg-white shadow-[0_-20px_60px_rgba(0,0,0,0.45),inset_0_1px_0_0_rgba(255,255,255,0.8)] dark:bg-zinc-900 dark:shadow-[0_-20px_60px_rgba(0,0,0,0.65),inset_0_1px_0_0_rgba(255,255,255,0.12)]"
             >
               <div className="flex h-full min-h-0 flex-col">
                 <button

@@ -26,6 +26,8 @@ import { LiteModeBadge } from "./LiteModeBadge";
 import { PerformanceWarningDialog } from "./PerformanceWarningDialog";
 import { NotchIsland } from "./NotchIsland";
 import { LOGO_LIGHT, LOGO_DARK } from "../constants/assets";
+import { triggerHaptic } from "../utils/haptics";
+import { APPLE_SPRING_PILL, APPLE_TAP_TRANSITION } from "../utils/springs";
 
 const ACCENT_STYLES = {
     emerald: { ring: "focus-visible:ring-emerald-500", text: "text-emerald-500", bg: "bg-emerald-500" },
@@ -131,7 +133,7 @@ export function Navbar() {
     const navTheme = getThemeClasses("navbar");
     const dockTheme = getThemeClasses("dock");
 
-    const pillSpring = { type: "spring" as const, stiffness: 600, damping: 38, mass: 0.4 };
+    const pillSpring = APPLE_SPRING_PILL;
     const accentStyle = ACCENT_STYLES[accentColor as keyof typeof ACCENT_STYLES] ?? ACCENT_STYLES.emerald;
     const scrollTransition = visualMode === "immersive" ? "transition-all duration-500 ease-out" : "transition-none";
 
@@ -261,6 +263,7 @@ export function Navbar() {
     };
 
     const handleNavClick = (e: React.MouseEvent, path: string) => {
+        triggerHaptic("selection");
         if (path === "/" && location.pathname === "/") {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: "smooth" });
@@ -517,9 +520,9 @@ export function Navbar() {
 
                         const content = (
                             <motion.div
-                                whileHover={{ scale: 1.06 }}
-                                whileTap={{ scale: 0.88 }}
-                                transition={{ type: "spring", stiffness: 450, damping: 20 }}
+                                whileHover={{ scale: 1.04 }}
+                                whileTap={{ scale: 0.94 }}
+                                transition={APPLE_TAP_TRANSITION}
                                 className={`relative z-10 flex flex-col items-center justify-center gap-0.5 transition-colors duration-200 ${
                                     isActive
                                         ? isDarkMode

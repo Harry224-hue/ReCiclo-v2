@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { ScanLine, MapPin, Sun, Moon, Settings, Layers } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
+import { triggerHaptic } from "../utils/haptics";
 
 interface NotchIslandProps {
     shortcuts?: string[];
@@ -30,7 +31,7 @@ export function NotchIsland({
 
     const { glassTheme } = useTheme();
 
-    // Estilos adaptativos según transparencia y modo oscuro/claro
+    // Estilos adaptativos según transparencia y modo oscuro/claro (Apple Glass & Specular Inset)
     const containerClasses = isTransparent
         ? "bg-transparent backdrop-blur-none border-transparent shadow-none"
         : glassTheme === "solid"
@@ -38,8 +39,8 @@ export function NotchIsland({
             ? "bg-zinc-900 text-white border-zinc-800 shadow-[0_8px_25px_rgba(0,0,0,0.4)] backdrop-blur-none"
             : "bg-white text-zinc-900 border-zinc-200 shadow-[0_8px_25px_rgba(0,0,0,0.08)] backdrop-blur-none"
         : isDarkMode
-        ? "bg-zinc-900/90 text-white border-zinc-700/60 shadow-[0_8px_25px_rgba(0,0,0,0.4)] backdrop-blur-xl"
-        : "bg-white/90 text-zinc-900 border-zinc-200/90 shadow-[0_8px_25px_rgba(0,0,0,0.08)] backdrop-blur-xl";
+        ? "bg-zinc-950/80 text-white border-white/10 shadow-[0_12px_32px_rgba(0,0,0,0.5),inset_0_1px_0_0_rgba(255,255,255,0.12)] backdrop-blur-2xl saturate-[180%]"
+        : "bg-white/80 text-zinc-900 border-white/60 shadow-[0_8px_25px_rgba(0,0,0,0.08),inset_0_1px_0_0_rgba(255,255,255,0.85)] backdrop-blur-2xl saturate-[180%]";
 
     const textClasses = isTransparent
         ? "text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)]"
@@ -162,7 +163,10 @@ export function NotchIsland({
                         ) : (
                             <button
                                 type="button"
-                                onClick={onToggleTheme}
+                                onClick={() => {
+                                    triggerHaptic("light");
+                                    onToggleTheme?.();
+                                }}
                                 className={`size-7 rounded-full active:scale-90 flex items-center justify-center text-amber-500 transition-all cursor-pointer ${buttonClasses}`}
                                 title="Alternar Tema"
                                 aria-label="Alternar Tema"
@@ -182,7 +186,10 @@ export function NotchIsland({
                         ) : (
                             <button
                                 type="button"
-                                onClick={onOpenSettings}
+                                onClick={() => {
+                                    triggerHaptic("light");
+                                    onOpenSettings?.();
+                                }}
                                 className={`size-7 rounded-full active:scale-90 flex items-center justify-center transition-all cursor-pointer ${buttonClasses}`}
                                 title="Configuración"
                                 aria-label="Configuración"

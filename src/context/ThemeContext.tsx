@@ -372,7 +372,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
                 case "light":
                     return `${baseTransition} bg-white/95 dark:bg-zinc-900/90 backdrop-blur-xl saturate-[160%] border border-zinc-200/90 dark:border-zinc-800 shadow-2xl text-zinc-900 dark:text-zinc-100`;
                 case "heavy":
-                    return `${baseTransition} bg-white/95 dark:bg-zinc-900/80 backdrop-blur-2xl saturate-[190%] border border-zinc-200/90 dark:border-zinc-800 shadow-2xl text-zinc-900 dark:text-zinc-100`;
+                    return `${baseTransition} bg-white/90 dark:bg-zinc-900/85 backdrop-blur-2xl saturate-[180%] border border-zinc-200/90 dark:border-zinc-800/90 text-zinc-900 dark:text-zinc-100 shadow-2xl [box-shadow:inset_0_1px_0_0_rgba(255,255,255,0.8),0_20px_40px_rgba(0,0,0,0.12)] dark:[box-shadow:inset_0_1px_0_0_rgba(255,255,255,0.12),0_25px_50px_rgba(0,0,0,0.6)]`;
             }
         }
 
@@ -383,7 +383,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
                 case "light":
                     return `${baseTransition} bg-white/85 dark:bg-zinc-900/85 backdrop-blur-lg saturate-[150%] border border-black/5 dark:border-white/10 shadow-lg`;
                 case "heavy":
-                    return `${baseTransition} bg-white/80 dark:bg-zinc-900/70 backdrop-blur-xl saturate-[180%] border border-black/10 dark:border-white/20 shadow-lg`;
+                    return `${baseTransition} bg-white/75 dark:bg-zinc-900/70 backdrop-blur-2xl saturate-[180%] border border-black/10 dark:border-white/15 shadow-xl [box-shadow:inset_0_1px_0_0_rgba(255,255,255,0.8),0_12px_32px_rgba(0,0,0,0.12)] dark:[box-shadow:inset_0_1px_0_0_rgba(255,255,255,0.15),0_16px_40px_rgba(0,0,0,0.55)]`;
             }
         }
 
@@ -393,7 +393,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
             case "light":
                 return `${baseTransition} bg-white/85 dark:bg-zinc-900/85 backdrop-blur-xl saturate-[150%] border border-white/60 dark:border-zinc-700/50 shadow-sm`;
             case "heavy":
-                return `${baseTransition} bg-white/80 dark:bg-zinc-900/70 backdrop-blur-2xl saturate-[180%] border border-white/40 dark:border-zinc-700/30 shadow-sm`;
+                return `${baseTransition} bg-white/80 dark:bg-zinc-900/75 backdrop-blur-2xl saturate-[180%] border border-white/40 dark:border-zinc-700/30 shadow-md [box-shadow:inset_0_1px_0_0_rgba(255,255,255,0.7),0_8px_24px_rgba(0,0,0,0.06)] dark:[box-shadow:inset_0_1px_0_0_rgba(255,255,255,0.12),0_12px_28px_rgba(0,0,0,0.4)]`;
         }
     };
 

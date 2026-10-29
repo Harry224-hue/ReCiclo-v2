@@ -44,6 +44,8 @@ import {
 import { useTheme } from "../context/ThemeContext";
 import { ContainerGuide } from "../components/ContainerGuide";
 import { ContainerDot, ContainerGlyph, containerTextOn } from "../components/container-ui";
+import { triggerHaptic } from "../utils/haptics";
+import { APPLE_SPRING_SHEET, projectMomentum } from "../utils/springs";
 
 /* ─────────────────────────────────────────────────────────────
    Configuración geoespacial · Plano General ITM
@@ -1415,16 +1417,20 @@ export default function Mapa() {
             initial={{ y: 42, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 42, opacity: 0 }}
-            transition={reduceMotion ? { duration: 0.01 } : { type: "spring", stiffness: 340, damping: 34 }}
+            transition={reduceMotion ? { duration: 0.01 } : APPLE_SPRING_SHEET}
             drag="y"
             dragControls={panelDragControls}
             dragListener={false}
             dragConstraints={{ top: 0, bottom: 0 }}
-            dragElastic={{ top: 0, bottom: 0.6 }}
+            dragElastic={{ top: 0, bottom: 0.55 }}
             dragMomentum={false}
             dragSnapToOrigin
             onDragEnd={(_, info) => {
-              if (info.offset.y > 96 || info.velocity.y > 520) closePanel();
+              const projectedY = info.offset.y + projectMomentum(info.velocity.y, 0.992);
+              if (projectedY > 120 || info.velocity.y > 350) {
+                triggerHaptic("light");
+                closePanel();
+              }
             }}
             className={`fixed inset-x-0 bottom-0 z-[70] lg:absolute lg:inset-x-auto lg:right-4 lg:w-[390px] ${
               expanded ? "lg:top-4 lg:bottom-4" : "lg:top-[7rem] lg:bottom-4"

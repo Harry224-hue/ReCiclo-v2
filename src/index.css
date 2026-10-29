@@ -4,11 +4,101 @@
 @variant dark (&:is(.dark *));
 
 * {
-  font-family: "Geist", sans-serif;
+  font-family: "Geist", -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Urbanist", sans-serif;
+  font-family: "Urbanist", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-optical-sizing: auto;
+}
+
+/* Apple Typography: Tracking size-specific & proportional leading */
+h1 {
+  letter-spacing: -0.028em;
+  line-height: 1.08;
+}
+
+h2 {
+  letter-spacing: -0.022em;
+  line-height: 1.15;
+}
+
+h3, h4 {
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+}
+
+p, body {
+  letter-spacing: -0.005em;
+  line-height: 1.55;
+}
+
+/* ─── APPLE DESIGN: TACTILE RESPONSE & FROSTED GLASS MATERIALS ─── */
+/* Instant feedback on pointerdown */
+.apple-press {
+  transform: translateZ(0);
+  transition: transform 120ms cubic-bezier(0.2, 0, 0, 1), box-shadow 120ms ease;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.apple-press:active {
+  transform: scale(0.965);
+}
+
+/* Apple Frosted Glass with Specular Light Reflection */
+.apple-glass {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.06), inset 0 1px 0 0 rgba(255, 255, 255, 0.65);
+}
+
+.dark .apple-glass {
+  background: rgba(18, 18, 22, 0.78);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 36px 0 rgba(0, 0, 0, 0.45), inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Apple Accessibility Overrides (Reduced Motion / Transparency / More Contrast) */
+@media (prefers-reduced-transparency: reduce) {
+  .apple-glass,
+  .backdrop-blur-xl,
+  .backdrop-blur-2xl,
+  .backdrop-blur-lg,
+  .backdrop-blur-md {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: #ffffff !important;
+  }
+  .dark .apple-glass,
+  .dark .backdrop-blur-xl,
+  .dark .backdrop-blur-2xl,
+  .dark .backdrop-blur-lg,
+  .dark .backdrop-blur-md {
+    background: #18181b !important;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .apple-glass {
+    border: 2px solid #000000 !important;
+  }
+  .dark .apple-glass {
+    border: 2px solid #ffffff !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .apple-press:active {
+    transform: none !important;
+  }
 }
 
 @keyframes marquee-up {

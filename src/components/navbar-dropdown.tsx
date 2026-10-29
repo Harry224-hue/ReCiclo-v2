@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
 import { logout } from "../firebase";
 import { Settings, LogIn, UserPlus, LogOut, Sun, Moon, Layers, User } from "lucide-react";
+import { triggerHaptic } from "../utils/haptics";
+import { APPLE_TAP_TRANSITION } from "../utils/springs";
 
 interface NavbarDropdownProps {
     id?: string;
@@ -47,7 +49,7 @@ const SECTION_LABEL =
     "text-xs font-bold text-zinc-900 dark:text-zinc-200 uppercase tracking-wider flex items-center gap-2";
 
 const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 8, scale: 0.98 },
+    hidden: { opacity: 0, y: 6, scale: 0.98 },
     visible: {
         opacity: 1,
         y: 0,
@@ -55,7 +57,7 @@ const itemVariants: Variants = {
         transition: {
             type: "spring",
             stiffness: 480,
-            damping: 28,
+            damping: 42,
             mass: 0.5,
         },
     },
@@ -78,15 +80,18 @@ function MenuItem({ icon: Icon, iconClass = "", onClick, children, danger = fals
         <motion.button
             type="button"
             variants={itemVariants}
-            whileHover={{ x: 4, scale: 1.01 }}
+            whileHover={{ x: 3, scale: 1.01 }}
             whileTap={{ scale: 0.97 }}
-            transition={{ type: "spring", stiffness: 500, damping: 28 }}
-            onClick={onClick}
+            transition={APPLE_TAP_TRANSITION}
+            onClick={() => {
+                triggerHaptic("selection");
+                onClick();
+            }}
             className={`group flex items-center gap-3 w-full px-3 py-2.5 text-sm rounded-xl text-left cursor-pointer transition-colors duration-150 ${tone} ${FOCUS_RING}`}
         >
             <motion.span
-                whileHover={{ scale: 1.18, rotate: danger ? 12 : -8 }}
-                transition={{ type: "spring", stiffness: 500, damping: 22 }}
+                whileHover={{ scale: 1.15, rotate: danger ? 8 : -6 }}
+                transition={APPLE_TAP_TRANSITION}
                 className="shrink-0 flex items-center justify-center transition-transform"
             >
                 <Icon size={16} className={danger ? "" : iconClass} />
@@ -179,7 +184,7 @@ export function NavbarDropdown({
     const containerVariants: Variants = {
         hidden: reduceMotion
             ? { opacity: 0 }
-            : { opacity: 0, scale: 0.93, y: -10 },
+            : { opacity: 0, scale: 0.95, y: -8 },
         visible: {
             opacity: 1,
             scale: 1,
@@ -188,20 +193,20 @@ export function NavbarDropdown({
                 ? { duration: 0.1 }
                 : {
                     type: "spring",
-                    stiffness: 460,
-                    damping: 30,
-                    mass: 0.6,
-                    staggerChildren: 0.035,
-                    delayChildren: 0.015,
+                    stiffness: 480,
+                    damping: 40,
+                    mass: 0.5,
+                    staggerChildren: 0.025,
+                    delayChildren: 0.01,
                 },
         },
         exit: reduceMotion
             ? { opacity: 0, transition: { duration: 0.08 } }
             : {
                 opacity: 0,
-                scale: 0.95,
-                y: -6,
-                transition: { duration: 0.15, ease: [0.32, 0, 0.67, 0] as const },
+                scale: 0.96,
+                y: -4,
+                transition: { duration: 0.14, ease: [0.32, 0, 0.67, 0] as const },
             },
     };
 

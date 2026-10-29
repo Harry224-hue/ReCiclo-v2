@@ -102,7 +102,7 @@ export function Hero() {
                     >
                         <Link
                             to="/escanear"
-                            className={`w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full text-sm font-medium text-white shadow-lg transition-all active:scale-95 ${accent.btn} ${LINK_FOCUS}`}
+                            className={`w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full text-sm font-medium text-white shadow-lg transition-transform duration-100 ease-out active:scale-[0.96] ${accent.btn} ${LINK_FOCUS}`}
                         >
                             <ScanLine className="size-4" aria-hidden="true" />
                             <span>Identificar Residuo</span>
@@ -110,19 +110,19 @@ export function Hero() {
 
                         <Link
                             to="/mapa"
-                            className={`w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-sm font-medium text-white bg-white/10 hover:bg-white/15 backdrop-blur-md border border-white/15 transition-all active:scale-95 ${LINK_FOCUS}`}
+                            className={`w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-sm font-medium text-white bg-white/10 hover:bg-white/15 backdrop-blur-md border border-white/15 transition-transform duration-100 ease-out active:scale-[0.96] ${LINK_FOCUS}`}
                         >
                             <span>Mapa de Botes ITM</span>
                             <ArrowRight className="size-3.5 text-zinc-300" aria-hidden="true" />
                         </Link>
                     </motion.div>
 
-                    {/* Guía didáctica de interacción interactiva sensorial */}
+                    {/* Guía didáctica de interacción sensorial con sobriedad Apple */}
                     <motion.div
                         variants={item}
                         className="mt-10 flex items-center gap-2 text-xs text-zinc-400 dark:text-zinc-500 select-none"
                     >
-                        <span className="size-2 rounded-full bg-emerald-400/80 animate-ping" />
+                        <span className="size-2 rounded-full bg-emerald-400 ring-2 ring-emerald-400/20" />
                         <span>Inclina tu dispositivo o mueve el cursor para interactuar con el entorno</span>
                     </motion.div>
                 </motion.div>

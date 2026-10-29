@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
 import { LazyMount, LazyImage } from "../components/PerformanceOptimizer";
+import { triggerHaptic } from "../utils/haptics";
 import ctaLeft from "../assets/project/cta-materiales.jpg";
 import ctaCenter from "../assets/project/cta-scan-mobile.jpg";
 import ctaRight from "../assets/project/cta-smart-bin.jpg";
@@ -121,8 +122,15 @@ export function ScannerCTA() {
                   aria-selected={isActive}
                   aria-label={card.title}
                   tabIndex={0}
-                  onClick={() => setActiveIndex(index)}
-                  onMouseEnter={() => setActiveIndex(index)}
+                  onClick={() => {
+                    triggerHaptic("selection");
+                    setActiveIndex(index);
+                  }}
+                  onMouseEnter={() => {
+                    if (activeIndex !== index) {
+                      setActiveIndex(index);
+                    }
+                  }}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" || e.key === " ") {
                       e.preventDefault();

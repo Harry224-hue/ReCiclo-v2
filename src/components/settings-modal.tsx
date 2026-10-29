@@ -28,6 +28,8 @@ import {
     SettingsAccountTab,
     SettingsPrivacyTab,
 } from "./settings/SettingsSecondaryTabs";
+import { triggerHaptic } from "../utils/haptics";
+import { APPLE_SPRING_DEFAULT } from "../utils/springs";
 
 interface SettingsModalProps {
     isOpen: boolean;
@@ -198,10 +200,10 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                     {/* MODAL */}
                     <motion.div
                         className="relative z-10 w-full h-[100dvh] sm:h-[calc(100dvh-2rem)] lg:h-[650px] lg:max-h-[calc(100dvh-3rem)] lg:max-w-5xl flex flex-col lg:flex-row overflow-hidden rounded-none sm:rounded-[1.75rem] shadow-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white"
-                        initial={{ opacity: 0, scale: 0.97, y: 10 }}
+                        initial={{ opacity: 0, scale: 0.98, y: 12 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.97, y: 10 }}
-                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                        exit={{ opacity: 0, scale: 0.98, y: 12 }}
+                        transition={APPLE_SPRING_DEFAULT}
                         onWheel={(e) => e.stopPropagation()}
                     >
                         {/* ================================================= */}
@@ -238,8 +240,11 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                                     return (
                                         <button
                                             key={tab.id}
-                                            onClick={() => setActiveTab(tab.id as SettingsTab)}
-                                            className={`shrink-0 flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                                            onClick={() => {
+                                                triggerHaptic("selection");
+                                                setActiveTab(tab.id as SettingsTab);
+                                            }}
+                                            className={`shrink-0 flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all active:scale-[0.96] cursor-pointer ${
                                                 isActive
                                                     ? `${accent.badge} shadow-xs border border-zinc-300/80 dark:border-zinc-700`
                                                     : "text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200/60 dark:hover:bg-zinc-800"
@@ -283,8 +288,11 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                                     return (
                                         <button
                                             key={tab.id}
-                                            onClick={() => setActiveTab(tab.id as SettingsTab)}
-                                            className={`flex items-start gap-3 px-3.5 py-2.5 rounded-xl text-left transition-all cursor-pointer ${
+                                            onClick={() => {
+                                                triggerHaptic("selection");
+                                                setActiveTab(tab.id as SettingsTab);
+                                            }}
+                                            className={`flex items-start gap-3 px-3.5 py-2.5 rounded-xl text-left transition-all active:scale-[0.98] cursor-pointer ${
                                                 isActive
                                                     ? "bg-white dark:bg-zinc-800 text-zinc-950 dark:text-white border border-zinc-200 dark:border-zinc-700 shadow-sm font-bold"
                                                     : "text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200/50 dark:hover:bg-zinc-800/50 hover:text-zinc-950 dark:hover:text-white font-semibold"
