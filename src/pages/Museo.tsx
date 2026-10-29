@@ -416,6 +416,8 @@ export default function Museo() {
                             activeSeries === "all" && orderMode === "asc" && version.id === "v0.0";
                         const showChapter1 =
                             activeSeries === "all" && orderMode === "asc" && version.id === "v1.0";
+                        const showChapter2 =
+                            activeSeries === "all" && orderMode === "asc" && version.id === "v2.0";
 
                         return (
                             <div key={version.id} className="space-y-8">
@@ -445,6 +447,21 @@ export default function Museo() {
                                         </h2>
                                         <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-1.5 max-w-2xl leading-relaxed">
                                             Consolidación oficial en el Tecnológico de Morelia: diagnóstico local de residuos, cartografía de botes en Campus 1 y 2, cámara en tiempo real y entrega final en Oxigena tus Ideas.
+                                        </p>
+                                    </div>
+                                )}
+
+                                {/* Hito de Capítulo 03 */}
+                                {showChapter2 && (
+                                    <div className="pt-8 pb-6 border-b-2 border-zinc-950 dark:border-white">
+                                        <span className="text-xs font-mono font-bold tracking-wider text-emerald-700 dark:text-emerald-400 uppercase">
+                                            Capítulo 03 · 18 al 28 de octubre de 2026
+                                        </span>
+                                        <h2 className="text-2xl sm:text-3xl font-extrabold text-zinc-950 dark:text-white mt-1">
+                                            Arquitectura Web Pura y Evolución en Producción
+                                        </h2>
+                                        <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-1.5 max-w-2xl leading-relaxed">
+                                            Consolidación de estándares web sin dependencias nativas: integración continua con GitHub Actions, despliegue serverless en Vercel, modularización del perfil, fundamentación técnica y museo histórico interactivo.
                                         </p>
                                     </div>
                                 )}
