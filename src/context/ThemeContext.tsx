@@ -153,9 +153,19 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
-    // Igual que antes: se inicializa leyendo de localStorage
+    // Liquid glass desactivado por defecto (soporte preservado para Configuración)
     const [glassTheme, setGlassTheme] = useState<GlassTheme>(() => {
-        return (localStorage.getItem("glassTheme") as GlassTheme) || "heavy";
+        const stored = localStorage.getItem("glassTheme");
+        const deactivatedV2 = localStorage.getItem("reciclo_liquid_glass_deactivated_v2");
+        if (!deactivatedV2) {
+            localStorage.setItem("reciclo_liquid_glass_deactivated_v2", "true");
+            localStorage.setItem("glassTheme", "solid");
+            return "solid";
+        }
+        if (stored === "solid" || stored === "light" || stored === "heavy") {
+            return stored;
+        }
+        return "solid";
     });
 
     const [accentColor, setAccentColor] = useState<AccentColor>(() => {
@@ -339,7 +349,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     // Restablecer valores por defecto también significa devolverle la decisión al motor
     // de rendimiento y al sistema operativo, en vez de forzar una elección fija.
     const resetTheme = () => {
-        setGlassTheme("heavy");
+        setGlassTheme("solid");
         setAccentColor("emerald");
         setColorSchemeMode("system");
         setHeroVideo(`${CLOUDINARY_HERO_BASE}/video-hero.mp4`);

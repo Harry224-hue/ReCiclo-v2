@@ -117,6 +117,7 @@ export function Navbar() {
 
     const {
         getThemeClasses,
+        glassTheme,
         perfTier,
         perfSource,
         requestImmersive,
@@ -234,19 +235,23 @@ export function Navbar() {
     }, [location.pathname]);
 
     useEffect(() => {
-        const handleClickOutside = (e: MouseEvent) => {
+        if (!isDropdownOpen) return;
+        const handleClickOutside = (e: MouseEvent | TouchEvent) => {
             if (
                 desktopRef.current &&
                 !desktopRef.current.contains(e.target as Node) &&
-                mobileRef.current &&
-                !mobileRef.current.contains(e.target as Node)
+                (!mobileRef.current || !mobileRef.current.contains(e.target as Node))
             ) {
                 setIsDropdownOpen(false);
             }
         };
         document.addEventListener("mousedown", handleClickOutside);
-        return () => document.removeEventListener("mousedown", handleClickOutside);
-    }, []);
+        document.addEventListener("touchstart", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener("touchstart", handleClickOutside);
+        };
+    }, [isDropdownOpen]);
 
     const handleLogoClick = (e: React.MouseEvent) => {
         if (location.pathname === "/") {
@@ -315,6 +320,8 @@ export function Navbar() {
                             className={`relative flex items-center gap-1.5 p-1.5 rounded-full ${scrollTransition} ${
                                 isOverHero
                                     ? "bg-white/15 dark:bg-black/40 backdrop-blur-md border border-white/20 dark:border-zinc-700/50 shadow-sm"
+                                    : glassTheme === "solid"
+                                    ? "bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 shadow-xs"
                                     : "bg-black/[0.04] dark:bg-white/10 backdrop-blur-md border border-black/[0.06] dark:border-white/5 shadow-sm"
                             }`}
                         >
@@ -375,6 +382,8 @@ export function Navbar() {
                             className={`flex items-center gap-2 pl-2.5 pr-1 py-1 rounded-full ${scrollTransition} cursor-pointer focus-visible:outline-none focus-visible:ring-2 ${accentStyle.ring} ${
                                 isOverHero
                                     ? "bg-white/15 dark:bg-black/40 backdrop-blur-md border border-white/20 dark:border-zinc-700/50 shadow-sm text-white"
+                                    : glassTheme === "solid"
+                                    ? "bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 shadow-xs hover:bg-zinc-200/80 dark:hover:bg-zinc-800"
                                     : "bg-black/[0.04] dark:bg-white/10 backdrop-blur-md border border-black/[0.06] dark:border-transparent shadow-sm hover:bg-black/[0.07] dark:hover:bg-white/15"
                             }`}
                         >

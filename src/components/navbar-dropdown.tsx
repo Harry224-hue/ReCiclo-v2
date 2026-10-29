@@ -3,10 +3,10 @@ import { motion, useReducedMotion, type Transition } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
 import { logout } from "../firebase";
-import { Settings, LogIn, UserPlus, LogOut, Sun, Moon, Palette, Layers, User } from "lucide-react";
+import { Settings, LogIn, UserPlus, LogOut, Sun, Moon, Layers, User } from "lucide-react";
 
 interface NavbarDropdownProps {
-    id: string;
+    id?: string;
     isLoggedIn: boolean;
     setIsLoggedIn: (value: boolean) => void;
     closeMenu: () => void;
@@ -14,12 +14,6 @@ interface NavbarDropdownProps {
     onSignUp?: () => void; // Acción de "Crear cuenta"
     user?: { name: string; email: string; photoURL?: string };
 }
-
-const GLASS_OPTIONS = [
-    { value: "solid", label: "Sólido" },
-    { value: "light", label: "Ligero" },
-    { value: "heavy", label: "Profundo" },
-] as const;
 
 // Mismos tokens de acento que el resto de la página: el color elegido por la persona
 // tiñe el saludo y los íconos, así el menú se siente parte del sitio y no un menú genérico.
@@ -77,7 +71,6 @@ function MenuItem({ icon: Icon, iconClass = "", onClick, children, danger = fals
 }
 
 export function NavbarDropdown({
-                                   id,
                                    isLoggedIn,
                                    setIsLoggedIn,
                                    closeMenu,
@@ -85,7 +78,7 @@ export function NavbarDropdown({
                                    onSignUp,
                                    user = { name: "Usuario", email: "usuario@correo.com" },
                                }: NavbarDropdownProps) {
-    const { glassTheme, setGlassTheme, isDarkMode, toggleDarkMode, colorSchemeMode, accentColor, perfTier } = useTheme();
+    const { isDarkMode, toggleDarkMode, colorSchemeMode, accentColor, getThemeClasses } = useTheme();
     const navigate = useNavigate();
     const accent = ACCENTS[accentColor as keyof typeof ACCENTS] ?? ACCENTS.emerald;
     const reduceMotion = useReducedMotion();
@@ -117,6 +110,27 @@ export function NavbarDropdown({
             if ((!active || active === document.body || node?.contains(active)) && previous?.isConnected) {
                 previous.focus({ preventScroll: true });
             }
+        };
+    }, []);
+
+    // Cerrar al hacer clic fuera del menú
+    useEffect(() => {
+        const handleClickOutside = (e: MouseEvent | TouchEvent) => {
+            const target = e.target as HTMLElement | null;
+            if (ref.current && !ref.current.contains(target as Node)) {
+                if (target?.closest('[aria-haspopup="dialog"]')) return;
+                closeRef.current();
+            }
+        };
+        const timer = setTimeout(() => {
+            document.addEventListener("mousedown", handleClickOutside);
+            document.addEventListener("touchstart", handleClickOutside);
+        }, 10);
+
+        return () => {
+            clearTimeout(timer);
+            document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener("touchstart", handleClickOutside);
         };
     }, []);
 
@@ -158,7 +172,7 @@ export function NavbarDropdown({
             animate={{ opacity: 1, scale: 1, y: 0, transition: enter }}
             exit={{ ...hidden, ...(reduceMotion ? {} : { scale: 0.97, y: -2 }), transition: leave }}
             style={{ transformOrigin: "top right", willChange: "transform, opacity" }}
-            className={`absolute top-[calc(100%+16px)] right-0 w-[265px] max-w-[calc(100vw-2rem)] rounded-[1.5rem] p-2 overflow-hidden z-50 outline-none bg-white/98 dark:bg-zinc-900/95 backdrop-blur-2xl border border-zinc-200/90 dark:border-zinc-800 shadow-2xl`}
+            className={`absolute top-[calc(100%+16px)] right-0 w-[265px] max-w-[calc(100vw-2rem)] rounded-[1.5rem] p-2 overflow-hidden z-50 outline-none ${getThemeClasses("dropdown")}`}
         >
             <div className="flex flex-col">
                 {/* 1. Usuario */}
@@ -247,47 +261,6 @@ export function NavbarDropdown({
                             />
                         </span>
                     </button>
-
-                    {/* El selector de transparencia optimizado sin layoutId pesado */}
-                    {perfTier === "lite" ? (
-                        <div className="flex items-center gap-2 px-2 py-2">
-                            <Palette size={15} className="shrink-0 text-zinc-700 dark:text-zinc-300" />
-                            <span className="text-xs font-semibold text-zinc-800 dark:text-zinc-200">
-                                Transparencia simplificada
-                            </span>
-                        </div>
-                    ) : (
-                        <div className="flex flex-col gap-1.5 px-1 py-1.5">
-                            <span id={`${id}-glass-label`} className={SECTION_LABEL}>
-                                Transparencia
-                            </span>
-                            <div
-                                role="radiogroup"
-                                aria-labelledby={`${id}-glass-label`}
-                                className="flex bg-zinc-100 dark:bg-white/5 border border-zinc-200/80 dark:border-white/5 p-1 rounded-xl"
-                            >
-                                {GLASS_OPTIONS.map(({ value, label }) => {
-                                    const active = glassTheme === value;
-                                    return (
-                                        <button
-                                            key={value}
-                                            type="button"
-                                            role="radio"
-                                            aria-checked={active}
-                                            onClick={() => setGlassTheme(value)}
-                                            className={`relative flex-1 py-1 text-xs font-semibold rounded-lg transition-all duration-150 cursor-pointer active:scale-95 ${FOCUS_RING} ${
-                                                active
-                                                    ? "bg-white dark:bg-zinc-800 text-zinc-950 dark:text-white shadow-sm border border-zinc-200/80 dark:border-white/10"
-                                                    : "text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white"
-                                            }`}
-                                        >
-                                            <span className="relative z-10">{label}</span>
-                                        </button>
-                                    );
-                                })}
-                            </div>
-                        </div>
-                    )}
                 </div>
 
                 {/* 3. Configuración detallada y cierre de sesión */}

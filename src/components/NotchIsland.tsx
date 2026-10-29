@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { ScanLine, MapPin, Sun, Moon, Settings, Layers } from "lucide-react";
+import { useTheme } from "../context/ThemeContext";
 
 interface NotchIslandProps {
     shortcuts?: string[];
@@ -27,9 +28,15 @@ export function NotchIsland({
         }
     };
 
+    const { glassTheme } = useTheme();
+
     // Estilos adaptativos según transparencia y modo oscuro/claro
     const containerClasses = isTransparent
         ? "bg-transparent backdrop-blur-none border-transparent shadow-none"
+        : glassTheme === "solid"
+        ? isDarkMode
+            ? "bg-zinc-900 text-white border-zinc-800 shadow-[0_8px_25px_rgba(0,0,0,0.4)] backdrop-blur-none"
+            : "bg-white text-zinc-900 border-zinc-200 shadow-[0_8px_25px_rgba(0,0,0,0.08)] backdrop-blur-none"
         : isDarkMode
         ? "bg-zinc-900/90 text-white border-zinc-700/60 shadow-[0_8px_25px_rgba(0,0,0,0.4)] backdrop-blur-xl"
         : "bg-white/90 text-zinc-900 border-zinc-200/90 shadow-[0_8px_25px_rgba(0,0,0,0.08)] backdrop-blur-xl";
