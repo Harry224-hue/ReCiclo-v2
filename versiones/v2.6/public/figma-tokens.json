@@ -1,0 +1,51 @@
+{
+  "version": "1.0.0",
+  "name": "ReCiclo Design Tokens for Figma",
+  "color": {
+    "brand": {
+      "emerald": { "value": "#10b981", "type": "color" },
+      "emeraldDark": { "value": "#059669", "type": "color" },
+      "emeraldLight": { "value": "#ecfdf5", "type": "color" }
+    },
+    "waste": {
+      "organico": { "value": "#10b981", "type": "color" },
+      "plastico": { "value": "#3b82f6", "type": "color" },
+      "papel": { "value": "#f59e0b", "type": "color" },
+      "vidrio": { "value": "#8b5cf6", "type": "color" }
+    },
+    "surface": {
+      "darkBg": { "value": "#09090b", "type": "color" },
+      "darkCard": { "value": "#18181b", "type": "color" },
+      "darkBorder": { "value": "#27272a", "type": "color" },
+      "lightBg": { "value": "#fafafa", "type": "color" },
+      "lightCard": { "value": "#ffffff", "type": "color" },
+      "lightBorder": { "value": "#e4e4e7", "type": "color" }
+    },
+    "text": {
+      "darkPrimary": { "value": "#ffffff", "type": "color" },
+      "darkSecondary": { "value": "#a1a1aa", "type": "color" },
+      "lightPrimary": { "value": "#09090b", "type": "color" },
+      "lightSecondary": { "value": "#71717a", "type": "color" }
+    }
+  },
+  "borderRadius": {
+    "sm": { "value": "8px", "type": "borderRadius" },
+    "md": { "value": "14px", "type": "borderRadius" },
+    "lg": { "value": "20px", "type": "borderRadius" },
+    "xl": { "value": "28px", "type": "borderRadius" },
+    "tabBar": { "value": "36px", "type": "borderRadius" },
+    "full": { "value": "9999px", "type": "borderRadius" }
+  },
+  "typography": {
+    "fontFamily": {
+      "primary": { "value": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', sans-serif", "type": "fontFamilies" }
+    },
+    "fontSize": {
+      "display": { "value": "44px", "type": "fontSizes" },
+      "title": { "value": "24px", "type": "fontSizes" },
+      "subtitle": { "value": "18px", "type": "fontSizes" },
+      "body": { "value": "15px", "type": "fontSizes" },
+      "caption": { "value": "12px", "type": "fontSizes" }
+    }
+  }
+}

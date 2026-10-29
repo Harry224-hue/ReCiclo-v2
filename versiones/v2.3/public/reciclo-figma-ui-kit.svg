@@ -1,0 +1,407 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 1400" width="2400" height="1400" style="background:#0f172a; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Segoe UI', Roboto, sans-serif;">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+    <linearGradient id="glassGradDark" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#27272a" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#18181b" stop-opacity="0.95" />
+    </linearGradient>
+    <linearGradient id="glassGradLight" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#f4f4f5" stop-opacity="0.98" />
+    </linearGradient>
+    <linearGradient id="cardGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#064e3b" />
+      <stop offset="100%" stop-color="#022c22" />
+    </linearGradient>
+    <linearGradient id="cardGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a" />
+      <stop offset="100%" stop-color="#172554" />
+    </linearGradient>
+    <linearGradient id="cardGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#78350f" />
+      <stop offset="100%" stop-color="#451a03" />
+    </linearGradient>
+    
+    <!-- Shadows -->
+    <filter id="shadowMobile" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="25" stdDeviation="35" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+    <filter id="glowEmerald" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="0" stdDeviation="15" flood-color="#10b981" flood-opacity="0.5"/>
+    </filter>
+    <filter id="shadowCard" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- HEADER / BANNER FIGMA UI KIT -->
+  <g id="Header" transform="translate(80, 60)">
+    <rect x="0" y="0" width="60" height="60" rx="16" fill="url(#emeraldGrad)" />
+    <path d="M 30 18 L 42 38 L 18 38 Z" fill="#ffffff" opacity="0.9" />
+    <circle cx="30" cy="30" r="4" fill="#064e3b" />
+    <text x="76" y="38" fill="#ffffff" font-size="32" font-weight="800" letter-spacing="-0.5">ReCiclo UI Kit &amp; Design System</text>
+    <text x="76" y="58" fill="#94a3b8" font-size="16" font-weight="500">Kit Vectorial para Figma • Mobile (390×844) &amp; Desktop (1440×900) • iOS Dynamic Notch • Design Tokens</text>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 1. MOBILE FRAME (iPhone 15 - 390x844) -->
+  <!-- ========================================== -->
+  <g id="Frame_Mobile_Light" transform="translate(80, 160)" filter="url(#shadowMobile)">
+    <!-- Device Frame Border -->
+    <rect x="0" y="0" width="390" height="844" rx="48" fill="#09090b" stroke="#3f3f46" stroke-width="6"/>
+    <!-- Screen Content Background (Light Mode) -->
+    <rect x="8" y="8" width="374" height="828" rx="42" fill="#fafafa"/>
+
+    <!-- Dynamic Island Notch -->
+    <g id="Mobile_Notch" transform="translate(110, 20)">
+      <rect x="0" y="0" width="170" height="34" rx="17" fill="#09090b" stroke="#27272a" stroke-width="1.5" />
+      <!-- Camera sensor -->
+      <circle cx="145" cy="17" r="5" fill="#18181b" />
+      <circle cx="145" cy="17" r="2" fill="#0f172a" />
+      <!-- Mic/Speaker -->
+      <circle cx="28" cy="17" r="3.5" fill="#10b981" filter="url(#glowEmerald)" />
+      <text x="40" y="22" fill="#ffffff" font-size="11" font-weight="700">ReCiclo</text>
+      <text x="96" y="21" fill="#10b981" font-size="10" font-weight="600">IA Activa</text>
+    </g>
+
+    <!-- Header / Brand Bar -->
+    <g transform="translate(28, 74)">
+      <text x="0" y="24" fill="#09090b" font-size="24" font-weight="900" letter-spacing="-0.5">ReCiclo</text>
+      <!-- Battery, Wifi & Profile indicator -->
+      <rect x="300" y="6" width="34" height="22" rx="11" fill="#f4f4f5" stroke="#e4e4e7" stroke-width="1"/>
+      <circle cx="317" cy="17" r="7" fill="#10b981"/>
+    </g>
+
+    <!-- Hero Card / Scanner Spotlight -->
+    <g transform="translate(24, 120)">
+      <rect x="0" y="0" width="342" height="230" rx="28" fill="#ffffff" stroke="#e4e4e7" stroke-width="1" filter="url(#shadowCard)"/>
+      <rect x="16" y="16" width="310" height="130" rx="20" fill="url(#cardGrad1)"/>
+      <!-- Scanner target lines in card -->
+      <path d="M 140 50 L 130 50 A 6 6 0 0 0 124 56 L 124 66" stroke="#10b981" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M 190 50 L 200 50 A 6 6 0 0 1 206 56 L 206 66" stroke="#10b981" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M 140 100 L 130 100 A 6 6 0 0 1 124 94 L 124 84" stroke="#10b981" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M 190 100 L 200 100 A 6 6 0 0 0 206 94 L 206 84" stroke="#10b981" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <text x="165" y="80" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="700">ESCANEAR RESIDUO</text>
+      <!-- Waste stats badge -->
+      <rect x="16" y="160" width="145" height="52" rx="14" fill="#f4f4f5"/>
+      <text x="30" y="182" fill="#71717a" font-size="11" font-weight="600">Materiales</text>
+      <text x="30" y="202" fill="#09090b" font-size="17" font-weight="800">4 Categorías</text>
+
+      <rect x="180" y="160" width="145" height="52" rx="14" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1"/>
+      <text x="194" y="182" fill="#059669" font-size="11" font-weight="600">IA Precisión</text>
+      <text x="194" y="202" fill="#065f46" font-size="17" font-weight="800">98.4% Precisa</text>
+    </g>
+
+    <!-- Waste Categories Horizontal Grid -->
+    <g transform="translate(24, 370)">
+      <text x="4" y="18" fill="#09090b" font-size="18" font-weight="800">Categorías de Reciclaje</text>
+      
+      <!-- Card 1: Orgánico -->
+      <g transform="translate(0, 32)">
+        <rect x="0" y="0" width="162" height="110" rx="20" fill="#ecfdf5" stroke="#10b981" stroke-width="1.5"/>
+        <circle cx="36" cy="36" r="18" fill="#10b981"/>
+        <text x="36" y="42" text-anchor="middle" fill="#ffffff" font-size="16">🌱</text>
+        <text x="20" y="78" fill="#065f46" font-size="15" font-weight="800">Orgánico</text>
+        <text x="20" y="96" fill="#059669" font-size="12" font-weight="600">Contenedor Verde</text>
+      </g>
+      
+      <!-- Card 2: Plástico -->
+      <g transform="translate(180, 32)">
+        <rect x="0" y="0" width="162" height="110" rx="20" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+        <circle cx="36" cy="36" r="18" fill="#3b82f6"/>
+        <text x="36" y="42" text-anchor="middle" fill="#ffffff" font-size="16">🧴</text>
+        <text x="20" y="78" fill="#1e3a8a" font-size="15" font-weight="800">Plástico</text>
+        <text x="20" y="96" fill="#2563eb" font-size="12" font-weight="600">Contenedor Azul</text>
+      </g>
+
+      <!-- Card 3: Papel / Cartón -->
+      <g transform="translate(0, 154)">
+        <rect x="0" y="0" width="162" height="110" rx="20" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.5"/>
+        <circle cx="36" cy="36" r="18" fill="#f59e0b"/>
+        <text x="36" y="42" text-anchor="middle" fill="#ffffff" font-size="16">📦</text>
+        <text x="20" y="78" fill="#78350f" font-size="15" font-weight="800">Papel / Cartón</text>
+        <text x="20" y="96" fill="#d97706" font-size="12" font-weight="600">Contenedor Amarillo</text>
+      </g>
+
+      <!-- Card 4: Vidrio -->
+      <g transform="translate(180, 154)">
+        <rect x="0" y="0" width="162" height="110" rx="20" fill="#faf5ff" stroke="#a855f7" stroke-width="1.5"/>
+        <circle cx="36" cy="36" r="18" fill="#a855f7"/>
+        <text x="36" y="42" text-anchor="middle" fill="#ffffff" font-size="16">🍾</text>
+        <text x="20" y="78" fill="#581c87" font-size="15" font-weight="800">Vidrio</text>
+        <text x="20" y="96" fill="#9333ea" font-size="12" font-weight="600">Contenedor Morado</text>
+      </g>
+    </g>
+
+    <!-- MOBILE BOTTOM TAB BAR -->
+    <g id="Mobile_TabBar" transform="translate(24, 735)">
+      <rect x="0" y="0" width="342" height="72" rx="36" fill="#ffffff" stroke="#e4e4e7" stroke-width="1.5" filter="url(#shadowCard)"/>
+      
+      <!-- Tab 1: Inicio (Active - Solid Fill) -->
+      <g transform="translate(36, 16)">
+        <path d="M 12 3 L 2 11 L 5 11 L 5 21 L 10 21 L 10 14 L 14 14 L 14 21 L 19 21 L 19 11 L 22 11 Z" fill="#10b981"/>
+        <text x="12" y="32" text-anchor="middle" fill="#10b981" font-size="10" font-weight="800">Inicio</text>
+      </g>
+
+      <!-- Tab 2: Mapa (Outline) -->
+      <g transform="translate(108, 16)">
+        <path d="M 12 2 C 7.58 2 4 5.58 4 10 C 4 15.5 12 22 12 22 C 12 22 20 15.5 20 10 C 20 5.58 16.42 2 12 2 Z M 12 12 C 10.9 12 10 11.1 10 10 C 10 8.9 10.9 8 12 8 C 13.1 8 14 8.9 14 10 C 14 11.1 13.1 12 12 12 Z" fill="none" stroke="#71717a" stroke-width="1.8"/>
+        <text x="12" y="32" text-anchor="middle" fill="#71717a" font-size="10" font-weight="600">Puntos</text>
+      </g>
+
+      <!-- Tab Central: Escáner Flotante (Emerald Highlight) -->
+      <g transform="translate(171, 0)">
+        <circle cx="0" cy="18" r="28" fill="url(#emeraldGrad)" filter="url(#glowEmerald)"/>
+        <!-- Scanner Icon -->
+        <path d="M -9 9 L -5 9 A 2 2 0 0 0 -3 7 L -3 3" stroke="#ffffff" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+        <path d="M 9 9 L 5 9 A 2 2 0 0 1 3 7 L 3 3" stroke="#ffffff" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+        <path d="M -9 27 L -5 27 A 2 2 0 0 1 -3 29 L -3 33" stroke="#ffffff" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+        <path d="M 9 27 L 5 27 A 2 2 0 0 0 3 29 L 3 33" stroke="#ffffff" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+        <line x1="-7" y1="18" x2="7" y2="18" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+      </g>
+
+      <!-- Tab 3: Perfil (Outline) -->
+      <g transform="translate(236, 16)">
+        <path d="M 12 2 C 8.69 2 6 4.69 6 8 C 6 11.31 8.69 14 12 14 C 15.31 14 18 11.31 18 8 C 18 4.69 15.31 2 12 2 Z M 4 20 C 4 16.5 7.5 15 12 15 C 16.5 15 20 16.5 20 20 Z" fill="none" stroke="#71717a" stroke-width="1.8"/>
+        <text x="12" y="32" text-anchor="middle" fill="#71717a" font-size="10" font-weight="600">Perfil</text>
+      </g>
+    </g>
+
+    <!-- iOS Home Indicator bar -->
+    <rect x="135" y="820" width="120" height="4" rx="2" fill="#09090b" opacity="0.3"/>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 2. DESKTOP / TABLET FRAME (1000 x 600) -->
+  <!-- ========================================== -->
+  <g id="Frame_Desktop_Preview" transform="translate(540, 160)" filter="url(#shadowMobile)">
+    <rect x="0" y="0" width="1000" height="600" rx="24" fill="#09090b" stroke="#27272a" stroke-width="3"/>
+    
+    <!-- Desktop Top Navigation Bar -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="1000" height="74" rx="24" fill="#18181b" stroke="#27272a" stroke-width="1"/>
+      <!-- Brand Logo -->
+      <rect x="36" y="19" width="36" height="36" rx="10" fill="url(#emeraldGrad)"/>
+      <text x="84" y="44" fill="#ffffff" font-size="22" font-weight="900" letter-spacing="-0.5">ReCiclo</text>
+      
+      <!-- Nav Links -->
+      <text x="240" y="44" fill="#10b981" font-size="14" font-weight="700">Inicio</text>
+      <text x="320" y="44" fill="#a1a1aa" font-size="14" font-weight="600">Escáner IA</text>
+      <text x="420" y="44" fill="#a1a1aa" font-size="14" font-weight="600">Mapa de Puntos</text>
+      <text x="560" y="44" fill="#a1a1aa" font-size="14" font-weight="600">Tecnologías</text>
+      <text x="680" y="44" fill="#a1a1aa" font-size="14" font-weight="600">Impacto</text>
+
+      <!-- Action buttons -->
+      <rect x="830" y="18" width="134" height="38" rx="19" fill="url(#emeraldGrad)" filter="url(#glowEmerald)"/>
+      <text x="897" y="42" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="700">Iniciar Sesión</text>
+    </g>
+
+    <!-- Desktop Hero Section Grid -->
+    <g transform="translate(48, 110)">
+      <rect x="0" y="0" width="904" height="440" rx="20" fill="#18181b" stroke="#27272a" stroke-width="1"/>
+      
+      <!-- Left Column: Copy -->
+      <g transform="translate(40, 50)">
+        <rect x="0" y="0" width="180" height="28" rx="14" fill="#064e3b" stroke="#10b981" stroke-width="1"/>
+        <text x="14" y="18" fill="#a7f3d0" font-size="11" font-weight="700">✦ TECNOLOGÍA SOSTENIBLE</text>
+        
+        <text x="0" y="80" fill="#ffffff" font-size="44" font-weight="900" letter-spacing="-1">Recicla con Inteligencia.</text>
+        <text x="0" y="130" fill="#10b981" font-size="44" font-weight="900" letter-spacing="-1">Transforma tu Entorno.</text>
+        <text x="0" y="175" fill="#a1a1aa" font-size="16" font-weight="400">Escanea cualquier residuo con tu cámara y descubre el contenedor exacto,</text>
+        <text x="0" y="200" fill="#a1a1aa" font-size="16" font-weight="400">su impacto de huella de carbono y centros de acopio cercanos.</text>
+
+        <!-- CTA Buttons -->
+        <rect x="0" y="240" width="180" height="46" rx="23" fill="url(#emeraldGrad)" filter="url(#glowEmerald)"/>
+        <text x="90" y="268" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="700">Probar Escáner</text>
+
+        <rect x="196" y="240" width="160" height="46" rx="23" fill="#27272a" stroke="#3f3f46" stroke-width="1"/>
+        <text x="276" y="268" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="600">Ver Centros</text>
+      </g>
+
+      <!-- Right Column: Interactive Graphic Card -->
+      <g transform="translate(530, 40)">
+        <rect x="0" y="0" width="330" height="360" rx="24" fill="#09090b" stroke="#3f3f46" stroke-width="1.5"/>
+        <circle cx="165" cy="140" r="70" fill="url(#emeraldGrad)" opacity="0.15" filter="url(#glowEmerald)"/>
+        <circle cx="165" cy="140" r="45" fill="url(#emeraldGrad)"/>
+        <text x="165" y="150" text-anchor="middle" fill="#ffffff" font-size="32">📷</text>
+        <text x="165" y="240" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="800">Detección en Tiempo Real</text>
+        <text x="165" y="266" text-anchor="middle" fill="#71717a" font-size="13">TensorFlow.js + MobileNet v2</text>
+        
+        <rect x="30" y="296" width="270" height="36" rx="10" fill="#18181b" stroke="#27272a" stroke-width="1"/>
+        <circle cx="48" cy="314" r="5" fill="#10b981"/>
+        <text x="64" y="318" fill="#e4e4e7" font-size="12" font-weight="600">Botella PET — 98% Confiabilidad</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 3. COMPONENT LIBRARY (ISLA DINAMICA & MODAL) -->
+  <!-- ========================================== -->
+  <g id="Component_Library" transform="translate(540, 800)">
+    <text x="0" y="30" fill="#ffffff" font-size="24" font-weight="800">Componentes de Sistema (Figma Autolayout Ready)</text>
+
+    <!-- Component 1: Dynamic Notch Island (Estados) -->
+    <g id="Component_Notch_States" transform="translate(0, 60)">
+      <rect x="0" y="0" width="480" height="240" rx="20" fill="#18181b" stroke="#27272a" stroke-width="1"/>
+      <text x="24" y="34" fill="#a1a1aa" font-size="13" font-weight="700">COMPONENTE: NOTCH DYNAMIC ISLAND</text>
+      
+      <!-- Estado 1: Compacto -->
+      <g transform="translate(24, 55)">
+        <rect x="0" y="0" width="210" height="40" rx="20" fill="#09090b" stroke="#3f3f46" stroke-width="1"/>
+        <circle cx="20" cy="20" r="4" fill="#10b981" filter="url(#glowEmerald)"/>
+        <text x="32" y="24" fill="#ffffff" font-size="12" font-weight="700">ReCiclo</text>
+        <text x="140" y="24" fill="#a1a1aa" font-size="12">9:41 AM</text>
+      </g>
+
+      <!-- Estado 2: Expandido con Accesos Directos -->
+      <g transform="translate(24, 115)">
+        <rect x="0" y="0" width="432" height="100" rx="28" fill="#09090b" stroke="#10b981" stroke-width="1.5" filter="url(#glowEmerald)"/>
+        <!-- Notch Header inside -->
+        <circle cx="28" cy="30" r="5" fill="#10b981"/>
+        <text x="44" y="34" fill="#ffffff" font-size="14" font-weight="800">ReCiclo Smart Island</text>
+        <text x="340" y="34" fill="#10b981" font-size="12" font-weight="700">Escaneando</text>
+
+        <!-- Shortcuts -->
+        <g transform="translate(24, 52)">
+          <rect x="0" y="0" width="120" height="34" rx="17" fill="#27272a"/>
+          <text x="60" y="22" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="600">⚡ Linterna</text>
+
+          <rect x="132" y="0" width="120" height="34" rx="17" fill="#10b981"/>
+          <text x="192" y="22" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="700">📷 Escanear</text>
+
+          <rect x="264" y="0" width="120" height="34" rx="17" fill="#27272a"/>
+          <text x="324" y="22" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="600">🗺️ Mapa</text>
+        </g>
+      </g>
+    </g>
+
+    <!-- Component 2: Modal de Configuración (Light Mode) -->
+    <g id="Component_Settings_Modal" transform="translate(510, 60)">
+      <rect x="0" y="0" width="490" height="240" rx="20" fill="#ffffff" stroke="#e4e4e7" stroke-width="1" filter="url(#shadowCard)"/>
+      
+      <!-- Header with Tabs -->
+      <g transform="translate(24, 20)">
+        <text x="0" y="20" fill="#09090b" font-size="18" font-weight="900">Configuración</text>
+        <!-- Mobile Tabs -->
+        <g transform="translate(0, 36)">
+          <rect x="0" y="0" width="96" height="30" rx="15" fill="#09090b"/>
+          <text x="48" y="19" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="700">Aspecto</text>
+
+          <rect x="104" y="0" width="86" height="30" rx="15" fill="#f4f4f5"/>
+          <text x="147" y="19" text-anchor="middle" fill="#71717a" font-size="11" font-weight="600">Notch</text>
+
+          <rect x="198" y="0" width="92" height="30" rx="15" fill="#f4f4f5"/>
+          <text x="244" y="19" text-anchor="middle" fill="#71717a" font-size="11" font-weight="600">Cuenta</text>
+
+          <rect x="298" y="0" width="104" height="30" rx="15" fill="#f4f4f5"/>
+          <text x="350" y="19" text-anchor="middle" fill="#71717a" font-size="11" font-weight="600">Privacidad</text>
+        </g>
+      </g>
+
+      <!-- Settings Content: Color Selector & Hex Wheel -->
+      <g transform="translate(24, 110)">
+        <text x="0" y="16" fill="#09090b" font-size="13" font-weight="800">COLOR DE ACENTO</text>
+        <circle cx="16" cy="42" r="14" fill="#10b981" stroke="#064e3b" stroke-width="3"/>
+        <circle cx="56" cy="42" r="14" fill="#3b82f6"/>
+        <circle cx="96" cy="42" r="14" fill="#8b5cf6"/>
+        <circle cx="136" cy="42" r="14" fill="#f59e0b"/>
+        <circle cx="176" cy="42" r="14" fill="#06b6d4"/>
+
+        <!-- Hex Color Selector Box -->
+        <rect x="230" y="24" width="190" height="36" rx="10" fill="#f4f4f5" stroke="#e4e4e7" stroke-width="1"/>
+        <circle cx="248" cy="42" r="8" fill="#10b981"/>
+        <text x="266" y="46" fill="#09090b" font-family="monospace" font-size="13" font-weight="700">#10B981</text>
+        <text x="350" y="46" fill="#71717a" font-size="12">Guardar</text>
+
+        <!-- Motion effects switch -->
+        <g transform="translate(0, 78)">
+          <rect x="0" y="0" width="442" height="36" rx="10" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1"/>
+          <text x="14" y="22" fill="#065f46" font-size="12" font-weight="700">⚡ Modo Inmersivo (60 FPS Activo)</text>
+          <rect x="380" y="7" width="46" height="22" rx="11" fill="#10b981"/>
+          <circle cx="415" cy="18" r="8" fill="#ffffff"/>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <!-- ========================================== -->
+  <!-- 4. DESIGN TOKENS & COLOR PALETTE -->
+  <!-- ========================================== -->
+  <g id="Design_Tokens_Palette" transform="translate(1580, 160)">
+    <text x="0" y="30" fill="#ffffff" font-size="24" font-weight="800">Figma Design Tokens</text>
+    <text x="0" y="56" fill="#94a3b8" font-size="14">Variables de color, tipografía y radios oficiales</text>
+
+    <!-- Colors Swatches -->
+    <g transform="translate(0, 80)">
+      <!-- Emerald Accent -->
+      <g transform="translate(0, 0)">
+        <rect x="0" y="0" width="220" height="70" rx="14" fill="#10b981"/>
+        <text x="16" y="32" fill="#ffffff" font-size="14" font-weight="800">Emerald (Primario)</text>
+        <text x="16" y="54" fill="#ffffff" font-size="13" font-family="monospace" opacity="0.9">HEX #10B981</text>
+      </g>
+      <!-- Dark Surface -->
+      <g transform="translate(240, 0)">
+        <rect x="0" y="0" width="220" height="70" rx="14" fill="#09090b" stroke="#27272a" stroke-width="2"/>
+        <text x="16" y="32" fill="#ffffff" font-size="14" font-weight="800">Zinc 950 (Fondo Dark)</text>
+        <text x="16" y="54" fill="#94a3b8" font-size="13" font-family="monospace">HEX #09090B</text>
+      </g>
+
+      <!-- Light Surface -->
+      <g transform="translate(0, 85)">
+        <rect x="0" y="0" width="220" height="70" rx="14" fill="#ffffff" stroke="#e4e4e7" stroke-width="2"/>
+        <text x="16" y="32" fill="#09090b" font-size="14" font-weight="800">White (Fondo Light)</text>
+        <text x="16" y="54" fill="#71717a" font-size="13" font-family="monospace">HEX #FFFFFF</text>
+      </g>
+      <!-- Blue Accent -->
+      <g transform="translate(240, 85)">
+        <rect x="0" y="0" width="220" height="70" rx="14" fill="#3b82f6"/>
+        <text x="16" y="32" fill="#ffffff" font-size="14" font-weight="800">Blue (Plásticos)</text>
+        <text x="16" y="54" fill="#ffffff" font-size="13" font-family="monospace" opacity="0.9">HEX #3B82F6</text>
+      </g>
+
+      <!-- Amber Accent -->
+      <g transform="translate(0, 170)">
+        <rect x="0" y="0" width="220" height="70" rx="14" fill="#f59e0b"/>
+        <text x="16" y="32" fill="#ffffff" font-size="14" font-weight="800">Amber (Papel / Cartón)</text>
+        <text x="16" y="54" fill="#ffffff" font-size="13" font-family="monospace" opacity="0.9">HEX #F59E0B</text>
+      </g>
+      <!-- Violet Accent -->
+      <g transform="translate(240, 170)">
+        <rect x="0" y="0" width="220" height="70" rx="14" fill="#8b5cf6"/>
+        <text x="16" y="32" fill="#ffffff" font-size="14" font-weight="800">Violet (Vidrio)</text>
+        <text x="16" y="54" fill="#ffffff" font-size="13" font-family="monospace" opacity="0.9">HEX #8B5CF6</text>
+      </g>
+    </g>
+
+    <!-- Typography & Spacing Specifications -->
+    <g transform="translate(0, 360)">
+      <rect x="0" y="0" width="460" height="420" rx="20" fill="#18181b" stroke="#27272a" stroke-width="1"/>
+      <text x="24" y="36" fill="#10b981" font-size="14" font-weight="800">TIPOGRAFÍA &amp; RADIOS (TAILWIND TO FIGMA)</text>
+
+      <g transform="translate(24, 60)">
+        <text x="0" y="20" fill="#ffffff" font-size="28" font-weight="900">SF Pro Display / Inter</text>
+        <text x="0" y="44" fill="#a1a1aa" font-size="13">Font Family: -apple-system, Inter, Roboto</text>
+
+        <line x1="0" y1="65" x2="410" y2="65" stroke="#27272a" stroke-width="1"/>
+
+        <text x="0" y="95" fill="#ffffff" font-size="14" font-weight="700">Escala de Tamaños:</text>
+        <text x="0" y="125" fill="#94a3b8" font-size="12">• Display / Hero: 44px - 56px (Bold 900)</text>
+        <text x="0" y="150" fill="#94a3b8" font-size="12">• Section Heading: 24px - 32px (Bold 800)</text>
+        <text x="0" y="175" fill="#94a3b8" font-size="12">• Card Title: 16px - 18px (Bold 700)</text>
+        <text x="0" y="200" fill="#94a3b8" font-size="12">• Body Text: 14px - 15px (Regular 400 / Medium 500)</text>
+        <text x="0" y="225" fill="#94a3b8" font-size="12">• Badges / Captions: 11px - 12px (SemiBold 600)</text>
+
+        <line x1="0" y1="245" x2="410" y2="245" stroke="#27272a" stroke-width="1"/>
+
+        <text x="0" y="275" fill="#ffffff" font-size="14" font-weight="700">Border Radius Oficial:</text>
+        <text x="0" y="305" fill="#94a3b8" font-size="12">• Contenedor Móvil: 48px</text>
+        <text x="0" y="330" fill="#94a3b8" font-size="12">• Dynamic Notch &amp; Tab Bar: 36px - Full Capsule</text>
+        <text x="0" y="355" fill="#94a3b8" font-size="12">• Tarjetas &amp; Modales: 20px - 28px (rounded-3xl)</text>
+      </g>
+    </g>
+  </g>
+</svg>
