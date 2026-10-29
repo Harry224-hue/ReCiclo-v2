@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+@variant dark (&:is(.dark *));
+
+* {
+  font-family: "Geist", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Urbanist", sans-serif;
+}
+
+@keyframes marquee-up {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes marquee-down {
+  0% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animate-marquee-up {
+  animation: marquee-up 30s linear infinite;
+}
+
+.animate-marquee-down {
+  animation: marquee-down 30s linear infinite;
+}
+
+.animate-marquee-up:hover,
+.animate-marquee-down:hover {
+  animation-play-state: paused;
+}
+
+/* Scrollbar estilizada y discreta */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(160, 160, 170, 0.35);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(160, 160, 170, 0.65);
+}
+
+/* ─── LEAFLET HIGH-CONTRAST DARK & LIGHT MODE STYLES ─── */
+.dark .leaflet-container {
+  background-color: #09090b !important;
+}
+
+.dark .leaflet-popup-content-wrapper {
+  background-color: #18181b !important;
+  color: #f4f4f5 !important;
+  border: 1px solid #3f3f46 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.7) !important;
+}
+
+.dark .leaflet-popup-tip {
+  background-color: #18181b !important;
+}
+
+.dark .leaflet-popup-content {
+  color: #f4f4f5 !important;
+  margin: 10px 12px !important;
+}
+
+.dark .leaflet-popup-close-button {
+  color: #a1a1aa !important;
+  padding: 6px 8px !important;
+}
+
+.dark .leaflet-popup-close-button:hover {
+  color: #ffffff !important;
+}
+
+.dark .leaflet-control-attribution {
+  background: rgba(9, 9, 11, 0.8) !important;
+  color: #71717a !important;
+  border-radius: 8px !important;
+  padding: 2px 6px !important;
+}
+
+.dark .leaflet-control-attribution a {
+  color: #34d399 !important;
+}
+
+.leaflet-tooltip {
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  font-size: 11px !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
+}
+
+.dark .leaflet-tooltip {
+  background-color: #18181b !important;
+  color: #f4f4f5 !important;
+  border: 1px solid #3f3f46 !important;
+}
+
