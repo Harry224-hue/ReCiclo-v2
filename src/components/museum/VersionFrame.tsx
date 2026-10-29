@@ -139,7 +139,7 @@ export function VersionFrame({
                             ? "Etapa 0 · Prototipo"
                             : version.phase === "v1"
                             ? "Etapa 1 · Campus ITM"
-                            : "Etapa 2 · Web Pura"}
+                            : "Etapa 2 · ReCiclo 2.0"}
                     </span>
 
                     <span className="text-xs text-zinc-500 dark:text-zinc-400 font-medium">

@@ -227,16 +227,16 @@ Este documento detalla la bitacora y el escalado progresivo de **ReCiclo Version
 ---
 
 # Historial de Evolución: ReCiclo Fase 2 (v2.0 a v2.9)
-### Ciclo de Evolución Web, Personalización y Consolidación
+### Ciclo de Evolución a ReCiclo 2.0: Escáner, Mapa, Perfil y Mejoras Continuas
 **Instituto Tecnológico de Morelia · Semestre Agosto - Diciembre 2026**
 
-Este bloque registra el avance y maduración de **ReCiclo Versión 2**, mostrando el paso a una plataforma web moderna, rápida y accesible desde cualquier navegador sin necesidad de descargas pesadas, la incorporación de herramientas interactivas de separación, personalización visual y el archivo completo del Museo Histórico.
+Este bloque registra el avance y maduración de **ReCiclo Versión 2**, mostrando el fortalecimiento de la plataforma a través de mejoras continuas en el mapa interactivo del campus, el escáner inteligente de residuos, el apartado de perfil con medallas y racha, herramientas de personalización visual y el archivo completo del Museo Histórico.
 
 ## Cronograma de la Fase 2
 
 | Versión | Fecha | Hito y Alcance de la Versión |
 | :---: | :---: | :--- |
-| **v2.0** | 18 de Octubre | **Llega ReCiclo 2.0:** Acceso web directo desde cualquier dispositivo y distintivo oficial v2.0 en el menú. |
+| **v2.0** | 18 de Octubre | **Llega ReCiclo 2.0:** Renovación general con distintivo oficial v2.0, base para mejoras en mapa, escáner y perfil. |
 | **v2.1** | 18 de Octubre | **Identificación de residuos más rápida:** Clasificación ágil con inteligencia artificial y subida directa de fotos. |
 | **v2.2** | 21 de Octubre | **Acceso con matrícula estudiantil:** Registro e inicio de sesión seguro con número de control de 8 dígitos del IT Morelia. |
 | **v2.3** | 21 de Octubre | **Isla de avisos y rueda de colores:** Barra flotante de notificaciones superiores y selector de temas y colores. |
@@ -253,13 +253,13 @@ Este bloque registra el avance y maduración de **ReCiclo Versión 2**, mostrand
 
 ### Version 2.0: Llega ReCiclo 2.0
 **Fecha:** 18 de Octubre de 2026  
-**Alcance de la versión:** Inicio de la versión 2.0 de la plataforma, funcionando de manera ágil en cualquier navegador web moderno sin requerir descargas de archivos pesados.
+**Alcance de la versión:** Inicio de la versión 2.0 con una renovación general de la plataforma, preparando las mejoras en el mapa del campus, el escáner y el perfil de usuario.
 
 ![Captura Portada ReCiclo v2.0](./capturas/v2.0.png)
 
 - **Avances tangibles:**
-  - Acceso directo instantáneo desde cualquier navegador de computadora o celular.
   - Distintivo visual oficial `v2.0` en la barra de navegación superior.
+  - Renovación de la base de código para incorporar mejoras continuas en mapa, escáner y perfil.
   - Portada renovada con diseño moderno y adaptado a diferentes tamaños de pantalla.
 - **Comando de prueba:**
   ```bash

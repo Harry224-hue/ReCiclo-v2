@@ -30,7 +30,7 @@ Por esta razon, la solucion tecnologica se diseno bajo los siguientes principios
 
 ## 2. Tecnologias utilizadas
 
-- **React 19 y Vite 6:** Arquitectura modular en formato SPA pura (Single Page Application), sin dependencias nativas complejas.
+- **React 19 y Vite 6:** Arquitectura modular en formato SPA (Single Page Application) moderna y rápida.
 - **React Router 7:** Enrutamiento web con BrowserRouter, carga diferida (React.lazy) para optimizar el rendimiento.
 - **Tailwind CSS v4:** Diseno responsivo con soporte de tema claro/oscuro y contraste accesible para exteriores.
 - **Framer Motion:** Animaciones suaves de scroll, transiciones de interfaz y la secuencia interactiva TeamCredits.
@@ -224,14 +224,14 @@ Consolidacion definitiva del sistema en apego total a los lineamientos de la con
 
 ---
 
-## 5. Ciclo 3: Evolución Web, Personalización y Archivo Histórico (v2.0 a v2.9)
+## 5. Ciclo 3: ReCiclo 2.0 — Escáner, Mapa, Perfil y Mejoras Continuas (v2.0 a v2.9)
 **Periodo del sprint:** 18 al 28 de octubre de 2026
 
-En esta etapa, el equipo de estudiantes (García Montañez Ulises Jasen, Medina Cuamba Juan Pablo y Solís Calvillo Juan Pablo) impulsó la segunda fase de ReCiclo, consolidándola como una plataforma web moderna, rápida y accesible desde cualquier dispositivo sin requerir instalaciones pesadas, enriqueciendo la experiencia con personalización visual y el archivo del Museo.
+En esta etapa, el equipo de estudiantes (García Montañez Ulises Jasen, Medina Cuamba Juan Pablo y Solís Calvillo Juan Pablo) impulsó la segunda fase de ReCiclo, enfocándose en potenciar el mapa interactivo del campus, acelerar la identificación de residuos en el escáner, enriquecer el perfil de usuario con medallas y racha, y archivar la historia del proyecto en el Museo.
 
 ### Version 2.0 (18 de Octubre)
 - **Hito:** Llega ReCiclo 2.0.
-- **Implementación:** Acceso web directo desde cualquier computadora o teléfono celular sin archivos pesados ni descargas complejas, incorporando el distintivo oficial v2.0 en el menú de navegación.
+- **Implementación:** Renovación general de ReCiclo con distintivo oficial v2.0 en el menú de navegación, preparando las bases para las mejoras en el mapa del campus, el escáner y el perfil estudiantil.
 
 ### Version 2.1 (18 de Octubre)
 - **Hito:** Identificación de residuos más rápida.

@@ -9,9 +9,10 @@
 
 ## 🚀 Novedades de la Versión 2.0
 
-- **Arquitectura Web Pura:** Eliminada la dependencia pesada de contenedores nativos (Android/Capacitor y Windows/Electron), operando con estándares web modernos (`MediaDevices API`, `ServiceWorker`, interfaces fluidas con Framer Motion).
-- **Integración Continua (CI):** Pipeline automatizado con **GitHub Actions** para comprobación de linting y compilación en cada cambio.
-- **Rendimiento Mejorado:** Cargas dinámicas con `React.lazy`, optimización de bundle con Vite y Tailwind CSS v4.
+- **Mejoras en el Mapa:** Mapa interactivo con localización de botes en Campus 1 y 2, filtros por tipo de residuo y rutas a pie.
+- **Mejoras en el Escáner:** Identificación rápida y precisa con inteligencia artificial por cámara y subida directa de fotografías.
+- **Mejoras en el Perfil:** Historial sincronizado en la nube, contador de racha ecológica y medallas de logro para la comunidad del IT Morelia.
+- **Personalización y Museo:** Selector de temas y paleta de colores, y el archivo histórico con las versiones de desarrollo.
 
 ---
 

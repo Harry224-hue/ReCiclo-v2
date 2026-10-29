@@ -230,7 +230,7 @@ export default function Museo() {
                     </div>
                     <div>
                         <div className="text-2xl sm:text-3xl font-extrabold text-zinc-950 dark:text-white tracking-tight">3 Etapas</div>
-                        <div className="text-xs text-zinc-500 dark:text-zinc-400 font-medium">Prototipo, v1 y Web Pura</div>
+                        <div className="text-xs text-zinc-500 dark:text-zinc-400 font-medium">Prototipo, Campus ITM y ReCiclo 2.0</div>
                     </div>
                     <div>
                         <div className="text-2xl sm:text-3xl font-extrabold text-zinc-950 dark:text-white tracking-tight">Campus 1 y 2</div>
@@ -348,7 +348,7 @@ export default function Museo() {
                                         : "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800/80 hover:text-zinc-900 dark:hover:text-white"
                                 }`}
                             >
-                                Etapa 2 · Web Pura (10)
+                                Etapa 2 · ReCiclo 2.0 (10)
                             </button>
                         </div>
                     </div>
@@ -384,7 +384,7 @@ export default function Museo() {
                                     </option>
                                 ))}
                             </optgroup>
-                            <optgroup label="Etapa 2 · Web Pura (v2.0 – v2.9)">
+                            <optgroup label="Etapa 2 · ReCiclo 2.0 (v2.0 – v2.9)">
                                 {MUSEUM_VERSIONS.filter((v) => v.phase === "v2").map((v) => (
                                     <option key={v.id} value={v.id}>
                                         {v.id} — {v.title}
@@ -458,10 +458,10 @@ export default function Museo() {
                                             Capítulo 03 · 18 al 28 de octubre de 2026
                                         </span>
                                         <h2 className="text-2xl sm:text-3xl font-extrabold text-zinc-950 dark:text-white mt-1">
-                                            Evolución Web, Personalización y Archivo Histórico
+                                            ReCiclo 2.0: Escáner, Mapa, Perfil y Mejoras Continuas
                                         </h2>
                                         <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-1.5 max-w-2xl leading-relaxed">
-                                            Consolidación de ReCiclo como plataforma web rápida y accesible desde cualquier dispositivo: identificación ágil de residuos, personalización visual con paleta de colores, guía práctica para preparar empaques, perfil con medallas y el archivo completo del Museo Histórico.
+                                            Gran evolución del proyecto ReCiclo: mejoras en el mapa interactivo del campus con puntos de separación, optimización del escáner inteligente de residuos, apartado de perfil con medallas y racha ecológica, personalización visual y el archivo histórico completo.
                                         </p>
                                     </div>
                                 )}
