@@ -360,15 +360,21 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const getThemeClasses = (element: UIElement = "navbar") => {
         const baseTransition = visualMode === "immersive" ? "transition-all duration-500 ease-out" : "transition-none";
 
-        // El menú desplegable permanece siempre en modo sólido (sin liquid glass)
-        if (element === "dropdown") {
-            return `${baseTransition} bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 shadow-2xl backdrop-blur-none text-zinc-900 dark:text-zinc-100`;
-        }
-
         // El recorte visual real de "lite" pasa por aquí: si el motor decidió "lite", el cristal
         // se limita a "solid" sin importar qué haya elegido la persona en glassTheme. Su elección
         // no se pierde (glassTheme no cambia), solo deja de aplicarse mientras el equipo lo necesite.
         const effectiveGlass: GlassTheme = perfTier === "lite" ? "solid" : glassTheme;
+
+        if (element === "dropdown") {
+            switch (effectiveGlass) {
+                case "solid":
+                    return `${baseTransition} bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 shadow-2xl backdrop-blur-none text-zinc-900 dark:text-zinc-100`;
+                case "light":
+                    return `${baseTransition} bg-white/95 dark:bg-zinc-900/90 backdrop-blur-xl saturate-[160%] border border-zinc-200/90 dark:border-zinc-800 shadow-2xl text-zinc-900 dark:text-zinc-100`;
+                case "heavy":
+                    return `${baseTransition} bg-white/95 dark:bg-zinc-900/80 backdrop-blur-2xl saturate-[190%] border border-zinc-200/90 dark:border-zinc-800 shadow-2xl text-zinc-900 dark:text-zinc-100`;
+            }
+        }
 
         if (element === "dock") {
             switch (effectiveGlass) {
