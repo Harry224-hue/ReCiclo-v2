@@ -80,7 +80,6 @@ export function VersionFrame({
 
     const date = formatMuseumDate(version.date);
     const titleId = `${version.slug}-title`;
-    const isSerie0 = version.phase === "v0";
     // En pantallas grandes el dispositivo alterna de lado para dar ritmo a la lectura
     const flip = index % 2 === 1;
 
@@ -129,12 +128,18 @@ export function VersionFrame({
                     {/* Etapa del Proyecto */}
                     <span
                         className={`rounded-md px-2.5 py-0.5 text-xs font-semibold border ${
-                            isSerie0
+                            version.phase === "v0"
                                 ? "bg-amber-50 text-amber-900 border-amber-200 dark:bg-amber-950/40 dark:text-amber-200 dark:border-amber-800/60"
-                                : "bg-sky-50 text-sky-900 border-sky-200 dark:bg-sky-950/40 dark:text-sky-200 dark:border-sky-800/60"
+                                : version.phase === "v1"
+                                ? "bg-sky-50 text-sky-900 border-sky-200 dark:bg-sky-950/40 dark:text-sky-200 dark:border-sky-800/60"
+                                : "bg-emerald-50 text-emerald-900 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-200 dark:border-emerald-800/60"
                         }`}
                     >
-                        {isSerie0 ? "Etapa 0 · Prototipo" : "Etapa 1 · Campus ITM"}
+                        {version.phase === "v0"
+                            ? "Etapa 0 · Prototipo"
+                            : version.phase === "v1"
+                            ? "Etapa 1 · Campus ITM"
+                            : "Etapa 2 · Web Pura"}
                     </span>
 
                     <span className="text-xs text-zinc-500 dark:text-zinc-400 font-medium">

@@ -12,7 +12,7 @@ export const MUSEUM_CAPTURE_WIDTH = 1200;
 export interface MuseumVersion {
     id: string;
     slug: string;
-    phase: "v0" | "v1";
+    phase: "v0" | "v1" | "v2";
     date: string;
     title: string;
     why: string;
@@ -56,7 +56,7 @@ export function museumRunUrl(id: string): string {
 
 function v(
     id: string,
-    phase: "v0" | "v1",
+    phase: "v0" | "v1" | "v2",
     date: string,
     title: string,
     why: string,
@@ -106,6 +106,18 @@ export const MUSEUM_VERSIONS: MuseumVersion[] = [
     v("v1.7", "v1", "2026-10-04", "Mapa del Campus 2 y filtros", "El mapa se extiende al Campus 2 y ahora es posible filtrar los contenedores según el tipo de residuo que quieras tirar.", ["Mapa extendido al Campus 2", "Filtros para ubicar botes de plástico, papel y orgánicos", "Atajos para encontrar el bote más cercano"], [], 8135),
     v("v1.8", "v1", "2026-10-07", "Cámara en vivo y cuenta de estudiante", "Permite usar la cámara de tu celular para apuntar a un residuo y acceder con tu número de control del IT Morelia.", ["Uso de la cámara del celular en tiempo real", "Acceso para estudiantes con número de control", "Galería fotográfica de botes reales del campus"], [], 8479),
     v("v1.9", "v1", "2026-10-08", "La entrega final", "Entrega integral presentada en Oxigena tus Ideas: inicio ágil en pestañas, perfil con medallas y reconocimiento visual.", ["Inicio organizado en pestañas para encontrar todo en un clic", "Perfil de estudiante con racha de reciclaje y medallas de logro", "Reconocimiento visual instantáneo de botellas y latas"], ["Páginas largas y dispersas (ahora unificadas en pestañas)"], 5107, "Entrega final"),
+
+    // ─── Fase 2 · Web pura y evolución en producción (18 Oct – 28 Oct) ──
+    v("v2.0", "v2", "2026-10-18", "Arquitectura Web Pura", "Se elimina la dependencia de Android y Windows para operar 100% en navegadores web con integración continua.", ["Eliminación de contenedores Electron y Capacitor", "Integración Continua con GitHub Actions", "Insignia visual oficial v2.0 en navbar"], ["Empaquetados nativos pesados (.apk, .exe)"], 3468, "Web Pura"),
+    v("v2.1", "v2", "2026-10-18", "Nube y Funciones Serverless", "Se despliega la plataforma en Vercel con endpoints seguros para proteger las credenciales de inteligencia artificial.", ["Despliegue optimizado en Vercel", "Función serverless para la API de Gemini", "Enrutamiento SPA con rewrites limpios"], [], 3468),
+    v("v2.2", "v2", "2026-10-21", "Seguridad y Validación Estudiantil", "Se refuerza el control de acceso verificando que los estudiantes ingresen con su matrícula oficial del IT Morelia.", ["Validación de matrícula institucional", "Protección y control de sesión con Firebase", "Mensajes claros de error en autenticación"], [], 3468),
+    v("v2.3", "v2", "2026-10-21", "Isla Dinámica e Interfaz Adaptativa", "Se crea un componente flotante de estado superior y se refinan los controles de accesibilidad y contraste.", ["Isla flotante superior interactiva (NotchIsland)", "Modo claro y oscuro con contraste reforzado", "Controles de navegación ágiles"], [], 3468),
+    v("v2.4", "v2", "2026-10-21", "Modularización de Ajustes y Perfil", "Se reorganiza el código de ajustes y perfil en submódulos especializados para acelerar la navegación.", ["Submódulos dedicados para el perfil de usuario", "Pestañas secundarias de configuración organizadas", "Mayor fluidez en transiciones de pantalla"], [], 4378),
+    v("v2.5", "v2", "2026-10-21", "Fundamentación Ambiental y Guía Operativa", "Se reestructuran las páginas informativas con datos verificables sobre el impacto de los residuos en el campus.", ["Página renovada de Cómo Funciona", "Métricas sustentables y fundamentación de impacto", "Guía paso a paso de acondicionamiento de envases"], [], 5235),
+    v("v2.6", "v2", "2026-10-22", "Catálogo de Tecnologías Institucionales", "Se estructura el inventario completo de herramientas, bibliotecas y normativas que dan sustento a ReCiclo.", ["Catálogo estructurado en 6 capas tecnológicas", "Fichas técnicas con licencias y propósito de cada librería", "Alineación explícita con normas ambientales mexicanas"], [], 5235),
+    v("v2.7", "v2", "2026-10-22", "Historial Estudiantil y Métricas de Logro", "Se enriquece el perfil con estadísticas detalladas de residuos evitados, medallas y sincronización en la nube.", ["Panel avanzado de estadísticas de reciclaje", "Medallas de logro y constancia estudiantil", "Sincronización automática con Cloud Firestore"], [], 5107),
+    v("v2.8", "v2", "2026-10-28", "El Museo de la Evolución", "Llega el museo histórico interactivo que permite emular y recorrer visualmente las 20 versiones previas del proyecto.", ["Museo interactivo con emuladores integrados", "Cédulas históricas con adiciones y retiros", "Pestañas del marco institucional en portada"], [], 6440, "Museo v1"),
+    v("v2.9", "v2", "2026-10-28", "Consolidación de Producción y Resiliencia", "Se blinda la aplicación contra bloqueadores de red y se integra la suite completa de 30 versiones históricas.", ["Resiliencia ante bloqueadores de anuncios (GTM/Firebase)", "Suite completa de 30 versiones históricas catalogadas", "Rendimiento optimizado para conexiones del campus"], [], 6440, "Versión 2 Consolidada"),
 ];
 
 export const MUSEUM_COUNT = MUSEUM_VERSIONS.length;

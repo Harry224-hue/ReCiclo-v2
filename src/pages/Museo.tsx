@@ -16,7 +16,7 @@ import { VersionDialog } from "../components/museum/VersionDialog";
 import { VersionFrame } from "../components/museum/VersionFrame";
 import { MUSEUM_COUNT, MUSEUM_VERSIONS, museumAnchor, type MuseumVersion } from "../data/museum";
 
-type SeriesFilter = "all" | "v0" | "v1";
+type SeriesFilter = "all" | "v0" | "v1" | "v2";
 type OrderMode = "asc" | "desc";
 
 export default function Museo() {
@@ -221,16 +221,16 @@ export default function Museo() {
                 {/* Métricas del archivo estilo editorial */}
                 <div style={{ animationDelay: "420ms" }} className="museum-rise mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4 border-t border-b border-zinc-200/90 dark:border-zinc-800/90 py-4 text-left">
                     <div>
-                        <div className="text-2xl sm:text-3xl font-extrabold text-zinc-950 dark:text-white tracking-tight">20</div>
+                        <div className="text-2xl sm:text-3xl font-extrabold text-zinc-950 dark:text-white tracking-tight">{MUSEUM_COUNT}</div>
                         <div className="text-xs text-zinc-500 dark:text-zinc-400 font-medium">Entregas archivadas</div>
                     </div>
                     <div>
-                        <div className="text-2xl sm:text-3xl font-extrabold text-zinc-950 dark:text-white tracking-tight">35 días</div>
-                        <div className="text-xs text-zinc-500 dark:text-zinc-400 font-medium">4 sep – 8 oct 2026</div>
+                        <div className="text-2xl sm:text-3xl font-extrabold text-zinc-950 dark:text-white tracking-tight">55 días</div>
+                        <div className="text-xs text-zinc-500 dark:text-zinc-400 font-medium">4 sep – 28 oct 2026</div>
                     </div>
                     <div>
-                        <div className="text-2xl sm:text-3xl font-extrabold text-zinc-950 dark:text-white tracking-tight">2 Etapas</div>
-                        <div className="text-xs text-zinc-500 dark:text-zinc-400 font-medium">Prototipo y Campus ITM</div>
+                        <div className="text-2xl sm:text-3xl font-extrabold text-zinc-950 dark:text-white tracking-tight">3 Etapas</div>
+                        <div className="text-xs text-zinc-500 dark:text-zinc-400 font-medium">Prototipo, v1 y Web Pura</div>
                     </div>
                     <div>
                         <div className="text-2xl sm:text-3xl font-extrabold text-zinc-950 dark:text-white tracking-tight">Campus 1 y 2</div>
@@ -245,14 +245,20 @@ export default function Museo() {
                     </p>
                     <div className="no-scrollbar -mx-1 flex items-center overflow-x-auto px-1 py-2">
                         {MUSEUM_VERSIONS.map((v, i) => {
-                            const isV0 = v.phase === "v0";
+                            const dotColor =
+                                v.phase === "v0"
+                                    ? "border-amber-300 bg-amber-50 text-amber-900 hover:bg-amber-100 dark:border-amber-800/70 dark:bg-amber-950/40 dark:text-amber-200 dark:hover:bg-amber-900/50"
+                                    : v.phase === "v1"
+                                    ? "border-sky-300 bg-sky-50 text-sky-900 hover:bg-sky-100 dark:border-sky-800/70 dark:bg-sky-950/40 dark:text-sky-200 dark:hover:bg-sky-900/50"
+                                    : "border-emerald-300 bg-emerald-50 text-emerald-900 hover:bg-emerald-100 dark:border-emerald-800/70 dark:bg-emerald-950/40 dark:text-emerald-200 dark:hover:bg-emerald-900/50";
+
                             return (
                                 <div key={v.id} className="flex items-center">
                                     {i > 0 && (
                                         <span
                                             aria-hidden="true"
                                             className={`h-px w-3 sm:w-4 ${
-                                                v.id === "v1.0"
+                                                v.id === "v1.0" || v.id === "v2.0"
                                                     ? "bg-zinc-300 dark:bg-zinc-700"
                                                     : "bg-zinc-200 dark:bg-zinc-800"
                                             }`}
@@ -263,11 +269,7 @@ export default function Museo() {
                                         onClick={() => handleJumpToVersion(v.id)}
                                         title={`${v.id} — ${v.title}`}
                                         aria-label={`Ir a ${v.id}: ${v.title}`}
-                                        className={`shrink-0 cursor-pointer rounded-full border px-2.5 py-1 font-mono text-[11px] font-bold transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 ${
-                                            isV0
-                                                ? "border-amber-300 bg-amber-50 text-amber-900 hover:bg-amber-100 dark:border-amber-800/70 dark:bg-amber-950/40 dark:text-amber-200 dark:hover:bg-amber-900/50"
-                                                : "border-sky-300 bg-sky-50 text-sky-900 hover:bg-sky-100 dark:border-sky-800/70 dark:bg-sky-950/40 dark:text-sky-200 dark:hover:bg-sky-900/50"
-                                        }`}
+                                        className={`shrink-0 cursor-pointer rounded-full border px-2.5 py-1 font-mono text-[11px] font-bold transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 ${dotColor}`}
                                     >
                                         {v.id.replace("v", "")}
                                     </button>
@@ -336,6 +338,18 @@ export default function Museo() {
                             >
                                 Etapa 1 · Campus ITM (10)
                             </button>
+
+                            <button
+                                type="button"
+                                onClick={() => setActiveSeries("v2")}
+                                className={`shrink-0 rounded-lg px-3 py-1.5 text-xs font-bold transition-all ${
+                                    activeSeries === "v2"
+                                        ? "bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 shadow-xs"
+                                        : "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800/80 hover:text-zinc-900 dark:hover:text-white"
+                                }`}
+                            >
+                                Etapa 2 · Web Pura (10)
+                            </button>
                         </div>
                     </div>
 
@@ -365,6 +379,13 @@ export default function Museo() {
                             </optgroup>
                             <optgroup label="Etapa 1 · Campus ITM (v1.0 – v1.9)">
                                 {MUSEUM_VERSIONS.filter((v) => v.phase === "v1").map((v) => (
+                                    <option key={v.id} value={v.id}>
+                                        {v.id} — {v.title}
+                                    </option>
+                                ))}
+                            </optgroup>
+                            <optgroup label="Etapa 2 · Web Pura (v2.0 – v2.9)">
+                                {MUSEUM_VERSIONS.filter((v) => v.phase === "v2").map((v) => (
                                     <option key={v.id} value={v.id}>
                                         {v.id} — {v.title}
                                     </option>
