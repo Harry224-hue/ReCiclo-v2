@@ -458,10 +458,10 @@ export default function Museo() {
                                             Capítulo 03 · 18 al 28 de octubre de 2026
                                         </span>
                                         <h2 className="text-2xl sm:text-3xl font-extrabold text-zinc-950 dark:text-white mt-1">
-                                            Arquitectura Web Pura y Evolución en Producción
+                                            Evolución Web, Personalización y Archivo Histórico
                                         </h2>
                                         <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-1.5 max-w-2xl leading-relaxed">
-                                            Consolidación de estándares web sin dependencias nativas: integración continua con GitHub Actions, despliegue serverless en Vercel, modularización del perfil, fundamentación técnica y museo histórico interactivo.
+                                            Consolidación de ReCiclo como plataforma web rápida y accesible desde cualquier dispositivo: identificación ágil de residuos, personalización visual con paleta de colores, guía práctica para preparar empaques, perfil con medallas y el archivo completo del Museo Histórico.
                                         </p>
                                     </div>
                                 )}

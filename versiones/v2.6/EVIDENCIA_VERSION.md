@@ -1,8 +1,8 @@
-# Evidencia v2.6: Catálogo de Tecnologías Institucionales (techCategories.ts)
+# Evidencia v2.6: Guía de herramientas y normas ambientales
 - **Fecha:** 22 de Octubre de 2026
 - **Commit de referencia:** `c3de19d`
-- **Hito principal:** Catálogo de Tecnologías Institucionales (techCategories.ts)
-- **Descripción técnica:** Estructuración de las 6 capas técnicas en techCategories.ts: IA, Frontend, Backend, Datos, Mapas y Normativa; fichas con versiones y licencias; apego a ITMORELIA-IT-AM-007 y LGPGIR 2026.
+- **Hito principal:** Guía de herramientas y normas ambientales
+- **Descripción:** Inventario abierto de herramientas del sistema y recopilación de normas oficiales mexicanas sobre manejo integral de residuos sólidos.
 - **Comando de prueba:**
   ```bash
   cd versiones/v2.6

@@ -1,8 +1,8 @@
-# Evidencia v2.2: Seguridad y Validación Estudiantil con Matrícula ITM
+# Evidencia v2.2: Acceso con matrícula estudiantil
 - **Fecha:** 21 de Octubre de 2026
 - **Commit de referencia:** `95f56e8`
-- **Hito principal:** Seguridad y Validación Estudiantil con Matrícula ITM
-- **Descripción técnica:** Validación de número de control institucional en Login.tsx y Registro.tsx; control robusto de estados de sesión con Firebase Auth; primera estructuración ampliada de Tecnologias.tsx.
+- **Hito principal:** Acceso con matrícula estudiantil
+- **Descripción:** Acceso e inicio de sesión seguro con validación del formato oficial de matrícula estudiantil de 8 dígitos del IT Morelia.
 - **Comando de prueba:**
   ```bash
   cd versiones/v2.2

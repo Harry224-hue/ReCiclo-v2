@@ -1,13 +1,17 @@
 import { createServer } from 'node:http';
 import { readFileSync, existsSync, mkdirSync, copyFileSync } from 'node:fs';
-import { join, extname } from 'node:path';
+import { join, extname, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { execSync } from 'node:child_process';
 import { createRequire } from 'node:module';
 
 const require = createRequire('/home/juanpa/Documentos/ReCiclo-version-1/ReCiclo-version-1/.tmp-tools/package.json');
 const { chromium } = require('playwright-core');
 
-const ROOT = '/home/juanpa/Documentos/ReCiclo-versión-de-pruebas-v2';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const ROOT = dirname(__dirname);
+
 const EMULADOR_DIR = join(ROOT, 'public', 'emulador');
 const MUSEO_DIR = join(ROOT, 'public', 'museo');
 const CAPTURAS_DIR = join(ROOT, 'public', 'capturas');
@@ -54,12 +58,59 @@ const browser = await chromium.launch({
   args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-gpu'],
 });
 
-const VERSIONS = Array.from({ length: 10 }, (_, i) => `v2.${i}`);
+const TARGETS = [
+  { id: 'v2.0', hash: '#/', fullPage: true },
+  { id: 'v2.1', hash: '#/escanear', fullPage: true },
+  { id: 'v2.2', hash: '#/login', fullPage: true },
+  {
+    id: 'v2.3',
+    hash: '#/',
+    fullPage: false,
+    actionDesktop: async (page) => {
+      const userBtn = page.locator('button[aria-label="Abrir menú de usuario"]');
+      if (await userBtn.count() > 0) {
+        await userBtn.click();
+        await page.waitForTimeout(400);
+      }
+    },
+  },
+  {
+    id: 'v2.4',
+    hash: '#/',
+    fullPage: false,
+    actionDesktop: async (page) => {
+      const userBtn = page.locator('button[aria-label="Abrir menú de usuario"]');
+      if (await userBtn.count() > 0) {
+        await userBtn.click();
+        await page.waitForTimeout(400);
+        const cfgBtn = page.locator('button').filter({ hasText: 'Configuración' });
+        if (await cfgBtn.count() > 0) {
+          await cfgBtn.click();
+          await page.waitForTimeout(600);
+        }
+      }
+    },
+    actionMobile: async (page) => {
+      const settingsBtn = page.locator('button[title="Configuración"]').first();
+      if (await settingsBtn.count() > 0) {
+        await settingsBtn.click();
+        await page.waitForTimeout(500);
+      }
+    },
+  },
+  { id: 'v2.5', hash: '#/como-funciona', fullPage: true },
+  { id: 'v2.6', hash: '#/tecnologias', fullPage: true },
+  { id: 'v2.7', hash: '#/perfil', fullPage: true },
+  { id: 'v2.8', hash: '#/', fullPage: true },
+  { id: 'v2.9', hash: '#/museo', fullPage: true },
+];
+
 const heights = {};
 
-for (const id of VERSIONS) {
-  console.log(`\nCapturando ${id}...`);
-  const url = `http://127.0.0.1:5499/${id}/index.html`;
+for (const target of TARGETS) {
+  const { id, hash, fullPage, actionDesktop, actionMobile } = target;
+  console.log(`\nCapturando ${id} (${hash})...`);
+  const url = `http://127.0.0.1:5499/${id}/index.html${hash}`;
 
   // --- Desktop ---
   const dCtx = await browser.newContext({
@@ -69,13 +120,20 @@ for (const id of VERSIONS) {
   });
   const dPage = await dCtx.newPage();
   await dPage.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
-  await dPage.waitForTimeout(1800);
+  await dPage.waitForTimeout(1600);
+
+  if (actionDesktop) {
+    await actionDesktop(dPage);
+  }
 
   const desktopPng = join(MUSEO_DIR, `${id}.png`);
   const desktopWebp = join(MUSEO_DIR, `${id}.webp`);
-  await dPage.screenshot({ path: desktopPng, fullPage: true });
+  await dPage.screenshot({ path: desktopPng, fullPage });
 
-  const pageHeight = await dPage.evaluate(() => Math.max(document.body.scrollHeight, document.documentElement.scrollHeight));
+  let pageHeight = 900;
+  if (fullPage) {
+    pageHeight = await dPage.evaluate(() => Math.max(document.body.scrollHeight, document.documentElement.scrollHeight));
+  }
   heights[id] = pageHeight;
   console.log(`  ✓ Desktop capturado (${pageHeight}px de altura) -> ${id}.png`);
   await dCtx.close();
@@ -98,7 +156,11 @@ for (const id of VERSIONS) {
   });
   const mPage = await mCtx.newPage();
   await mPage.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
-  await mPage.waitForTimeout(1800);
+  await mPage.waitForTimeout(1600);
+
+  if (actionMobile) {
+    await actionMobile(mPage);
+  }
 
   const mobilePng = join(MUSEO_DIR, `${id}-mobile.png`);
   await mPage.screenshot({ path: mobilePng });

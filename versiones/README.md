@@ -47,16 +47,16 @@ Este directorio reúne el código fuente, la documentación técnica y las evide
 
 | Versión | Fecha | Hito Principal | Enlace |
 | :---: | :---: | :--- | :---: |
-| **v2.0** | 18 de octubre | Arquitectura Web Pura y CI con GitHub Actions | [Evidencia](./v2.0/EVIDENCIA_VERSION.md) |
-| **v2.1** | 18 de octubre | Despliegue en Vercel y API Serverless para Gemini | [Evidencia](./v2.1/EVIDENCIA_VERSION.md) |
-| **v2.2** | 21 de octubre | Seguridad y validación estudiantil con matrícula | [Evidencia](./v2.2/EVIDENCIA_VERSION.md) |
-| **v2.3** | 21 de octubre | Isla dinámica superior (`NotchIsland`) e interfaz adaptativa | [Evidencia](./v2.3/EVIDENCIA_VERSION.md) |
-| **v2.4** | 21 de octubre | Modularización de ajustes y perfil | [Evidencia](./v2.4/EVIDENCIA_VERSION.md) |
-| **v2.5** | 21 de octubre | Fundamentación ambiental (`/como-funciona` e `/impacto`) | [Evidencia](./v2.5/EVIDENCIA_VERSION.md) |
-| **v2.6** | 22 de octubre | Catálogo de tecnologías institucionales (`techCategories.ts`) | [Evidencia](./v2.6/EVIDENCIA_VERSION.md) |
-| **v2.7** | 22 de octubre | Historial estudiantil, medallas de logro y Firestore | [Evidencia](./v2.7/EVIDENCIA_VERSION.md) |
-| **v2.8** | 28 de octubre | El Museo de la Evolución con emuladores integrados | [Evidencia](./v2.8/EVIDENCIA_VERSION.md) |
-| **v2.9** | 28 de octubre | Consolidación de producción y resiliencia ante adblockers | [Evidencia](./v2.9/EVIDENCIA_VERSION.md) |
+| **v2.0** | 18 de octubre | Llega ReCiclo 2.0: acceso web directo sin descargas pesadas | [Evidencia](./v2.0/EVIDENCIA_VERSION.md) |
+| **v2.1** | 18 de octubre | Identificación de residuos más rápida con inteligencia artificial | [Evidencia](./v2.1/EVIDENCIA_VERSION.md) |
+| **v2.2** | 21 de octubre | Acceso y registro seguro con matrícula estudiantil de 8 dígitos | [Evidencia](./v2.2/EVIDENCIA_VERSION.md) |
+| **v2.3** | 21 de octubre | Barra flotante de avisos rápidos y selector de temas y colores | [Evidencia](./v2.3/EVIDENCIA_VERSION.md) |
+| **v2.4** | 21 de octubre | Ventana de ajustes organizada en pestañas claras | [Evidencia](./v2.4/EVIDENCIA_VERSION.md) |
+| **v2.5** | 21 de octubre | Guía práctica para preparar botellas y empaques en 4 pasos | [Evidencia](./v2.5/EVIDENCIA_VERSION.md) |
+| **v2.6** | 22 de octubre | Guía informativa de herramientas y normas ambientales del campus | [Evidencia](./v2.6/EVIDENCIA_VERSION.md) |
+| **v2.7** | 22 de octubre | Perfil con medallas de logro y racha diaria de reciclaje | [Evidencia](./v2.7/EVIDENCIA_VERSION.md) |
+| **v2.8** | 28 de octubre | Portada compacta en pestañas y apertura del Museo Histórico | [Evidencia](./v2.8/EVIDENCIA_VERSION.md) |
+| **v2.9** | 28 de octubre | Colección completa de 30 versiones históricas en el Museo | [Evidencia](./v2.9/EVIDENCIA_VERSION.md) |
 
 ---
 

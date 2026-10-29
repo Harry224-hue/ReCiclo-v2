@@ -224,48 +224,48 @@ Consolidacion definitiva del sistema en apego total a los lineamientos de la con
 
 ---
 
-## 5. Ciclo 3: Escalado a Web Pura, Modularización y Resiliencia (v2.0 a v2.9)
+## 5. Ciclo 3: Evolución Web, Personalización y Archivo Histórico (v2.0 a v2.9)
 **Periodo del sprint:** 18 al 28 de octubre de 2026
 
-En esta etapa, el equipo de estudiantes (García Montañez Ulises Jasen, Medina Cuamba Juan Pablo y Solís Calvillo Juan Pablo) abordó la optimización de producción de ReCiclo, prescindiendo de dependencias nativas pesadas e integrando el archivo histórico como evidencia de desarrollo.
+En esta etapa, el equipo de estudiantes (García Montañez Ulises Jasen, Medina Cuamba Juan Pablo y Solís Calvillo Juan Pablo) impulsó la segunda fase de ReCiclo, consolidándola como una plataforma web moderna, rápida y accesible desde cualquier dispositivo sin requerir instalaciones pesadas, enriqueciendo la experiencia con personalización visual y el archivo del Museo.
 
 ### Version 2.0 (18 de Octubre)
-- **Hito:** Arquitectura Web Pura y CI.
-- **Implementación:** Eliminación de Electron y Capacitor. Configuración de GitHub Actions para verificación automatizada en cada commit y distintivo v2.0 en navbar.
+- **Hito:** Llega ReCiclo 2.0.
+- **Implementación:** Acceso web directo desde cualquier computadora o teléfono celular sin archivos pesados ni descargas complejas, incorporando el distintivo oficial v2.0 en el menú de navegación.
 
 ### Version 2.1 (18 de Octubre)
-- **Hito:** Despliegue en Vercel y API Serverless.
-- **Implementación:** Configuración de `vercel.json` con SPA rewrites y endpoint `/api/gemini` para proteger la API Key de Gemini en servidor.
+- **Hito:** Identificación de residuos más rápida.
+- **Implementación:** Mejora del escáner con inteligencia artificial conectada a la nube para clasificar residuos al instante, permitiendo subir fotos directamente desde la galería o la cámara.
 
 ### Version 2.2 (21 de Octubre, 12:06)
-- **Hito:** Seguridad en Autenticación.
-- **Implementación:** Validación obligatoria de matrícula institucional del IT Morelia y control de estados de autenticación con Firebase.
+- **Hito:** Acceso con matrícula estudiantil.
+- **Implementación:** Formulario de inicio de sesión y registro protegido con validación obligatoria del número de control de 8 dígitos del IT Morelia.
 
 ### Version 2.3 (21 de Octubre, 21:50)
-- **Hito:** Isla Dinámica y Accesibilidad.
-- **Implementación:** Componente flotante `NotchIsland.tsx`, sincronización global con `ThemeContext` y contraste reforzado en modo claro y oscuro.
+- **Hito:** Isla de avisos y rueda de colores.
+- **Implementación:** Barra flotante superior de avisos rápidos (`NotchIsland.tsx`), selector de colores y temas para la interfaz, y contraste mejorado para facilitar la lectura bajo el sol del campus.
 
 ### Version 2.4 (21 de Octubre, 23:08)
-- **Hito:** Modularización de Perfil y Ajustes.
-- **Implementación:** Desacoplamiento de `ProfileHistoryAndResources.tsx` y `SettingsSecondaryTabs.tsx` para mejorar la fluidez y mantenibilidad.
+- **Hito:** Ajustes organizados en pestañas.
+- **Implementación:** Reorganización del menú de ajustes en pestañas claras (Apariencia, Barra de estado, Cuenta y Privacidad), optimizando las opciones para teléfonos sencillos.
 
 ### Version 2.5 (21 de Octubre, 23:23)
-- **Hito:** Sustento Ambiental Verificado.
-- **Implementación:** Rediseño editorial profundo de `/como-funciona` e `/impacto` con datos oficiales de SEMARNAT/INEGI y guía pedagógica de acondicionamiento físico.
+- **Hito:** Guía para preparar botellas y empaques.
+- **Implementación:** Sección interactiva «Cómo Funciona» con la regla de 4 pasos (Vacía, Enjuaga, Aplasta y Tapa) y la guía de los 5 contenedores oficiales del Tecnológico.
 
 ### Version 2.6 (22 de Octubre, 01:34)
-- **Hito:** Catálogo Tecnológico Institucional.
-- **Implementación:** Creación de `techCategories.ts` organizando las 6 capas del proyecto (IA, Frontend, Backend, Datos, Mapas, Normativa) con licencias y justificación.
+- **Hito:** Guía de herramientas y normas ambientales.
+- **Implementación:** Catálogo abierto con las herramientas de software del proyecto y recopilación de normas oficiales mexicanas sobre manejo responsable de residuos.
 
 ### Version 2.7 (22 de Octubre, 02:44)
-- **Hito:** Gamificación e Historial Estudiantil.
-- **Implementación:** Medallas de logro, estadísticas de reciclaje y sincronización automática en Cloud Firestore.
+- **Hito:** Tus medallas y racha de reciclaje.
+- **Implementación:** Panel de perfil con contador de días seguidos reciclando (racha), medallas de logro por materiales separados e historial que se conserva al cambiar de dispositivo.
 
 ### Version 2.8 (28 de Octubre, 12:15)
-- **Hito:** El Museo de la Evolución.
-- **Implementación:** Creación de la ruta interactiva `/museo` con emuladores sandbox de 20 versiones históricas y pestañas institucionales en portada.
+- **Hito:** Inicio más cómodo y compacto.
+- **Implementación:** Portada ágil con pestañas interactivas para no realizar desplazamientos largos y apertura del Museo Histórico interactivo para recorrer versiones previas.
 
 ### Version 2.9 (28 de Octubre, 12:22)
-- **Hito:** Consolidación de Producción y Resiliencia en Campus.
-- **Implementación:** Protección contra bloqueadores de anuncios (desactivación de GTM en Firebase para prevenir `ERR_BLOCKED_BY_CLIENT`), catálogo completo de 30 versiones históricas e interfaz optimizada para redes del IT Morelia.
+- **Hito:** El archivo completo de ReCiclo.
+- **Implementación:** Colección integral de 30 versiones históricas en el Museo con sus cédulas y emuladores, con navegación estable y fluida en las conexiones universitarias.
 

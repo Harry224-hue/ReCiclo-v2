@@ -1,8 +1,8 @@
-# Evidencia v2.8: El Museo de la Evolución y Marco Institucional
+# Evidencia v2.8: Inicio más cómodo y compacto
 - **Fecha:** 28 de Octubre de 2026
 - **Commit de referencia:** `aa4a4cb`
-- **Hito principal:** El Museo de la Evolución y Marco Institucional
-- **Descripción técnica:** Incorporación del visor histórico interactivo /museo con 20 versiones emulables en sandbox; pestañas institucionales ProjectFrameworkTabs.tsx y pie de página con TeamCredits (6-6-7).
+- **Hito principal:** Inicio más cómodo y compacto
+- **Descripción:** Rediseño de la portada con pestañas interactivas para una lectura sin desplazamientos largos y apertura del Museo Histórico.
 - **Comando de prueba:**
   ```bash
   cd versiones/v2.8

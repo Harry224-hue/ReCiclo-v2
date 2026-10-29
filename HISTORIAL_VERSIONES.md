@@ -227,40 +227,40 @@ Este documento detalla la bitacora y el escalado progresivo de **ReCiclo Version
 ---
 
 # Historial de Evolución: ReCiclo Fase 2 (v2.0 a v2.9)
-### Ciclo de Arquitectura Web Pura, Modularización y Resiliencia en Producción
+### Ciclo de Evolución Web, Personalización y Consolidación
 **Instituto Tecnológico de Morelia · Semestre Agosto - Diciembre 2026**
 
-Este bloque registra el escalado y optimización de **ReCiclo Versión 2**, abarcando la eliminación de envoltorios nativos pesados, integración continua, arquitectura cloud serverless en Vercel, modularización profunda del perfil y ajustes, y la creación del Museo interactivo de versiones.
+Este bloque registra el avance y maduración de **ReCiclo Versión 2**, mostrando el paso a una plataforma web moderna, rápida y accesible desde cualquier navegador sin necesidad de descargas pesadas, la incorporación de herramientas interactivas de separación, personalización visual y el archivo completo del Museo Histórico.
 
-## Cronograma Técnico de la Fase 2
+## Cronograma de la Fase 2
 
-| Versión | Fecha | Hito y Alcance Técnico |
+| Versión | Fecha | Hito y Alcance de la Versión |
 | :---: | :---: | :--- |
-| **v2.0** | 18 de Octubre | **Arquitectura Web Pura y CI:** Eliminación de Electron y Capacitor; CI con GitHub Actions; insignia oficial v2.0 en navbar. |
-| **v2.1** | 18 de Octubre | **Arquitectura Cloud y Serverless:** Despliegue en Vercel, rewrites limpios de SPA y función serverless para proteger API Gemini. |
-| **v2.2** | 21 de Octubre | **Seguridad y Validación Estudiantil:** Validación de matrícula ITM y control de estados de autenticación con Firebase. |
-| **v2.3** | 21 de Octubre | **Interfaz Adaptativa e Isla Dinámica:** Integración de `NotchIsland.tsx`, controles de visualización y contraste reforzado. |
-| **v2.4** | 21 de Octubre | **Modularización de Ajustes y Perfil:** Separación en `ProfileHistoryAndResources.tsx` y `SettingsSecondaryTabs.tsx`. |
-| **v2.5** | 21 de Octubre | **Fundamentación Ambiental y Guía Operativa:** Rediseño editorial profundo de `/como-funciona` e `/impacto`. |
-| **v2.6** | 22 de Octubre | **Catálogo de Tecnologías Institucionales:** Estructuración de `techCategories.ts` en 6 capas técnicas y normativas. |
-| **v2.7** | 22 de Octubre | **Historial Estudiantil y Métricas de Logro:** Panel de estadísticas, racha, medallas y sincronización en Cloud Firestore. |
-| **v2.8** | 28 de Octubre | **El Museo de la Evolución y Marco Institucional:** Integración del visor interactivo con emuladores sandbox de 20 versiones. |
-| **v2.9** | 28 de Octubre | **Consolidación de Producción y Resiliencia:** Protección contra adblockers (GTM/Firebase), suite histórica de 30 versiones y entrega final. |
+| **v2.0** | 18 de Octubre | **Llega ReCiclo 2.0:** Acceso web directo desde cualquier dispositivo y distintivo oficial v2.0 en el menú. |
+| **v2.1** | 18 de Octubre | **Identificación de residuos más rápida:** Clasificación ágil con inteligencia artificial y subida directa de fotos. |
+| **v2.2** | 21 de Octubre | **Acceso con matrícula estudiantil:** Registro e inicio de sesión seguro con número de control de 8 dígitos del IT Morelia. |
+| **v2.3** | 21 de Octubre | **Isla de avisos y rueda de colores:** Barra flotante de notificaciones superiores y selector de temas y colores. |
+| **v2.4** | 21 de Octubre | **Ajustes organizados en pestañas:** Configuración clara dividida en Apariencia, Barra de estado, Cuenta y Privacidad. |
+| **v2.5** | 21 de Octubre | **Guía para preparar botellas y empaques:** La regla de 4 pasos (Vacía, Enjuaga, Aplasta y Tapa) y los 5 contenedores. |
+| **v2.6** | 22 de Octubre | **Guía de herramientas y normas ambientales:** Biblioteca de herramientas del sistema y normas oficiales mexicanas. |
+| **v2.7** | 22 de Octubre | **Tus medallas y racha de reciclaje:** Reconocimiento de constancia estudiantil con medallas y estadísticas guardadas. |
+| **v2.8** | 28 de Octubre | **Inicio más cómodo y compacto:** Portada organizada en pestañas y apertura del Museo Histórico interactivo. |
+| **v2.9** | 28 de Octubre | **El archivo completo de ReCiclo:** Colección integral de 30 versiones históricas y navegación estable en el campus. |
 
 ---
 
 ## Desglose Detallado de la Fase 2
 
-### Version 2.0: Arquitectura Web Pura e Integración Continua (CI)
+### Version 2.0: Llega ReCiclo 2.0
 **Fecha:** 18 de Octubre de 2026  
-**Alcance del sprint:** Retiro definitivo de contenedores nativos (Android/Capacitor y Windows/Electron) para operar como SPA moderna pura.
+**Alcance de la versión:** Inicio de la versión 2.0 de la plataforma, funcionando de manera ágil en cualquier navegador web moderno sin requerir descargas de archivos pesados.
 
 ![Captura Portada ReCiclo v2.0](./capturas/v2.0.png)
 
-- **Características técnicas y metodológicas:**
-  - Migración a estándares web nativos (`MediaDevices API`, `ServiceWorker`, interfaces fluidas con Framer Motion).
-  - Pipeline de Integración Continua (CI) con GitHub Actions (`.github/workflows/build.yml`) para validación de linter y compilación en cada cambio.
-  - Distintivo visual oficial `v2.0` en la barra de navegación de cristal.
+- **Avances tangibles:**
+  - Acceso directo instantáneo desde cualquier navegador de computadora o celular.
+  - Distintivo visual oficial `v2.0` en la barra de navegación superior.
+  - Portada renovada con diseño moderno y adaptado a diferentes tamaños de pantalla.
 - **Comando de prueba:**
   ```bash
   npm run v2.0
@@ -268,15 +268,16 @@ Este bloque registra el escalado y optimización de **ReCiclo Versión 2**, abar
 
 ---
 
-### Version 2.1: Arquitectura Cloud y Funciones Serverless en Vercel
+### Version 2.1: Identificación de residuos más rápida
 **Fecha:** 18 de Octubre de 2026  
-**Alcance del sprint:** Despliegue y resguardo de claves API de inteligencia artificial.
+**Alcance de la versión:** Mejora del escáner de residuos para responder con mayor velocidad y precisión al identificar materiales reciclables.
 
-![Captura Portada ReCiclo v2.1](./capturas/v2.1.png)
+![Captura Escáner ReCiclo v2.1](./capturas/v2.1.png)
 
-- **Características técnicas y metodológicas:**
-  - Configuración de `vercel.json` con enrutamiento SPA y rewrites limpios.
-  - Creación del endpoint serverless `api/gemini.js` para resguardar la clave `GEMINI_API_KEY` en entorno de servidor.
+- **Avances tangibles:**
+  - Clasificación de residuos con inteligencia artificial más rápida y estable.
+  - Subida directa de fotos desde la galería o la cámara sin demoras.
+  - Respuestas inmediatas indicando a qué contenedor debe ir cada residuo.
 - **Comando de prueba:**
   ```bash
   npm run v2.1
@@ -284,15 +285,16 @@ Este bloque registra el escalado y optimización de **ReCiclo Versión 2**, abar
 
 ---
 
-### Version 2.2: Seguridad y Validación Estudiantil
+### Version 2.2: Acceso con matrícula estudiantil
 **Fecha:** 21 de Octubre de 2026  
-**Alcance del sprint:** Control de acceso exclusivo para la comunidad del IT Morelia.
+**Alcance de la versión:** Incorporación de acceso seguro para alumnos del Tecnológico de Morelia mediante su número de control oficial.
 
-![Captura Portada ReCiclo v2.2](./capturas/v2.2.png)
+![Captura Inicio de Sesión ReCiclo v2.2](./capturas/v2.2.png)
 
-- **Características técnicas y metodológicas:**
-  - Validación estricta de matrícula institucional del IT Morelia en pantallas de `/login` y `/registro`.
-  - Manejo robusto de errores de red y permisos en Firebase Auth.
+- **Avances tangibles:**
+  - Formulario de acceso con verificación del formato institucional de 8 dígitos del IT Morelia.
+  - Registro seguro para que cada estudiante proteja su cuenta y sus puntos de reciclaje.
+  - Avisos claros e inmediatos al escribir la información.
 - **Comando de prueba:**
   ```bash
   npm run v2.2
@@ -300,15 +302,16 @@ Este bloque registra el escalado y optimización de **ReCiclo Versión 2**, abar
 
 ---
 
-### Version 2.3: Interfaz Adaptativa e Isla Dinámica
+### Version 2.3: Isla de avisos y rueda de colores
 **Fecha:** 21 de Octubre de 2026  
-**Alcance del sprint:** Notificaciones superiores y accesibilidad táctil.
+**Alcance de la versión:** Creación de una barra flotante de avisos rápidos y opciones para personalizar el aspecto visual de la aplicación.
 
-![Captura Portada ReCiclo v2.3](./capturas/v2.3.png)
+![Captura Barra Superior y Colores ReCiclo v2.3](./capturas/v2.3.png)
 
-- **Características técnicas y metodológicas:**
-  - Implementación del componente `NotchIsland.tsx` para avisos no intrusivos en la parte superior.
-  - Sincronización de tema y acentos globales con `ThemeContext`.
+- **Avances tangibles:**
+  - Barra flotante superior interactiva para consultar avisos importantes al momento.
+  - Menú desplegable con paleta de colores para personalizar el tono de la interfaz.
+  - Contraste reforzado para facilitar la lectura tanto de día bajo el sol como de noche.
 - **Comando de prueba:**
   ```bash
   npm run v2.3
@@ -316,15 +319,16 @@ Este bloque registra el escalado y optimización de **ReCiclo Versión 2**, abar
 
 ---
 
-### Version 2.4: Modularización de Ajustes y Perfil
+### Version 2.4: Ajustes organizados en pestañas
 **Fecha:** 21 de Octubre de 2026  
-**Alcance del sprint:** Refactorización modular para mantener alto rendimiento.
+**Alcance de la versión:** Reorganización completa de la ventana de ajustes para que configurar la experiencia sea rápido y sencillo.
 
-![Captura Portada ReCiclo v2.4](./capturas/v2.4.png)
+![Captura Ajustes ReCiclo v2.4](./capturas/v2.4.png)
 
-- **Características técnicas y metodológicas:**
-  - Creación de `ProfileHistoryAndResources.tsx` y `SettingsSecondaryTabs.tsx`, aliviando la carga de renderizado.
-  - Optimización de transiciones y manejo de accesibilidad ARIA.
+- **Avances tangibles:**
+  - Menú de ajustes ordenado en pestañas especializadas (Apariencia, Barra de estado, Cuenta y Privacidad).
+  - Opciones de accesibilidad para elegir modo de visualización y contraste cómodo.
+  - Ajustes de fluidez pensados para ahorrar batería en teléfonos sencillos.
 - **Comando de prueba:**
   ```bash
   npm run v2.4
@@ -332,15 +336,16 @@ Este bloque registra el escalado y optimización de **ReCiclo Versión 2**, abar
 
 ---
 
-### Version 2.5: Fundamentación Ambiental y Guía Operativa
+### Version 2.5: Guía para preparar botellas y empaques
 **Fecha:** 21 de Octubre de 2026  
-**Alcance del sprint:** Sustento normativo y pedagógico del acondicionamiento de residuos.
+**Alcance de la versión:** Publicación de la guía interactiva «Cómo Funciona» y la explicación de los 5 contenedores oficiales del campus.
 
-![Captura Portada ReCiclo v2.5](./capturas/v2.5.png)
+![Captura Cómo Funciona ReCiclo v2.5](./capturas/v2.5.png)
 
-- **Características técnicas y metodológicas:**
-  - Rediseño editorial profundo de `/como-funciona` e `/impacto` con métricas verificadas de SEMARNAT/INEGI.
-  - Pautas pedagógicas de vaciar, enjuagar, compactar y tapar botellas y empaques.
+- **Avances tangibles:**
+  - Guía pedagógica de los 4 pasos fundamentales: Vacía, Enjuaga, Aplasta y Tapa.
+  - Catálogo interactivo con los 5 contenedores oficiales del Tecnológico de Morelia.
+  - Consejos prácticos para evitar que los restos orgánicos ensucien el plástico y el cartón.
 - **Comando de prueba:**
   ```bash
   npm run v2.5
@@ -348,15 +353,16 @@ Este bloque registra el escalado y optimización de **ReCiclo Versión 2**, abar
 
 ---
 
-### Version 2.6: Catálogo de Tecnologías Institucionales
+### Version 2.6: Guía de herramientas y normas ambientales
 **Fecha:** 22 de Octubre de 2026  
-**Alcance del sprint:** Transparencia técnica y gobernanza de software.
+**Alcance de la versión:** Creación de la biblioteca informativa sobre las tecnologías utilizadas y las leyes ambientales que fundamentan el proyecto.
 
-![Captura Portada ReCiclo v2.6](./capturas/v2.6.png)
+![Captura Tecnologías ReCiclo v2.6](./capturas/v2.6.png)
 
-- **Características técnicas y metodológicas:**
-  - Creación de `src/data/techCategories.ts` clasificando las 6 capas del proyecto: IA, Frontend, Backend, Datos, Mapas y Normativa.
-  - Fichas descriptivas de cada biblioteca con licencias de código abierto y propósito institucional.
+- **Avances tangibles:**
+  - Inventario transparente de las herramientas y bibliotecas de software que hacen funcionar ReCiclo.
+  - Sección dedicada a normas ambientales mexicanas de manejo integral de residuos sólidos.
+  - Información accesible para que cualquier estudiante o docente conozca el sustento del proyecto.
 - **Comando de prueba:**
   ```bash
   npm run v2.6
@@ -364,15 +370,16 @@ Este bloque registra el escalado y optimización de **ReCiclo Versión 2**, abar
 
 ---
 
-### Version 2.7: Historial Estudiantil y Métricas de Logro
+### Version 2.7: Tus medallas y racha de reciclaje
 **Fecha:** 22 de Octubre de 2026  
-**Alcance del sprint:** Reconocimiento de participación ambiental estudiantil.
+**Alcance de la versión:** Incorporación de un panel de logros para motivar la participación estudiantil continua.
 
-![Captura Portada ReCiclo v2.7](./capturas/v2.7.png)
+![Captura Perfil ReCiclo v2.7](./capturas/v2.7.png)
 
-- **Características técnicas y metodológicas:**
-  - Panel interactivo de estadísticas de reciclaje, rachas y medallas de logro en `Perfil.tsx`.
-  - Persistencia segura y sincronización automática en Cloud Firestore.
+- **Avances tangibles:**
+  - Contador de racha para registrar los días consecutivos que el estudiante participa reciclando.
+  - Medallas de reconocimiento por separar diferentes tipos de materiales.
+  - Historial seguro que se mantiene guardado aunque se cambie de computadora o celular.
 - **Comando de prueba:**
   ```bash
   npm run v2.7
@@ -380,15 +387,16 @@ Este bloque registra el escalado y optimización de **ReCiclo Versión 2**, abar
 
 ---
 
-### Version 2.8: El Museo de la Evolución y Marco Institucional
+### Version 2.8: Inicio más cómodo y compacto
 **Fecha:** 28 de Octubre de 2026  
-**Alcance del sprint:** Archivo interactivo con emulación de 20 versiones.
+**Alcance de la versión:** Rediseño de la portada principal con pestañas interactivas y presentación del Museo Histórico.
 
-![Captura Portada ReCiclo v2.8](./capturas/v2.8.png)
+![Captura Portada Compacta ReCiclo v2.8](./capturas/v2.8.png)
 
-- **Características técnicas y metodológicas:**
-  - Ruta `/museo` con emuladores sandbox de 20 versiones históricas (`v0.0` a `v1.9`).
-  - Pestañas `ProjectFrameworkTabs` y guía de contenedores en portada.
+- **Avances tangibles:**
+  - Portada compacta organizada con pestañas para explorar el proyecto sin desplazamientos eternos.
+  - Apertura del Museo Histórico con emuladores para probar interactivamente las versiones previas.
+  - Créditos y agradecimientos al equipo de trabajo estudiantil.
 - **Comando de prueba:**
   ```bash
   npm run v2.8
@@ -396,16 +404,16 @@ Este bloque registra el escalado y optimización de **ReCiclo Versión 2**, abar
 
 ---
 
-### Version 2.9: Consolidación de Producción y Resiliencia en Campus
+### Version 2.9: El archivo completo de ReCiclo
 **Fecha:** 28 de Octubre de 2026  
-**Alcance del sprint:** Suite completa de 30 versiones históricas y resiliencia en red.
+**Alcance de la versión:** Cierre de la segunda etapa con la colección completa de 30 versiones históricas y navegación estable en el campus.
 
-![Captura Portada ReCiclo v2.9](./capturas/v2.9.png)
+![Captura Museo Completo ReCiclo v2.9](./capturas/v2.9.png)
 
-- **Características técnicas y metodológicas:**
-  - Blindaje contra bloqueadores de red (GTM/Firebase) para evitar errores `ERR_BLOCKED_BY_CLIENT`.
-  - Integración completa de la Fase 2 en el Museo de Versiones (30 versiones históricas accesibles).
-  - Rendimiento adaptativo optimizado para conectividad en campus.
+- **Avances tangibles:**
+  - Galería integral de 30 versiones históricas catalogadas con capturas, emuladores interactivos y código fuente.
+  - Navegación protegida y estable en las conexiones universitarias.
+  - Plataforma consolidada y lista para su aprovechamiento por toda la comunidad del campus.
 - **Comando de prueba:**
   ```bash
   npm run v2.9

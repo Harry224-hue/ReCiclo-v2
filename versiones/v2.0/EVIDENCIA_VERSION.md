@@ -1,8 +1,8 @@
-# Evidencia v2.0: Arquitectura Web Pura e Integración Continua (CI)
+# Evidencia v2.0: Llega ReCiclo 2.0
 - **Fecha:** 18 de Octubre de 2026
 - **Commit de referencia:** `2bcb5af`
-- **Hito principal:** Arquitectura Web Pura e Integración Continua (CI)
-- **Descripción técnica:** Eliminación de dependencias y wrappers nativos de Electron y Android/Capacitor; pipeline automatizado con GitHub Actions (.github/workflows/build.yml); APIs web estándar y badge oficial v2.0 en navbar.
+- **Hito principal:** Llega ReCiclo 2.0
+- **Descripción:** Acceso web directo desde cualquier dispositivo sin requerir instalaciones pesadas, incorporando la portada oficial renovada y el distintivo visual v2.0 en la barra de navegación superior.
 - **Comando de prueba:**
   ```bash
   cd versiones/v2.0
