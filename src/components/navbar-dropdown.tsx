@@ -1,5 +1,5 @@
 import { useEffect, useRef, type ComponentType, type KeyboardEvent as ReactKeyboardEvent, type ReactNode } from "react";
-import { motion, useReducedMotion, type Transition } from "framer-motion";
+import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
 import { logout } from "../firebase";
@@ -46,6 +46,21 @@ const FOCUS_RING =
 const SECTION_LABEL =
     "text-xs font-bold text-zinc-900 dark:text-zinc-200 uppercase tracking-wider flex items-center gap-2";
 
+const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 8, scale: 0.98 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        transition: {
+            type: "spring",
+            stiffness: 480,
+            damping: 28,
+            mass: 0.5,
+        },
+    },
+};
+
 interface MenuItemProps {
     icon: ComponentType<{ size?: number; className?: string }>;
     iconClass?: string;
@@ -56,17 +71,28 @@ interface MenuItemProps {
 
 function MenuItem({ icon: Icon, iconClass = "", onClick, children, danger = false }: MenuItemProps) {
     const tone = danger
-        ? "text-red-600 dark:text-red-400 hover:bg-red-500/10 dark:hover:bg-red-500/20 font-bold"
+        ? "text-red-600 dark:text-red-400 hover:bg-red-500/15 dark:hover:bg-red-500/25 font-bold"
         : "text-zinc-900 dark:text-zinc-100 hover:bg-black/5 dark:hover:bg-white/10 font-semibold";
 
     return (
-        <button
+        <motion.button
             type="button"
+            variants={itemVariants}
+            whileHover={{ x: 4, scale: 1.01 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: "spring", stiffness: 500, damping: 28 }}
             onClick={onClick}
-            className={`flex items-center gap-3 w-full px-3 py-2.5 text-sm rounded-xl transition-colors text-left cursor-pointer active:scale-[0.98] ${tone} ${FOCUS_RING}`}
+            className={`group flex items-center gap-3 w-full px-3 py-2.5 text-sm rounded-xl text-left cursor-pointer transition-colors duration-150 ${tone} ${FOCUS_RING}`}
         >
-            <Icon size={16} className={danger ? "" : iconClass} /> {children}
-        </button>
+            <motion.span
+                whileHover={{ scale: 1.18, rotate: danger ? 12 : -8 }}
+                transition={{ type: "spring", stiffness: 500, damping: 22 }}
+                className="shrink-0 flex items-center justify-center transition-transform"
+            >
+                <Icon size={16} className={danger ? "" : iconClass} />
+            </motion.span>
+            <span className="flex-1 truncate">{children}</span>
+        </motion.button>
     );
 }
 
@@ -150,16 +176,34 @@ export function NavbarDropdown({
         items[next].focus();
     };
 
-    // Animación rápida y sin blur: entra con un resorte firme (~200 ms) y sale más rápido todavía.
-    // Animar `filter: blur()` sobre un panel que ya tiene backdrop-blur era lo más lento del original.
-    const hidden = reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.94, y: -6 };
-    const enter: Transition = reduceMotion
-        ? { duration: 0.1 }
-        : {
-            default: { type: "spring", stiffness: 520, damping: 36, mass: 0.7 },
-            opacity: { duration: 0.14, ease: "easeOut" },
-        };
-    const leave: Transition = { duration: reduceMotion ? 0.08 : 0.12, ease: "easeIn" };
+    const containerVariants: Variants = {
+        hidden: reduceMotion
+            ? { opacity: 0 }
+            : { opacity: 0, scale: 0.93, y: -10 },
+        visible: {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            transition: reduceMotion
+                ? { duration: 0.1 }
+                : {
+                    type: "spring",
+                    stiffness: 460,
+                    damping: 30,
+                    mass: 0.6,
+                    staggerChildren: 0.035,
+                    delayChildren: 0.015,
+                },
+        },
+        exit: reduceMotion
+            ? { opacity: 0, transition: { duration: 0.08 } }
+            : {
+                opacity: 0,
+                scale: 0.95,
+                y: -6,
+                transition: { duration: 0.15, ease: [0.32, 0, 0.67, 0] as const },
+            },
+    };
 
     return (
         <motion.div
@@ -168,17 +212,25 @@ export function NavbarDropdown({
             aria-label="Menú de usuario"
             tabIndex={-1}
             onKeyDown={onKeyDown}
-            initial={hidden}
-            animate={{ opacity: 1, scale: 1, y: 0, transition: enter }}
-            exit={{ ...hidden, ...(reduceMotion ? {} : { scale: 0.97, y: -2 }), transition: leave }}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            variants={containerVariants}
             style={{ transformOrigin: "top right", willChange: "transform, opacity" }}
             className={`absolute top-[calc(100%+16px)] right-0 w-[265px] max-w-[calc(100vw-2rem)] rounded-[1.5rem] p-2 overflow-hidden z-50 outline-none ${getThemeClasses("dropdown")}`}
         >
             <div className="flex flex-col">
                 {/* 1. Usuario */}
                 {isLoggedIn ? (
-                    <div className="px-3 py-3 border-b border-black/5 dark:border-white/10 mb-2 flex items-center gap-3">
-                        <div className="size-10 rounded-full overflow-hidden bg-black/5 dark:bg-white/10 shrink-0 border border-black/10 dark:border-white/10 shadow-sm flex items-center justify-center">
+                    <motion.div
+                        variants={itemVariants}
+                        className="px-3 py-3 border-b border-black/5 dark:border-white/10 mb-2 flex items-center gap-3"
+                    >
+                        <motion.div
+                            whileHover={{ scale: 1.08, rotate: 3 }}
+                            transition={{ type: "spring", stiffness: 450, damping: 20 }}
+                            className="size-10 rounded-full overflow-hidden bg-black/5 dark:bg-white/10 shrink-0 border border-black/10 dark:border-white/10 shadow-sm flex items-center justify-center cursor-pointer"
+                        >
                             {user.photoURL ? (
                                 <img src={user.photoURL} alt={user.name} className="w-full h-full object-cover" />
                             ) : (
@@ -186,7 +238,7 @@ export function NavbarDropdown({
                                     {(user.name || "U").charAt(0).toUpperCase()}
                                 </span>
                             )}
-                        </div>
+                        </motion.div>
                         <div className="min-w-0 flex-1">
                             <p className="text-sm font-bold text-zinc-950 dark:text-white truncate">
                                 Hola,{" "}
@@ -194,9 +246,9 @@ export function NavbarDropdown({
                             </p>
                             <p className="text-xs text-zinc-700 dark:text-zinc-300 font-medium truncate">{user.email}</p>
                         </div>
-                    </div>
+                    </motion.div>
                 ) : (
-                    <div className="flex flex-col gap-1 mb-2 border-b border-black/5 dark:border-white/10 pb-2">
+                    <motion.div variants={itemVariants} className="flex flex-col gap-1 mb-2 border-b border-black/5 dark:border-white/10 pb-2">
                         <MenuItem
                             icon={LogIn}
                             iconClass={accent.text}
@@ -221,14 +273,17 @@ export function NavbarDropdown({
                         >
                             Crear cuenta
                         </MenuItem>
-                    </div>
+                    </motion.div>
                 )}
 
                 {/* 2. Ajustes rápidos */}
-                <div className="px-2 mb-2 flex flex-col gap-1.5">
+                <motion.div variants={itemVariants} className="px-2 mb-2 flex flex-col gap-1.5">
                     {/* Toda la fila es el interruptor: objetivo táctil grande y un solo elemento enfocable */}
-                    <button
+                    <motion.button
                         type="button"
+                        whileHover={{ scale: 1.01 }}
+                        whileTap={{ scale: 0.98 }}
+                        transition={{ type: "spring", stiffness: 500, damping: 28 }}
                         role="switch"
                         aria-checked={isDarkMode}
                         onClick={toggleDarkMode}
@@ -240,7 +295,16 @@ export function NavbarDropdown({
                         className={`flex items-center justify-between w-full px-2 py-2 rounded-xl cursor-pointer transition-colors hover:bg-black/5 dark:hover:bg-white/10 ${FOCUS_RING}`}
                     >
                         <span className={SECTION_LABEL}>
-                            {isDarkMode ? <Moon size={15} className={accent.text} /> : <Sun size={15} className={accent.text} />} Tema
+                            <motion.span
+                                key={isDarkMode ? "moon" : "sun"}
+                                initial={{ rotate: -90, scale: 0.5, opacity: 0 }}
+                                animate={{ rotate: 0, scale: 1, opacity: 1 }}
+                                transition={{ type: "spring", stiffness: 500, damping: 25 }}
+                                className="inline-flex"
+                            >
+                                {isDarkMode ? <Moon size={15} className={accent.text} /> : <Sun size={15} className={accent.text} />}
+                            </motion.span>
+                            <span>Tema</span>
                             {(colorSchemeMode === "system" || colorSchemeMode === "schedule") && (
                                 <span className="normal-case font-medium text-zinc-600 dark:text-zinc-400">
                                     · Automático
@@ -257,14 +321,14 @@ export function NavbarDropdown({
                                 initial={false}
                                 className="block w-4 h-4 bg-white rounded-full shadow-md"
                                 animate={{ x: isDarkMode ? 20 : 0 }}
-                                transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 600, damping: 34 }}
+                                transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 650, damping: 32 }}
                             />
                         </span>
-                    </button>
-                </div>
+                    </motion.button>
+                </motion.div>
 
                 {/* 3. Configuración detallada y cierre de sesión */}
-                <div className="border-t border-black/5 dark:border-white/10 pt-2 mt-1">
+                <motion.div variants={itemVariants} className="border-t border-black/5 dark:border-white/10 pt-2 mt-1 flex flex-col gap-0.5">
                     <MenuItem
                         icon={User}
                         iconClass={accent.text}
@@ -315,8 +379,9 @@ export function NavbarDropdown({
                             Cerrar sesión
                         </MenuItem>
                     )}
-                </div>
+                </motion.div>
             </div>
         </motion.div>
     );
 }
+

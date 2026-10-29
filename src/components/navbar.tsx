@@ -373,8 +373,9 @@ export function Navbar() {
                     {/* Controles de la derecha en PC: Menú de usuario con Configuración integrada */}
                     <div className="flex items-center justify-end gap-2 relative" ref={desktopRef}>
                         <motion.button
-                            whileHover={{ scale: 1.04 }}
-                            whileTap={{ scale: 0.96 }}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            transition={{ type: "spring", stiffness: 500, damping: 25 }}
                             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                             aria-label="Abrir menú de usuario"
                             aria-expanded={isDropdownOpen}
@@ -387,8 +388,18 @@ export function Navbar() {
                                     : "bg-black/[0.04] dark:bg-white/10 backdrop-blur-md border border-black/[0.06] dark:border-transparent shadow-sm hover:bg-black/[0.07] dark:hover:bg-white/15"
                             }`}
                         >
-                            <Menu size={18} className={`transition-colors duration-200 ${isOverHero ? "text-white/90" : isDarkMode ? "text-zinc-300" : "text-zinc-700"}`} />
-                            <div className="w-8 h-8 rounded-full overflow-hidden flex items-center justify-center bg-black/5 dark:bg-white/10">
+                            <motion.span
+                                animate={{ rotate: isDropdownOpen ? 90 : 0 }}
+                                transition={{ type: "spring", stiffness: 450, damping: 25 }}
+                                className="flex items-center justify-center"
+                            >
+                                <Menu size={18} className={`transition-colors duration-200 ${isOverHero ? "text-white/90" : isDarkMode ? "text-zinc-300" : "text-zinc-700"}`} />
+                            </motion.span>
+                            <motion.div
+                                whileHover={{ scale: 1.08 }}
+                                transition={{ type: "spring", stiffness: 500, damping: 25 }}
+                                className="w-8 h-8 rounded-full overflow-hidden flex items-center justify-center bg-black/5 dark:bg-white/10"
+                            >
                                 {isLoggedIn ? (
                                     userPhoto ? (
                                         <img src={userPhoto} alt="Foto de perfil" className="w-full h-full object-cover" />
@@ -400,7 +411,7 @@ export function Navbar() {
                                 ) : (
                                     <User size={16} className={`transition-colors duration-200 ${isOverHero ? "text-white" : isDarkMode ? "text-zinc-200" : "text-zinc-700"}`} />
                                 )}
-                            </div>
+                            </motion.div>
                         </motion.button>
 
                         <AnimatePresence>
