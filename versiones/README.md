@@ -47,7 +47,7 @@ Este directorio reúne el código fuente, la documentación técnica y las evide
 
 | Versión | Fecha | Hito Principal | Enlace |
 | :---: | :---: | :--- | :---: |
-| **v2.0** | 18 de octubre | Llega ReCiclo 2.0: renovación con mejoras en mapa, escáner y perfil | [Evidencia](./v2.0/EVIDENCIA_VERSION.md) |
+| **v2.0** | 18 de octubre | Llega ReCiclo 2.0: portada renovada con distintivo oficial v2.0 | [Evidencia](./v2.0/EVIDENCIA_VERSION.md) |
 | **v2.1** | 18 de octubre | Identificación de residuos más rápida con inteligencia artificial | [Evidencia](./v2.1/EVIDENCIA_VERSION.md) |
 | **v2.2** | 21 de octubre | Acceso y registro seguro con matrícula estudiantil de 8 dígitos | [Evidencia](./v2.2/EVIDENCIA_VERSION.md) |
 | **v2.3** | 21 de octubre | Barra flotante de avisos rápidos y selector de temas y colores | [Evidencia](./v2.3/EVIDENCIA_VERSION.md) |

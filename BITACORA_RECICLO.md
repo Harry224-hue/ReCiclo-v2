@@ -231,7 +231,7 @@ En esta etapa, el equipo de estudiantes (García Montañez Ulises Jasen, Medina 
 
 ### Version 2.0 (18 de Octubre)
 - **Hito:** Llega ReCiclo 2.0.
-- **Implementación:** Renovación general de ReCiclo con distintivo oficial v2.0 en el menú de navegación, preparando las bases para las mejoras en el mapa del campus, el escáner y el perfil estudiantil.
+- **Implementación:** Portada de bienvenida renovada con distintivo visual oficial v2.0 en el menú de navegación y diseño optimizado para computadoras y celulares.
 
 ### Version 2.1 (18 de Octubre)
 - **Hito:** Identificación de residuos más rápida.

@@ -236,7 +236,7 @@ Este bloque registra el avance y maduración de **ReCiclo Versión 2**, mostrand
 
 | Versión | Fecha | Hito y Alcance de la Versión |
 | :---: | :---: | :--- |
-| **v2.0** | 18 de Octubre | **Llega ReCiclo 2.0:** Renovación general con distintivo oficial v2.0, base para mejoras en mapa, escáner y perfil. |
+| **v2.0** | 18 de Octubre | **Llega ReCiclo 2.0:** Portada de bienvenida renovada con distintivo oficial v2.0 y navegación ágil. |
 | **v2.1** | 18 de Octubre | **Identificación de residuos más rápida:** Clasificación ágil con inteligencia artificial y subida directa de fotos. |
 | **v2.2** | 21 de Octubre | **Acceso con matrícula estudiantil:** Registro e inicio de sesión seguro con número de control de 8 dígitos del IT Morelia. |
 | **v2.3** | 21 de Octubre | **Isla de avisos y rueda de colores:** Barra flotante de notificaciones superiores y selector de temas y colores. |
@@ -253,14 +253,14 @@ Este bloque registra el avance y maduración de **ReCiclo Versión 2**, mostrand
 
 ### Version 2.0: Llega ReCiclo 2.0
 **Fecha:** 18 de Octubre de 2026  
-**Alcance de la versión:** Inicio de la versión 2.0 con una renovación general de la plataforma, preparando las mejoras en el mapa del campus, el escáner y el perfil de usuario.
+**Alcance de la versión:** Inicio de la versión 2.0 con una portada oficial renovada, distintivo visual oficial y navegación ágil para computadoras y celulares.
 
 ![Captura Portada ReCiclo v2.0](./capturas/v2.0.png)
 
 - **Avances tangibles:**
   - Distintivo visual oficial `v2.0` en la barra de navegación superior.
-  - Renovación de la base de código para incorporar mejoras continuas en mapa, escáner y perfil.
-  - Portada renovada con diseño moderno y adaptado a diferentes tamaños de pantalla.
+  - Portada renovada con nuevo diseño visual y secciones introductorias.
+  - Navegación general más rápida y cómoda entre páginas.
 - **Comando de prueba:**
   ```bash
   npm run v2.0
