@@ -44,11 +44,12 @@ const presetAccents: {
     name: string;
     hex: string;
 }[] = [
-    { id: "emerald", bgClass: "bg-emerald-500", name: "Esmeralda", hex: "#10b981" },
-    { id: "blue", bgClass: "bg-sky-500", name: "Zafiro", hex: "#0284c7" },
-    { id: "amber", bgClass: "bg-amber-500", name: "Ámbar", hex: "#d97706" },
-    { id: "purple", bgClass: "bg-purple-500", name: "Amatista", hex: "#9333ea" },
-    { id: "rose", bgClass: "bg-rose-500", name: "Coral", hex: "#e11d48" },
+    { id: "obsidian", bgClass: "bg-zinc-800 dark:bg-zinc-200", name: "Obsidiana", hex: "#27272a" },
+    { id: "blue", bgClass: "bg-sky-600", name: "Zafiro", hex: "#0284c7" },
+    { id: "emerald", bgClass: "bg-teal-600", name: "Salvia Mineral", hex: "#0d9488" },
+    { id: "amber", bgClass: "bg-amber-600", name: "Ámbar", hex: "#d97706" },
+    { id: "purple", bgClass: "bg-violet-600", name: "Amatista", hex: "#7c3aed" },
+    { id: "rose", bgClass: "bg-rose-600", name: "Coral", hex: "#e11d48" },
 ];
 
 const colorSchemeOptions: {
@@ -354,14 +355,21 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                                                     {presetAccents.map((color) => (
                                                         <button
                                                             key={color.id}
-                                                            onClick={() => setAccentColor(color.id)}
-                                                            className={`relative flex items-center gap-2 px-3 py-2 rounded-xl border text-xs transition-all cursor-pointer ${
+                                                            onClick={() => {
+                                                                setAccentColor(color.id);
+                                                                setHexInputText(color.hex);
+                                                                setHsva(hexToHsva(color.hex));
+                                                            }}
+                                                            className={`relative flex items-center gap-2 px-3.5 py-2 rounded-full border text-xs transition-all cursor-pointer ${
                                                                 accentColor === color.id
-                                                                    ? "border-zinc-400 dark:border-zinc-600 bg-white dark:bg-zinc-800 shadow-sm font-bold text-zinc-950 dark:text-white"
-                                                                    : "border-zinc-300 dark:border-zinc-700 bg-white/80 dark:bg-zinc-800/50 text-zinc-800 dark:text-zinc-300 hover:bg-white dark:hover:bg-zinc-800 font-medium"
+                                                                    ? "border-zinc-400 dark:border-zinc-500 bg-white dark:bg-zinc-800 shadow-sm font-bold text-zinc-950 dark:text-white"
+                                                                    : "border-zinc-300/80 dark:border-zinc-700 bg-white/80 dark:bg-zinc-800/50 text-zinc-800 dark:text-zinc-300 hover:bg-white dark:hover:bg-zinc-800 font-medium"
                                                             }`}
                                                         >
-                                                            <span className={`size-4 rounded-full ${color.bgClass} shadow-xs shrink-0`} />
+                                                            <span
+                                                                className="size-4 rounded-full shadow-xs shrink-0 border border-black/10 dark:border-white/15"
+                                                                style={{ backgroundColor: color.hex }}
+                                                            />
                                                             <span>{color.name}</span>
                                                             {accentColor === color.id && (
                                                                 <Check size={13} className="text-zinc-900 dark:text-zinc-100" strokeWidth={3} />
@@ -371,14 +379,14 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
 
                                                     <button
                                                         onClick={() => setAccentColor("custom")}
-                                                        className={`relative flex items-center gap-2 px-3 py-2 rounded-xl border text-xs transition-all cursor-pointer ${
+                                                        className={`relative flex items-center gap-2 px-3.5 py-2 rounded-full border text-xs transition-all cursor-pointer ${
                                                             accentColor === "custom"
-                                                                ? "border-zinc-400 dark:border-zinc-600 bg-white dark:bg-zinc-800 shadow-sm font-bold text-zinc-950 dark:text-white"
-                                                                : "border-zinc-300 dark:border-zinc-700 bg-white/80 dark:bg-zinc-800/50 text-zinc-800 dark:text-zinc-300 hover:bg-white dark:hover:bg-zinc-800 font-medium"
+                                                                ? "border-zinc-400 dark:border-zinc-500 bg-white dark:bg-zinc-800 shadow-sm font-bold text-zinc-950 dark:text-white"
+                                                                : "border-zinc-300/80 dark:border-zinc-700 bg-white/80 dark:bg-zinc-800/50 text-zinc-800 dark:text-zinc-300 hover:bg-white dark:hover:bg-zinc-800 font-medium"
                                                         }`}
                                                     >
                                                         <span
-                                                            className="size-4 rounded-full shadow-xs shrink-0"
+                                                            className="size-4 rounded-full shadow-xs shrink-0 border border-black/10 dark:border-white/15"
                                                             style={{ backgroundColor: customHex }}
                                                         />
                                                         <span>Personalizado</span>

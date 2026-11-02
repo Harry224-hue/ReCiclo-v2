@@ -752,7 +752,7 @@ export default function Escanear() {
                     <button
                       type="button"
                       onClick={() => startLiveCamera(facingMode)}
-                      className="min-h-[46px] w-full px-5 text-xs sm:text-sm app-btn-pearl"
+                      className="min-h-[46px] w-full px-5 text-xs sm:text-sm app-btn-primary"
                     >
                       <CameraIcon size={15} />
                       Activar cámara
@@ -881,7 +881,7 @@ export default function Escanear() {
                     <button
                       type="submit"
                       disabled={!manualBarcode.trim() || isScanning}
-                      className="min-h-[36px] shrink-0 px-4 py-1.5 text-xs app-btn-pearl"
+                      className="min-h-[36px] shrink-0 px-4 py-1.5 text-xs app-btn-primary"
                     >
                       <Search size={13} />
                       <span>Buscar</span>
@@ -897,7 +897,7 @@ export default function Escanear() {
                           setBarcodeError(null);
                           setScanMode("photo");
                         }}
-                        className="px-3 py-1 text-[10px] app-btn-pearl"
+                        className="px-3 py-1 text-[10px] app-btn-primary"
                       >
                         Usar Foto con IA
                       </button>
@@ -946,7 +946,7 @@ export default function Escanear() {
                   }}
                   className={`flex min-h-[34px] items-center gap-1.5 rounded-full px-4 py-1.5 text-[11px] font-semibold transition-all duration-200 active:scale-[0.97] cursor-pointer ${
                     scanMode === "photo"
-                      ? "bg-white text-zinc-950 shadow-[0_2px_12px_rgba(255,255,255,0.22),0_1px_3px_rgba(0,0,0,0.35)]"
+                      ? "app-btn-primary"
                       : "text-white/75 hover:text-white"
                   }`}
                 >
@@ -964,7 +964,7 @@ export default function Escanear() {
                   }}
                   className={`flex min-h-[34px] items-center gap-1.5 rounded-full px-4 py-1.5 text-[11px] font-semibold transition-all duration-200 active:scale-[0.97] cursor-pointer ${
                     scanMode === "barcode"
-                      ? "bg-white text-zinc-950 shadow-[0_2px_12px_rgba(255,255,255,0.22),0_1px_3px_rgba(0,0,0,0.35)]"
+                      ? "app-btn-primary"
                       : "text-white/75 hover:text-white"
                   }`}
                 >

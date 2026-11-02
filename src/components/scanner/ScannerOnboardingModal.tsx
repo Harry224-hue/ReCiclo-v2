@@ -312,7 +312,7 @@ export function ScannerOnboardingModal({ open, onClose }: ScannerOnboardingModal
                   <button
                     type="button"
                     onClick={nextSlide}
-                    className="min-h-[40px] px-4 text-xs app-btn-pearl"
+                    className="min-h-[40px] px-4 text-xs app-btn-primary"
                   >
                     <span>
                       {index < SLIDES.length - 1 ? "Siguiente" : "¡Entendido, escanear!"}

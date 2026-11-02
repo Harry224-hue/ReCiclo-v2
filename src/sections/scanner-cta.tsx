@@ -219,7 +219,7 @@ export function ScannerCTA() {
                     <Link
                       to={card.link}
                       onClick={(e) => e.stopPropagation()}
-                      className="min-h-[46px] text-xs sm:text-sm px-6 sm:px-7 py-2.5 group/btn app-btn-pearl"
+                      className={`min-h-[46px] text-xs sm:text-sm px-6 sm:px-7 py-2.5 group/btn ${accent.btn}`}
                     >
                       <span>{card.ctaText}</span>
                       <ArrowRight size={15} className="transition-transform duration-200 group-hover/btn:translate-x-1" />

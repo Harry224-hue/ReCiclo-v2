@@ -3,7 +3,7 @@ import { useAdaptivePerformance, type PerfTier, type PerfSource } from "../hooks
 
 export type GlassTheme = "solid" | "light" | "heavy";
 export type VisualMode = "essential" | "immersive";
-export type AccentColor = "emerald" | "blue" | "purple" | "rose" | "amber" | "custom";
+export type AccentColor = "obsidian" | "emerald" | "blue" | "purple" | "rose" | "amber" | "custom";
 export type ColorSchemeMode = "light" | "dark" | "system" | "schedule";
 type UIElement = "navbar" | "dropdown" | "dock";
 
@@ -29,29 +29,42 @@ export function createCustomTokens(hex: string): AccentTokens {
         text: "text-[var(--accent-color)]",
         btn: "app-btn-primary",
         btnOutline: "app-btn-secondary",
-        badge: "bg-zinc-100 dark:bg-white/10 text-zinc-900 dark:text-zinc-100 border border-black/10 dark:border-white/15",
-        ring: "focus-visible:ring-zinc-900 dark:focus-visible:ring-white",
+        badge: "app-badge-accent",
+        ring: "focus-visible:ring-[var(--accent-color)]",
         border: "border-[var(--accent-color)]",
         glow: "bg-[var(--accent-color)]/15",
-        gradient: "from-zinc-900 to-zinc-700 dark:from-white dark:to-zinc-300",
+        gradient: "from-[var(--accent-color)] to-zinc-800 dark:from-[var(--accent-color)] dark:to-zinc-200",
         hex: hex,
     };
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const ACCENT_TOKENS: Record<AccentColor, AccentTokens> = {
-    emerald: {
-        id: "emerald",
-        name: "Obsidiana Editorial",
+    obsidian: {
+        id: "obsidian",
+        name: "Obsidiana",
         text: "text-zinc-900 dark:text-zinc-100",
         btn: "app-btn-primary",
         btnOutline: "app-btn-secondary",
-        badge: "bg-zinc-100 dark:bg-white/10 text-zinc-800 dark:text-zinc-200 border border-zinc-200/80 dark:border-white/15",
+        badge: "app-badge-accent",
         ring: "focus-visible:ring-zinc-900 dark:focus-visible:ring-white",
         border: "border-zinc-900 dark:border-white",
         glow: "bg-zinc-500/10 dark:bg-white/10",
         gradient: "from-zinc-900 via-zinc-700 to-zinc-900 dark:from-white dark:via-zinc-200 dark:to-zinc-400",
-        hex: "#18181b",
+        hex: "#27272a",
+    },
+    emerald: {
+        id: "emerald",
+        name: "Salvia Mineral",
+        text: "text-teal-700 dark:text-teal-300",
+        btn: "app-btn-primary",
+        btnOutline: "app-btn-secondary",
+        badge: "app-badge-accent",
+        ring: "focus-visible:ring-teal-600",
+        border: "border-teal-600",
+        glow: "bg-teal-500/15 dark:bg-teal-500/20",
+        gradient: "from-teal-600 to-emerald-700 dark:from-teal-400 dark:to-emerald-300",
+        hex: "#0d9488",
     },
     blue: {
         id: "blue",
@@ -59,7 +72,7 @@ export const ACCENT_TOKENS: Record<AccentColor, AccentTokens> = {
         text: "text-sky-600 dark:text-sky-400",
         btn: "app-btn-primary",
         btnOutline: "app-btn-secondary",
-        badge: "bg-sky-50 dark:bg-sky-950/60 text-sky-800 dark:text-sky-300 border-sky-300 dark:border-sky-800",
+        badge: "app-badge-accent",
         ring: "focus-visible:ring-sky-500",
         border: "border-sky-500",
         glow: "bg-sky-500/15 dark:bg-sky-500/20",
@@ -72,7 +85,7 @@ export const ACCENT_TOKENS: Record<AccentColor, AccentTokens> = {
         text: "text-amber-600 dark:text-amber-400",
         btn: "app-btn-primary",
         btnOutline: "app-btn-secondary",
-        badge: "bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border-amber-300 dark:border-amber-800",
+        badge: "app-badge-accent",
         ring: "focus-visible:ring-amber-500",
         border: "border-amber-500",
         glow: "bg-amber-500/15 dark:bg-amber-500/20",
@@ -85,12 +98,12 @@ export const ACCENT_TOKENS: Record<AccentColor, AccentTokens> = {
         text: "text-purple-600 dark:text-purple-400",
         btn: "app-btn-primary",
         btnOutline: "app-btn-secondary",
-        badge: "bg-purple-50 dark:bg-purple-950/60 text-purple-800 dark:text-purple-300 border-purple-300 dark:border-purple-800",
+        badge: "app-badge-accent",
         ring: "focus-visible:ring-purple-500",
         border: "border-purple-500",
         glow: "bg-purple-500/15 dark:bg-purple-500/20",
         gradient: "from-purple-500 to-fuchsia-600 dark:from-purple-400 dark:to-fuchsia-300",
-        hex: "#9333ea",
+        hex: "#7c3aed",
     },
     rose: {
         id: "rose",
@@ -98,14 +111,14 @@ export const ACCENT_TOKENS: Record<AccentColor, AccentTokens> = {
         text: "text-rose-600 dark:text-rose-400",
         btn: "app-btn-primary",
         btnOutline: "app-btn-secondary",
-        badge: "bg-rose-50 dark:bg-rose-950/60 text-rose-800 dark:text-rose-300 border-rose-300 dark:border-rose-800",
+        badge: "app-badge-accent",
         ring: "focus-visible:ring-rose-500",
         border: "border-rose-500",
         glow: "bg-rose-500/15 dark:bg-rose-500/20",
         gradient: "from-rose-500 to-pink-600 dark:from-rose-400 dark:to-pink-300",
         hex: "#e11d48",
     },
-    custom: createCustomTokens("#18181b"),
+    custom: createCustomTokens("#0284c7"),
 };
 
 // Franja fija por simplicidad
@@ -169,11 +182,20 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     });
 
     const [accentColor, setAccentColor] = useState<AccentColor>(() => {
-        return (localStorage.getItem("accentColor") as AccentColor) || "emerald";
+        const migratedAccent = localStorage.getItem("reciclo_accent_v2_editorial");
+        if (!migratedAccent) {
+            localStorage.setItem("reciclo_accent_v2_editorial", "true");
+            const current = localStorage.getItem("accentColor");
+            if (!current || current === "emerald") {
+                localStorage.setItem("accentColor", "obsidian");
+                return "obsidian";
+            }
+        }
+        return (localStorage.getItem("accentColor") as AccentColor) || "obsidian";
     });
 
     const [customHex, setCustomHexState] = useState<string>(() => {
-        return localStorage.getItem("reciclo_custom_hex") || "#10b981";
+        return localStorage.getItem("reciclo_custom_hex") || "#0284c7";
     });
 
     const setCustomHex = (hex: string) => {
@@ -215,7 +237,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const activeAccent: AccentTokens =
         accentColor === "custom"
             ? createCustomTokens(customHex)
-            : ACCENT_TOKENS[accentColor] || ACCENT_TOKENS.emerald;
+            : ACCENT_TOKENS[accentColor] || ACCENT_TOKENS.obsidian;
 
     // Inyectar variables CSS globales en :root para reactividad instantánea
     useEffect(() => {
@@ -350,7 +372,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     // de rendimiento y al sistema operativo, en vez de forzar una elección fija.
     const resetTheme = () => {
         setGlassTheme("heavy");
-        setAccentColor("emerald");
+        setAccentColor("obsidian");
         setColorSchemeMode("system");
         setHeroVideo(`${CLOUDINARY_HERO_BASE}/video-hero.mp4`);
         setNotchShortcuts(DEFAULT_NOTCH_SHORTCUTS);

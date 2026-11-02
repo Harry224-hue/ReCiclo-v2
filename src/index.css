@@ -101,97 +101,125 @@ p, body {
   pointer-events: none;
 }
 
-/* Primary: Editorial High-Contrast (Obsidian in Light / Luminous Pearl in Dark) */
+/* Primary: Apple Liquid Glass & Specular Capsule — 100% personalizable en vivo con var(--accent-color) */
 .app-btn-primary {
-  background: linear-gradient(180deg, #27272a 0%, #09090b 100%);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent-color, #18181b) 80%, #ffffff 20%) 0%,
+    var(--accent-color, #18181b) 52%,
+    color-mix(in srgb, var(--accent-color, #18181b) 82%, #09090b 18%) 100%
+  );
   color: #ffffff !important;
-  border: 1px solid rgba(24, 24, 27, 0.9);
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.22),
-              0 6px 16px -3px rgba(9, 9, 11, 0.26),
-              0 2px 4px 0 rgba(9, 9, 11, 0.12);
+  border: 1px solid color-mix(in srgb, var(--accent-color, #18181b) 68%, #ffffff 32%);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.42),
+              inset 0 -1px 0 0 rgba(0, 0, 0, 0.24),
+              0 7px 20px -4px color-mix(in srgb, var(--accent-color, #18181b) 46%, transparent),
+              0 2px 6px 0 rgba(9, 9, 11, 0.2);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.18);
 }
 .app-btn-primary:hover {
-  background: linear-gradient(180deg, #3f3f46 0%, #18181b 100%);
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.28),
-              0 8px 22px -3px rgba(9, 9, 11, 0.34),
-              0 2px 6px 0 rgba(9, 9, 11, 0.16);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent-color, #18181b) 72%, #ffffff 28%) 0%,
+    color-mix(in srgb, var(--accent-color, #18181b) 92%, #ffffff 8%) 52%,
+    color-mix(in srgb, var(--accent-color, #18181b) 86%, #09090b 14%) 100%
+  );
+  border-color: color-mix(in srgb, var(--accent-color, #18181b) 55%, #ffffff 45%);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.52),
+              inset 0 -1px 0 0 rgba(0, 0, 0, 0.2),
+              0 10px 26px -4px color-mix(in srgb, var(--accent-color, #18181b) 60%, transparent),
+              0 3px 8px 0 rgba(9, 9, 11, 0.24);
 }
 .dark .app-btn-primary {
-  background: linear-gradient(180deg, #ffffff 0%, #e4e4e7 100%);
-  color: #09090b !important;
-  border: 1px solid rgba(255, 255, 255, 0.95);
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 1),
-              0 6px 20px -3px rgba(255, 255, 255, 0.16),
-              0 2px 6px 0 rgba(0, 0, 0, 0.45);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent-color, #27272a) 76%, #ffffff 24%) 0%,
+    color-mix(in srgb, var(--accent-color, #27272a) 92%, #ffffff 8%) 52%,
+    color-mix(in srgb, var(--accent-color, #27272a) 84%, #09090b 16%) 100%
+  );
+  color: #ffffff !important;
+  border: 1px solid color-mix(in srgb, var(--accent-color, #27272a) 60%, #ffffff 40%);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.45),
+              inset 0 -1px 0 0 rgba(0, 0, 0, 0.28),
+              0 8px 24px -4px color-mix(in srgb, var(--accent-color, #27272a) 55%, transparent),
+              0 2px 8px 0 rgba(0, 0, 0, 0.45);
 }
 .dark .app-btn-primary:hover {
-  background: linear-gradient(180deg, #ffffff 0%, #f4f4f5 100%);
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 1),
-              0 8px 26px -3px rgba(255, 255, 255, 0.24),
-              0 2px 8px 0 rgba(0, 0, 0, 0.5);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent-color, #27272a) 68%, #ffffff 32%) 0%,
+    color-mix(in srgb, var(--accent-color, #27272a) 88%, #ffffff 12%) 52%,
+    color-mix(in srgb, var(--accent-color, #27272a) 88%, #09090b 12%) 100%
+  );
+  border-color: color-mix(in srgb, var(--accent-color, #27272a) 50%, #ffffff 50%);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.55),
+              inset 0 -1px 0 0 rgba(0, 0, 0, 0.22),
+              0 12px 30px -4px color-mix(in srgb, var(--accent-color, #27272a) 68%, transparent),
+              0 3px 10px 0 rgba(0, 0, 0, 0.5);
 }
 
-/* Pearl: Always Luminous White Capsule (for Dark Hero, Camera HUD, Dark Modals) */
+/* Pearl: Luminous White Capsule con reflejo de acento personalizable */
 .app-btn-pearl {
   background: linear-gradient(180deg, #ffffff 0%, #e4e4e7 100%);
   color: #09090b !important;
   border: 1px solid rgba(255, 255, 255, 0.95);
   box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 1),
-              0 8px 24px -4px rgba(255, 255, 255, 0.22),
+              0 8px 24px -4px color-mix(in srgb, var(--accent-color, #ffffff) 38%, rgba(255, 255, 255, 0.22)),
               0 2px 8px 0 rgba(0, 0, 0, 0.45);
 }
 .app-btn-pearl:hover {
   background: linear-gradient(180deg, #ffffff 0%, #f4f4f5 100%);
+  border-color: color-mix(in srgb, var(--accent-color, #ffffff) 45%, #ffffff 55%);
   box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 1),
-              0 10px 28px -4px rgba(255, 255, 255, 0.3),
+              0 10px 28px -4px color-mix(in srgb, var(--accent-color, #ffffff) 52%, rgba(255, 255, 255, 0.3)),
               0 3px 10px 0 rgba(0, 0, 0, 0.5);
 }
 
-/* Secondary: Apple Frosted Glass with Specular Border */
+/* Secondary: Apple Frosted Glass con tinte sutil de acento al interactuar */
 .app-btn-secondary {
-  background-color: rgba(255, 255, 255, 0.86);
+  background-color: rgba(255, 255, 255, 0.88);
   color: #18181b;
-  border: 1px solid rgba(24, 24, 27, 0.1);
+  border: 1px solid color-mix(in srgb, var(--accent-color, #18181b) 16%, rgba(24, 24, 27, 0.1));
   backdrop-filter: blur(16px) saturate(160%);
   -webkit-backdrop-filter: blur(16px) saturate(160%);
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.9),
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.92),
               0 2px 8px -2px rgba(0, 0, 0, 0.06);
 }
 .app-btn-secondary:hover {
-  background-color: #f4f4f5;
-  border-color: rgba(24, 24, 27, 0.18);
+  background-color: color-mix(in srgb, var(--accent-color, #18181b) 7%, #ffffff 93%);
+  border-color: color-mix(in srgb, var(--accent-color, #18181b) 34%, rgba(24, 24, 27, 0.15));
   box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 1),
-              0 4px 12px -2px rgba(0, 0, 0, 0.1);
+              0 4px 14px -2px color-mix(in srgb, var(--accent-color, #18181b) 16%, rgba(0, 0, 0, 0.08));
 }
 .dark .app-btn-secondary {
-  background-color: rgba(39, 39, 42, 0.72);
+  background-color: rgba(39, 39, 42, 0.74);
   color: #f4f4f5;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid color-mix(in srgb, var(--accent-color, #ffffff) 22%, rgba(255, 255, 255, 0.12));
   box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.12),
               0 4px 14px -2px rgba(0, 0, 0, 0.45);
 }
 .dark .app-btn-secondary:hover {
-  background-color: rgba(63, 63, 70, 0.85);
-  border-color: rgba(255, 255, 255, 0.22);
+  background-color: color-mix(in srgb, var(--accent-color, #ffffff) 16%, rgba(63, 63, 70, 0.88));
+  border-color: color-mix(in srgb, var(--accent-color, #ffffff) 42%, rgba(255, 255, 255, 0.22));
 }
 
-/* Outline: Crisp Minimal Capsule */
+/* Outline: Crisp Minimal Capsule con realce de acento */
 .app-btn-outline {
   background-color: transparent;
   color: #18181b;
   border: 1px solid rgba(24, 24, 27, 0.16);
 }
 .app-btn-outline:hover {
-  background-color: rgba(24, 24, 27, 0.05);
-  border-color: rgba(24, 24, 27, 0.28);
+  background-color: color-mix(in srgb, var(--accent-color, #18181b) 8%, transparent);
+  border-color: color-mix(in srgb, var(--accent-color, #18181b) 42%, rgba(24, 24, 27, 0.25));
 }
 .dark .app-btn-outline {
   color: #e4e4e7;
   border: 1px solid rgba(255, 255, 255, 0.16);
 }
 .dark .app-btn-outline:hover {
-  background-color: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.28);
+  background-color: color-mix(in srgb, var(--accent-color, #ffffff) 14%, transparent);
+  border-color: color-mix(in srgb, var(--accent-color, #ffffff) 48%, rgba(255, 255, 255, 0.25));
 }
 
 /* Glass: Dark Liquid Glass for Hero / Camera / Overlays */
@@ -229,6 +257,20 @@ p, body {
 .dark .app-btn-danger:hover {
   background-color: rgba(244, 63, 94, 0.24);
   border-color: rgba(244, 63, 94, 0.42);
+}
+
+/* Badge dinámico sincronizado con var(--accent-color) */
+.app-badge-accent {
+  background-color: color-mix(in srgb, var(--accent-color, #18181b) 10%, rgba(255, 255, 255, 0.92));
+  color: color-mix(in srgb, var(--accent-color, #18181b) 82%, #09090b 18%);
+  border: 1px solid color-mix(in srgb, var(--accent-color, #18181b) 28%, rgba(24, 24, 27, 0.08));
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.85);
+}
+.dark .app-badge-accent {
+  background-color: color-mix(in srgb, var(--accent-color, #ffffff) 18%, rgba(24, 24, 27, 0.72));
+  color: color-mix(in srgb, var(--accent-color, #ffffff) 48%, #ffffff 52%);
+  border: 1px solid color-mix(in srgb, var(--accent-color, #ffffff) 36%, rgba(255, 255, 255, 0.14));
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
 }
 
 /* Apple Frosted Glass with Specular Light Reflection */

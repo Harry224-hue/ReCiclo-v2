@@ -102,7 +102,7 @@ export function Hero() {
                     >
                         <Link
                             to="/escanear"
-                            className={`w-full sm:w-auto min-h-[48px] px-7 py-3 text-sm app-btn-pearl ${LINK_FOCUS}`}
+                            className={`w-full sm:w-auto min-h-[48px] px-7 py-3 text-sm ${accent.btn} ${LINK_FOCUS}`}
                         >
                             <ScanLine className="size-4" aria-hidden="true" />
                             <span>Identificar Residuo</span>
