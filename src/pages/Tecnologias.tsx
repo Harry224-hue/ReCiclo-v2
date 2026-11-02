@@ -161,7 +161,7 @@ export default function Tecnologias() {
               setSelectedFilter("all");
               setSearchQuery("");
             }}
-            className={`mt-4 min-h-[40px] px-5 py-2 text-xs rounded-xl font-semibold text-white cursor-pointer ${accent.btn}`}
+            className={`mt-4 min-h-[40px] px-5 py-2 text-xs ${accent.btn}`}
           >
             Ver todas las tecnologías
           </button>

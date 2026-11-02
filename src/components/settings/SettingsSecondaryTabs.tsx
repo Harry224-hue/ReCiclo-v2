@@ -72,7 +72,7 @@ export function SettingsResourcesTab({ accent, onClose, navigate }: ResourcesTab
                         onClose();
                         navigate("/tecnologias");
                     }}
-                    className={`w-full min-h-[44px] py-2.5 px-4 rounded-xl text-xs font-semibold text-white cursor-pointer flex items-center justify-center gap-2 ${accent.btn}`}
+                    className={`w-full min-h-[44px] py-2.5 px-4 text-xs ${accent.btn}`}
                 >
                     <Layers size={14} />
                     <span>Ver apartado completo de Tecnologías</span>

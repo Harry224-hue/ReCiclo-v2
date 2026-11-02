@@ -219,7 +219,7 @@ export function ScannerCTA() {
                     <Link
                       to={card.link}
                       onClick={(e) => e.stopPropagation()}
-                      className={`inline-flex min-h-[46px] items-center justify-center gap-2 text-xs sm:text-sm font-semibold px-5 sm:px-6 py-2.5 rounded-xl cursor-pointer ${accent.btn}`}
+                      className="min-h-[46px] text-xs sm:text-sm px-6 sm:px-7 py-2.5 group/btn app-btn-pearl"
                     >
                       <span>{card.ctaText}</span>
                       <ArrowRight size={15} className="transition-transform duration-200 group-hover/btn:translate-x-1" />
@@ -241,10 +241,10 @@ export function ScannerCTA() {
                   key={`pill-${card.id}`}
                   type="button"
                   onClick={() => setActiveIndex(idx)}
-                  className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-150 flex items-center gap-2 cursor-pointer ${
+                  className={`px-4 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm ${
                     isPillActive
                       ? `${accent.btn}`
-                      : "bg-white/80 dark:bg-zinc-900/80 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-black/5 dark:border-white/10 backdrop-blur-sm"
+                      : "app-btn-secondary"
                   }`}
                 >
                   <IconComp size={14} />

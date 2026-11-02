@@ -264,7 +264,7 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                         <div className="hidden lg:flex w-64 shrink-0 bg-zinc-50 dark:bg-zinc-950/60 border-r border-zinc-200 dark:border-zinc-800 flex-col pt-7 pb-6 px-4">
                             <div className="flex items-center gap-2.5 px-3 mb-6">
                                 <div className={`size-8 rounded-xl ${accent.btn} flex items-center justify-center shadow-sm`}>
-                                    <Sliders size={16} className="text-white" />
+                                    <Sliders size={16} />
                                 </div>
                                 <div>
                                     <h2 className="text-base font-black text-zinc-950 dark:text-white leading-tight">
@@ -435,7 +435,8 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                                                             Insignia activa
                                                         </span>
                                                         <button
-                                                            className={`px-3 py-1.5 rounded-xl text-[11px] font-semibold text-white ${accent.btn}`}
+                                                            type="button"
+                                                            className={`px-3.5 py-1.5 text-[11px] ${accent.btn}`}
                                                         >
                                                             Botón demo
                                                         </button>

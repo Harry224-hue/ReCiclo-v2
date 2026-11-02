@@ -28,7 +28,7 @@ export function Partnerships() {
                             <motion.textarea rows={3} placeholder="¿Cómo planeas integrar ReCiclo?" className={`w-full bg-black/5 dark:bg-white/5 border border-transparent rounded-xl px-4 py-3.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 transition-all duration-300 resize-none ${accent.ring}`} initial={{ y: 20, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true }} />
 
                             <motion.div className="mt-2" initial={{ y: 20, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true }}>
-                                <button type="submit" className={`inline-flex min-h-[46px] items-center justify-center px-7 py-2.5 rounded-xl text-sm font-semibold cursor-pointer ${accent.btn}`}>
+                                <button type="submit" className={`min-h-[46px] px-7 py-2.5 text-sm ${accent.btn}`}>
                                     Contactar equipo
                                 </button>
                             </motion.div>

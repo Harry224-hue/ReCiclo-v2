@@ -554,7 +554,7 @@ export default function Perfil() {
                     type="button"
                     onClick={openEdit}
                     disabled={!cloudReady}
-                    className={`inline-flex items-center gap-1.5 min-h-[44px] px-4 py-2 rounded-xl text-xs font-semibold text-white cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed ${accent.btn} focus:outline-none focus-visible:ring-2 ${accent.ring}`}
+                    className={`min-h-[42px] px-4 py-2 text-xs disabled:opacity-50 disabled:cursor-not-allowed ${accent.btn} focus:outline-none focus-visible:ring-2 ${accent.ring}`}
                   >
                     <Pencil size={13} aria-hidden="true" />
                     <span>Editar perfil</span>
@@ -563,7 +563,7 @@ export default function Perfil() {
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
                     disabled={avatarBusy || !cloudReady}
-                    className={`inline-flex items-center gap-1.5 min-h-[44px] px-3.5 py-2 rounded-xl text-xs font-semibold app-btn-secondary cursor-pointer focus:outline-none focus-visible:ring-2 ${accent.ring}`}
+                    className={`min-h-[42px] px-4 py-2 text-xs app-btn-secondary focus:outline-none focus-visible:ring-2 ${accent.ring}`}
                   >
                     <Camera size={13} aria-hidden="true" />
                     <span>Cambiar foto</span>
@@ -573,7 +573,7 @@ export default function Perfil() {
                       type="button"
                       onClick={() => saveAvatar("")}
                       disabled={avatarBusy}
-                      className="min-h-[44px] px-3 py-2 rounded-xl text-xs font-semibold text-rose-700 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 active:scale-[0.98] transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
+                      className="min-h-[42px] px-3.5 py-2 text-xs app-btn-danger focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
                     >
                       Quitar foto
                     </button>
@@ -749,7 +749,7 @@ export default function Perfil() {
                       type="button"
                       disabled={saving}
                       onClick={() => setIsEditing(false)}
-                      className={`inline-flex items-center gap-1.5 min-h-[44px] px-3.5 py-2 rounded-xl text-xs font-semibold app-btn-secondary cursor-pointer focus:outline-none focus-visible:ring-2 ${accent.ring}`}
+                      className={`min-h-[42px] px-4 py-2 text-xs app-btn-secondary focus:outline-none focus-visible:ring-2 ${accent.ring}`}
                     >
                       <X size={14} aria-hidden="true" />
                       <span>Cancelar</span>
@@ -757,7 +757,7 @@ export default function Perfil() {
                     <button
                       type="submit"
                       disabled={saving}
-                      className={`inline-flex items-center gap-1.5 min-h-[44px] px-4 py-2 rounded-xl text-xs font-semibold text-white cursor-pointer disabled:opacity-60 ${accent.btn} focus:outline-none focus-visible:ring-2 ${accent.ring}`}
+                      className={`min-h-[42px] px-4 py-2 text-xs disabled:opacity-60 ${accent.btn} focus:outline-none focus-visible:ring-2 ${accent.ring}`}
                     >
                       {saving ? (
                         <Loader2 size={14} className="animate-spin" aria-hidden="true" />
@@ -787,7 +787,7 @@ export default function Perfil() {
                 <div
                   role="group"
                   aria-label="Campus preferido"
-                  className="grid grid-cols-2 gap-1.5 p-1 rounded-2xl bg-zinc-100 dark:bg-zinc-800/80 text-xs"
+                  className="grid grid-cols-2 gap-1.5 p-1 rounded-full bg-zinc-100 dark:bg-zinc-800/80 text-xs"
                 >
                   {CAMPUSES.map((c) => {
                     const active = preferredCampus.includes(c.label);
@@ -797,9 +797,9 @@ export default function Perfil() {
                         type="button"
                         aria-pressed={active}
                         onClick={() => handleCampusChange(c.id)}
-                        className={`min-h-[40px] px-3 py-2 rounded-xl font-medium transition-all cursor-pointer focus:outline-none focus-visible:ring-2 ${accent.ring} ${
+                        className={`min-h-[38px] px-3 py-1.5 rounded-full font-medium transition-all cursor-pointer focus:outline-none focus-visible:ring-2 ${accent.ring} ${
                           active
-                            ? "bg-white dark:bg-zinc-700 text-zinc-900 dark:text-white shadow-xs font-semibold"
+                            ? "bg-zinc-900 text-white dark:bg-white dark:text-zinc-950 shadow-xs font-semibold"
                             : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
                         }`}
                       >
@@ -824,7 +824,7 @@ export default function Perfil() {
                   <button
                     type="button"
                     onClick={() => logout()}
-                    className="inline-flex items-center gap-1.5 min-h-[40px] px-3.5 py-1.5 rounded-xl text-xs font-semibold text-rose-700 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 active:scale-[0.98] transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
+                    className="min-h-[38px] px-4 py-1.5 text-xs app-btn-danger focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
                   >
                     <LogOut size={14} aria-hidden="true" />
                     <span>Cerrar sesión</span>
@@ -833,14 +833,14 @@ export default function Perfil() {
                   <div className="flex items-center gap-2">
                     <Link
                       to="/login"
-                      className={`inline-flex items-center gap-1.5 min-h-[40px] px-3.5 py-1.5 rounded-xl text-xs font-semibold text-white cursor-pointer ${accent.btn} focus:outline-none focus-visible:ring-2 ${accent.ring}`}
+                      className={`min-h-[38px] px-4 py-1.5 text-xs ${accent.btn} focus:outline-none focus-visible:ring-2 ${accent.ring}`}
                     >
                       <LogIn size={13} aria-hidden="true" />
                       <span>Acceder</span>
                     </Link>
                     <Link
                       to="/registro"
-                      className={`inline-flex items-center min-h-[40px] px-3.5 py-1.5 rounded-xl text-xs font-semibold app-btn-secondary cursor-pointer focus:outline-none focus-visible:ring-2 ${accent.ring}`}
+                      className={`min-h-[38px] px-4 py-1.5 text-xs app-btn-secondary focus:outline-none focus-visible:ring-2 ${accent.ring}`}
                     >
                       Registrarse
                     </Link>

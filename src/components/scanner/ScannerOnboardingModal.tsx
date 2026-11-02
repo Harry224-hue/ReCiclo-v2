@@ -170,11 +170,11 @@ export function ScannerOnboardingModal({ open, onClose }: ScannerOnboardingModal
                   <div className="relative flex h-36 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.08] to-white/[0.02] p-4">
                     {index === 0 && (
                       <div className="flex items-center gap-4">
-                        <div className="flex size-16 items-center justify-center rounded-2xl bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 shadow-lg">
+                        <div className="flex size-16 items-center justify-center rounded-2xl bg-white/15 border border-white/25 text-white shadow-lg">
                           <Camera size={32} />
                         </div>
                         <div className="text-left">
-                          <span className="inline-block rounded-md bg-emerald-500/20 px-2 py-0.5 text-[10px] font-bold text-emerald-300">
+                          <span className="inline-block rounded-full bg-white/15 px-2.5 py-0.5 text-[10px] font-bold text-white border border-white/20">
                             Groq Vision IA
                           </span>
                           <p className="mt-1 text-xs font-bold text-white">
@@ -193,7 +193,7 @@ export function ScannerOnboardingModal({ open, onClose }: ScannerOnboardingModal
                           <Barcode size={32} />
                         </div>
                         <div className="text-left">
-                          <span className="inline-block rounded-md bg-sky-500/20 px-2 py-0.5 text-[10px] font-bold text-sky-300">
+                          <span className="inline-block rounded-full bg-sky-500/20 px-2.5 py-0.5 text-[10px] font-bold text-sky-300 border border-sky-400/30">
                             EAN-13 / UPC
                           </span>
                           <p className="mt-1 text-xs font-bold text-white">
@@ -256,7 +256,7 @@ export function ScannerOnboardingModal({ open, onClose }: ScannerOnboardingModal
                       >
                         <CheckCircle2
                           size={15}
-                          className="mt-0.5 shrink-0 text-emerald-400"
+                          className="mt-0.5 shrink-0 text-white"
                         />
                         <span>{bullet}</span>
                       </li>
@@ -267,9 +267,9 @@ export function ScannerOnboardingModal({ open, onClose }: ScannerOnboardingModal
                     <button
                       type="button"
                       onClick={() => handleDismiss(slide.modeAction?.mode)}
-                      className="flex min-h-[40px] w-full items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/10 px-4 py-2 text-xs font-bold text-white transition-colors hover:bg-white/20 cursor-pointer"
+                      className="min-h-[40px] w-full px-4 py-2 text-xs app-btn-glass"
                     >
-                      <Recycle size={14} className="text-emerald-400" />
+                      <Recycle size={14} className="text-white" />
                       <span>{slide.modeAction.label} ahora</span>
                     </button>
                   )}
@@ -290,7 +290,7 @@ export function ScannerOnboardingModal({ open, onClose }: ScannerOnboardingModal
                       aria-label={`Ir a diapositiva ${idx + 1}`}
                       className={`h-2 rounded-full transition-all cursor-pointer ${
                         idx === index
-                          ? "w-6 bg-emerald-400"
+                          ? "w-6 bg-white"
                           : "w-2 bg-white/25 hover:bg-white/40"
                       }`}
                     />
@@ -302,7 +302,7 @@ export function ScannerOnboardingModal({ open, onClose }: ScannerOnboardingModal
                     <button
                       type="button"
                       onClick={prevSlide}
-                      className="flex min-h-[40px] items-center gap-1 rounded-xl border border-white/15 bg-white/5 px-3 text-xs font-semibold text-zinc-200 hover:bg-white/10 cursor-pointer"
+                      className="min-h-[40px] px-3.5 text-xs app-btn-glass"
                     >
                       <ChevronLeft size={15} />
                       Anterior
@@ -312,7 +312,7 @@ export function ScannerOnboardingModal({ open, onClose }: ScannerOnboardingModal
                   <button
                     type="button"
                     onClick={nextSlide}
-                    className="flex min-h-[40px] items-center gap-1.5 rounded-xl bg-emerald-600 px-4 text-xs font-bold text-white shadow-md hover:bg-emerald-500 active:scale-[0.98] transition-all cursor-pointer"
+                    className="min-h-[40px] px-4 text-xs app-btn-pearl"
                   >
                     <span>
                       {index < SLIDES.length - 1 ? "Siguiente" : "¡Entendido, escanear!"}

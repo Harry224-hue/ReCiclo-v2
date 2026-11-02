@@ -219,9 +219,9 @@ export function ProjectFrameworkTabs() {
                       aria-controls={`desktop-panel-${tab.key}`}
                       onClick={() => handleTabClick(tab.key)}
                       onKeyDown={(e) => handleKeyDown(e, idx)}
-                      className={`flex items-start justify-between gap-3 p-3.5 rounded-2xl text-left border transition-all duration-200 ${
+                      className={`flex items-start justify-between gap-3 p-3.5 rounded-2xl text-left border transition-all duration-200 cursor-pointer ${
                         isSelected
-                          ? "border-emerald-500/70 dark:border-emerald-500/60 bg-emerald-50/80 dark:bg-emerald-950/40 shadow-sm ring-1 ring-emerald-500/30"
+                          ? "border-zinc-900/20 dark:border-white/25 bg-white dark:bg-zinc-900 shadow-sm ring-1 ring-zinc-900/10 dark:ring-white/15"
                           : "border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 bg-zinc-50/60 dark:bg-zinc-900/40 hover:bg-zinc-100/70 dark:hover:bg-zinc-800/40"
                       }`}
                     >
@@ -229,14 +229,14 @@ export function ProjectFrameworkTabs() {
                         <div
                           className={`p-2 rounded-xl shrink-0 transition-colors ${
                             isSelected
-                              ? "bg-emerald-600 dark:bg-emerald-500 text-white shadow-sm"
+                              ? "bg-zinc-900 text-white dark:bg-white dark:text-zinc-950 shadow-sm"
                               : "bg-zinc-200/70 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400"
                           }`}
                         >
                           <Icon className="size-4" />
                         </div>
                         <div className="min-w-0">
-                          <span className="text-[10px] font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
+                          <span className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
                             {tab.badge}
                           </span>
                           <div className="text-sm font-bold text-zinc-900 dark:text-zinc-100 truncate">
@@ -250,7 +250,7 @@ export function ProjectFrameworkTabs() {
                       <ChevronRight
                         className={`size-4 shrink-0 transition-transform mt-2 ${
                           isSelected
-                            ? "text-emerald-600 dark:text-emerald-400 translate-x-0.5"
+                            ? "text-zinc-900 dark:text-white translate-x-0.5"
                             : "text-zinc-400 dark:text-zinc-600"
                         }`}
                       />
@@ -312,7 +312,7 @@ export function ProjectFrameworkTabs() {
                     key={tab.key}
                     className={`rounded-2xl border transition-all duration-200 overflow-hidden ${
                       isItemOpen
-                        ? "border-emerald-500/70 dark:border-emerald-500/60 bg-white dark:bg-zinc-900 shadow-sm"
+                        ? "border-zinc-900/20 dark:border-white/25 bg-white dark:bg-zinc-900 shadow-sm"
                         : "border-zinc-200 dark:border-zinc-800 bg-zinc-50/80 dark:bg-zinc-900/50"
                     }`}
                   >
@@ -320,20 +320,20 @@ export function ProjectFrameworkTabs() {
                       type="button"
                       onClick={() => toggleMobileTab(tab.key)}
                       aria-expanded={isItemOpen}
-                      className="w-full flex items-center justify-between p-4 text-left"
+                      className="w-full flex items-center justify-between p-4 text-left cursor-pointer"
                     >
                       <div className="flex items-center gap-3 min-w-0">
                         <div
                           className={`p-2 rounded-xl shrink-0 transition-colors ${
                             isItemOpen
-                              ? "bg-emerald-600 dark:bg-emerald-500 text-white"
+                              ? "bg-zinc-900 text-white dark:bg-white dark:text-zinc-950"
                               : "bg-zinc-200/70 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400"
                           }`}
                         >
                           <Icon className="size-4" />
                         </div>
                         <div className="min-w-0">
-                          <span className="text-[10px] font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider block">
+                          <span className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider block">
                             {tab.badge}
                           </span>
                           <div className="text-sm font-bold text-zinc-900 dark:text-zinc-100 truncate">

@@ -339,13 +339,13 @@ function RailButton({
       aria-label={label}
       aria-pressed={toggle ? active : undefined}
       disabled={loading}
-      className={`relative flex size-11 touch-manipulation items-center justify-center rounded-full transition-all active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white disabled:opacity-70 dark:focus-visible:ring-offset-zinc-950 ${
+      className={`relative flex size-11 touch-manipulation items-center justify-center rounded-full transition-all active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-white disabled:opacity-70 dark:focus-visible:ring-offset-zinc-950 cursor-pointer ${
         active
-          ? "bg-emerald-700 text-white shadow-md"
+          ? "bg-zinc-900 text-white shadow-md dark:bg-white dark:text-zinc-950"
           : "text-zinc-700 hover:bg-zinc-100 hover:text-zinc-950 dark:text-zinc-200 dark:hover:bg-white/10 dark:hover:text-white"
       }`}
     >
-      {loading ? <Loader2 size={18} className="animate-spin text-emerald-600 dark:text-emerald-400" /> : children}
+      {loading ? <Loader2 size={18} className="animate-spin text-zinc-700 dark:text-zinc-200" /> : children}
     </button>
   );
 }
@@ -917,11 +917,11 @@ export default function Mapa() {
       {/* ── Encabezado flotante: campus + resumen ── */}
       <div className={`pointer-events-none absolute left-3 right-3 z-40 flex max-w-[calc(100vw-1.5rem)] flex-col gap-2 md:right-auto md:left-4 md:max-w-[calc(100vw-5.5rem)] ${topInset}`}>
         <div className="pointer-events-auto flex items-center gap-2.5 rounded-2xl border border-black/5 bg-white/95 px-2.5 py-2 shadow-xl backdrop-blur-xl dark:border-white/15 dark:bg-zinc-950/85">
-          <div className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-emerald-700 text-white shadow-sm">
+          <div className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-zinc-900 text-white shadow-sm dark:bg-white dark:text-zinc-950">
             <MapPin size={17} />
           </div>
           <div className="min-w-0 flex-1">
-            <p className="text-[9px] font-black uppercase tracking-[0.16em] text-emerald-700 dark:text-emerald-400">
+            <p className="text-[9px] font-black uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">
               {activeCfg.planoCode}
             </p>
             <p className="truncate text-[13px] font-extrabold leading-tight text-zinc-900 dark:text-zinc-50">
@@ -948,9 +948,9 @@ export default function Mapa() {
             }}
             aria-label={panelOpen ? "Ocultar panel de estaciones" : "Abrir panel de estaciones"}
             aria-pressed={panelOpen}
-            className={`flex size-11 shrink-0 items-center justify-center rounded-xl transition-colors ${
+            className={`flex size-10 shrink-0 items-center justify-center rounded-full transition-all cursor-pointer ${
               panelOpen
-                ? "bg-emerald-700 text-white"
+                ? "bg-zinc-900 text-white shadow-sm dark:bg-white dark:text-zinc-950"
                 : "bg-zinc-100 text-zinc-700 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700"
             }`}
           >
@@ -971,9 +971,9 @@ export default function Mapa() {
                   setZoneFilter("todas");
                 }}
                 aria-pressed={isActive}
-                className={`min-h-[44px] rounded-full px-3 py-1.5 text-[11px] font-bold transition-all ${
+                className={`min-h-[38px] rounded-full px-3.5 py-1.5 text-[11px] font-semibold transition-all cursor-pointer ${
                   isActive
-                    ? "bg-emerald-700 text-white shadow-sm"
+                    ? "bg-zinc-900 text-white shadow-sm dark:bg-white dark:text-zinc-950"
                     : "text-zinc-600 hover:text-zinc-950 dark:text-zinc-300 dark:hover:text-white"
                 }`}
               >
@@ -1082,10 +1082,10 @@ export default function Mapa() {
             }}
             aria-expanded={filtersOpen}
             aria-controls="map-filter-popover"
-            className={`flex min-h-[44px] items-center gap-1.5 rounded-full px-3 text-[11.5px] font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 ${
-              filter !== "todos"
-                ? "bg-emerald-50 text-emerald-900 dark:bg-emerald-500/15 dark:text-emerald-100"
-                : "text-zinc-700 dark:text-zinc-200"
+            className={`flex min-h-[42px] items-center gap-1.5 rounded-full px-3.5 text-[11.5px] font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 dark:focus-visible:ring-white cursor-pointer ${
+              filter !== "todos" || filtersOpen
+                ? "bg-zinc-900 text-white dark:bg-white dark:text-zinc-950 shadow-xs"
+                : "text-zinc-700 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-white/10"
             }`}
           >
             <SlidersHorizontal size={14} aria-hidden="true" />
@@ -1106,10 +1106,10 @@ export default function Mapa() {
             }}
             aria-expanded={toolsOpen}
             aria-controls="map-tools-popover"
-            className={`flex min-h-[44px] items-center gap-1.5 rounded-full px-3 text-[11.5px] font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 ${
+            className={`flex min-h-[42px] items-center gap-1.5 rounded-full px-3.5 text-[11.5px] font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 dark:focus-visible:ring-white cursor-pointer ${
               toolsOpen
-                ? "bg-emerald-50 text-emerald-900 dark:bg-emerald-500/15 dark:text-emerald-100"
-                : "text-zinc-700 dark:text-zinc-200"
+                ? "bg-zinc-900 text-white dark:bg-white dark:text-zinc-950 shadow-xs"
+                : "text-zinc-700 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-white/10"
             }`}
           >
             <Layers size={14} aria-hidden="true" />
@@ -1172,15 +1172,15 @@ export default function Mapa() {
                         setFiltersOpen(false);
                       }}
                       aria-pressed={isActive}
-                      className={`flex min-h-[44px] items-center gap-2 rounded-xl border px-2.5 text-[11.5px] font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 ${
+                      className={`flex min-h-[42px] items-center gap-2 rounded-xl border px-2.5 text-[11.5px] font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 dark:focus-visible:ring-white cursor-pointer ${
                         isActive
-                          ? "border-emerald-600 bg-emerald-50 text-emerald-900 dark:border-emerald-400/50 dark:bg-emerald-500/15 dark:text-emerald-100"
+                          ? "border-zinc-900 bg-zinc-900 text-white dark:border-white dark:bg-white dark:text-zinc-950"
                           : "border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800"
                       }`}
                     >
                       {option.color ? <ContainerDot id={option.id} size={8} /> : <Layers size={13} />}
                       <span className="truncate">{option.label}</span>
-                      {isActive && <CheckCircle2 size={14} className="ml-auto shrink-0 text-emerald-700 dark:text-emerald-300" />}
+                      {isActive && <CheckCircle2 size={14} className="ml-auto shrink-0" />}
                     </button>
                   );
                 })}
@@ -1193,7 +1193,7 @@ export default function Mapa() {
                     setZoneFilter("todas");
                     setFiltersOpen(false);
                   }}
-                  className="min-h-[44px] rounded-lg px-1 text-[10.5px] font-semibold text-emerald-700 hover:underline dark:text-emerald-400"
+                  className="min-h-[38px] rounded-lg px-1 text-[10.5px] font-semibold text-zinc-700 hover:underline dark:text-zinc-300 cursor-pointer"
                 >
                   Quitar filtros
                 </button>
@@ -1532,9 +1532,9 @@ export default function Mapa() {
                             type="button"
                             onClick={() => setZoneFilter(zone.id)}
                             aria-pressed={isActive}
-                            className={`min-h-[44px] shrink-0 rounded-full border px-3 py-1 text-[10.5px] font-bold transition-colors ${
+                            className={`min-h-[38px] shrink-0 rounded-full border px-3.5 py-1 text-[10.5px] font-semibold transition-all cursor-pointer ${
                               isActive
-                                ? "border-emerald-600 bg-emerald-700 text-white"
+                                ? "border-zinc-900 bg-zinc-900 text-white shadow-xs dark:border-white dark:bg-white dark:text-zinc-950"
                                 : "border-zinc-200 bg-white text-zinc-600 hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800"
                             }`}
                           >
@@ -1614,7 +1614,7 @@ export default function Mapa() {
                               setCampus(otherCampus);
                               setZoneFilter("todas");
                             }}
-                            className="mt-2.5 inline-flex items-center gap-1 rounded-lg bg-emerald-700 px-3 py-1.5 text-[11px] font-bold text-white hover:bg-emerald-600"
+                            className="mt-2.5 min-h-[36px] px-3.5 py-1.5 text-[11px] app-btn-primary"
                           >
                             Ver en {CAMPUS_GEO_CONFIG[otherCampus].shortName} <ChevronRight size={12} />
                           </button>
@@ -1626,7 +1626,7 @@ export default function Mapa() {
                             setZoneFilter("todas");
                             setQuery("");
                           }}
-                          className="mt-2 block w-full text-[11px] font-semibold text-emerald-700 hover:underline dark:text-emerald-400"
+                          className="mt-2 block w-full text-[11px] font-semibold text-zinc-700 hover:underline dark:text-zinc-300 cursor-pointer"
                         >
                           Quitar filtros
                         </button>
@@ -1842,13 +1842,13 @@ export default function Mapa() {
                       </p>
                     </div>
 
-                    <div className="shrink-0 border-t border-zinc-100 bg-white/95 p-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom))] dark:border-zinc-800 dark:bg-zinc-950/95">
+                    <div className="shrink-0 border-t border-zinc-100 bg-white/95 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] dark:border-zinc-800 dark:bg-zinc-950/95">
                       <div className="flex gap-2">
                         <a
                           href={`https://www.google.com/maps/dir/?api=1&destination=${selectedPoint.coordinates.lat},${selectedPoint.coordinates.lng}&travelmode=walking`}
                           target="_blank"
                           rel="noreferrer"
-                          className="flex min-h-[44px] flex-1 items-center justify-center gap-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 px-3 text-xs font-semibold text-white border border-emerald-700/20 shadow-xs active:scale-[0.98] transition-all cursor-pointer"
+                          className="min-h-[44px] flex-1 px-4 text-xs app-btn-primary"
                         >
                           <Navigation size={14} />
                           Cómo llegar
@@ -1856,9 +1856,9 @@ export default function Mapa() {
                         <button
                           type="button"
                           onClick={() => {
-                                                flyToPoint(selectedPoint, { forcePanel: true });
+                            flyToPoint(selectedPoint, { forcePanel: true });
                           }}
-                          className="flex min-h-[44px] items-center justify-center gap-1.5 rounded-xl px-3 text-xs font-semibold app-btn-secondary cursor-pointer"
+                          className="min-h-[44px] px-4 text-xs app-btn-secondary"
                         >
                           <LocateFixed size={14} />
                           Centrar
@@ -1892,7 +1892,7 @@ export default function Mapa() {
             >
               <div className="flex shrink-0 items-center justify-between border-b border-zinc-200/80 px-4 py-3 dark:border-zinc-800">
                 <div className="flex items-center gap-2.5">
-                  <div className="flex size-9 items-center justify-center rounded-xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400">
+                  <div className="flex size-9 items-center justify-center rounded-xl bg-zinc-100 text-zinc-900 dark:bg-white/10 dark:text-white">
                     <Building2 size={17} />
                   </div>
                   <div>
@@ -1908,7 +1908,7 @@ export default function Mapa() {
                   type="button"
                   onClick={() => setDirectoryOpen(false)}
                   aria-label="Cerrar directorio"
-                  className="flex size-9 items-center justify-center rounded-full text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                  className="flex size-9 items-center justify-center rounded-full text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800 cursor-pointer"
                 >
                   <X size={16} />
                 </button>
@@ -1926,7 +1926,7 @@ export default function Mapa() {
                       key={`${item.code}-${item.name}`}
                       className="flex items-start gap-2 rounded-xl border border-zinc-200 bg-zinc-50/70 p-2.5 dark:border-zinc-700/80 dark:bg-zinc-800/40"
                     >
-                      <span className="shrink-0 rounded-md bg-emerald-700 px-1.5 py-0.5 font-mono text-[10px] font-bold text-white">
+                      <span className="shrink-0 rounded-md bg-zinc-900 px-1.5 py-0.5 font-mono text-[10px] font-bold text-white dark:bg-white dark:text-zinc-950">
                         {item.code}
                       </span>
                       <div className="min-w-0">
@@ -1943,7 +1943,7 @@ export default function Mapa() {
                 <button
                   type="button"
                   onClick={() => setDirectoryOpen(false)}
-                  className="w-full rounded-xl bg-emerald-700 py-2.5 text-sm font-bold text-white hover:bg-emerald-600"
+                  className="w-full min-h-[44px] py-2.5 text-sm app-btn-primary"
                 >
                   Volver al mapa
                 </button>

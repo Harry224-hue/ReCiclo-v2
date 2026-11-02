@@ -362,7 +362,7 @@ export default function Impacto() {
           <div className="flex flex-wrap items-center gap-2.5 shrink-0">
             <Link
               to="/escanear"
-              className={`inline-flex min-h-[42px] items-center justify-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold text-white cursor-pointer ${accent.btn}`}
+              className={`min-h-[42px] px-5 py-2 text-xs ${accent.btn}`}
             >
               <Sparkles size={14} />
               <span>Escanear Residuo</span>
@@ -370,7 +370,7 @@ export default function Impacto() {
             </Link>
             <Link
               to="/mapa"
-              className="inline-flex min-h-[42px] items-center justify-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold app-btn-secondary cursor-pointer"
+              className="min-h-[42px] px-5 py-2 text-xs app-btn-secondary"
             >
               <MapPin size={14} />
               <span>Ver Mapa ITM</span>

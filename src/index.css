@@ -49,79 +49,186 @@ p, body {
   transform: scale(0.965);
 }
 
-/* ─── SISTEMA UNIFICADO DE BOTONES (ANTI-SLOP & TACTILE) ─── */
-.app-btn-base {
+/* ─── SISTEMA UNIFICADO DE BOTONES (APPLE LIQUID GLASS & EDITORIAL HIGH-CONTRAST) ─── */
+.app-btn-base,
+.app-btn-primary,
+.app-btn-secondary,
+.app-btn-outline,
+.app-btn-glass,
+.app-btn-pearl,
+.app-btn-danger {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  border-radius: 0.75rem; /* rounded-xl: 12px squircle */
+  border-radius: 9999px;
   font-weight: 600;
   line-height: 1.25;
+  letter-spacing: -0.01em;
   white-space: nowrap;
   user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
   cursor: pointer;
   transform: translateZ(0);
-  transition: background-color 150ms cubic-bezier(0.2, 0, 0, 1),
-              border-color 150ms cubic-bezier(0.2, 0, 0, 1),
-              color 150ms cubic-bezier(0.2, 0, 0, 1),
-              box-shadow 150ms cubic-bezier(0.2, 0, 0, 1),
-              transform 100ms cubic-bezier(0.2, 0, 0, 1);
+  transition: background 180ms cubic-bezier(0.2, 0, 0, 1),
+              background-color 180ms cubic-bezier(0.2, 0, 0, 1),
+              border-color 180ms cubic-bezier(0.2, 0, 0, 1),
+              color 180ms cubic-bezier(0.2, 0, 0, 1),
+              box-shadow 180ms cubic-bezier(0.2, 0, 0, 1),
+              transform 120ms cubic-bezier(0.2, 0, 0, 1);
 }
 
-.app-btn-base:active {
-  transform: scale(0.98);
+.app-btn-base:active,
+.app-btn-primary:active,
+.app-btn-secondary:active,
+.app-btn-outline:active,
+.app-btn-glass:active,
+.app-btn-pearl:active,
+.app-btn-danger:active {
+  transform: scale(0.968);
 }
 
-.app-btn-base:disabled {
-  opacity: 0.5;
+.app-btn-base:disabled,
+.app-btn-primary:disabled,
+.app-btn-secondary:disabled,
+.app-btn-outline:disabled,
+.app-btn-glass:disabled,
+.app-btn-pearl:disabled,
+.app-btn-danger:disabled {
+  opacity: 0.48;
   cursor: not-allowed;
   pointer-events: none;
 }
 
-.app-btn-secondary {
-  background-color: #f4f4f5;
-  color: #18181b;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+/* Primary: Editorial High-Contrast (Obsidian in Light / Luminous Pearl in Dark) */
+.app-btn-primary {
+  background: linear-gradient(180deg, #27272a 0%, #09090b 100%);
+  color: #ffffff !important;
+  border: 1px solid rgba(24, 24, 27, 0.9);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.22),
+              0 6px 16px -3px rgba(9, 9, 11, 0.26),
+              0 2px 4px 0 rgba(9, 9, 11, 0.12);
 }
-.app-btn-secondary:hover {
-  background-color: #e4e4e7;
+.app-btn-primary:hover {
+  background: linear-gradient(180deg, #3f3f46 0%, #18181b 100%);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.28),
+              0 8px 22px -3px rgba(9, 9, 11, 0.34),
+              0 2px 6px 0 rgba(9, 9, 11, 0.16);
 }
-.dark .app-btn-secondary {
-  background-color: #27272a;
-  color: #f4f4f5;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+.dark .app-btn-primary {
+  background: linear-gradient(180deg, #ffffff 0%, #e4e4e7 100%);
+  color: #09090b !important;
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 1),
+              0 6px 20px -3px rgba(255, 255, 255, 0.16),
+              0 2px 6px 0 rgba(0, 0, 0, 0.45);
 }
-.dark .app-btn-secondary:hover {
-  background-color: #3f3f46;
+.dark .app-btn-primary:hover {
+  background: linear-gradient(180deg, #ffffff 0%, #f4f4f5 100%);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 1),
+              0 8px 26px -3px rgba(255, 255, 255, 0.24),
+              0 2px 8px 0 rgba(0, 0, 0, 0.5);
 }
 
+/* Pearl: Always Luminous White Capsule (for Dark Hero, Camera HUD, Dark Modals) */
+.app-btn-pearl {
+  background: linear-gradient(180deg, #ffffff 0%, #e4e4e7 100%);
+  color: #09090b !important;
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 1),
+              0 8px 24px -4px rgba(255, 255, 255, 0.22),
+              0 2px 8px 0 rgba(0, 0, 0, 0.45);
+}
+.app-btn-pearl:hover {
+  background: linear-gradient(180deg, #ffffff 0%, #f4f4f5 100%);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 1),
+              0 10px 28px -4px rgba(255, 255, 255, 0.3),
+              0 3px 10px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* Secondary: Apple Frosted Glass with Specular Border */
+.app-btn-secondary {
+  background-color: rgba(255, 255, 255, 0.86);
+  color: #18181b;
+  border: 1px solid rgba(24, 24, 27, 0.1);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.9),
+              0 2px 8px -2px rgba(0, 0, 0, 0.06);
+}
+.app-btn-secondary:hover {
+  background-color: #f4f4f5;
+  border-color: rgba(24, 24, 27, 0.18);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 1),
+              0 4px 12px -2px rgba(0, 0, 0, 0.1);
+}
+.dark .app-btn-secondary {
+  background-color: rgba(39, 39, 42, 0.72);
+  color: #f4f4f5;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.12),
+              0 4px 14px -2px rgba(0, 0, 0, 0.45);
+}
+.dark .app-btn-secondary:hover {
+  background-color: rgba(63, 63, 70, 0.85);
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+/* Outline: Crisp Minimal Capsule */
 .app-btn-outline {
   background-color: transparent;
-  color: #27272a;
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  color: #18181b;
+  border: 1px solid rgba(24, 24, 27, 0.16);
 }
 .app-btn-outline:hover {
-  background-color: rgba(0, 0, 0, 0.04);
+  background-color: rgba(24, 24, 27, 0.05);
+  border-color: rgba(24, 24, 27, 0.28);
 }
 .dark .app-btn-outline {
   color: #e4e4e7;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.16);
 }
 .dark .app-btn-outline:hover {
-  background-color: rgba(255, 255, 255, 0.06);
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.28);
 }
 
+/* Glass: Dark Liquid Glass for Hero / Camera / Overlays */
 .app-btn-glass {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.12);
   color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.26),
+              0 8px 24px -4px rgba(0, 0, 0, 0.35);
 }
 .app-btn-glass:hover {
-  background-color: rgba(255, 255, 255, 0.18);
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.34);
+}
+
+/* Danger: Subtle Tactile Rose Capsule */
+.app-btn-danger {
+  background-color: rgba(244, 63, 94, 0.08);
+  color: #be123c;
+  border: 1px solid rgba(244, 63, 94, 0.22);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.5);
+}
+.app-btn-danger:hover {
+  background-color: rgba(244, 63, 94, 0.15);
+  border-color: rgba(244, 63, 94, 0.35);
+}
+.dark .app-btn-danger {
+  background-color: rgba(244, 63, 94, 0.14);
+  color: #fda4af;
+  border: 1px solid rgba(244, 63, 94, 0.28);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+}
+.dark .app-btn-danger:hover {
+  background-color: rgba(244, 63, 94, 0.24);
+  border-color: rgba(244, 63, 94, 0.42);
 }
 
 /* Apple Frosted Glass with Specular Light Reflection */

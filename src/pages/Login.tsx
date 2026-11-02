@@ -465,7 +465,7 @@ export default function Login() {
                                             <button
                                                 type="submit"
                                                 disabled={forgotStatus.type === "sending"}
-                                                className={`w-full min-h-[38px] rounded-xl font-semibold text-xs text-white flex items-center justify-center cursor-pointer disabled:opacity-50 ${accent.btn}`}
+                                                className={`w-full min-h-[38px] text-xs disabled:opacity-50 ${accent.btn}`}
                                             >
                                                 {forgotStatus.type === "sending" ? "Enviando…" : "Enviar enlace de recuperación"}
                                             </button>
@@ -478,10 +478,10 @@ export default function Login() {
                             <button
                                 disabled={loading}
                                 type="submit"
-                                className={`w-full min-h-[44px] mt-1 rounded-xl font-semibold text-xs sm:text-sm text-white flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed ${accent.btn}`}
+                                className={`w-full min-h-[44px] mt-1 text-xs sm:text-sm disabled:opacity-50 disabled:cursor-not-allowed ${accent.btn}`}
                             >
                                 {loading ? (
-                                    <div className="size-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                                    <div className="size-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
                                 ) : (
                                     <>
                                         <span>Iniciar sesión</span>

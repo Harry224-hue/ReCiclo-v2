@@ -213,7 +213,7 @@ export function ScanResultPanel({
 
       {/* Pestañas */}
       <div className="shrink-0 px-4 pt-2.5">
-        <div className="relative grid grid-cols-3 gap-1 rounded-xl bg-zinc-100 p-1 dark:bg-zinc-800/90">
+        <div className="relative grid grid-cols-3 gap-1 rounded-full bg-zinc-100 p-1 dark:bg-zinc-800/90 border border-black/5 dark:border-white/10">
           {TABS.map((item) => {
             const isActive = tab === item.id;
             return (
@@ -225,17 +225,17 @@ export function ScanResultPanel({
                   setTab(item.id);
                 }}
                 aria-pressed={isActive}
-                className={`relative min-h-[44px] rounded-lg py-2 text-[12px] font-bold transition-all active:scale-[0.97] cursor-pointer ${
+                className={`relative min-h-[38px] rounded-full py-1.5 text-[12px] font-semibold transition-all active:scale-[0.97] cursor-pointer ${
                   isActive
-                    ? "text-emerald-700 dark:text-emerald-300"
-                    : "text-zinc-600 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-white"
+                    ? "text-zinc-950 dark:text-white"
+                    : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white"
                 }`}
               >
                 {isActive && (
                   <motion.span
                     layoutId="scanResultTabPill"
                     transition={reduceMotion ? { duration: 0.01 } : APPLE_SPRING_PILL}
-                    className="absolute inset-0 rounded-lg bg-white shadow-sm dark:bg-zinc-950"
+                    className="absolute inset-0 rounded-full bg-white shadow-sm dark:bg-zinc-950 border border-black/5 dark:border-white/10"
                   />
                 )}
                 <span className="relative z-10">{item.label}</span>
@@ -254,7 +254,7 @@ export function ScanResultPanel({
           <div className="space-y-3">
             <section>
               <h3 className="mb-2 flex items-center gap-1.5 text-[11px] font-black uppercase tracking-[0.14em] text-zinc-500 dark:text-zinc-400">
-                <Sparkles size={12} className="text-emerald-600 dark:text-emerald-400" />
+                <Sparkles size={12} className="text-zinc-700 dark:text-zinc-300" />
                 Antes de depositarlo
               </h3>
               <ol className="space-y-2">
@@ -263,7 +263,7 @@ export function ScanResultPanel({
                     key={instruction}
                     className="flex items-start gap-2.5 rounded-xl border border-zinc-200/80 bg-zinc-50/70 p-3 dark:border-zinc-800 dark:bg-zinc-800/40"
                   >
-                    <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-emerald-700 text-[10px] font-black text-white">
+                    <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-zinc-900 text-[10px] font-black text-white dark:bg-white dark:text-zinc-950">
                       {index + 1}
                     </span>
                     <span className="text-[12.5px] leading-relaxed text-zinc-700 dark:text-zinc-300">
@@ -408,10 +408,10 @@ export function ScanResultPanel({
 
             <Link
               to="/historial"
-              className="flex items-center justify-between rounded-xl border border-zinc-200 bg-white px-3 py-2.5 text-[11px] font-bold text-zinc-700 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900/50 dark:text-zinc-200 dark:hover:bg-zinc-800"
+              className="flex min-h-[40px] items-center justify-between px-4 py-2 text-[11px] app-btn-secondary"
             >
               <span className="flex items-center gap-1.5">
-                <History size={13} className="text-emerald-600 dark:text-emerald-400" />
+                <History size={13} className="text-zinc-600 dark:text-zinc-300" />
                 Ver este escaneo en el historial
               </span>
               <ExternalLink size={12} className="text-zinc-400" />
@@ -425,12 +425,12 @@ export function ScanResultPanel({
       </div>
 
       {/* Acciones fijas */}
-      <div className="shrink-0 border-t border-zinc-200/80 bg-white/95 p-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom))] dark:border-zinc-800 dark:bg-zinc-900/95">
+      <div className="shrink-0 border-t border-zinc-200/80 bg-white/95 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] dark:border-zinc-800 dark:bg-zinc-900/95">
         <div className="flex gap-2">
           <Link
             to={`/mapa?bin=${bin.id}`}
             onClick={() => triggerHaptic("light")}
-            className="flex min-h-[44px] flex-1 items-center justify-center gap-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs sm:text-sm border border-emerald-700/20 dark:border-emerald-500/30 shadow-xs active:scale-[0.98] transition-all duration-150 cursor-pointer"
+            className="min-h-[44px] flex-1 px-4 text-xs sm:text-sm app-btn-primary"
           >
             <MapPin size={14} />
             Ver botes en el mapa
@@ -443,7 +443,7 @@ export function ScanResultPanel({
             }}
             aria-label="Abrir guía de contenedores"
             title="Guía de contenedores"
-            className="flex min-h-[44px] w-11 items-center justify-center rounded-xl border border-zinc-200/80 dark:border-zinc-700 text-zinc-700 dark:text-zinc-200 bg-zinc-50 dark:bg-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-700 active:scale-[0.98] transition-all duration-150 cursor-pointer"
+            className="min-h-[44px] w-11 app-btn-secondary"
           >
             <BookOpen size={16} />
           </button>
@@ -455,7 +455,7 @@ export function ScanResultPanel({
             }}
             aria-label="Escanear otro residuo"
             title="Escanear otro"
-            className="flex min-h-[44px] w-11 items-center justify-center rounded-xl border border-zinc-200/80 dark:border-zinc-700 text-zinc-700 dark:text-zinc-200 bg-zinc-50 dark:bg-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-700 active:scale-[0.98] transition-all duration-150 cursor-pointer"
+            className="min-h-[44px] w-11 app-btn-secondary"
           >
             <RefreshCw size={16} />
           </button>

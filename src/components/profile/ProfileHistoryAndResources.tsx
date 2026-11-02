@@ -254,7 +254,7 @@ export function ProfileScanHistorySection({
                 <div className="flex items-center gap-2">
                     <Link
                         to="/escanear"
-                        className={`inline-flex items-center gap-1.5 min-h-[44px] px-3.5 py-2 rounded-xl text-xs font-semibold text-white cursor-pointer ${accent.btn} focus:outline-none focus-visible:ring-2 ${accent.ring}`}
+                        className={`min-h-[42px] px-4 py-2 text-xs ${accent.btn} focus:outline-none focus-visible:ring-2 ${accent.ring}`}
                     >
                         <ScanLine size={14} aria-hidden="true" />
                         <span>Clasificar residuo</span>
@@ -263,7 +263,7 @@ export function ProfileScanHistorySection({
                         <button
                             type="button"
                             onClick={handleClearHistory}
-                            className="inline-flex items-center gap-1.5 min-h-[44px] px-3 py-2 rounded-xl text-xs font-semibold text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/40 hover:bg-rose-100 dark:hover:bg-rose-950/70 active:scale-[0.98] transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
+                            className="min-h-[42px] px-3.5 py-2 text-xs app-btn-danger focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
                         >
                             <Trash2 size={14} aria-hidden="true" />
                             <span>Vaciar</span>
@@ -301,15 +301,14 @@ export function ProfileScanHistorySection({
                                         key={key}
                                         type="button"
                                         aria-pressed={categoryFilter === key}
-                                        style={categoryFilter === key ? { backgroundColor: accent.hex } : undefined}
                                         onClick={() => {
                                             setCategoryFilter(key);
                                             setVisible(PAGE_SIZE);
                                         }}
-                                        className={`min-h-[40px] px-3.5 py-1.5 rounded-xl text-xs font-medium transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 ${accent.ring} ${
+                                        className={`min-h-[38px] px-3.5 py-1.5 text-xs focus:outline-none focus-visible:ring-2 ${accent.ring} ${
                                             categoryFilter === key
-                                                ? "text-white font-semibold shadow-xs"
-                                                : "bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700"
+                                                ? "app-btn-primary"
+                                                : "app-btn-secondary"
                                         }`}
                                     >
                                         {label}
@@ -334,7 +333,7 @@ export function ProfileScanHistorySection({
                     </p>
                     <Link
                         to="/escanear"
-                        className={`mt-4 inline-flex items-center gap-2 min-h-[44px] px-5 py-2.5 rounded-xl text-xs font-semibold text-white cursor-pointer ${accent.btn} focus:outline-none focus-visible:ring-2 ${accent.ring}`}
+                        className={`mt-4 min-h-[44px] px-6 py-2.5 text-xs ${accent.btn} focus:outline-none focus-visible:ring-2 ${accent.ring}`}
                     >
                         <ScanLine size={15} aria-hidden="true" />
                         <span>Abrir escáner de residuos</span>
@@ -351,7 +350,7 @@ export function ProfileScanHistorySection({
                     <button
                         type="button"
                         onClick={clearFilters}
-                        className={`mt-3 inline-flex items-center justify-center min-h-[44px] px-4 py-2 rounded-xl text-xs font-semibold app-btn-secondary cursor-pointer focus:outline-none focus-visible:ring-2 ${accent.ring}`}
+                        className={`mt-3 min-h-[42px] px-4 py-2 text-xs app-btn-secondary focus:outline-none focus-visible:ring-2 ${accent.ring}`}
                     >
                         Restablecer búsqueda y filtros
                     </button>

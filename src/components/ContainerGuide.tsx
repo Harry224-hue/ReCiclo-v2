@@ -244,7 +244,7 @@ export function ContainerGuide({ open, onClose, initialBinId }: ContainerGuidePr
               <button
                 type="button"
                 onClick={onClose}
-                className="w-full min-h-[44px] rounded-xl bg-emerald-600 hover:bg-emerald-700 py-2.5 text-sm font-semibold text-white border border-emerald-700/20 shadow-xs active:scale-[0.98] transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-zinc-900"
+                className="w-full min-h-[44px] py-2.5 text-sm app-btn-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 dark:focus-visible:ring-white focus-visible:ring-offset-2 dark:focus-visible:ring-offset-zinc-900"
               >
                 Entendido
               </button>

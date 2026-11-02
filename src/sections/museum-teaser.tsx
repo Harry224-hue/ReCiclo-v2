@@ -65,7 +65,7 @@ export function MuseumTeaser() {
                     <div className="mt-8 flex flex-col items-start gap-3">
                         <Link
                             to="/museo"
-                            className={`group inline-flex min-h-[48px] items-center justify-center gap-2.5 rounded-xl px-6 py-3 text-sm font-semibold text-white cursor-pointer ${accent.btn} focus-visible:outline-none focus-visible:ring-2 ${accent.ring}`}
+                            className={`group min-h-[48px] px-7 py-3 text-sm ${accent.btn} focus-visible:outline-none focus-visible:ring-2 ${accent.ring}`}
                         >
                             <span>Explorar archivo completo</span>
                             <ArrowRight
