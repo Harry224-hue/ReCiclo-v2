@@ -417,7 +417,7 @@ export default function Perfil() {
         <div className="flex flex-wrap items-center gap-2.5 self-start sm:self-auto">
           <Link
             to="/mapa"
-            className={`inline-flex items-center gap-1.5 min-h-[44px] px-3.5 py-2 rounded-xl text-xs font-semibold text-zinc-800 dark:text-zinc-200 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors focus:outline-none focus-visible:ring-2 ${accent.ring}`}
+            className={`min-h-[44px] px-3.5 py-2 text-xs app-btn-secondary focus:outline-none focus-visible:ring-2 ${accent.ring}`}
           >
             <MapPin size={14} className={accent.text} aria-hidden="true" />
             <span>{activeCampusObj.label}</span>
@@ -426,7 +426,7 @@ export default function Perfil() {
             type="button"
             onClick={() => setIsSettingsOpen(true)}
             aria-label="Abrir configuración de la aplicación"
-            className={`inline-flex items-center gap-1.5 min-h-[44px] px-3.5 py-2 rounded-xl text-xs font-semibold text-zinc-800 dark:text-zinc-200 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 ${accent.ring}`}
+            className={`min-h-[44px] px-3.5 py-2 text-xs app-btn-tertiary focus:outline-none focus-visible:ring-2 ${accent.ring}`}
           >
             <Settings size={14} aria-hidden="true" />
             <span>Ajustes de interfaz</span>
@@ -554,7 +554,7 @@ export default function Perfil() {
                     type="button"
                     onClick={openEdit}
                     disabled={!cloudReady}
-                    className={`min-h-[42px] px-4 py-2 text-xs disabled:opacity-50 disabled:cursor-not-allowed ${accent.btn} focus:outline-none focus-visible:ring-2 ${accent.ring}`}
+                    className={`min-h-[42px] px-4 py-2 text-xs disabled:opacity-50 disabled:cursor-not-allowed app-btn-secondary focus:outline-none focus-visible:ring-2 ${accent.ring}`}
                   >
                     <Pencil size={13} aria-hidden="true" />
                     <span>Editar perfil</span>
@@ -563,7 +563,7 @@ export default function Perfil() {
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
                     disabled={avatarBusy || !cloudReady}
-                    className={`min-h-[42px] px-4 py-2 text-xs app-btn-secondary focus:outline-none focus-visible:ring-2 ${accent.ring}`}
+                    className={`min-h-[42px] px-4 py-2 text-xs app-btn-tertiary focus:outline-none focus-visible:ring-2 ${accent.ring}`}
                   >
                     <Camera size={13} aria-hidden="true" />
                     <span>Cambiar foto</span>
@@ -573,7 +573,7 @@ export default function Perfil() {
                       type="button"
                       onClick={() => saveAvatar("")}
                       disabled={avatarBusy}
-                      className="min-h-[42px] px-3.5 py-2 text-xs app-btn-danger focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
+                      className="min-h-[42px] px-3 py-2 text-xs app-btn-text !text-rose-600 dark:!text-rose-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
                     >
                       Quitar foto
                     </button>
@@ -749,7 +749,7 @@ export default function Perfil() {
                       type="button"
                       disabled={saving}
                       onClick={() => setIsEditing(false)}
-                      className={`min-h-[42px] px-4 py-2 text-xs app-btn-secondary focus:outline-none focus-visible:ring-2 ${accent.ring}`}
+                      className={`min-h-[42px] px-4 py-2 text-xs app-btn-text focus:outline-none focus-visible:ring-2 ${accent.ring}`}
                     >
                       <X size={14} aria-hidden="true" />
                       <span>Cancelar</span>

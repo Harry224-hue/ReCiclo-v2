@@ -89,7 +89,8 @@ export function ContainerGuide({ open, onClose, initialBinId }: ContainerGuidePr
                 type="button"
                 onClick={onClose}
                 aria-label="Cerrar guía de contenedores"
-                className="flex size-10 shrink-0 items-center justify-center rounded-full text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 dark:hover:bg-zinc-800 dark:hover:text-white"
+                title="Cerrar guía de contenedores"
+                className="app-btn-icon shrink-0"
               >
                 <X size={18} />
               </button>

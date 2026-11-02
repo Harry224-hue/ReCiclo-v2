@@ -1153,7 +1153,8 @@ export default function Mapa() {
                   type="button"
                   onClick={() => setFiltersOpen(false)}
                   aria-label="Cerrar filtros"
-                  className="flex size-11 shrink-0 items-center justify-center rounded-full text-zinc-500 hover:bg-zinc-100 hover:text-zinc-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 dark:hover:bg-zinc-800 dark:hover:text-white"
+                  title="Cerrar filtros"
+                  className="app-btn-icon shrink-0"
                 >
                   <X size={17} />
                 </button>
@@ -1193,7 +1194,7 @@ export default function Mapa() {
                     setZoneFilter("todas");
                     setFiltersOpen(false);
                   }}
-                  className="min-h-[38px] rounded-lg px-1 text-[10.5px] font-semibold text-zinc-700 hover:underline dark:text-zinc-300 cursor-pointer"
+                  className="min-h-[38px] text-[11px] app-btn-text"
                 >
                   Quitar filtros
                 </button>
@@ -1228,7 +1229,8 @@ export default function Mapa() {
                   type="button"
                   onClick={() => setToolsOpen(false)}
                   aria-label="Cerrar herramientas"
-                  className="flex size-11 shrink-0 items-center justify-center rounded-full text-zinc-500 hover:bg-zinc-100 hover:text-zinc-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 dark:hover:bg-zinc-800 dark:hover:text-white"
+                  title="Cerrar herramientas"
+                  className="app-btn-icon shrink-0"
                 >
                   <X size={17} />
                 </button>
@@ -1461,7 +1463,8 @@ export default function Mapa() {
                       setSelectedPoint(null);
                     }}
                     aria-label="Volver al listado de estaciones"
-                    className="flex size-11 shrink-0 items-center justify-center rounded-full text-zinc-500 hover:bg-zinc-100 hover:text-zinc-900 dark:hover:bg-zinc-800 dark:hover:text-white"
+                    title="Volver al listado"
+                    className="app-btn-icon shrink-0"
                   >
                     <ArrowLeft size={17} />
                   </button>
@@ -1490,7 +1493,7 @@ export default function Mapa() {
                   onClick={() => setDirectoryOpen(true)}
                   aria-label="Directorio de edificios del plano"
                   title="Directorio de edificios"
-                  className="flex size-11 shrink-0 items-center justify-center rounded-full text-zinc-500 hover:bg-zinc-100 hover:text-zinc-900 dark:hover:bg-zinc-800 dark:hover:text-white"
+                  className="app-btn-icon shrink-0"
                 >
                   <Building2 size={16} />
                 </button>
@@ -1498,7 +1501,8 @@ export default function Mapa() {
                   type="button"
                   onClick={closePanel}
                   aria-label="Cerrar panel"
-                  className="flex size-11 shrink-0 items-center justify-center rounded-full text-zinc-500 hover:bg-zinc-100 hover:text-zinc-900 dark:hover:bg-zinc-800 dark:hover:text-white"
+                  title="Cerrar panel"
+                  className="app-btn-icon shrink-0"
                 >
                   <X size={17} />
                 </button>
@@ -1626,7 +1630,7 @@ export default function Mapa() {
                             setZoneFilter("todas");
                             setQuery("");
                           }}
-                          className="mt-2 block w-full text-[11px] font-semibold text-zinc-700 hover:underline dark:text-zinc-300 cursor-pointer"
+                          className="mt-2 min-h-[38px] w-full text-[11px] app-btn-text"
                         >
                           Quitar filtros
                         </button>
@@ -1699,7 +1703,7 @@ export default function Mapa() {
                       <button
                         type="button"
                         onClick={() => applyReferenceLocation(campus)}
-                        className="flex items-center justify-center gap-1.5 rounded-lg py-1.5 text-[10.5px] font-semibold text-zinc-500 hover:text-emerald-700 dark:text-zinc-400 dark:hover:text-emerald-400"
+                        className="min-h-[38px] w-full text-[10.5px] app-btn-text"
                       >
                         <Navigation size={11} />
                         Probar desde el acceso principal
@@ -1908,7 +1912,8 @@ export default function Mapa() {
                   type="button"
                   onClick={() => setDirectoryOpen(false)}
                   aria-label="Cerrar directorio"
-                  className="flex size-9 items-center justify-center rounded-full text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800 cursor-pointer"
+                  title="Cerrar directorio"
+                  className="app-btn-icon"
                 >
                   <X size={16} />
                 </button>
@@ -1943,7 +1948,7 @@ export default function Mapa() {
                 <button
                   type="button"
                   onClick={() => setDirectoryOpen(false)}
-                  className="w-full min-h-[44px] py-2.5 text-sm app-btn-primary"
+                  className="w-full min-h-[44px] py-2.5 text-sm app-btn-tertiary"
                 >
                   Volver al mapa
                 </button>

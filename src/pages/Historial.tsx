@@ -30,6 +30,7 @@ export default function Historial() {
   const { user, profile, isLoggedIn } = useAuth();
   const [history, setHistory] = useState<ScanHistoryEntry[]>(() => getScanHistory());
   const [syncing, setSyncing] = useState(false);
+  const [confirmClearOpen, setConfirmClearOpen] = useState(false);
 
   useEffect(() => {
     const syncLocal = () => setHistory(getScanHistory());
@@ -66,18 +67,14 @@ export default function Historial() {
   };
 
   const handleClear = async () => {
-    const confirmMsg = isLoggedIn
-      ? "¿Deseas vaciar el historial de residuos de tu cuenta? (Tu nivel y progreso general se conservarán)."
-      : "¿Deseas vaciar el historial de residuos identificados en este dispositivo?";
-    if (window.confirm(confirmMsg)) {
-      clearScanHistory();
-      setHistory([]);
-      if (user?.uid) {
-        try {
-          await clearUserScans(user.uid);
-        } catch (err) {
-          console.warn("[Historial] Advertencia al limpiar registros en Firestore:", err);
-        }
+    clearScanHistory();
+    setHistory([]);
+    setConfirmClearOpen(false);
+    if (user?.uid) {
+      try {
+        await clearUserScans(user.uid);
+      } catch (err) {
+        console.warn("[Historial] Advertencia al limpiar registros en Firestore:", err);
       }
     }
   };
@@ -121,14 +118,55 @@ export default function Historial() {
         {history.length > 0 && (
           <button
             type="button"
-            onClick={handleClear}
-            className="min-h-[40px] self-start sm:self-center px-4 py-2 text-xs app-btn-danger"
+            onClick={() => setConfirmClearOpen(true)}
+            className="min-h-[42px] self-start sm:self-center px-4 py-2 text-xs app-btn-danger"
           >
             <Trash2 className="size-3.5" />
             <span>Vaciar historial</span>
           </button>
         )}
       </motion.div>
+
+      {/* Modal de confirmación de acción destructiva (Patrón UX de botones destructivos) */}
+      {confirmClearOpen && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="clear-history-title"
+          className="fixed inset-0 z-[90] flex items-center justify-center bg-black/55 p-4 backdrop-blur-sm"
+        >
+          <div className="w-full max-w-md rounded-2xl border border-zinc-200 bg-white p-6 shadow-2xl dark:border-zinc-800 dark:bg-zinc-900">
+            <h2
+              id="clear-history-title"
+              className="text-lg font-extrabold tracking-tight text-zinc-950 dark:text-white"
+            >
+              ¿Seguro que deseas vaciar el historial?
+            </h2>
+            <p className="mt-2 text-xs sm:text-sm leading-relaxed text-zinc-600 dark:text-zinc-300">
+              {isLoggedIn
+                ? "Esta acción eliminará permanentemente los registros del historial en tu cuenta y en este dispositivo. No se puede deshacer."
+                : "Esta acción eliminará permanentemente los registros guardados en este dispositivo. No se puede deshacer."}
+            </p>
+            <div className="mt-6 flex items-center justify-end gap-2.5">
+              <button
+                type="button"
+                onClick={() => setConfirmClearOpen(false)}
+                className="min-h-[42px] px-4 py-2 text-xs font-semibold app-btn-ghost"
+              >
+                Cancelar
+              </button>
+              <button
+                type="button"
+                onClick={handleClear}
+                className="min-h-[42px] px-4 py-2 text-xs font-bold app-btn-destructive"
+              >
+                <Trash2 className="size-3.5" />
+                <span>Eliminar historial</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Banner de Estado de Cuenta vs Almacenamiento Local */}
       <div className="mb-6">
@@ -269,16 +307,16 @@ export default function Historial() {
                     <button
                       type="button"
                       onClick={() => handleRemoveEntry(entry)}
-                      title="Eliminar registro"
+                      title="Eliminar este registro del historial"
                       aria-label={`Eliminar ${entry.wasteName}`}
-                      className="p-1.5 rounded-lg text-zinc-400 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors cursor-pointer"
+                      className="app-btn-icon hover:!text-rose-600 hover:!bg-rose-50 dark:hover:!bg-rose-950/40"
                     >
-                      <Trash2 className="size-3.5" />
+                      <Trash2 className="size-4" />
                     </button>
                   </div>
                   <Link
                     to="/mapa"
-                    className="text-xs text-emerald-600 dark:text-emerald-400 hover:underline inline-flex items-center gap-1 font-medium"
+                    className="text-xs app-link-action"
                   >
                     <span>Ver puntos en campus</span>
                     <ExternalLink className="size-3" />

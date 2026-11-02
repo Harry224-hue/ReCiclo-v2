@@ -220,8 +220,9 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                                 </div>
                                 <button
                                     onClick={onClose}
-                                    className="p-2 rounded-full bg-zinc-200/70 dark:bg-white/10 hover:bg-zinc-300 dark:hover:bg-white/20 text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white transition-colors cursor-pointer"
-                                    title="Cerrar"
+                                    className="app-btn-icon"
+                                    title="Cerrar configuración"
+                                    aria-label="Cerrar configuración"
                                 >
                                     <X size={18} strokeWidth={2.5} />
                                 </button>
@@ -311,7 +312,7 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
 
                             <button
                                 onClick={onClose}
-                                className="mt-auto flex min-h-[40px] items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold app-btn-secondary cursor-pointer"
+                                className="mt-auto min-h-[42px] w-full py-2 text-xs app-btn-text"
                             >
                                 <X size={15} />
                                 Cerrar panel
@@ -436,18 +437,46 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                                                         />
                                                     </div>
 
-                                                    {/* VISTA PREVIA DEL COLOR ACTIVO */}
-                                                    <div className="pt-2 flex items-center gap-2 text-xs">
-                                                        <span className="text-zinc-600 dark:text-zinc-400 font-medium">Muestra en vivo:</span>
-                                                        <span className={`px-2.5 py-1 rounded-full text-[11px] font-bold ${accent.badge}`}>
-                                                            Insignia activa
-                                                        </span>
-                                                        <button
-                                                            type="button"
-                                                            className={`px-3.5 py-1.5 text-[11px] ${accent.btn}`}
-                                                        >
-                                                            Botón demo
-                                                        </button>
+                                                    {/* VISTA PREVIA DE LA JERARQUÍA DE BOTONES UX */}
+                                                    <div className="pt-2 space-y-2 text-xs">
+                                                        <div className="flex items-center justify-between">
+                                                            <span className="text-zinc-600 dark:text-zinc-400 font-medium">Jerarquía UX en vivo:</span>
+                                                            <span className={`px-2.5 py-0.5 rounded-full text-[10.5px] font-bold ${accent.badge}`}>
+                                                                Insignia (rounded-full)
+                                                            </span>
+                                                        </div>
+                                                        <div className="flex flex-wrap items-center gap-2">
+                                                            <button
+                                                                type="button"
+                                                                className={`px-3.5 py-1.5 text-[11px] ${accent.btn}`}
+                                                            >
+                                                                Primario
+                                                            </button>
+                                                            <button
+                                                                type="button"
+                                                                className={`px-3.5 py-1.5 text-[11px] ${accent.btnOutline}`}
+                                                            >
+                                                                Secundario
+                                                            </button>
+                                                            <button
+                                                                type="button"
+                                                                className="px-3.5 py-1.5 text-[11px] app-btn-tertiary"
+                                                            >
+                                                                Terciario
+                                                            </button>
+                                                            <button
+                                                                type="button"
+                                                                className="px-3.5 py-1.5 text-[11px] app-btn-ghost"
+                                                            >
+                                                                Ghost
+                                                            </button>
+                                                            <button
+                                                                type="button"
+                                                                className="py-1.5 text-[11px] app-btn-text"
+                                                            >
+                                                                Texto
+                                                            </button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -567,8 +596,9 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                                         {/* BOTÓN RESTABLECER */}
                                         <div>
                                             <button
+                                                type="button"
                                                 onClick={resetTheme}
-                                                className="flex items-center gap-2 text-xs font-bold text-rose-600 dark:text-rose-400 hover:underline cursor-pointer"
+                                                className="min-h-[40px] py-2 text-xs font-bold text-rose-600 dark:text-rose-400 app-btn-text"
                                             >
                                                 <RotateCcw size={14} />
                                                 Restaurar configuración visual por defecto

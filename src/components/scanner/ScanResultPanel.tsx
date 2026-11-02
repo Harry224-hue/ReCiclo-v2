@@ -88,7 +88,8 @@ export function ScanResultPanel({
           type="button"
           onClick={onClose}
           aria-label="Cerrar resultado"
-          className="absolute right-2.5 top-2.5 z-10 flex size-11 items-center justify-center rounded-full bg-black/5 text-zinc-500 transition-colors hover:bg-black/10 hover:text-zinc-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 dark:bg-white/10 dark:text-zinc-300 dark:hover:bg-white/15 dark:hover:text-white"
+          title="Cerrar ficha de resultado"
+          className="absolute right-2 top-2 z-10 app-btn-icon"
         >
           <X size={16} />
         </button>
@@ -406,16 +407,16 @@ export function ScanResultPanel({
               </div>
             </div>
 
-            <Link
-              to="/historial"
-              className="flex min-h-[40px] items-center justify-between px-4 py-2 text-[11px] app-btn-secondary"
-            >
-              <span className="flex items-center gap-1.5">
-                <History size={13} className="text-zinc-600 dark:text-zinc-300" />
-                Ver este escaneo en el historial
-              </span>
-              <ExternalLink size={12} className="text-zinc-400" />
-            </Link>
+            <div className="pt-1 flex justify-center">
+              <Link
+                to="/historial"
+                className="text-xs app-link-action"
+              >
+                <History size={13} />
+                <span>Ver este escaneo en el historial</span>
+                <ExternalLink size={12} />
+              </Link>
+            </div>
 
             <p className="text-center text-[9.5px] text-zinc-400 dark:text-zinc-500">
               Registro local + sincronización con tu perfil si iniciaste sesión.
@@ -426,13 +427,13 @@ export function ScanResultPanel({
 
       {/* Acciones fijas */}
       <div className="shrink-0 border-t border-zinc-200/80 bg-white/95 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] dark:border-zinc-800 dark:bg-zinc-900/95">
-        <div className="flex gap-2">
+        <div className="flex items-center gap-2">
           <Link
             to={`/mapa?bin=${bin.id}`}
             onClick={() => triggerHaptic("light")}
-            className="min-h-[44px] flex-1 px-4 text-xs sm:text-sm app-btn-primary"
+            className="min-h-[48px] flex-1 px-4 text-xs sm:text-sm app-btn-primary"
           >
-            <MapPin size={14} />
+            <MapPin size={15} />
             Ver botes en el mapa
           </Link>
           <button
@@ -443,9 +444,9 @@ export function ScanResultPanel({
             }}
             aria-label="Abrir guía de contenedores"
             title="Guía de contenedores"
-            className="min-h-[44px] w-11 app-btn-secondary"
+            className="app-btn-icon"
           >
-            <BookOpen size={16} />
+            <BookOpen size={17} />
           </button>
           <button
             type="button"
@@ -454,10 +455,10 @@ export function ScanResultPanel({
               onRescan();
             }}
             aria-label="Escanear otro residuo"
-            title="Escanear otro"
-            className="min-h-[44px] w-11 app-btn-secondary"
+            title="Escanear otro residuo"
+            className="app-btn-icon"
           >
-            <RefreshCw size={16} />
+            <RefreshCw size={17} />
           </button>
         </div>
       </div>

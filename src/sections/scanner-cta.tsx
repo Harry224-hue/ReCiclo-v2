@@ -243,8 +243,8 @@ export function ScannerCTA() {
                   onClick={() => setActiveIndex(idx)}
                   className={`px-4 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm ${
                     isPillActive
-                      ? `${accent.btn}`
-                      : "app-btn-secondary"
+                      ? `${accent.btnOutline}`
+                      : "app-btn-tertiary"
                   }`}
                 >
                   <IconComp size={14} />

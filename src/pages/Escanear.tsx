@@ -545,22 +545,22 @@ export default function Escanear() {
           <button
             type="button"
             onClick={() => setOnboardingOpen(true)}
-            className="min-h-[42px] px-4 text-xs app-btn-secondary"
+            className="min-h-[42px] px-3.5 text-xs app-btn-text"
           >
-            <HelpCircle size={15} className="text-zinc-600 dark:text-zinc-300" />
+            <HelpCircle size={15} />
             Cómo usar el escáner
           </button>
           <button
             type="button"
             onClick={() => openGuide()}
-            className="min-h-[42px] px-4 text-xs app-btn-secondary"
+            className="min-h-[42px] px-4 text-xs app-btn-tertiary"
           >
-            <BookOpen size={15} className="text-zinc-600 dark:text-zinc-300" />
+            <BookOpen size={15} />
             Guía de contenedores
           </button>
           <Link
             to="/historial"
-            className="min-h-[42px] px-4 text-xs app-btn-primary"
+            className="min-h-[42px] px-4 text-xs app-btn-secondary"
           >
             <History size={15} />
             Historial
@@ -658,28 +658,28 @@ export default function Escanear() {
                 onClick={() => setOnboardingOpen(true)}
                 aria-label="Ver tutorial del escáner"
                 title="Cómo usar el escáner"
-                className="flex size-11 items-center justify-center rounded-full border border-white/20 bg-black/55 text-white backdrop-blur-md transition-transform active:scale-90 cursor-pointer"
+                className="app-btn-icon-glass"
               >
-                <HelpCircle size={17} />
+                <HelpCircle size={18} />
               </button>
               <button
                 type="button"
                 onClick={() => openGuide()}
                 aria-label="Abrir guía de contenedores"
                 title="Guía de contenedores"
-                className="flex size-11 items-center justify-center rounded-full border border-white/20 bg-black/55 text-white backdrop-blur-md transition-transform active:scale-90 cursor-pointer"
+                className="app-btn-icon-glass"
               >
-                <BookOpen size={17} />
+                <BookOpen size={18} />
               </button>
               {cameraActive && (
                 <button
                   type="button"
                   onClick={toggleCameraFacing}
-                  aria-label="Cambiar cámara"
+                  aria-label="Cambiar cámara frontal o trasera"
                   title="Cambiar cámara"
-                  className="flex size-11 items-center justify-center rounded-full border border-white/20 bg-black/55 text-white backdrop-blur-md transition-transform active:scale-90 cursor-pointer"
+                  className="app-btn-icon-glass"
                 >
-                  <RefreshCw size={17} />
+                  <RefreshCw size={18} />
                 </button>
               )}
             </div>
@@ -929,7 +929,7 @@ export default function Escanear() {
           {/* Selector de modo + Controles de captura */}
           {!hasResult && (
             <div className="absolute inset-x-4 bottom-[calc(env(safe-area-inset-bottom,0px)+5.25rem)] z-[58] flex flex-col items-center gap-2.5 md:bottom-5 md:inset-x-8 lg:inset-x-8 lg:bottom-5">
-              {/* Pestañas selectoras: Foto con IA vs Código de barras (Diseño Apple Liquid Glass) */}
+              {/* Pestañas selectoras: Foto con IA vs Código de barras */}
               <div
                 role="tablist"
                 aria-label="Modo de escaneo"
@@ -946,7 +946,7 @@ export default function Escanear() {
                   }}
                   className={`flex min-h-[34px] items-center gap-1.5 rounded-full px-4 py-1.5 text-[11px] font-semibold transition-all duration-200 active:scale-[0.97] cursor-pointer ${
                     scanMode === "photo"
-                      ? "app-btn-primary"
+                      ? "bg-white text-zinc-950 shadow-[0_2px_12px_rgba(255,255,255,0.22),0_1px_3px_rgba(0,0,0,0.35)]"
                       : "text-white/75 hover:text-white"
                   }`}
                 >
@@ -964,7 +964,7 @@ export default function Escanear() {
                   }}
                   className={`flex min-h-[34px] items-center gap-1.5 rounded-full px-4 py-1.5 text-[11px] font-semibold transition-all duration-200 active:scale-[0.97] cursor-pointer ${
                     scanMode === "barcode"
-                      ? "app-btn-primary"
+                      ? "bg-white text-zinc-950 shadow-[0_2px_12px_rgba(255,255,255,0.22),0_1px_3px_rgba(0,0,0,0.35)]"
                       : "text-white/75 hover:text-white"
                   }`}
                 >
@@ -977,9 +977,11 @@ export default function Escanear() {
                 <button
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
+                  title="Subir imagen desde la galería"
+                  aria-label="Subir imagen desde la galería"
                   className="flex w-16 flex-col items-center gap-1 text-[10px] font-semibold text-white active:scale-90 cursor-pointer"
                 >
-                  <span className="flex size-11 items-center justify-center rounded-full border border-white/22 bg-zinc-950/60 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.2)] backdrop-blur-xl transition-colors hover:bg-white/15">
+                  <span className="app-btn-icon-glass">
                     <ImagePlus size={18} />
                   </span>
                   Galería
@@ -997,16 +999,15 @@ export default function Escanear() {
                       }
                     }}
                     disabled={isScanning}
-                    className="relative flex size-[72px] items-center justify-center rounded-full border-[3.5px] border-white/90 p-1.5 shadow-[0_8px_28px_rgba(0,0,0,0.45)] transition-transform active:scale-90 disabled:opacity-50 touch-manipulation cursor-pointer select-none"
+                    title="Capturar y clasificar residuo"
                     aria-label="Capturar y clasificar residuo"
+                    className="relative flex size-[72px] items-center justify-center p-1.5 app-btn-fab disabled:opacity-50"
                   >
-                    <span className="block h-full w-full rounded-full bg-white shadow-[inset_0_1px_0_0_rgba(255,255,255,1),0_2px_10px_rgba(255,255,255,0.25)]" />
+                    <span className="block h-full w-full rounded-full border-2 border-white/40 bg-white/15" />
                     {scanMode === "barcode" ? (
-                      <Barcode className="absolute size-6 text-zinc-950" strokeWidth={2.2} />
+                      <Barcode className="absolute size-7 text-white" strokeWidth={2.2} />
                     ) : (
-                      !cameraActive && (
-                        <CameraIcon className="absolute size-6 text-zinc-900" strokeWidth={2.2} />
-                      )
+                      <CameraIcon className="absolute size-7 text-white" strokeWidth={2.2} />
                     )}
                   </button>
                   <span className="text-[9.5px] font-semibold text-white/75">
@@ -1022,14 +1023,16 @@ export default function Escanear() {
                   type="button"
                   onClick={() => setShowSamples((value) => !value)}
                   aria-pressed={showSamples}
+                  title="Probar con muestras del campus"
+                  aria-label="Probar con muestras del campus"
                   className="flex w-16 flex-col items-center gap-1 text-[10px] font-semibold text-white active:scale-90 cursor-pointer"
                 >
                   <span
-                    className={`flex size-11 items-center justify-center rounded-full border transition-all backdrop-blur-xl ${
+                    className={
                       showSamples
-                        ? "border-white bg-white text-zinc-950 shadow-[0_4px_18px_rgba(255,255,255,0.28)]"
-                        : "border-white/22 bg-zinc-950/60 text-white shadow-[inset_0_1px_0_0_rgba(255,255,255,0.2)] hover:bg-white/15"
-                    }`}
+                        ? "flex min-h-[48px] min-w-[48px] items-center justify-center rounded-full border border-white bg-white text-zinc-950 shadow-[0_4px_18px_rgba(255,255,255,0.28)]"
+                        : "app-btn-icon-glass"
+                    }
                   >
                     <FlaskConical size={18} />
                   </span>
@@ -1171,7 +1174,7 @@ export default function Escanear() {
               <button
                 type="button"
                 onClick={() => openGuide()}
-                className="mt-4 flex w-full min-h-[42px] items-center justify-between px-4 py-2.5 text-left app-btn-secondary"
+                className="mt-4 flex w-full min-h-[42px] items-center justify-between px-4 py-2.5 text-left app-btn-tertiary"
               >
                 <span className="flex items-center gap-2">
                   <Trash2 size={14} className="text-zinc-700 dark:text-zinc-300" />

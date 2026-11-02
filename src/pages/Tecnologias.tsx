@@ -108,15 +108,15 @@ export default function Tecnologias() {
           </div>
         </div>
 
-        {/* Chips de Categorías */}
-        <div className="mt-4 flex items-center gap-1.5 overflow-x-auto pb-2 scrollbar-none no-scrollbar">
+        {/* Botones de filtro de Categorías (Secundario activo vs Terciario inactivo) */}
+        <div className="mt-4 flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none no-scrollbar">
           <button
             type="button"
             onClick={() => setSelectedFilter("all")}
-            className={`text-xs px-3 py-1.5 rounded-full font-medium transition-all shrink-0 cursor-pointer ${
+            className={`min-h-[38px] text-xs px-3.5 py-1.5 shrink-0 ${
               selectedFilter === "all"
-                ? `${accent.badge} font-bold shadow-xs`
-                : "bg-zinc-100 dark:bg-zinc-800/80 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
+                ? "app-btn-secondary"
+                : "app-btn-tertiary"
             }`}
           >
             Todas ({TOTAL_TECH_RESOURCES})
@@ -130,10 +130,10 @@ export default function Tecnologias() {
                 type="button"
                 key={cat.id}
                 onClick={() => setSelectedFilter(cat.id)}
-                className={`flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full font-medium transition-all shrink-0 cursor-pointer ${
+                className={`min-h-[38px] text-xs px-3.5 py-1.5 shrink-0 ${
                   isSelected
-                    ? `${accent.badge} font-bold shadow-xs`
-                    : "bg-zinc-100 dark:bg-zinc-800/80 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
+                    ? "app-btn-secondary"
+                    : "app-btn-tertiary"
                 }`}
               >
                 <Icon className="size-3.5" />

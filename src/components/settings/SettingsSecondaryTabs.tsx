@@ -384,7 +384,7 @@ export function SettingsPrivacyTab({
                     <button
                         type="button"
                         onClick={onClearHistory}
-                        className="px-3.5 py-2 rounded-xl bg-rose-500/15 hover:bg-rose-500/25 text-rose-700 dark:text-rose-300 text-xs font-bold flex items-center gap-2 self-start sm:self-auto cursor-pointer transition-colors shadow-xs"
+                        className="min-h-[40px] px-4 py-2 text-xs app-btn-destructive self-start sm:self-auto"
                     >
                         {cacheCleared ? (
                             <>

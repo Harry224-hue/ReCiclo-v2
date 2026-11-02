@@ -420,7 +420,7 @@ export default function Login() {
                                         setForgotOpen((v) => !v);
                                         setForgotStatus({ type: "idle", message: "" });
                                     }}
-                                    className="hover:underline cursor-pointer transition-colors"
+                                    className="py-1 px-2 text-[11px] app-btn-text"
                                     style={{ color: accentHex }}
                                 >
                                     ¿Olvidaste contraseña?
@@ -465,7 +465,7 @@ export default function Login() {
                                             <button
                                                 type="submit"
                                                 disabled={forgotStatus.type === "sending"}
-                                                className={`w-full min-h-[38px] text-xs disabled:opacity-50 ${accent.btn}`}
+                                                className={`w-full min-h-[38px] text-xs disabled:opacity-50 ${accent.btnOutline}`}
                                             >
                                                 {forgotStatus.type === "sending" ? "Enviando…" : "Enviar enlace de recuperación"}
                                             </button>

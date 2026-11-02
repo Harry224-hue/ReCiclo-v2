@@ -307,8 +307,8 @@ export function ProfileScanHistorySection({
                                         }}
                                         className={`min-h-[38px] px-3.5 py-1.5 text-xs focus:outline-none focus-visible:ring-2 ${accent.ring} ${
                                             categoryFilter === key
-                                                ? "app-btn-primary"
-                                                : "app-btn-secondary"
+                                                ? "app-btn-secondary"
+                                                : "app-btn-tertiary"
                                         }`}
                                     >
                                         {label}
@@ -365,7 +365,7 @@ export function ProfileScanHistorySection({
                             <button
                                 type="button"
                                 onClick={clearFilters}
-                                className={`font-semibold ${accent.text} hover:underline cursor-pointer`}
+                                className="min-h-[36px] text-xs app-btn-text"
                             >
                                 Quitar filtros
                             </button>
@@ -419,7 +419,7 @@ export function ProfileScanHistorySection({
                                         onClick={() => handleRemoveEntry(entry.id)}
                                         aria-label={`Eliminar ${entry.wasteName} del historial`}
                                         title="Eliminar registro"
-                                        className="shrink-0 size-11 rounded-xl inline-flex items-center justify-center text-zinc-500 dark:text-zinc-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
+                                        className="shrink-0 app-btn-icon hover:!text-rose-600 dark:hover:!text-rose-400 hover:!bg-rose-50 dark:hover:!bg-rose-950/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
                                     >
                                         <Trash2 size={15} aria-hidden="true" />
                                     </button>
@@ -433,7 +433,7 @@ export function ProfileScanHistorySection({
                             <button
                                 type="button"
                                 onClick={() => setVisible((v) => v + PAGE_SIZE)}
-                                className={`min-h-[44px] px-5 py-2.5 rounded-xl text-xs font-semibold app-btn-secondary cursor-pointer focus:outline-none focus-visible:ring-2 ${accent.ring}`}
+                                className={`min-h-[44px] px-5 py-2.5 text-xs app-btn-tertiary focus:outline-none focus-visible:ring-2 ${accent.ring}`}
                             >
                                 Mostrar más registros ({filteredHistory.length - visible} restantes)
                             </button>
