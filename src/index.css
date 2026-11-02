@@ -49,19 +49,11 @@ p, body {
   transform: scale(0.965);
 }
 
-/* ─── SISTEMA JERÁRQUICO DE BOTONES EN UX (SEGÚN GUÍA UX DE BOTONES) ───
- * 1. Forma consistente (.rounded-xl / 12px) en botones de texto para distinguirlos
- *    de insignias/etiquetas (.rounded-full), mientras que FABs e Icon Buttons son circulares.
- * 2. Jerarquía visual estricta:
- *    - Primary (.app-btn-primary): Color de acento sólido y audaz (máx. 1 por vista/contenedor).
- *    - Secondary (.app-btn-secondary): Inverso del primario (borde y texto con color de acento).
- *    - Tertiary (.app-btn-tertiary): Gris neutro suave sin borde pesado para acciones de menor prioridad.
- *    - Ghost (.app-btn-ghost / .app-btn-glass): Transparente con borde visible para rutas alternas.
- *    - Text (.app-btn-text): Sin borde ni fondo; gana relleno sutil en hover/focus.
- *    - FAB (.app-btn-fab): Botón de acción flotante circular/píldora con sombra elevada.
- *    - Icon (.app-btn-icon / .app-btn-icon-glass): Icono único con área táctil mínima de 48x48px.
- *    - Destructive (.app-btn-destructive / .app-btn-danger): Rojo de advertencia sólido o secundario.
- *    - Link (.app-link-action): Enlace de navegación que gana subrayado en hover (no relleno de botón).
+/* ─── SISTEMA DE BOTONES RECICLO: CRAFTED (APPLE DESIGN & ANTISLOP) ───
+ * Diseño auténtico, sobrio y humano: sin artificios de IA (sin rayos diagonales
+ * shimmer, sin halos de neón saturados ni decoraciones innecesarias).
+ * Foco en respuesta táctil física inmediata (kill latency), micro-bisel de luz
+ * cenital, curvas elásticas spring y retroalimentación direccional en iconos.
  * ─────────────────────────────────────────────────────────────────────────── */
 .app-btn-base,
 .app-btn-primary,
@@ -74,48 +66,55 @@ p, body {
 .app-btn-text,
 .app-btn-destructive,
 .app-btn-danger {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  border-radius: 0.75rem; /* 12px consistente: distingue botones de badges/tags (rounded-full) */
+  border-radius: 0.75rem;
   font-weight: 600;
+  font-size: 0.875rem;
   line-height: 1.25;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
   white-space: nowrap;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
   cursor: pointer;
   transform: translateZ(0);
-  transition: background 180ms cubic-bezier(0.2, 0, 0, 1),
-              background-color 180ms cubic-bezier(0.2, 0, 0, 1),
-              border-color 180ms cubic-bezier(0.2, 0, 0, 1),
-              color 180ms cubic-bezier(0.2, 0, 0, 1),
-              box-shadow 180ms cubic-bezier(0.2, 0, 0, 1),
-              transform 120ms cubic-bezier(0.2, 0, 0, 1);
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 180ms cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 150ms ease,
+              border-color 150ms ease,
+              color 150ms ease,
+              filter 150ms ease;
 }
 
-.app-btn-fab,
-.app-btn-icon,
-.app-btn-icon-glass {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 9999px;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  cursor: pointer;
-  transform: translateZ(0);
-  transition: background 180ms cubic-bezier(0.2, 0, 0, 1),
-              background-color 180ms cubic-bezier(0.2, 0, 0, 1),
-              border-color 180ms cubic-bezier(0.2, 0, 0, 1),
-              color 180ms cubic-bezier(0.2, 0, 0, 1),
-              box-shadow 180ms cubic-bezier(0.2, 0, 0, 1),
-              transform 120ms cubic-bezier(0.2, 0, 0, 1);
+/* Micro-interacción direccional en iconos (Apple Momentum Hint) */
+.app-btn-base svg,
+.app-btn-primary svg,
+.app-btn-secondary svg,
+.app-btn-tertiary svg,
+.app-btn-ghost svg,
+.app-btn-destructive svg {
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.app-btn-base:hover svg:last-child:not(:first-child),
+.app-btn-primary:hover svg:last-child:not(:first-child),
+.app-btn-secondary:hover svg:last-child:not(:first-child),
+.app-btn-tertiary:hover svg:last-child:not(:first-child),
+.app-btn-ghost:hover svg:last-child:not(:first-child) {
+  transform: translateX(2px);
+}
+
+.app-btn-base:hover svg:first-child:not(:last-child),
+.app-btn-primary:hover svg:first-child:not(:last-child),
+.app-btn-secondary:hover svg:first-child:not(:last-child) {
+  transform: scale(1.05);
+}
+
+/* Respuesta táctil física instantánea (Kill Latency - Apple WWDC) */
 .app-btn-base:active,
 .app-btn-primary:active,
 .app-btn-secondary:active,
@@ -130,7 +129,8 @@ p, body {
 .app-btn-icon-glass:active,
 .app-btn-destructive:active,
 .app-btn-danger:active {
-  transform: scale(0.968);
+  transform: scale(0.97) !important;
+  transition: transform 80ms ease-out !important;
 }
 
 .app-btn-base:disabled,
@@ -147,169 +147,171 @@ p, body {
 .app-btn-icon-glass:disabled,
 .app-btn-destructive:disabled,
 .app-btn-danger:disabled {
-  opacity: 0.45;
+  opacity: 0.42;
   cursor: not-allowed;
   pointer-events: none;
+  transform: none !important;
+  box-shadow: none !important;
+  filter: grayscale(0.5);
 }
 
-/* 1. PRIMARY BUTTON: Color de acento sólido y audaz (Reservado a 1 CTA principal por vista) */
+/* 1. BOTÓN PRINCIPAL: Pigmento sólido con bisel táctil cenital */
 .app-btn-primary {
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--accent-color, #18181b) 82%, #ffffff 18%) 0%,
-    var(--accent-color, #18181b) 52%,
-    color-mix(in srgb, var(--accent-color, #18181b) 84%, #09090b 16%) 100%
-  );
+  background-color: var(--accent-color, #059669);
   color: #ffffff !important;
-  border: 1px solid color-mix(in srgb, var(--accent-color, #18181b) 68%, #ffffff 32%);
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.38),
-              inset 0 -1px 0 0 rgba(0, 0, 0, 0.22),
-              0 6px 18px -4px color-mix(in srgb, var(--accent-color, #18181b) 48%, transparent),
-              0 2px 5px 0 rgba(9, 9, 11, 0.18);
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.16);
-}
-.app-btn-primary:hover {
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--accent-color, #18181b) 74%, #ffffff 26%) 0%,
-    color-mix(in srgb, var(--accent-color, #18181b) 92%, #ffffff 8%) 52%,
-    color-mix(in srgb, var(--accent-color, #18181b) 88%, #09090b 12%) 100%
-  );
-  border-color: color-mix(in srgb, var(--accent-color, #18181b) 55%, #ffffff 45%);
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.48),
-              inset 0 -1px 0 0 rgba(0, 0, 0, 0.18),
-              0 10px 24px -4px color-mix(in srgb, var(--accent-color, #18181b) 60%, transparent),
-              0 3px 8px 0 rgba(9, 9, 11, 0.22);
-}
-.dark .app-btn-primary {
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--accent-color, #27272a) 76%, #ffffff 24%) 0%,
-    color-mix(in srgb, var(--accent-color, #27272a) 92%, #ffffff 8%) 52%,
-    color-mix(in srgb, var(--accent-color, #27272a) 84%, #09090b 16%) 100%
-  );
-  color: #ffffff !important;
-  border: 1px solid color-mix(in srgb, var(--accent-color, #27272a) 58%, #ffffff 42%);
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.44),
-              inset 0 -1px 0 0 rgba(0, 0, 0, 0.26),
-              0 8px 22px -4px color-mix(in srgb, var(--accent-color, #27272a) 54%, transparent),
-              0 2px 8px 0 rgba(0, 0, 0, 0.45);
-}
-.dark .app-btn-primary:hover {
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--accent-color, #27272a) 68%, #ffffff 32%) 0%,
-    color-mix(in srgb, var(--accent-color, #27272a) 88%, #ffffff 12%) 52%,
-    color-mix(in srgb, var(--accent-color, #27272a) 88%, #09090b 12%) 100%
-  );
-  border-color: color-mix(in srgb, var(--accent-color, #27272a) 50%, #ffffff 50%);
+  border: 1px solid color-mix(in srgb, var(--accent-color, #059669) 82%, #000000 18%);
+  box-shadow: inset 0 1px 0.5px 0 rgba(255, 255, 255, 0.22),
+              0 1px 2px 0 rgba(0, 0, 0, 0.08);
 }
 
-/* 2. SECONDARY BUTTON: Inverso del botón primario (Fondo limpio + Borde y texto de acento) */
+.app-btn-primary:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.04);
+  box-shadow: inset 0 1px 0.5px 0 rgba(255, 255, 255, 0.28),
+              0 4px 12px -2px rgba(0, 0, 0, 0.16),
+              0 1px 3px 0 rgba(0, 0, 0, 0.08);
+}
+
+.dark .app-btn-primary {
+  background-color: var(--accent-color, #059669);
+  border: 1px solid color-mix(in srgb, var(--accent-color, #059669) 82%, #ffffff 18%);
+  box-shadow: inset 0 1px 0.5px 0 rgba(255, 255, 255, 0.2),
+              0 2px 6px 0 rgba(0, 0, 0, 0.35);
+}
+
+.dark .app-btn-primary:hover {
+  filter: brightness(1.06);
+  box-shadow: inset 0 1px 0.5px 0 rgba(255, 255, 255, 0.25),
+              0 5px 14px -2px rgba(0, 0, 0, 0.45);
+}
+
+.app-btn-fab,
+.app-btn-icon,
+.app-btn-icon-glass {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  cursor: pointer;
+  transform: translateZ(0);
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 180ms cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 150ms ease,
+              border-color 150ms ease,
+              color 150ms ease;
+}
+
+/* 2. SECONDARY BUTTON: Fondo blanco nítido, borde fino y tinte suave en hover */
 .app-btn-secondary {
-  background-color: rgba(255, 255, 255, 0.92);
-  color: color-mix(in srgb, var(--accent-color, #18181b) 88%, #09090b 12%);
-  border: 1.5px solid color-mix(in srgb, var(--accent-color, #18181b) 55%, rgba(24, 24, 27, 0.2));
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
+  background-color: #ffffff;
+  color: color-mix(in srgb, var(--accent-color, #059669) 90%, #064e3b 10%);
+  border: 1px solid color-mix(in srgb, var(--accent-color, #059669) 30%, #e4e4e7 70%);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
 }
 .app-btn-secondary:hover {
-  background-color: color-mix(in srgb, var(--accent-color, #18181b) 9%, #ffffff 91%);
-  border-color: color-mix(in srgb, var(--accent-color, #18181b) 82%, #09090b 18%);
-  box-shadow: 0 3px 10px -2px color-mix(in srgb, var(--accent-color, #18181b) 18%, transparent);
+  transform: translateY(-1px);
+  background-color: color-mix(in srgb, var(--accent-color, #059669) 6%, #ffffff);
+  border-color: color-mix(in srgb, var(--accent-color, #059669) 55%, transparent);
+  box-shadow: 0 3px 8px -1px rgba(0, 0, 0, 0.07);
 }
 .dark .app-btn-secondary {
-  background-color: rgba(24, 24, 27, 0.65);
-  color: color-mix(in srgb, var(--accent-color, #ffffff) 42%, #ffffff 58%);
-  border: 1.5px solid color-mix(in srgb, var(--accent-color, #ffffff) 58%, rgba(255, 255, 255, 0.22));
-  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.35);
+  background-color: #18181b;
+  color: color-mix(in srgb, var(--accent-color, #34d399) 75%, #ffffff 25%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.25);
 }
 .dark .app-btn-secondary:hover {
-  background-color: color-mix(in srgb, var(--accent-color, #ffffff) 18%, rgba(39, 39, 42, 0.85));
-  border-color: color-mix(in srgb, var(--accent-color, #ffffff) 75%, #ffffff 25%);
+  background-color: color-mix(in srgb, var(--accent-color, #34d399) 10%, #18181b);
+  border-color: color-mix(in srgb, var(--accent-color, #34d399) 45%, transparent);
+  box-shadow: 0 3px 10px -1px rgba(0, 0, 0, 0.4);
 }
 
-/* 3. TERTIARY BUTTON: Gris neutro suave sin borde pronunciado (Acciones de menor prioridad) */
+/* 3. TERTIARY BUTTON: Material neutro silencioso (Apple System Gray) */
 .app-btn-tertiary {
   background-color: #f4f4f5;
   color: #27272a;
-  border: 1px solid rgba(24, 24, 27, 0.05);
+  border: 1px solid transparent;
 }
 .app-btn-tertiary:hover {
+  transform: translateY(-1px);
   background-color: #e4e4e7;
   color: #09090b;
-  border-color: rgba(24, 24, 27, 0.1);
 }
 .dark .app-btn-tertiary {
-  background-color: rgba(39, 39, 42, 0.82);
+  background-color: #27272a;
   color: #e4e4e7;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.04);
 }
 .dark .app-btn-tertiary:hover {
-  background-color: rgba(63, 63, 70, 0.92);
+  background-color: #3f3f46;
   color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.12);
 }
 
-/* 4. GHOST BUTTON: Transparente con borde y texto visibles (Rutas alternas junto al CTA primario) */
+/* 4. GHOST / OUTLINE: Borde neutro sutil para rutas alternas */
 .app-btn-ghost,
 .app-btn-outline {
   background-color: transparent;
-  color: #18181b;
-  border: 1.5px solid rgba(24, 24, 27, 0.24);
+  color: #27272a;
+  border: 1px solid rgba(24, 24, 27, 0.14);
 }
 .app-btn-ghost:hover,
 .app-btn-outline:hover {
-  background-color: rgba(24, 24, 27, 0.06);
-  border-color: rgba(24, 24, 27, 0.45);
+  transform: translateY(-1px);
+  background-color: rgba(24, 24, 27, 0.04);
+  border-color: rgba(24, 24, 27, 0.28);
 }
 .dark .app-btn-ghost,
 .dark .app-btn-outline {
   background-color: transparent;
   color: #f4f4f5;
-  border: 1.5px solid rgba(255, 255, 255, 0.26);
+  border: 1px solid rgba(255, 255, 255, 0.16);
 }
 .dark .app-btn-ghost:hover,
 .dark .app-btn-outline:hover {
-  background-color: rgba(255, 255, 255, 0.09);
-  border-color: rgba(255, 255, 255, 0.48);
+  background-color: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.32);
 }
 
-/* Ghost sobre fondos oscuros/multimedia (Hero, Cámara, Modales oscuros) con contraste garantizado */
+/* Ghost sobre overlay de cámara o fondos oscuros */
 .app-btn-glass {
-  background-color: rgba(9, 9, 11, 0.38);
+  background-color: rgba(0, 0, 0, 0.45);
   color: #ffffff;
-  border: 1.5px solid rgba(255, 255, 255, 0.34);
-  backdrop-filter: blur(14px) saturate(160%);
-  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 .app-btn-glass:hover {
-  background-color: rgba(255, 255, 255, 0.16);
-  border-color: rgba(255, 255, 255, 0.62);
+  transform: translateY(-1px);
+  background-color: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
-/* Pearl: Variante luminosa de alto contraste para superficies oscuras */
+/* Pearl: Superficie luminosa sólida */
 .app-btn-pearl {
-  background: linear-gradient(180deg, #ffffff 0%, #e4e4e7 100%);
+  background-color: #ffffff;
   color: #09090b !important;
-  border: 1px solid rgba(255, 255, 255, 0.95);
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 1),
-              0 6px 20px -4px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06);
 }
 .app-btn-pearl:hover {
-  background: linear-gradient(180deg, #ffffff 0%, #f4f4f5 100%);
+  transform: translateY(-1px);
+  background-color: #f4f4f5;
+  box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.09);
 }
 
-/* 5. TEXT BUTTON: Sin contorno ni fondo por defecto; gana relleno claro en hover/focus */
+/* 5. TEXT BUTTON: Sin marco, adquiere relleno suave al interactuar */
 .app-btn-text {
   background-color: transparent;
   color: #3f3f46;
   border: 1px solid transparent;
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
+  padding-left: 0.625rem;
+  padding-right: 0.625rem;
 }
 .app-btn-text:hover,
 .app-btn-text:focus-visible {
-  background-color: rgba(24, 24, 27, 0.07);
+  background-color: rgba(24, 24, 27, 0.05);
   color: #09090b;
 }
 .dark .app-btn-text {
@@ -317,104 +319,100 @@ p, body {
 }
 .dark .app-btn-text:hover,
 .dark .app-btn-text:focus-visible {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.07);
   color: #ffffff;
 }
 
-/* 6. FLOATING ACTION BUTTON (FAB): Circular o píldora con sombra flotante pronunciada */
+/* 6. FLOATING ACTION BUTTON (FAB): Elevación física para cámara */
 .app-btn-fab {
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--accent-color, #18181b) 80%, #ffffff 20%) 0%,
-    var(--accent-color, #18181b) 55%,
-    color-mix(in srgb, var(--accent-color, #18181b) 82%, #09090b 18%) 100%
-  );
+  border-radius: 9999px;
+  background-color: var(--accent-color, #059669);
   color: #ffffff !important;
-  border: 1.5px solid color-mix(in srgb, var(--accent-color, #18181b) 60%, #ffffff 40%);
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.45),
-              0 12px 28px -4px color-mix(in srgb, var(--accent-color, #18181b) 58%, rgba(0, 0, 0, 0.38)),
-              0 4px 10px 0 rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.16);
 }
 .app-btn-fab:hover {
-  transform: translateY(-2px);
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.55),
-              0 16px 34px -4px color-mix(in srgb, var(--accent-color, #18181b) 70%, rgba(0, 0, 0, 0.45)),
-              0 6px 14px 0 rgba(0, 0, 0, 0.32);
+  transform: translateY(-2px) scale(1.03);
+  filter: brightness(1.04);
+  box-shadow: 0 6px 18px 0 rgba(0, 0, 0, 0.22);
 }
 
-/* 7. ICON BUTTON: Icono singular con objetivo táctil mínimo de 48x48px para móviles */
+/* 7. ICON BUTTON: 48×48px táctil ergonómico con micro-escala */
 .app-btn-icon {
   min-width: 48px;
   min-height: 48px;
   padding: 0.625rem;
-  background-color: rgba(244, 244, 245, 0.9);
+  border-radius: 0.75rem;
+  background-color: rgba(244, 244, 245, 0.85);
   color: #27272a;
   border: 1px solid rgba(24, 24, 27, 0.08);
 }
 .app-btn-icon:hover {
+  transform: scale(1.04);
   background-color: #e4e4e7;
   color: #09090b;
-  border-color: rgba(24, 24, 27, 0.16);
 }
 .dark .app-btn-icon {
   background-color: rgba(39, 39, 42, 0.85);
   color: #e4e4e7;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 .dark .app-btn-icon:hover {
   background-color: rgba(63, 63, 70, 0.95);
   color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .app-btn-icon-glass {
   min-width: 48px;
   min-height: 48px;
   padding: 0.625rem;
-  background-color: rgba(9, 9, 11, 0.52);
+  border-radius: 9999px;
+  background-color: rgba(0, 0, 0, 0.45);
   color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  backdrop-filter: blur(14px) saturate(160%);
-  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 .app-btn-icon-glass:hover {
-  background-color: rgba(255, 255, 255, 0.18);
-  border-color: rgba(255, 255, 255, 0.4);
+  transform: scale(1.04);
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.35);
 }
 
-/* 8. DESTRUCTIVE BUTTON: Rojo de advertencia sólido para modales de confirmación destructiva */
+/* 8. DESTRUCTIVE BUTTON: Rojo Apple con relieve sutil */
 .app-btn-destructive {
-  background: linear-gradient(180deg, #ef4444 0%, #dc2626 100%);
+  background-color: #dc2626;
   color: #ffffff !important;
   border: 1px solid #b91c1c;
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.32),
-              0 6px 18px -3px rgba(220, 38, 38, 0.42),
-              0 2px 5px 0 rgba(0, 0, 0, 0.18);
+  box-shadow: inset 0 1px 0.5px 0 rgba(255, 255, 255, 0.2),
+              0 1px 2px 0 rgba(0, 0, 0, 0.08);
 }
 .app-btn-destructive:hover {
-  background: linear-gradient(180deg, #f87171 0%, #ef4444 100%);
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.4),
-              0 8px 22px -3px rgba(220, 38, 38, 0.55);
+  transform: translateY(-1px);
+  filter: brightness(1.04);
+  box-shadow: inset 0 1px 0.5px 0 rgba(255, 255, 255, 0.25),
+              0 4px 12px -2px rgba(220, 38, 38, 0.28);
 }
 
-/* Danger secundario (activador de advertencia antes del modal de confirmación) */
+/* Danger secundario */
 .app-btn-danger {
   background-color: rgba(244, 63, 94, 0.08);
   color: #be123c;
-  border: 1.5px solid rgba(244, 63, 94, 0.28);
+  border: 1.5px solid rgba(244, 63, 94, 0.25);
 }
 .app-btn-danger:hover {
-  background-color: rgba(244, 63, 94, 0.16);
-  border-color: rgba(244, 63, 94, 0.48);
+  transform: translateY(-1.5px);
+  background-color: rgba(244, 63, 94, 0.15);
+  border-color: rgba(244, 63, 94, 0.45);
 }
 .dark .app-btn-danger {
-  background-color: rgba(244, 63, 94, 0.14);
+  background-color: rgba(244, 63, 94, 0.12);
   color: #fda4af;
-  border: 1.5px solid rgba(244, 63, 94, 0.34);
+  border: 1.5px solid rgba(244, 63, 94, 0.3);
 }
 .dark .app-btn-danger:hover {
-  background-color: rgba(244, 63, 94, 0.24);
-  border-color: rgba(244, 63, 94, 0.52);
+  background-color: rgba(244, 63, 94, 0.22);
+  border-color: rgba(244, 63, 94, 0.5);
 }
 
 /* 9. LINKS DE NAVEGACIÓN (.app-link-action): Subrayado en hover en lugar de relleno de botón */

@@ -55,16 +55,16 @@ export const ACCENT_TOKENS: Record<AccentColor, AccentTokens> = {
     },
     emerald: {
         id: "emerald",
-        name: "Salvia Mineral",
-        text: "text-teal-700 dark:text-teal-300",
+        name: "Esmeralda Biósfera",
+        text: "text-emerald-700 dark:text-emerald-300",
         btn: "app-btn-primary",
         btnOutline: "app-btn-secondary",
         badge: "app-badge-accent",
-        ring: "focus-visible:ring-teal-600",
-        border: "border-teal-600",
-        glow: "bg-teal-500/15 dark:bg-teal-500/20",
-        gradient: "from-teal-600 to-emerald-700 dark:from-teal-400 dark:to-emerald-300",
-        hex: "#0d9488",
+        ring: "focus-visible:ring-emerald-500",
+        border: "border-emerald-500",
+        glow: "bg-emerald-500/25 dark:bg-emerald-500/30",
+        gradient: "from-emerald-500 via-teal-600 to-emerald-700 dark:from-emerald-400 dark:via-teal-400 dark:to-emerald-500",
+        hex: "#059669",
     },
     blue: {
         id: "blue",
@@ -182,20 +182,15 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     });
 
     const [accentColor, setAccentColor] = useState<AccentColor>(() => {
-        const migratedAccent = localStorage.getItem("reciclo_accent_v2_editorial");
-        if (!migratedAccent) {
-            localStorage.setItem("reciclo_accent_v2_editorial", "true");
-            const current = localStorage.getItem("accentColor");
-            if (!current || current === "emerald") {
-                localStorage.setItem("accentColor", "obsidian");
-                return "obsidian";
-            }
+        const stored = localStorage.getItem("accentColor");
+        if (stored && (stored in ACCENT_TOKENS || stored === "custom")) {
+            return stored as AccentColor;
         }
-        return (localStorage.getItem("accentColor") as AccentColor) || "obsidian";
+        return "emerald";
     });
 
     const [customHex, setCustomHexState] = useState<string>(() => {
-        return localStorage.getItem("reciclo_custom_hex") || "#0284c7";
+        return localStorage.getItem("reciclo_custom_hex") || "#059669";
     });
 
     const setCustomHex = (hex: string) => {
@@ -372,7 +367,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     // de rendimiento y al sistema operativo, en vez de forzar una elección fija.
     const resetTheme = () => {
         setGlassTheme("heavy");
-        setAccentColor("obsidian");
+        setAccentColor("emerald");
         setColorSchemeMode("system");
         setHeroVideo(`${CLOUDINARY_HERO_BASE}/video-hero.mp4`);
         setNotchShortcuts(DEFAULT_NOTCH_SHORTCUTS);

@@ -44,12 +44,12 @@ const presetAccents: {
     name: string;
     hex: string;
 }[] = [
-    { id: "obsidian", bgClass: "bg-zinc-800 dark:bg-zinc-200", name: "Obsidiana", hex: "#27272a" },
-    { id: "blue", bgClass: "bg-sky-600", name: "Zafiro", hex: "#0284c7" },
-    { id: "emerald", bgClass: "bg-teal-600", name: "Salvia Mineral", hex: "#0d9488" },
-    { id: "amber", bgClass: "bg-amber-600", name: "Ámbar", hex: "#d97706" },
+    { id: "emerald", bgClass: "bg-emerald-600", name: "Esmeralda Biósfera", hex: "#059669" },
+    { id: "blue", bgClass: "bg-sky-600", name: "Zafiro Océano", hex: "#0284c7" },
+    { id: "amber", bgClass: "bg-amber-600", name: "Ámbar Solar", hex: "#d97706" },
     { id: "purple", bgClass: "bg-violet-600", name: "Amatista", hex: "#7c3aed" },
-    { id: "rose", bgClass: "bg-rose-600", name: "Coral", hex: "#e11d48" },
+    { id: "rose", bgClass: "bg-rose-600", name: "Coral Botánico", hex: "#e11d48" },
+    { id: "obsidian", bgClass: "bg-zinc-800 dark:bg-zinc-200", name: "Obsidiana Platino", hex: "#18181b" },
 ];
 
 const colorSchemeOptions: {
@@ -442,7 +442,7 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                                                         <div className="flex items-center justify-between">
                                                             <span className="text-zinc-600 dark:text-zinc-400 font-medium">Jerarquía UX en vivo:</span>
                                                             <span className={`px-2.5 py-0.5 rounded-full text-[10.5px] font-bold ${accent.badge}`}>
-                                                                Insignia (rounded-full)
+                                                                Botones interactivos
                                                             </span>
                                                         </div>
                                                         <div className="flex flex-wrap items-center gap-2">
