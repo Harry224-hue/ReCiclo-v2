@@ -424,7 +424,7 @@ export default function ComoFunciona() {
           <div className="flex flex-wrap items-center gap-2.5 shrink-0">
             <Link
               to="/escanear"
-              className={`inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold text-white shadow-xs transition-transform active:scale-95 ${accent.btn}`}
+              className={`inline-flex min-h-[42px] items-center justify-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold text-white cursor-pointer ${accent.btn}`}
             >
               <Sparkles size={14} />
               <span>Ir al Escáner</span>
@@ -432,7 +432,7 @@ export default function ComoFunciona() {
             </Link>
             <Link
               to="/mapa"
-              className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
+              className="inline-flex min-h-[42px] items-center justify-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold app-btn-secondary cursor-pointer"
             >
               <MapPin size={14} />
               <span>Mapa del Campus</span>

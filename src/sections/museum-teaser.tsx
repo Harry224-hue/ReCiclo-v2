@@ -14,7 +14,7 @@ const FRAME_POSITIONS = [
 ];
 
 export function MuseumTeaser() {
-    const { isDarkMode } = useTheme();
+    const { isDarkMode, accent } = useTheme();
 
     return (
         <section
@@ -61,29 +61,17 @@ export function MuseumTeaser() {
                         prueba interactivamente cada versión como corría en su momento.
                     </p>
 
-                    {/* Botón dinámico, con brillo, hover reactivo y acento global */}
+                    {/* Botón táctil estandarizado con acento global */}
                     <div className="mt-8 flex flex-col items-start gap-3">
                         <Link
                             to="/museo"
-                            className="group relative inline-flex min-h-[50px] items-center gap-3 overflow-hidden rounded-2xl px-7 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-                            style={{
-                                backgroundColor: "var(--accent-color)",
-                                boxShadow: "0 8px 28px var(--accent-glow)",
-                            }}
+                            className={`group inline-flex min-h-[48px] items-center justify-center gap-2.5 rounded-xl px-6 py-3 text-sm font-semibold text-white cursor-pointer ${accent.btn} focus-visible:outline-none focus-visible:ring-2 ${accent.ring}`}
                         >
-                            {/* Reflejo de brillo que barre en hover */}
-                            <span
-                                aria-hidden="true"
-                                className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-1000 group-hover:translate-x-full"
-                            />
-
-                            <span className="relative z-10 tracking-wide font-semibold">
-                                Explorar archivo completo
-                            </span>
+                            <span>Explorar archivo completo</span>
                             <ArrowRight
-                                size={18}
+                                size={16}
                                 aria-hidden="true"
-                                className="relative z-10 transition-transform duration-300 group-hover:translate-x-1.5"
+                                className="transition-transform duration-200 group-hover:translate-x-1"
                             />
                         </Link>
 

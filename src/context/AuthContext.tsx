@@ -9,6 +9,7 @@ import {
 } from "react";
 import { type User } from "firebase/auth";
 import { onAuthChange, getUserProfile, type UserProfile } from "../firebase";
+import { clearScanHistory, syncAccountHistoryWithCloud } from "../data/historyStorage";
 
 // ─── Tipos ─────────────────────────────────────────────────
 export type ProfileStatus = "idle" | "loading" | "ready" | "error";
@@ -63,12 +64,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     useEffect(() => {
         const unsubscribe = onAuthChange(async (firebaseUser) => {
+            const prevUid = uidRef.current;
             uidRef.current = firebaseUser?.uid ?? null;
             setUser(firebaseUser);
 
             if (firebaseUser) {
-                await loadProfile(firebaseUser.uid);
+                await Promise.all([
+                    loadProfile(firebaseUser.uid),
+                    syncAccountHistoryWithCloud(firebaseUser.uid),
+                ]);
             } else {
+                if (prevUid) {
+                    // Al cerrar sesión, limpiar la caché local para proteger la privacidad en equipos compartidos
+                    clearScanHistory();
+                }
                 setProfile(null);
                 setProfileStatus("idle");
             }

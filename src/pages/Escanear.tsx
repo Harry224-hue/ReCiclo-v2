@@ -2,16 +2,19 @@ import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useDragControls, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
+  Barcode,
   BookOpen,
   Camera as CameraIcon,
   ChevronDown,
   Cpu,
   FlaskConical,
+  HelpCircle,
   History,
   ImagePlus,
   Loader2,
   RefreshCw,
   ScanLine,
+  Search,
   ShieldCheck,
   Sparkles,
   Trash2,
@@ -23,14 +26,24 @@ import {
   WasteItem,
   CAMPUS_CONTAINERS_CATALOG,
 } from "../data/wasteData";
-import { addScanToHistory } from "../data/historyStorage";
+import { addScanToHistory, markScanEntrySynced } from "../data/historyStorage";
 import { WasteVisual } from "../components/WasteVisual";
 import { useAuth } from "../context/AuthContext";
 import type { AIClassificationResult } from "../services/aiClassifier";
+import { classifyWithGroq } from "../services/groqClassifier";
+import {
+  CAMPUS_BARCODE_PRESETS,
+  classifyByBarcode,
+  detectBarcodeFromSource,
+} from "../services/barcodeClassifier";
 import { classifyWithGemini } from "../services/geminiClassifier";
 import { addScan, getUserProgress, updateUserProgress } from "../firebase";
 import { ContainerGuide } from "../components/ContainerGuide";
 import { ScanResultPanel } from "../components/scanner/ScanResultPanel";
+import {
+  SCANNER_ONBOARDING_KEY,
+  ScannerOnboardingModal,
+} from "../components/scanner/ScannerOnboardingModal";
 import { triggerHaptic } from "../utils/haptics";
 import { APPLE_SPRING_SHEET, projectMomentum } from "../utils/springs";
 
@@ -109,7 +122,17 @@ export default function Escanear() {
   const [scanStep, setScanStep] = useState(0);
   const [guideOpen, setGuideOpen] = useState(false);
   const [guideBinId, setGuideBinId] = useState<string | null>(null);
-  const { user } = useAuth();
+  const [scanMode, setScanMode] = useState<"photo" | "barcode">("photo");
+  const [manualBarcode, setManualBarcode] = useState("");
+  const [barcodeError, setBarcodeError] = useState<string | null>(null);
+  const [onboardingOpen, setOnboardingOpen] = useState<boolean>(() => {
+    try {
+      return !localStorage.getItem(SCANNER_ONBOARDING_KEY);
+    } catch {
+      return true;
+    }
+  });
+  const { user, isLoggedIn } = useAuth();
   const reduceMotion = useReducedMotion();
 
   const mountedRef = useRef(true);
@@ -258,18 +281,19 @@ export default function Escanear() {
   };
 
   const saveScanRecord = async (waste: WasteItem, confidence = 0.9) => {
-    addScanToHistory({
+    const localEntry = addScanToHistory({
       wasteId: waste.id,
       wasteName: waste.name,
       material: waste.material,
       category: waste.category,
       categoryLabel: waste.categoryLabel,
       recommendedBin: waste.recommendedBin.label,
+      syncedToCloud: false,
     });
 
     if (user?.uid) {
       try {
-        await addScan({
+        const cloudId = await addScan({
           userId: user.uid,
           fecha: new Date(),
           nombreDetectado: waste.name,
@@ -278,7 +302,10 @@ export default function Escanear() {
           contenedor: waste.recommendedBin.label,
           confianza: Math.round(confidence * 100),
           imagenUrl: "",
+          wasteId: waste.id,
+          categoryLabel: waste.categoryLabel,
         });
+        markScanEntrySynced(localEntry.id, cloudId);
 
         const currentProg = await getUserProgress(user.uid);
         if (currentProg) {
@@ -303,9 +330,79 @@ export default function Escanear() {
     setShowSamples(false);
   };
 
+  const handleBarcodeLookup = async (rawCode: string) => {
+    const clean = rawCode.replace(/\D/g, "").trim();
+    if (!clean) return;
+    setBarcodeError(null);
+    stopCamera();
+    setUploadedPreview(null);
+    setIsScanning(true);
+    setSelectedWaste(null);
+    setAiResult(null);
+
+    try {
+      const result = await classifyByBarcode(clean);
+      setAiResult(result);
+      if (result.productImageUrl) {
+        setUploadedPreview(result.productImageUrl);
+      }
+      triggerHaptic("success");
+      showResult(result.wasteItem);
+      saveScanRecord(result.wasteItem, result.confidence);
+      setManualBarcode("");
+    } catch (err) {
+      const msg =
+        err instanceof Error
+          ? err.message
+          : "No se encontró el código en Open Food Facts. Usa el modo «Foto con IA».";
+      setBarcodeError(msg);
+      startLiveCamera(facingMode);
+    } finally {
+      setIsScanning(false);
+    }
+  };
+
+  // Bucle de lectura automática en vivo cuando está activo el modo "Código de barras"
+  useEffect(() => {
+    if (
+      !cameraActive ||
+      scanMode !== "barcode" ||
+      isScanning ||
+      Boolean(selectedWaste) ||
+      onboardingOpen
+    ) {
+      return;
+    }
+
+    let cancelled = false;
+    let busy = false;
+
+    const timer = window.setInterval(async () => {
+      if (cancelled || busy || !videoRef.current) return;
+      if (videoRef.current.readyState < 2) return;
+      busy = true;
+      try {
+        const detected = await detectBarcodeFromSource(videoRef.current);
+        if (!cancelled && detected) {
+          triggerHaptic("medium");
+          handleBarcodeLookup(detected);
+        }
+      } finally {
+        busy = false;
+      }
+    }, 380);
+
+    return () => {
+      cancelled = true;
+      window.clearInterval(timer);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cameraActive, scanMode, isScanning, selectedWaste, onboardingOpen]);
+
   const processImageSrc = (dataUrl: string) => {
     stopCamera();
     setUploadedPreview(dataUrl);
+    setBarcodeError(null);
     setIsScanning(true);
     setSelectedWaste(null);
     setAiResult(null);
@@ -313,14 +410,35 @@ export default function Escanear() {
     const img = new Image();
     img.onload = async () => {
       try {
-        let result: AIClassificationResult;
-        try {
-          result = await classifyWithGemini(img);
-        } catch (geminiErr) {
-          console.warn("[Gemini] No disponible, usando MobileNet local:", geminiErr);
-          const { classifyWasteImage } = await import("../services/aiClassifier");
-          result = { ...(await classifyWasteImage(img)), engine: "mobilenet" };
+        let result: AIClassificationResult | null = null;
+
+        // Si el usuario está en modo código de barras, intentar primero extraer el código de la imagen
+        if (scanMode === "barcode") {
+          const codeInImg = await detectBarcodeFromSource(img);
+          if (codeInImg) {
+            try {
+              result = await classifyByBarcode(codeInImg);
+            } catch {
+              result = null;
+            }
+          }
         }
+
+        // Clasificación principal por visión: Groq Cloud Vision -> respaldo Gemini -> respaldo MobileNet local
+        if (!result) {
+          try {
+            result = await classifyWithGroq(img);
+          } catch (groqErr) {
+            console.warn("[Groq Vision] Usando clasificador alternativo:", groqErr);
+            try {
+              result = await classifyWithGemini(img);
+            } catch {
+              const { classifyWasteImage } = await import("../services/aiClassifier");
+              result = { ...(await classifyWasteImage(img)), engine: "mobilenet" };
+            }
+          }
+        }
+
         setAiResult(result);
         triggerHaptic("success");
         showResult(result.wasteItem);
@@ -413,28 +531,36 @@ export default function Escanear() {
         <div>
           <div className="inline-flex items-center gap-1.5 rounded-full border border-emerald-300/60 bg-emerald-50 px-3 py-1 text-[10.5px] font-bold uppercase tracking-wider text-emerald-700 dark:border-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300">
             <Cpu size={12} />
-            Visión artificial · MobileNet v2 + Gemini
+            Groq Vision IA + Código de barras (Open Food Facts) + MobileNet
           </div>
           <h1 className="mt-2 text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50 xl:text-4xl">
             Escáner de residuos
           </h1>
           <p className="mt-0.5 max-w-xl text-[12.5px] leading-snug text-zinc-500 dark:text-zinc-400">
-            Apunta al residuo, captura y obtén el contenedor oficial del ITM con los pasos para
-            prepararlo antes de depositarlo.
+            Elige entre tomar una foto al residuo con IA gratuita o escanear el código de barras del
+            empaque para obtener el contenedor oficial del ITM.
           </p>
         </div>
         <div className="flex shrink-0 items-center gap-2">
           <button
             type="button"
+            onClick={() => setOnboardingOpen(true)}
+            className="flex min-h-[44px] items-center gap-1.5 rounded-xl px-3.5 text-xs font-semibold app-btn-secondary cursor-pointer"
+          >
+            <HelpCircle size={15} className="text-amber-600 dark:text-amber-400" />
+            Cómo usar el escáner
+          </button>
+          <button
+            type="button"
             onClick={() => openGuide()}
-            className="flex min-h-[44px] items-center gap-1.5 rounded-xl border border-zinc-200 bg-white px-3.5 text-[12px] font-bold text-zinc-700 transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800"
+            className="flex min-h-[44px] items-center gap-1.5 rounded-xl px-3.5 text-xs font-semibold app-btn-secondary cursor-pointer"
           >
             <BookOpen size={15} className="text-emerald-600 dark:text-emerald-400" />
             Guía de contenedores
           </button>
           <Link
             to="/historial"
-            className="flex min-h-[44px] items-center gap-1.5 rounded-xl border border-zinc-200 bg-white px-3.5 text-[12px] font-bold text-zinc-700 transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800"
+            className="flex min-h-[44px] items-center gap-1.5 rounded-xl px-3.5 text-xs font-semibold app-btn-secondary cursor-pointer"
           >
             <History size={15} className="text-sky-600 dark:text-sky-400" />
             Historial
@@ -504,25 +630,44 @@ export default function Escanear() {
           {/* HUD superior */}
           <div className="absolute inset-x-3 top-[calc(env(safe-area-inset-top,0px)+5rem)] z-40 flex items-start justify-between gap-2 md:inset-x-5 md:top-[6.25rem] lg:inset-x-4 lg:top-4">
             <span className="pointer-events-auto inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-black/55 px-3 py-2 text-[10.5px] font-bold text-white shadow-lg backdrop-blur-md">
-              <Cpu size={12} className="text-emerald-400" />
+              {scanMode === "barcode" ? (
+                <Barcode size={12} className="text-sky-400" />
+              ) : (
+                <Cpu size={12} className="text-emerald-400" />
+              )}
               {cameraActive ? (
                 <>
-                  <span className="size-1.5 rounded-full bg-emerald-400" />
-                  Cámara en vivo
+                  <span
+                    className={`size-1.5 rounded-full ${
+                      scanMode === "barcode" ? "bg-sky-400" : "bg-emerald-400"
+                    }`}
+                  />
+                  {scanMode === "barcode" ? "Lector de código activo" : "Cámara en vivo"}
                 </>
               ) : (
                 "Escáner IA"
               )}
-              <span className="hidden text-white/50 sm:inline">· MobileNet v2</span>
+              <span className="hidden text-white/50 sm:inline">
+                {scanMode === "barcode" ? "· Open Food Facts" : "· Groq Vision / MobileNet"}
+              </span>
             </span>
 
             <div className="pointer-events-auto flex items-center gap-1.5">
               <button
                 type="button"
+                onClick={() => setOnboardingOpen(true)}
+                aria-label="Ver tutorial del escáner"
+                title="Cómo usar el escáner"
+                className="flex size-11 items-center justify-center rounded-full border border-white/20 bg-black/55 text-white backdrop-blur-md transition-transform active:scale-90 cursor-pointer"
+              >
+                <HelpCircle size={17} />
+              </button>
+              <button
+                type="button"
                 onClick={() => openGuide()}
                 aria-label="Abrir guía de contenedores"
                 title="Guía de contenedores"
-                className="flex size-11 items-center justify-center rounded-full border border-white/20 bg-black/55 text-white backdrop-blur-md transition-transform active:scale-90"
+                className="flex size-11 items-center justify-center rounded-full border border-white/20 bg-black/55 text-white backdrop-blur-md transition-transform active:scale-90 cursor-pointer"
               >
                 <BookOpen size={17} />
               </button>
@@ -532,7 +677,7 @@ export default function Escanear() {
                   onClick={toggleCameraFacing}
                   aria-label="Cambiar cámara"
                   title="Cambiar cámara"
-                  className="flex size-11 items-center justify-center rounded-full border border-white/20 bg-black/55 text-white backdrop-blur-md transition-transform active:scale-90"
+                  className="flex size-11 items-center justify-center rounded-full border border-white/20 bg-black/55 text-white backdrop-blur-md transition-transform active:scale-90 cursor-pointer"
                 >
                   <RefreshCw size={17} />
                 </button>
@@ -540,21 +685,37 @@ export default function Escanear() {
             </div>
           </div>
 
-          {/* Retícula de captura */}
+          {/* Retícula de captura (adapta su forma según el modo seleccionado) */}
           {cameraActive && !hasResult && (
             <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center">
-              <div className="relative aspect-square w-[60vw] max-w-[260px] sm:max-w-[300px]">
-                <span className="absolute left-0 top-0 size-8 rounded-tl-2xl border-l-[3px] border-t-[3px] border-emerald-400" />
-                <span className="absolute right-0 top-0 size-8 rounded-tr-2xl border-r-[3px] border-t-[3px] border-emerald-400" />
-                <span className="absolute bottom-0 left-0 size-8 rounded-bl-2xl border-b-[3px] border-l-[3px] border-emerald-400" />
-                <span className="absolute bottom-0 right-0 size-8 rounded-br-2xl border-b-[3px] border-r-[3px] border-emerald-400" />
-                <span className="scan-sweep absolute inset-x-4 h-px bg-emerald-400/80 shadow-[0_0_14px_2px_rgba(52,211,153,0.6)]" />
-                <span className="absolute inset-0 flex items-center justify-center">
-                  <span className="rounded-full border border-white/20 bg-black/35 px-3 py-1 text-[10px] font-semibold text-white/85 backdrop-blur-sm">
-                    Centra el residuo
+              {scanMode === "barcode" ? (
+                <div className="relative h-[135px] w-[74vw] max-w-[320px] sm:h-[155px] sm:max-w-[360px]">
+                  <span className="absolute left-0 top-0 size-7 rounded-tl-2xl border-l-[3px] border-t-[3px] border-sky-400" />
+                  <span className="absolute right-0 top-0 size-7 rounded-tr-2xl border-r-[3px] border-t-[3px] border-sky-400" />
+                  <span className="absolute bottom-0 left-0 size-7 rounded-bl-2xl border-b-[3px] border-l-[3px] border-sky-400" />
+                  <span className="absolute bottom-0 right-0 size-7 rounded-br-2xl border-b-[3px] border-r-[3px] border-sky-400" />
+                  <span className="scan-sweep absolute inset-x-3 h-0.5 bg-sky-400/90 shadow-[0_0_14px_2px_rgba(56,189,248,0.75)]" />
+                  <span className="absolute inset-0 flex items-center justify-center">
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-black/45 px-3 py-1 text-[10px] font-semibold text-white/90 backdrop-blur-sm">
+                      <Barcode size={12} className="text-sky-300" />
+                      Apunta al código de barras
+                    </span>
                   </span>
-                </span>
-              </div>
+                </div>
+              ) : (
+                <div className="relative aspect-square w-[60vw] max-w-[260px] sm:max-w-[300px]">
+                  <span className="absolute left-0 top-0 size-8 rounded-tl-2xl border-l-[3px] border-t-[3px] border-emerald-400" />
+                  <span className="absolute right-0 top-0 size-8 rounded-tr-2xl border-r-[3px] border-t-[3px] border-emerald-400" />
+                  <span className="absolute bottom-0 left-0 size-8 rounded-bl-2xl border-b-[3px] border-l-[3px] border-emerald-400" />
+                  <span className="absolute bottom-0 right-0 size-8 rounded-br-2xl border-b-[3px] border-r-[3px] border-emerald-400" />
+                  <span className="scan-sweep absolute inset-x-4 h-px bg-emerald-400/80 shadow-[0_0_14px_2px_rgba(52,211,153,0.6)]" />
+                  <span className="absolute inset-0 flex items-center justify-center">
+                    <span className="rounded-full border border-white/20 bg-black/35 px-3 py-1 text-[10px] font-semibold text-white/85 backdrop-blur-sm">
+                      Centra el residuo
+                    </span>
+                  </span>
+                </div>
+              )}
             </div>
           )}
 
@@ -591,7 +752,7 @@ export default function Escanear() {
                     <button
                       type="button"
                       onClick={() => startLiveCamera(facingMode)}
-                      className="flex min-h-[46px] w-full items-center justify-center gap-1.5 rounded-xl bg-emerald-700 px-4 text-[12.5px] font-bold text-white transition-colors hover:bg-emerald-600 active:scale-[0.98]"
+                      className="flex min-h-[46px] w-full items-center justify-center gap-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 px-4 text-xs sm:text-sm font-semibold text-white border border-emerald-700/20 shadow-xs active:scale-[0.98] transition-all cursor-pointer"
                     >
                       <CameraIcon size={15} />
                       Activar cámara
@@ -600,7 +761,7 @@ export default function Escanear() {
                       <button
                         type="button"
                         onClick={handleNativeCamera}
-                        className="flex min-h-[42px] items-center justify-center gap-1.5 rounded-xl border border-white/20 bg-white/10 px-2 text-[11px] font-semibold text-white transition-colors hover:bg-white/20"
+                        className="flex min-h-[42px] items-center justify-center gap-1.5 rounded-xl border border-white/20 bg-white/10 px-2 text-xs font-semibold text-white hover:bg-white/20 active:scale-[0.98] transition-all cursor-pointer"
                       >
                         <UploadCloud size={14} />
                         Tomar foto
@@ -608,7 +769,7 @@ export default function Escanear() {
                       <button
                         type="button"
                         onClick={() => fileInputRef.current?.click()}
-                        className="flex min-h-[42px] items-center justify-center gap-1.5 rounded-xl border border-white/20 bg-white/10 px-2 text-[11px] font-semibold text-white transition-colors hover:bg-white/20"
+                        className="flex min-h-[42px] items-center justify-center gap-1.5 rounded-xl border border-white/20 bg-white/10 px-2 text-xs font-semibold text-white hover:bg-white/20 active:scale-[0.98] transition-all cursor-pointer"
                       >
                         <ImagePlus size={14} />
                         Subir imagen
@@ -686,62 +847,201 @@ export default function Escanear() {
             )}
           </AnimatePresence>
 
-          {/* Controles de captura */}
-          {!hasResult && (
-            <div className="absolute inset-x-4 bottom-[calc(env(safe-area-inset-bottom,0px)+5.5rem)] z-[58] flex items-end justify-between md:bottom-6 md:inset-x-8 lg:inset-x-8 lg:bottom-6">
-              <button
-                type="button"
-                onClick={() => fileInputRef.current?.click()}
-                className="flex w-16 flex-col items-center gap-1 text-[10px] font-semibold text-white active:scale-90"
+          {/* Panel de código de barras (entrada rápida y códigos frecuentes del campus) */}
+          <AnimatePresence>
+            {scanMode === "barcode" && !hasResult && !showSamples && (
+              <motion.div
+                initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 18 }}
+                className="absolute inset-x-3 bottom-[calc(env(safe-area-inset-bottom,0px)+14.5rem)] z-[58] md:inset-x-6 md:bottom-36 lg:inset-x-5 lg:bottom-36"
               >
-                <span className="flex size-11 items-center justify-center rounded-full border border-white/20 bg-black/55 backdrop-blur-md">
-                  <ImagePlus size={18} />
-                </span>
-                Galería
-              </button>
+                <div className="mx-auto max-w-md rounded-2xl border border-white/15 bg-black/75 p-3 shadow-2xl backdrop-blur-xl">
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      handleBarcodeLookup(manualBarcode);
+                    }}
+                    className="flex items-center gap-2"
+                  >
+                    <div className="relative flex-1">
+                      <Barcode
+                        size={15}
+                        className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-sky-400"
+                      />
+                      <input
+                        type="text"
+                        inputMode="numeric"
+                        value={manualBarcode}
+                        onChange={(e) => setManualBarcode(e.target.value)}
+                        placeholder="Apunta al código o escribe EAN (ej. 7501055300075)"
+                        className="w-full rounded-xl border border-white/15 bg-white/10 py-2 pl-9 pr-3 text-xs text-white placeholder:text-white/50 focus:border-sky-400 focus:outline-none"
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      disabled={!manualBarcode.trim() || isScanning}
+                      className="flex min-h-[36px] shrink-0 items-center gap-1 rounded-xl bg-sky-600 px-3 py-2 text-xs font-bold text-white hover:bg-sky-500 disabled:opacity-40 cursor-pointer"
+                    >
+                      <Search size={13} />
+                      <span>Buscar</span>
+                    </button>
+                  </form>
 
-              <div className="flex flex-col items-center gap-1.5">
+                  {barcodeError && (
+                    <div className="mt-2 flex flex-wrap items-center justify-between gap-2 rounded-xl border border-amber-400/30 bg-amber-500/20 px-2.5 py-1.5 text-[10.5px] text-amber-100">
+                      <span>{barcodeError}</span>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setBarcodeError(null);
+                          setScanMode("photo");
+                        }}
+                        className="rounded-lg bg-emerald-600 px-2 py-1 text-[10px] font-bold text-white hover:bg-emerald-500 cursor-pointer"
+                      >
+                        Usar Foto con IA
+                      </button>
+                    </div>
+                  )}
+
+                  <div className="mt-2">
+                    <p className="mb-1 text-[9.5px] font-bold uppercase tracking-wider text-white/60">
+                      Códigos frecuentes en el campus ITM (prueba rápida):
+                    </p>
+                    <div className="no-scrollbar flex gap-1.5 overflow-x-auto pb-0.5">
+                      {CAMPUS_BARCODE_PRESETS.map((preset) => (
+                        <button
+                          key={preset.code}
+                          type="button"
+                          onClick={() => handleBarcodeLookup(preset.code)}
+                          className="shrink-0 rounded-lg border border-white/15 bg-white/10 px-2.5 py-1 text-[10px] font-semibold text-white transition-colors hover:border-sky-400/50 hover:bg-sky-500/20 cursor-pointer"
+                        >
+                          {preset.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Selector de modo + Controles de captura */}
+          {!hasResult && (
+            <div className="absolute inset-x-4 bottom-[calc(env(safe-area-inset-bottom,0px)+5.25rem)] z-[58] flex flex-col items-center gap-2.5 md:bottom-5 md:inset-x-8 lg:inset-x-8 lg:bottom-5">
+              {/* Pestañas selectoras: Foto con IA vs Código de barras */}
+              <div
+                role="tablist"
+                aria-label="Modo de escaneo"
+                className="inline-flex items-center gap-1 rounded-full border border-white/20 bg-black/65 p-1 shadow-xl backdrop-blur-md"
+              >
                 <button
                   type="button"
+                  role="tab"
+                  aria-selected={scanMode === "photo"}
                   onClick={() => {
-                    triggerHaptic("medium");
-                    if (cameraActive) {
-                      handleCaptureFromLiveView();
-                    } else {
-                      handleNativeCamera();
-                    }
+                    triggerHaptic("selection");
+                    setBarcodeError(null);
+                    setScanMode("photo");
                   }}
-                  disabled={isScanning}
-                  className="relative flex size-[74px] items-center justify-center rounded-full border-4 border-white p-1 transition-transform active:scale-90 disabled:opacity-50 touch-manipulation cursor-pointer select-none"
-                  aria-label="Capturar y clasificar residuo"
-                >
-                  <span className="block h-full w-full rounded-full bg-white" />
-                  {!cameraActive && (
-                    <CameraIcon className="absolute size-6 text-zinc-900" strokeWidth={2.2} />
-                  )}
-                </button>
-                <span className="text-[9.5px] font-semibold text-white/70">
-                  {cameraActive ? "Capturar" : "Tomar foto"}
-                </span>
-              </div>
-
-              <button
-                type="button"
-                onClick={() => setShowSamples((value) => !value)}
-                aria-pressed={showSamples}
-                className="flex w-16 flex-col items-center gap-1 text-[10px] font-semibold text-white active:scale-90"
-              >
-                <span
-                  className={`flex size-11 items-center justify-center rounded-full border backdrop-blur-md ${
-                    showSamples
-                      ? "border-emerald-300 bg-emerald-500"
-                      : "border-white/20 bg-black/55"
+                  className={`flex min-h-[34px] items-center gap-1.5 rounded-full px-3.5 py-1 text-[11px] font-bold transition-all cursor-pointer ${
+                    scanMode === "photo"
+                      ? "bg-emerald-600 text-white shadow-sm"
+                      : "text-white/75 hover:text-white"
                   }`}
                 >
-                  <FlaskConical size={18} />
-                </span>
-                Muestras
-              </button>
+                  <CameraIcon size={13} />
+                  <span>Foto con IA</span>
+                </button>
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={scanMode === "barcode"}
+                  onClick={() => {
+                    triggerHaptic("selection");
+                    setShowSamples(false);
+                    setScanMode("barcode");
+                  }}
+                  className={`flex min-h-[34px] items-center gap-1.5 rounded-full px-3.5 py-1 text-[11px] font-bold transition-all cursor-pointer ${
+                    scanMode === "barcode"
+                      ? "bg-sky-600 text-white shadow-sm"
+                      : "text-white/75 hover:text-white"
+                  }`}
+                >
+                  <Barcode size={13} />
+                  <span>Código de barras</span>
+                </button>
+              </div>
+
+              <div className="flex w-full items-end justify-between">
+                <button
+                  type="button"
+                  onClick={() => fileInputRef.current?.click()}
+                  className="flex w-16 flex-col items-center gap-1 text-[10px] font-semibold text-white active:scale-90 cursor-pointer"
+                >
+                  <span className="flex size-11 items-center justify-center rounded-full border border-white/20 bg-black/55 backdrop-blur-md">
+                    <ImagePlus size={18} />
+                  </span>
+                  Galería
+                </button>
+
+                <div className="flex flex-col items-center gap-1.5">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      triggerHaptic("medium");
+                      if (cameraActive) {
+                        handleCaptureFromLiveView();
+                      } else {
+                        handleNativeCamera();
+                      }
+                    }}
+                    disabled={isScanning}
+                    className={`relative flex size-[72px] items-center justify-center rounded-full border-4 p-1 transition-transform active:scale-90 disabled:opacity-50 touch-manipulation cursor-pointer select-none ${
+                      scanMode === "barcode" ? "border-sky-300" : "border-white"
+                    }`}
+                    aria-label="Capturar y clasificar residuo"
+                  >
+                    <span
+                      className={`block h-full w-full rounded-full ${
+                        scanMode === "barcode" ? "bg-sky-400" : "bg-white"
+                      }`}
+                    />
+                    {scanMode === "barcode" ? (
+                      <Barcode className="absolute size-6 text-zinc-950" strokeWidth={2.2} />
+                    ) : (
+                      !cameraActive && (
+                        <CameraIcon className="absolute size-6 text-zinc-900" strokeWidth={2.2} />
+                      )
+                    )}
+                  </button>
+                  <span className="text-[9.5px] font-semibold text-white/75">
+                    {scanMode === "barcode"
+                      ? "Capturar código"
+                      : cameraActive
+                        ? "Capturar foto"
+                        : "Tomar foto"}
+                  </span>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => setShowSamples((value) => !value)}
+                  aria-pressed={showSamples}
+                  className="flex w-16 flex-col items-center gap-1 text-[10px] font-semibold text-white active:scale-90 cursor-pointer"
+                >
+                  <span
+                    className={`flex size-11 items-center justify-center rounded-full border backdrop-blur-md ${
+                      showSamples
+                        ? "border-emerald-300 bg-emerald-500"
+                        : "border-white/20 bg-black/55"
+                    }`}
+                  >
+                    <FlaskConical size={18} />
+                  </span>
+                  Muestras
+                </button>
+              </div>
             </div>
           )}
 
@@ -794,15 +1094,46 @@ export default function Escanear() {
                 </div>
               </div>
               <p className="mt-3 text-[12px] leading-relaxed text-zinc-500 dark:text-zinc-400">
-                Captura una foto o elige una muestra. Verás el bote oficial, cómo preparar el
-                residuo y su ficha ambiental, sin salir del escáner.
+                Usa el selector inferior para tomar una foto con IA o escanear el código de barras de
+                un producto comercial.
               </p>
+
+              {/* Aviso de sincronización de cuenta vs guardado solo en este dispositivo */}
+              <div className="mt-3">
+                {isLoggedIn ? (
+                  <div className="rounded-xl border border-emerald-200 bg-emerald-50/70 px-3 py-2 text-[11px] text-emerald-800 dark:border-emerald-900/60 dark:bg-emerald-950/30 dark:text-emerald-300">
+                    <strong>Sesión activa:</strong> Tus escaneos se guardan automáticamente en el
+                    historial de tu cuenta universitaria.
+                  </div>
+                ) : (
+                  <div className="rounded-xl border border-amber-200 bg-amber-50/80 px-3 py-2 text-[11px] text-amber-900 dark:border-amber-900/60 dark:bg-amber-950/30 dark:text-amber-200">
+                    <strong>Modo sin sesión:</strong> El historial solo se guarda en este
+                    dispositivo.{" "}
+                    <Link to="/login" className="font-bold underline hover:opacity-80">
+                      Inicia sesión
+                    </Link>{" "}
+                    para guardarlo en tu cuenta.
+                  </div>
+                )}
+              </div>
 
               <div className="mt-4 space-y-1.5">
                 {[
-                  { n: "1", t: "Captura", d: "Enfoca un solo residuo con buena luz." },
-                  { n: "2", t: "Identifica", d: "Gemini Visión con respaldo MobileNet." },
-                  { n: "3", t: "Deposita", d: "Sigue la ruta al bote correcto en el mapa." },
+                  {
+                    n: "1",
+                    t: "Elige modo",
+                    d: "«Foto con IA» para residuos sueltos o «Código de barras» para empaques.",
+                  },
+                  {
+                    n: "2",
+                    t: "Identifica sin costo",
+                    d: "Groq Vision IA + Open Food Facts + MobileNet local.",
+                  },
+                  {
+                    n: "3",
+                    t: "Deposita en el ITM",
+                    d: "Sigue los pasos de preparación y ubica el bote en el mapa.",
+                  },
                 ].map((step) => (
                   <div
                     key={step.n}
@@ -931,6 +1262,17 @@ export default function Escanear() {
         open={guideOpen}
         onClose={() => setGuideOpen(false)}
         initialBinId={guideBinId}
+      />
+
+      <ScannerOnboardingModal
+        open={onboardingOpen}
+        onClose={(selectedMode) => {
+          setOnboardingOpen(false);
+          if (selectedMode) {
+            setScanMode(selectedMode);
+            if (selectedMode === "barcode") setShowSamples(false);
+          }
+        }}
       />
     </div>
   );

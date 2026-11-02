@@ -72,7 +72,7 @@ export function SettingsResourcesTab({ accent, onClose, navigate }: ResourcesTab
                         onClose();
                         navigate("/tecnologias");
                     }}
-                    className={`w-full py-2.5 px-4 rounded-xl text-xs font-bold text-white shadow-xs transition-transform active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2 ${accent.btn}`}
+                    className={`w-full min-h-[44px] py-2.5 px-4 rounded-xl text-xs font-semibold text-white cursor-pointer flex items-center justify-center gap-2 ${accent.btn}`}
                 >
                     <Layers size={14} />
                     <span>Ver apartado completo de Tecnologías</span>
@@ -212,7 +212,7 @@ export function SettingsAccountTab({
                 <Link
                     to="/perfil"
                     onClick={onClose}
-                    className={`px-4 py-2 rounded-xl text-xs font-bold ${accent.btnOutline} border flex items-center gap-1.5 self-start sm:self-auto cursor-pointer shadow-xs`}
+                    className={`min-h-[40px] px-4 py-2 rounded-xl text-xs font-semibold ${accent.btnOutline} flex items-center gap-1.5 self-start sm:self-auto cursor-pointer`}
                 >
                     Ver Perfil Completo
                     <ExternalLink size={13} />
@@ -412,7 +412,7 @@ export function SettingsPrivacyTab({
                     <button
                         type="button"
                         onClick={onExportData}
-                        className={`px-3.5 py-2 rounded-xl ${accent.btnOutline} border text-xs font-bold flex items-center gap-2 self-start sm:self-auto cursor-pointer transition-colors shadow-xs`}
+                        className={`min-h-[40px] px-3.5 py-2 rounded-xl ${accent.btnOutline} text-xs font-semibold flex items-center gap-2 self-start sm:self-auto cursor-pointer`}
                     >
                         <Download size={14} />
                         Exportar JSON

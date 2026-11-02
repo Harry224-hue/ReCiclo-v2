@@ -181,7 +181,7 @@ export default function Museo() {
                                 onClick={toggleDarkMode}
                                 title={`Cambiar a modo ${isDarkMode ? "claro" : "oscuro"}`}
                                 aria-label={`Cambiar a modo ${isDarkMode ? "claro" : "oscuro"}`}
-                                className="inline-flex size-9 items-center justify-center rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors shadow-xs cursor-pointer"
+                                className="inline-flex size-9 items-center justify-center rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors shadow-xs cursor-pointer"
                             >
                                 {isDarkMode ? <Sun size={15} className="text-amber-400" /> : <Moon size={15} className="text-zinc-700" />}
                             </button>
@@ -192,7 +192,7 @@ export default function Museo() {
                                 onClick={() => setIsSettingsOpen(true)}
                                 title="Personalizar tema y colores de ReCiclo"
                                 aria-label="Abrir panel de ajustes de tema"
-                                className="inline-flex size-9 items-center justify-center rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors shadow-xs cursor-pointer"
+                                className="inline-flex size-9 items-center justify-center rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors shadow-xs cursor-pointer"
                             >
                                 <Settings size={15} />
                             </button>
@@ -306,7 +306,7 @@ export default function Museo() {
                             <button
                                 type="button"
                                 onClick={() => setActiveSeries("all")}
-                                className={`shrink-0 rounded-lg px-3 py-1.5 text-xs font-bold transition-all ${
+                                className={`shrink-0 rounded-xl px-3 py-1.5 text-xs font-semibold transition-all ${
                                     activeSeries === "all"
                                         ? "bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 shadow-xs"
                                         : "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800/80 hover:text-zinc-900 dark:hover:text-white"
@@ -318,7 +318,7 @@ export default function Museo() {
                             <button
                                 type="button"
                                 onClick={() => setActiveSeries("v0")}
-                                className={`shrink-0 rounded-lg px-3 py-1.5 text-xs font-bold transition-all ${
+                                className={`shrink-0 rounded-xl px-3 py-1.5 text-xs font-semibold transition-all ${
                                     activeSeries === "v0"
                                         ? "bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 shadow-xs"
                                         : "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800/80 hover:text-zinc-900 dark:hover:text-white"
@@ -330,7 +330,7 @@ export default function Museo() {
                             <button
                                 type="button"
                                 onClick={() => setActiveSeries("v1")}
-                                className={`shrink-0 rounded-lg px-3 py-1.5 text-xs font-bold transition-all ${
+                                className={`shrink-0 rounded-xl px-3 py-1.5 text-xs font-semibold transition-all ${
                                     activeSeries === "v1"
                                         ? "bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 shadow-xs"
                                         : "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800/80 hover:text-zinc-900 dark:hover:text-white"
@@ -342,7 +342,7 @@ export default function Museo() {
                             <button
                                 type="button"
                                 onClick={() => setActiveSeries("v2")}
-                                className={`shrink-0 rounded-lg px-3 py-1.5 text-xs font-bold transition-all ${
+                                className={`shrink-0 rounded-xl px-3 py-1.5 text-xs font-semibold transition-all ${
                                     activeSeries === "v2"
                                         ? "bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 shadow-xs"
                                         : "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800/80 hover:text-zinc-900 dark:hover:text-white"
@@ -489,7 +489,7 @@ export default function Museo() {
                         <button
                             type="button"
                             onClick={scrollToTop}
-                            className="inline-flex min-h-[44px] items-center gap-2 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 px-4 py-2 text-xs font-semibold text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors shadow-xs cursor-pointer"
+                            className="inline-flex min-h-[44px] items-center gap-2 rounded-xl px-4 py-2 text-xs font-semibold app-btn-secondary cursor-pointer"
                         >
                             <ArrowUp size={15} />
                             <span>Volver arriba</span>

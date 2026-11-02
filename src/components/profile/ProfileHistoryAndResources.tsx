@@ -9,8 +9,11 @@ import {
     Inbox,
     ScanLine,
     Calendar,
+    CloudCheck,
+    HardDrive,
 } from "lucide-react";
 import { type AccentTokens } from "../../context/ThemeContext";
+import { useAuth } from "../../context/AuthContext";
 import { type ScanHistoryEntry } from "../../data/historyStorage";
 import { CATEGORY_INFO } from "../../data/wasteData";
 import { WasteVisual } from "../WasteVisual";
@@ -211,6 +214,7 @@ export function ProfileScanHistorySection({
     categoriesCount,
     rankedCategories,
 }: ProfileScanHistoryProps) {
+    const { isLoggedIn } = useAuth();
     return (
         <section
             aria-label="Historial de residuos"
@@ -220,16 +224,29 @@ export function ProfileScanHistorySection({
                 <div className="flex items-center gap-2.5">
                     <History size={18} className={accent.text} aria-hidden="true" />
                     <div>
-                        <div className="flex items-center gap-2">
+                        <div className="flex flex-wrap items-center gap-2">
                             <h2 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-100">
                                 Historial de Residuos Clasificados
                             </h2>
                             <span className={`text-xs px-2.5 py-0.5 rounded-full font-bold tabular-nums ${accent.badge}`}>
                                 {history.length}
                             </span>
+                            {isLoggedIn ? (
+                                <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 dark:bg-emerald-950/60 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-800 dark:text-emerald-300 border border-emerald-300/60 dark:border-emerald-800">
+                                    <CloudCheck size={12} />
+                                    Guardado en tu cuenta
+                                </span>
+                            ) : (
+                                <span className="inline-flex items-center gap-1 rounded-full bg-amber-100 dark:bg-amber-950/60 px-2.5 py-0.5 text-[11px] font-semibold text-amber-800 dark:text-amber-300 border border-amber-300/60 dark:border-amber-800">
+                                    <HardDrive size={12} />
+                                    Solo en este dispositivo (Sin sesión)
+                                </span>
+                            )}
                         </div>
                         <p className="text-xs text-zinc-600 dark:text-zinc-400 mt-0.5">
-                            Registros guardados localmente en este navegador para consultar su contenedor e instrucciones.
+                            {isLoggedIn
+                                ? "Registros sincronizados con tu cuenta universitaria para consultarlos desde cualquier dispositivo."
+                                : "El historial solo se guarda en este dispositivo porque no has iniciado sesión. Inicia sesión para respaldarlo en tu cuenta."}
                         </p>
                     </div>
                 </div>
@@ -237,7 +254,7 @@ export function ProfileScanHistorySection({
                 <div className="flex items-center gap-2">
                     <Link
                         to="/escanear"
-                        className={`inline-flex items-center gap-1.5 min-h-[44px] px-3.5 py-2 rounded-xl text-xs font-semibold text-white shadow-xs transition-transform active:scale-95 ${accent.btn} focus:outline-none focus-visible:ring-2 ${accent.ring}`}
+                        className={`inline-flex items-center gap-1.5 min-h-[44px] px-3.5 py-2 rounded-xl text-xs font-semibold text-white cursor-pointer ${accent.btn} focus:outline-none focus-visible:ring-2 ${accent.ring}`}
                     >
                         <ScanLine size={14} aria-hidden="true" />
                         <span>Clasificar residuo</span>
@@ -246,7 +263,7 @@ export function ProfileScanHistorySection({
                         <button
                             type="button"
                             onClick={handleClearHistory}
-                            className="inline-flex items-center gap-1.5 min-h-[44px] px-3 py-2 rounded-xl text-xs font-medium text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/40 hover:bg-rose-100 dark:hover:bg-rose-950/70 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
+                            className="inline-flex items-center gap-1.5 min-h-[44px] px-3 py-2 rounded-xl text-xs font-semibold text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/40 hover:bg-rose-100 dark:hover:bg-rose-950/70 active:scale-[0.98] transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
                         >
                             <Trash2 size={14} aria-hidden="true" />
                             <span>Vaciar</span>
@@ -317,7 +334,7 @@ export function ProfileScanHistorySection({
                     </p>
                     <Link
                         to="/escanear"
-                        className={`mt-4 inline-flex items-center gap-2 min-h-[44px] px-5 py-2.5 rounded-xl text-xs font-semibold text-white shadow-sm transition-transform active:scale-95 ${accent.btn} focus:outline-none focus-visible:ring-2 ${accent.ring}`}
+                        className={`mt-4 inline-flex items-center gap-2 min-h-[44px] px-5 py-2.5 rounded-xl text-xs font-semibold text-white cursor-pointer ${accent.btn} focus:outline-none focus-visible:ring-2 ${accent.ring}`}
                     >
                         <ScanLine size={15} aria-hidden="true" />
                         <span>Abrir escáner de residuos</span>
@@ -334,7 +351,7 @@ export function ProfileScanHistorySection({
                     <button
                         type="button"
                         onClick={clearFilters}
-                        className={`mt-3 min-h-[44px] px-4 py-2 rounded-xl text-xs font-semibold text-zinc-800 dark:text-zinc-200 bg-zinc-200/80 dark:bg-zinc-800 hover:bg-zinc-300/80 dark:hover:bg-zinc-700 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 ${accent.ring}`}
+                        className={`mt-3 inline-flex items-center justify-center min-h-[44px] px-4 py-2 rounded-xl text-xs font-semibold app-btn-secondary cursor-pointer focus:outline-none focus-visible:ring-2 ${accent.ring}`}
                     >
                         Restablecer búsqueda y filtros
                     </button>
@@ -417,7 +434,7 @@ export function ProfileScanHistorySection({
                             <button
                                 type="button"
                                 onClick={() => setVisible((v) => v + PAGE_SIZE)}
-                                className={`min-h-[44px] px-5 py-2.5 rounded-xl text-xs font-semibold text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 ${accent.ring}`}
+                                className={`min-h-[44px] px-5 py-2.5 rounded-xl text-xs font-semibold app-btn-secondary cursor-pointer focus:outline-none focus-visible:ring-2 ${accent.ring}`}
                             >
                                 Mostrar más registros ({filteredHistory.length - visible} restantes)
                             </button>

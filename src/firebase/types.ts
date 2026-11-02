@@ -23,13 +23,15 @@ export interface UserProfile {
 export interface Scan {
     id: string;
     userId: string;
-    fecha: Date;
+    fecha: Date | { toDate?: () => Date; seconds?: number } | string;
     nombreDetectado: string;
     categoria: string;
     material: string;
     contenedor: string;
     confianza: number; // 0-100
     imagenUrl: string;
+    wasteId?: string;
+    categoryLabel?: string;
 }
 
 // ─── Catálogo de residuos ──────────────────────────────────

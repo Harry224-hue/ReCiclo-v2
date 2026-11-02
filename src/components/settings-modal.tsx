@@ -310,7 +310,7 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
 
                             <button
                                 onClick={onClose}
-                                className="mt-auto flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl border border-zinc-300 dark:border-zinc-700 text-xs font-bold text-zinc-800 dark:text-zinc-200 hover:text-zinc-950 dark:hover:text-white bg-white dark:bg-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer shadow-xs"
+                                className="mt-auto flex min-h-[40px] items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold app-btn-secondary cursor-pointer"
                             >
                                 <X size={15} />
                                 Cerrar panel
@@ -435,7 +435,7 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                                                             Insignia activa
                                                         </span>
                                                         <button
-                                                            className={`px-3 py-1 rounded-lg text-[11px] font-bold text-white ${accent.btn}`}
+                                                            className={`px-3 py-1.5 rounded-xl text-[11px] font-semibold text-white ${accent.btn}`}
                                                         >
                                                             Botón demo
                                                         </button>

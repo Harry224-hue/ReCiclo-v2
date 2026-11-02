@@ -2,10 +2,13 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
 import {
+  Barcode,
   BookOpen,
   CheckCircle2,
   Clock,
+  CloudCheck,
   ExternalLink,
+  HardDrive,
   History,
   Leaf,
   MapPin,
@@ -17,6 +20,7 @@ import {
 } from "lucide-react";
 import { CATEGORY_INFO, CampusContainerSpec, WasteItem } from "../../data/wasteData";
 import type { AIClassificationResult } from "../../services/aiClassifier";
+import { useAuth } from "../../context/AuthContext";
 import { WasteVisual } from "../WasteVisual";
 import { ContainerGlyph, containerTextOn } from "../container-ui";
 import { triggerHaptic } from "../../utils/haptics";
@@ -55,11 +59,21 @@ export function ScanResultPanel({
   onRescan,
 }: ScanResultPanelProps) {
   const [tab, setTab] = useState<ResultTab>("preparar");
+  const { isLoggedIn } = useAuth();
   const reduceMotion = useReducedMotion();
   const binInk = containerTextOn(bin.colorHex);
   const confidence = aiResult ? Math.round(aiResult.confidence * 100) : null;
+  const displayPreview = preview || aiResult?.productImageUrl || null;
   const engineLabel =
-    aiResult?.engine === "gemini" ? "Gemini Visión" : aiResult?.engine === "mobilenet" ? "MobileNet local" : "Resultado de muestra";
+    aiResult?.engine === "groq"
+      ? "Groq Visión IA"
+      : aiResult?.engine === "barcode"
+        ? "Open Food Facts · Código"
+        : aiResult?.engine === "gemini"
+          ? "Gemini Visión"
+          : aiResult?.engine === "mobilenet"
+            ? "MobileNet local"
+            : "Resultado de muestra";
 
   return (
     <div className="flex h-full min-h-0 flex-col bg-white text-zinc-900 dark:bg-zinc-900 dark:text-zinc-50">
@@ -84,8 +98,8 @@ export function ScanResultPanel({
             className="relative flex size-14 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white shadow-md ring-2 ring-white/60 dark:bg-zinc-800 dark:ring-white/10"
             style={{ boxShadow: `0 8px 24px ${bin.colorHex}33` }}
           >
-            {preview ? (
-              <img src={preview} alt={waste.name} className="h-full w-full object-cover" />
+            {displayPreview ? (
+              <img src={displayPreview} alt={waste.name} className="h-full w-full object-cover" />
             ) : (
               <WasteVisual id={waste.id} size="lg" />
             )}
@@ -122,7 +136,9 @@ export function ScanResultPanel({
         {confidence !== null && (
           <div className="mt-2 flex items-center gap-2">
             <span className="flex shrink-0 items-center gap-1 rounded-full border border-zinc-200 bg-white/85 px-2 py-1 text-[11px] font-bold text-zinc-600 dark:border-zinc-700 dark:bg-zinc-800/80 dark:text-zinc-300">
-              {aiResult?.engine === "gemini" ? (
+              {aiResult?.engine === "barcode" ? (
+                <Barcode size={10} className="text-sky-500" />
+              ) : aiResult?.engine === "groq" || aiResult?.engine === "gemini" ? (
                 <Sparkles size={10} className="text-indigo-500" />
               ) : (
                 <Leaf size={10} className="text-emerald-600 dark:text-emerald-400" />
@@ -164,6 +180,34 @@ export function ScanResultPanel({
             </p>
           </div>
           <CheckCircle2 size={19} className="shrink-0" style={{ color: bin.colorHex }} />
+        </div>
+
+        {/* Estado de guardado en historial (Cuenta vs Dispositivo local) */}
+        <div className="mt-2">
+          {isLoggedIn ? (
+            <div className="flex items-center justify-between gap-2 rounded-lg border border-emerald-500/25 bg-emerald-500/10 px-2.5 py-1.5 text-[10.5px] font-semibold text-emerald-800 dark:text-emerald-300">
+              <span className="flex items-center gap-1.5">
+                <CloudCheck size={13} className="shrink-0 text-emerald-600 dark:text-emerald-400" />
+                <span>Guardado en el historial de tu cuenta</span>
+              </span>
+              <Link to="/historial" className="underline hover:opacity-80 shrink-0">
+                Ver historial
+              </Link>
+            </div>
+          ) : (
+            <div className="flex items-center justify-between gap-2 rounded-lg border border-amber-500/30 bg-amber-500/10 px-2.5 py-1.5 text-[10.5px] font-medium text-amber-900 dark:text-amber-200">
+              <span className="flex items-center gap-1.5">
+                <HardDrive size={13} className="shrink-0 text-amber-600 dark:text-amber-400" />
+                <span>El historial solo se guarda en este dispositivo sin sesión</span>
+              </span>
+              <Link
+                to="/login"
+                className="font-bold text-amber-800 underline hover:opacity-80 dark:text-amber-300 shrink-0"
+              >
+                Iniciar sesión
+              </Link>
+            </div>
+          )}
         </div>
       </div>
 
@@ -242,7 +286,12 @@ export function ScanResultPanel({
             {aiResult?.geminiTip && (
               <div className="rounded-xl border border-indigo-500/25 bg-indigo-500/10 p-2.5">
                 <p className="flex items-center gap-1 text-[10.5px] font-black uppercase tracking-wider text-indigo-800 dark:text-indigo-300">
-                  <Sparkles size={11} /> Lo que vio Gemini
+                  {aiResult.engine === "barcode" ? <Barcode size={11} /> : <Sparkles size={11} />}
+                  {aiResult.engine === "barcode"
+                    ? "Dato de Open Food Facts"
+                    : aiResult.engine === "groq"
+                      ? "Lo que detectó Groq Visión"
+                      : "Nota de identificación"}
                 </p>
                 <p className="mt-0.5 text-[11px] leading-snug text-indigo-900/90 dark:text-indigo-200/90">
                   {aiResult.geminiTip}
@@ -381,7 +430,7 @@ export function ScanResultPanel({
           <Link
             to={`/mapa?bin=${bin.id}`}
             onClick={() => triggerHaptic("light")}
-            className="flex min-h-[44px] flex-1 items-center justify-center gap-1.5 rounded-xl bg-emerald-700 px-3 text-[12.5px] font-bold text-white shadow-sm transition-transform duration-100 ease-out hover:bg-emerald-600 active:scale-[0.96]"
+            className="flex min-h-[44px] flex-1 items-center justify-center gap-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs sm:text-sm border border-emerald-700/20 dark:border-emerald-500/30 shadow-xs active:scale-[0.98] transition-all duration-150 cursor-pointer"
           >
             <MapPin size={14} />
             Ver botes en el mapa
@@ -394,7 +443,7 @@ export function ScanResultPanel({
             }}
             aria-label="Abrir guía de contenedores"
             title="Guía de contenedores"
-            className="flex min-h-[44px] w-11 items-center justify-center rounded-xl border border-zinc-200 text-zinc-600 transition-all duration-100 ease-out hover:bg-zinc-50 active:scale-[0.94] dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
+            className="flex min-h-[44px] w-11 items-center justify-center rounded-xl border border-zinc-200/80 dark:border-zinc-700 text-zinc-700 dark:text-zinc-200 bg-zinc-50 dark:bg-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-700 active:scale-[0.98] transition-all duration-150 cursor-pointer"
           >
             <BookOpen size={16} />
           </button>
@@ -406,7 +455,7 @@ export function ScanResultPanel({
             }}
             aria-label="Escanear otro residuo"
             title="Escanear otro"
-            className="flex min-h-[44px] w-11 items-center justify-center rounded-xl border border-zinc-200 text-zinc-600 transition-all duration-100 ease-out hover:bg-zinc-50 active:scale-[0.94] dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
+            className="flex min-h-[44px] w-11 items-center justify-center rounded-xl border border-zinc-200/80 dark:border-zinc-700 text-zinc-700 dark:text-zinc-200 bg-zinc-50 dark:bg-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-700 active:scale-[0.98] transition-all duration-150 cursor-pointer"
           >
             <RefreshCw size={16} />
           </button>

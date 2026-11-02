@@ -25,7 +25,7 @@ import {
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useTheme } from "../context/ThemeContext";
-import { logout, updateUserProfile } from "../firebase";
+import { clearUserScans, deleteScan, logout, updateUserProfile } from "../firebase";
 import {
   getScanHistory,
   clearScanHistory,
@@ -299,15 +299,33 @@ export default function Perfil() {
     setVisible(PAGE_SIZE);
   };
 
-  const handleRemoveEntry = (id: string) => {
+  const handleRemoveEntry = async (id: string) => {
+    const target = history.find((h) => h.id === id);
     setHistory(removeScanFromHistory(id));
+    if (uid && target?.cloudId) {
+      try {
+        await deleteScan(target.cloudId);
+      } catch (err) {
+        console.warn("[Perfil] No se pudo eliminar escaneo en Firestore:", err);
+      }
+    }
   };
 
-  const handleClearHistory = () => {
-    if (window.confirm("¿Deseas vaciar el historial de residuos clasificados?")) {
+  const handleClearHistory = async () => {
+    const msg = cloud
+      ? "¿Deseas vaciar el historial de residuos clasificados en tu cuenta?"
+      : "¿Deseas vaciar el historial de residuos clasificados en este dispositivo?";
+    if (window.confirm(msg)) {
       clearScanHistory();
       setHistory([]);
       clearFilters();
+      if (uid) {
+        try {
+          await clearUserScans(uid);
+        } catch (err) {
+          console.warn("[Perfil] No se pudo vaciar el historial en Firestore:", err);
+        }
+      }
     }
   };
 
@@ -536,7 +554,7 @@ export default function Perfil() {
                     type="button"
                     onClick={openEdit}
                     disabled={!cloudReady}
-                    className={`inline-flex items-center gap-1.5 min-h-[44px] px-4 py-2 rounded-xl text-xs font-semibold text-white shadow-xs transition-transform active:scale-95 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed ${accent.btn} focus:outline-none focus-visible:ring-2 ${accent.ring}`}
+                    className={`inline-flex items-center gap-1.5 min-h-[44px] px-4 py-2 rounded-xl text-xs font-semibold text-white cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed ${accent.btn} focus:outline-none focus-visible:ring-2 ${accent.ring}`}
                   >
                     <Pencil size={13} aria-hidden="true" />
                     <span>Editar perfil</span>
@@ -545,7 +563,7 @@ export default function Perfil() {
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
                     disabled={avatarBusy || !cloudReady}
-                    className={`inline-flex items-center gap-1.5 min-h-[44px] px-3.5 py-2 rounded-xl text-xs font-semibold text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 ${accent.ring}`}
+                    className={`inline-flex items-center gap-1.5 min-h-[44px] px-3.5 py-2 rounded-xl text-xs font-semibold app-btn-secondary cursor-pointer focus:outline-none focus-visible:ring-2 ${accent.ring}`}
                   >
                     <Camera size={13} aria-hidden="true" />
                     <span>Cambiar foto</span>
@@ -555,7 +573,7 @@ export default function Perfil() {
                       type="button"
                       onClick={() => saveAvatar("")}
                       disabled={avatarBusy}
-                      className="min-h-[44px] px-3 py-2 rounded-xl text-xs font-semibold text-rose-700 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
+                      className="min-h-[44px] px-3 py-2 rounded-xl text-xs font-semibold text-rose-700 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 active:scale-[0.98] transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
                     >
                       Quitar foto
                     </button>
@@ -731,7 +749,7 @@ export default function Perfil() {
                       type="button"
                       disabled={saving}
                       onClick={() => setIsEditing(false)}
-                      className={`inline-flex items-center gap-1.5 min-h-[44px] px-3.5 py-2 rounded-xl text-xs font-semibold text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 ${accent.ring}`}
+                      className={`inline-flex items-center gap-1.5 min-h-[44px] px-3.5 py-2 rounded-xl text-xs font-semibold app-btn-secondary cursor-pointer focus:outline-none focus-visible:ring-2 ${accent.ring}`}
                     >
                       <X size={14} aria-hidden="true" />
                       <span>Cancelar</span>
@@ -739,7 +757,7 @@ export default function Perfil() {
                     <button
                       type="submit"
                       disabled={saving}
-                      className={`inline-flex items-center gap-1.5 min-h-[44px] px-4 py-2 rounded-xl text-xs font-semibold text-white shadow-xs transition-transform active:scale-95 cursor-pointer disabled:opacity-60 ${accent.btn} focus:outline-none focus-visible:ring-2 ${accent.ring}`}
+                      className={`inline-flex items-center gap-1.5 min-h-[44px] px-4 py-2 rounded-xl text-xs font-semibold text-white cursor-pointer disabled:opacity-60 ${accent.btn} focus:outline-none focus-visible:ring-2 ${accent.ring}`}
                     >
                       {saving ? (
                         <Loader2 size={14} className="animate-spin" aria-hidden="true" />
@@ -806,7 +824,7 @@ export default function Perfil() {
                   <button
                     type="button"
                     onClick={() => logout()}
-                    className="inline-flex items-center gap-1.5 min-h-[40px] px-3.5 py-1.5 rounded-xl text-xs font-semibold text-rose-700 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
+                    className="inline-flex items-center gap-1.5 min-h-[40px] px-3.5 py-1.5 rounded-xl text-xs font-semibold text-rose-700 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 active:scale-[0.98] transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
                   >
                     <LogOut size={14} aria-hidden="true" />
                     <span>Cerrar sesión</span>
@@ -815,14 +833,14 @@ export default function Perfil() {
                   <div className="flex items-center gap-2">
                     <Link
                       to="/login"
-                      className={`inline-flex items-center gap-1.5 min-h-[40px] px-3.5 py-1.5 rounded-xl text-xs font-semibold text-white shadow-xs ${accent.btn} focus:outline-none focus-visible:ring-2 ${accent.ring}`}
+                      className={`inline-flex items-center gap-1.5 min-h-[40px] px-3.5 py-1.5 rounded-xl text-xs font-semibold text-white cursor-pointer ${accent.btn} focus:outline-none focus-visible:ring-2 ${accent.ring}`}
                     >
                       <LogIn size={13} aria-hidden="true" />
                       <span>Acceder</span>
                     </Link>
                     <Link
                       to="/registro"
-                      className={`inline-flex items-center min-h-[40px] px-3.5 py-1.5 rounded-xl text-xs font-semibold text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors focus:outline-none focus-visible:ring-2 ${accent.ring}`}
+                      className={`inline-flex items-center min-h-[40px] px-3.5 py-1.5 rounded-xl text-xs font-semibold app-btn-secondary cursor-pointer focus:outline-none focus-visible:ring-2 ${accent.ring}`}
                     >
                       Registrarse
                     </Link>

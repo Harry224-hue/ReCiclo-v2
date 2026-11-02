@@ -28,6 +28,25 @@ import type {
 //  SCANS (Historial de escaneos)
 // ═══════════════════════════════════════════════════════════
 
+function parseFirestoreDateMs(fecha: unknown): number {
+    if (!fecha) return 0;
+    if (fecha instanceof Date) return fecha.getTime();
+    if (typeof fecha === "string" || typeof fecha === "number") {
+        const d = new Date(fecha).getTime();
+        return Number.isNaN(d) ? 0 : d;
+    }
+    if (typeof fecha === "object" && fecha !== null) {
+        const maybeTs = fecha as { toDate?: () => Date; seconds?: number };
+        if (typeof maybeTs.toDate === "function") {
+            return maybeTs.toDate().getTime();
+        }
+        if (typeof maybeTs.seconds === "number") {
+            return maybeTs.seconds * 1000;
+        }
+    }
+    return 0;
+}
+
 export async function addScan(data: Omit<Scan, "id">): Promise<string> {
     const ref = await addDoc(collection(db, "scans"), {
         ...data,
@@ -37,18 +56,37 @@ export async function addScan(data: Omit<Scan, "id">): Promise<string> {
 }
 
 export async function getUserScans(userId: string, maxResults = 50): Promise<Scan[]> {
-    const q = query(
-        collection(db, "scans"),
-        where("userId", "==", userId),
-        orderBy("fecha", "desc"),
-        limit(maxResults)
-    );
-    const snap = await getDocs(q);
-    return snap.docs.map((d) => ({ id: d.id, ...d.data() }) as Scan);
+    try {
+        const q = query(
+            collection(db, "scans"),
+            where("userId", "==", userId),
+            orderBy("fecha", "desc"),
+            limit(maxResults)
+        );
+        const snap = await getDocs(q);
+        return snap.docs.map((d) => ({ id: d.id, ...d.data() }) as Scan);
+    } catch {
+        // Fallback si el proyecto de Firebase aún no tiene el índice compuesto (userId + fecha)
+        const qFallback = query(
+            collection(db, "scans"),
+            where("userId", "==", userId),
+            limit(maxResults * 2)
+        );
+        const snap = await getDocs(qFallback);
+        const docs = snap.docs.map((d) => ({ id: d.id, ...d.data() }) as Scan);
+        docs.sort((a, b) => parseFirestoreDateMs(b.fecha) - parseFirestoreDateMs(a.fecha));
+        return docs.slice(0, maxResults);
+    }
 }
 
 export async function deleteScan(scanId: string): Promise<void> {
     await deleteDoc(doc(db, "scans", scanId));
+}
+
+export async function clearUserScans(userId: string): Promise<void> {
+    const q = query(collection(db, "scans"), where("userId", "==", userId));
+    const snap = await getDocs(q);
+    await Promise.all(snap.docs.map((d) => deleteDoc(doc(db, "scans", d.id))));
 }
 
 // ═══════════════════════════════════════════════════════════

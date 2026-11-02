@@ -102,7 +102,7 @@ export function Hero() {
                     >
                         <Link
                             to="/escanear"
-                            className={`w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full text-sm font-medium text-white shadow-lg transition-transform duration-100 ease-out active:scale-[0.96] ${accent.btn} ${LINK_FOCUS}`}
+                            className={`w-full sm:w-auto inline-flex min-h-[48px] items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white cursor-pointer ${accent.btn} ${LINK_FOCUS}`}
                         >
                             <ScanLine className="size-4" aria-hidden="true" />
                             <span>Identificar Residuo</span>
@@ -110,7 +110,7 @@ export function Hero() {
 
                         <Link
                             to="/mapa"
-                            className={`w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-sm font-medium text-white bg-white/10 hover:bg-white/15 backdrop-blur-md border border-white/15 transition-transform duration-100 ease-out active:scale-[0.96] ${LINK_FOCUS}`}
+                            className={`w-full sm:w-auto inline-flex min-h-[48px] items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white bg-white/10 hover:bg-white/15 backdrop-blur-md border border-white/15 shadow-xs transition-all duration-150 ease-out active:scale-[0.98] cursor-pointer ${LINK_FOCUS}`}
                         >
                             <span>Mapa de Botes ITM</span>
                             <ArrowRight className="size-3.5 text-zinc-300" aria-hidden="true" />

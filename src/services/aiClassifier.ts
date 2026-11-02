@@ -10,8 +10,10 @@ export interface AIClassificationResult {
   allPredictions: Array<{ className: string; probability: number }>;
   isAiReal: boolean;
   notes?: string;
-  engine?: "gemini" | "mobilenet";
+  engine?: "groq" | "barcode" | "gemini" | "mobilenet";
   geminiTip?: string;
+  barcode?: string;
+  productImageUrl?: string;
 }
 
 // Singleton del modelo MobileNet para no recargar pesos innecesariamente

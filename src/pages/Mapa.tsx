@@ -1848,7 +1848,7 @@ export default function Mapa() {
                           href={`https://www.google.com/maps/dir/?api=1&destination=${selectedPoint.coordinates.lat},${selectedPoint.coordinates.lng}&travelmode=walking`}
                           target="_blank"
                           rel="noreferrer"
-                          className="flex min-h-[44px] flex-1 items-center justify-center gap-1.5 rounded-xl bg-emerald-700 px-3 text-[12px] font-bold text-white transition-colors hover:bg-emerald-600"
+                          className="flex min-h-[44px] flex-1 items-center justify-center gap-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 px-3 text-xs font-semibold text-white border border-emerald-700/20 shadow-xs active:scale-[0.98] transition-all cursor-pointer"
                         >
                           <Navigation size={14} />
                           Cómo llegar
@@ -1858,7 +1858,7 @@ export default function Mapa() {
                           onClick={() => {
                                                 flyToPoint(selectedPoint, { forcePanel: true });
                           }}
-                          className="flex min-h-[44px] items-center justify-center gap-1.5 rounded-xl border border-zinc-200 px-3 text-[12px] font-bold text-zinc-700 transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-800"
+                          className="flex min-h-[44px] items-center justify-center gap-1.5 rounded-xl px-3 text-xs font-semibold app-btn-secondary cursor-pointer"
                         >
                           <LocateFixed size={14} />
                           Centrar

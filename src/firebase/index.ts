@@ -25,6 +25,7 @@ export {
     addScan,
     getUserScans,
     deleteScan,
+    clearUserScans,
     getWasteTypes,
     getWasteTypeById,
     getUserProgress,

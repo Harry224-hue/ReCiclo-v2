@@ -266,7 +266,7 @@ export function CampusShowcase() {
 
                 <Link
                   to="/mapa"
-                  className={`w-full py-3 px-4 rounded-xl text-center text-sm font-semibold flex items-center justify-center gap-2 transition-all duration-300 shadow-md ${accent.btn}`}
+                  className={`w-full min-h-[46px] py-2.5 px-4 rounded-xl text-center text-sm font-semibold flex items-center justify-center gap-2 cursor-pointer ${accent.btn}`}
                 >
                   <span>Abrir Mapa y Encontrar Botes</span>
                   <ArrowUpRight size={16} />

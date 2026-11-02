@@ -465,8 +465,7 @@ export default function Login() {
                                             <button
                                                 type="submit"
                                                 disabled={forgotStatus.type === "sending"}
-                                                className="w-full py-2 rounded-lg text-xs font-bold text-white disabled:opacity-50 cursor-pointer"
-                                                style={{ background: accentHex }}
+                                                className={`w-full min-h-[38px] rounded-xl font-semibold text-xs text-white flex items-center justify-center cursor-pointer disabled:opacity-50 ${accent.btn}`}
                                             >
                                                 {forgotStatus.type === "sending" ? "Enviando…" : "Enviar enlace de recuperación"}
                                             </button>
@@ -475,16 +474,11 @@ export default function Login() {
                                 )}
                             </AnimatePresence>
 
-                            {/* Botón Principal Material You */}
-                            <motion.button
-                                whileTap={{ scale: 0.98 }}
+                            {/* Botón Principal Estandarizado */}
+                            <button
                                 disabled={loading}
                                 type="submit"
-                                className="w-full py-2.5 sm:py-3 mt-1 rounded-full font-bold text-xs sm:text-sm text-white transition-all duration-300 disabled:opacity-50 cursor-pointer flex items-center justify-center gap-1.5 shadow-md active:scale-[0.98]"
-                                style={{
-                                    background: `linear-gradient(135deg, ${accentHex} 0%, ${hexToRgba(accentHex, 0.85)} 60%, #059669 100%)`,
-                                    boxShadow: `0 6px 18px ${hexToRgba(accentHex, 0.32)}`,
-                                }}
+                                className={`w-full min-h-[44px] mt-1 rounded-xl font-semibold text-xs sm:text-sm text-white flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed ${accent.btn}`}
                             >
                                 {loading ? (
                                     <div className="size-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -494,7 +488,7 @@ export default function Login() {
                                         <ArrowRight size={14} />
                                     </>
                                 )}
-                            </motion.button>
+                            </button>
                         </form>
 
                         {/* Enlace de cambio */}
