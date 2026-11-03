@@ -49,11 +49,10 @@ p, body {
   transform: scale(0.965);
 }
 
-/* ─── SISTEMA DE BOTONES RECICLO: CRAFTED (APPLE DESIGN & ANTISLOP) ───
- * Diseño auténtico, sobrio y humano: sin artificios de IA (sin rayos diagonales
- * shimmer, sin halos de neón saturados ni decoraciones innecesarias).
- * Foco en respuesta táctil física inmediata (kill latency), micro-bisel de luz
- * cenital, curvas elásticas spring y retroalimentación direccional en iconos.
+/* ─── SISTEMA DE BOTONES RECICLO: REDONDOS Y NATURALES ───
+ * Botones limpios, normales y consistentes con la estética redondeada (rounded-full)
+ * del resto de la aplicación (Notch, píldoras, tags y tarjetas).
+ * Sin efectos raros ni artificiales: color sólido, interacción táctil fluida y limpia.
  * ─────────────────────────────────────────────────────────────────────────── */
 .app-btn-base,
 .app-btn-primary,
@@ -71,50 +70,21 @@ p, body {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  border-radius: 0.75rem;
+  border-radius: 9999px;
   font-weight: 600;
   font-size: 0.875rem;
   line-height: 1.25;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.012em;
   white-space: nowrap;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
   cursor: pointer;
   transform: translateZ(0);
-  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 180ms cubic-bezier(0.16, 1, 0.3, 1),
-              background-color 150ms ease,
-              border-color 150ms ease,
-              color 150ms ease,
-              filter 150ms ease;
+  transition: all 150ms ease;
 }
 
-/* Micro-interacción direccional en iconos (Apple Momentum Hint) */
-.app-btn-base svg,
-.app-btn-primary svg,
-.app-btn-secondary svg,
-.app-btn-tertiary svg,
-.app-btn-ghost svg,
-.app-btn-destructive svg {
-  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.app-btn-base:hover svg:last-child:not(:first-child),
-.app-btn-primary:hover svg:last-child:not(:first-child),
-.app-btn-secondary:hover svg:last-child:not(:first-child),
-.app-btn-tertiary:hover svg:last-child:not(:first-child),
-.app-btn-ghost:hover svg:last-child:not(:first-child) {
-  transform: translateX(2px);
-}
-
-.app-btn-base:hover svg:first-child:not(:last-child),
-.app-btn-primary:hover svg:first-child:not(:last-child),
-.app-btn-secondary:hover svg:first-child:not(:last-child) {
-  transform: scale(1.05);
-}
-
-/* Respuesta táctil física instantánea (Kill Latency - Apple WWDC) */
+/* Pulsación táctil normal */
 .app-btn-base:active,
 .app-btn-primary:active,
 .app-btn-secondary:active,
@@ -129,8 +99,7 @@ p, body {
 .app-btn-icon-glass:active,
 .app-btn-destructive:active,
 .app-btn-danger:active {
-  transform: scale(0.97) !important;
-  transition: transform 80ms ease-out !important;
+  transform: scale(0.96);
 }
 
 .app-btn-base:disabled,
@@ -147,42 +116,38 @@ p, body {
 .app-btn-icon-glass:disabled,
 .app-btn-destructive:disabled,
 .app-btn-danger:disabled {
-  opacity: 0.42;
+  opacity: 0.45;
   cursor: not-allowed;
   pointer-events: none;
   transform: none !important;
   box-shadow: none !important;
-  filter: grayscale(0.5);
 }
 
-/* 1. BOTÓN PRINCIPAL: Pigmento sólido con bisel táctil cenital */
+/* 1. BOTÓN PRINCIPAL: Redondo, color sólido con hover y elevación normal */
 .app-btn-primary {
   background-color: var(--accent-color, #059669);
   color: #ffffff !important;
-  border: 1px solid color-mix(in srgb, var(--accent-color, #059669) 82%, #000000 18%);
-  box-shadow: inset 0 1px 0.5px 0 rgba(255, 255, 255, 0.22),
-              0 1px 2px 0 rgba(0, 0, 0, 0.08);
+  border: none;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
 }
 
 .app-btn-primary:hover {
+  filter: brightness(1.08);
   transform: translateY(-1px);
-  filter: brightness(1.04);
-  box-shadow: inset 0 1px 0.5px 0 rgba(255, 255, 255, 0.28),
-              0 4px 12px -2px rgba(0, 0, 0, 0.16),
-              0 1px 3px 0 rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.16);
 }
 
 .dark .app-btn-primary {
   background-color: var(--accent-color, #059669);
-  border: 1px solid color-mix(in srgb, var(--accent-color, #059669) 82%, #ffffff 18%);
-  box-shadow: inset 0 1px 0.5px 0 rgba(255, 255, 255, 0.2),
-              0 2px 6px 0 rgba(0, 0, 0, 0.35);
+  color: #ffffff !important;
+  border: none;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.35);
 }
 
 .dark .app-btn-primary:hover {
-  filter: brightness(1.06);
-  box-shadow: inset 0 1px 0.5px 0 rgba(255, 255, 255, 0.25),
-              0 5px 14px -2px rgba(0, 0, 0, 0.45);
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px -2px rgba(0, 0, 0, 0.45);
 }
 
 .app-btn-fab,
@@ -191,44 +156,36 @@ p, body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  border-radius: 9999px;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
   cursor: pointer;
   transform: translateZ(0);
-  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 180ms cubic-bezier(0.16, 1, 0.3, 1),
-              background-color 150ms ease,
-              border-color 150ms ease,
-              color 150ms ease;
+  transition: all 150ms ease;
 }
 
-/* 2. SECONDARY BUTTON: Fondo blanco nítido, borde fino y tinte suave en hover */
+/* 2. SECONDARY BUTTON: Borde y texto con el acento, fondo transparente/limpio */
 .app-btn-secondary {
-  background-color: #ffffff;
-  color: color-mix(in srgb, var(--accent-color, #059669) 90%, #064e3b 10%);
-  border: 1px solid color-mix(in srgb, var(--accent-color, #059669) 30%, #e4e4e7 70%);
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+  background-color: transparent;
+  color: var(--accent-color, #059669);
+  border: 1.5px solid var(--accent-color, #059669);
 }
 .app-btn-secondary:hover {
   transform: translateY(-1px);
-  background-color: color-mix(in srgb, var(--accent-color, #059669) 6%, #ffffff);
-  border-color: color-mix(in srgb, var(--accent-color, #059669) 55%, transparent);
-  box-shadow: 0 3px 8px -1px rgba(0, 0, 0, 0.07);
+  background-color: color-mix(in srgb, var(--accent-color, #059669) 10%, transparent);
 }
 .dark .app-btn-secondary {
-  background-color: #18181b;
-  color: color-mix(in srgb, var(--accent-color, #34d399) 75%, #ffffff 25%);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.25);
+  background-color: transparent;
+  color: color-mix(in srgb, var(--accent-color, #34d399) 85%, #ffffff 15%);
+  border: 1.5px solid color-mix(in srgb, var(--accent-color, #34d399) 75%, transparent);
 }
 .dark .app-btn-secondary:hover {
-  background-color: color-mix(in srgb, var(--accent-color, #34d399) 10%, #18181b);
-  border-color: color-mix(in srgb, var(--accent-color, #34d399) 45%, transparent);
-  box-shadow: 0 3px 10px -1px rgba(0, 0, 0, 0.4);
+  transform: translateY(-1px);
+  background-color: color-mix(in srgb, var(--accent-color, #34d399) 15%, transparent);
 }
 
-/* 3. TERTIARY BUTTON: Material neutro silencioso (Apple System Gray) */
+/* 3. TERTIARY BUTTON: Gris neutro suave */
 .app-btn-tertiary {
   background-color: #f4f4f5;
   color: #27272a;
@@ -241,124 +198,127 @@ p, body {
 }
 .dark .app-btn-tertiary {
   background-color: #27272a;
-  color: #e4e4e7;
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  color: #f4f4f5;
+  border: 1px solid transparent;
 }
 .dark .app-btn-tertiary:hover {
+  transform: translateY(-1px);
   background-color: #3f3f46;
   color: #ffffff;
 }
 
-/* 4. GHOST / OUTLINE: Borde neutro sutil para rutas alternas */
+/* 4. GHOST / OUTLINE: Borde neutro sutil */
 .app-btn-ghost,
 .app-btn-outline {
   background-color: transparent;
-  color: #27272a;
-  border: 1px solid rgba(24, 24, 27, 0.14);
+  color: #3f3f46;
+  border: 1.5px solid #d4d4d8;
 }
 .app-btn-ghost:hover,
 .app-btn-outline:hover {
   transform: translateY(-1px);
-  background-color: rgba(24, 24, 27, 0.04);
-  border-color: rgba(24, 24, 27, 0.28);
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #09090b;
+  border-color: #a1a1aa;
 }
 .dark .app-btn-ghost,
 .dark .app-btn-outline {
   background-color: transparent;
-  color: #f4f4f5;
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #d4d4d8;
+  border: 1.5px solid #3f3f46;
 }
 .dark .app-btn-ghost:hover,
 .dark .app-btn-outline:hover {
-  background-color: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.32);
+  transform: translateY(-1px);
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  border-color: #52525b;
 }
 
-/* Ghost sobre overlay de cámara o fondos oscuros */
+/* Ghost sobre fondo oscuro o cámara */
 .app-btn-glass {
   background-color: rgba(0, 0, 0, 0.45);
   color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 .app-btn-glass:hover {
   transform: translateY(-1px);
-  background-color: rgba(255, 255, 255, 0.14);
-  border-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.45);
 }
 
-/* Pearl: Superficie luminosa sólida */
+/* Pearl: Blanco limpio */
 .app-btn-pearl {
   background-color: #ffffff;
   color: #09090b !important;
   border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08);
 }
 .app-btn-pearl:hover {
   transform: translateY(-1px);
   background-color: #f4f4f5;
-  box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.09);
 }
 
-/* 5. TEXT BUTTON: Sin marco, adquiere relleno suave al interactuar */
+/* 5. TEXT BUTTON: Sin marco, adquiere fondo suave al interactuar */
 .app-btn-text {
   background-color: transparent;
-  color: #3f3f46;
+  color: #52525b;
   border: 1px solid transparent;
-  padding-left: 0.625rem;
-  padding-right: 0.625rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 .app-btn-text:hover,
 .app-btn-text:focus-visible {
-  background-color: rgba(24, 24, 27, 0.05);
+  background-color: rgba(0, 0, 0, 0.05);
   color: #09090b;
 }
 .dark .app-btn-text {
-  color: #d4d4d8;
+  color: #a1a1aa;
 }
 .dark .app-btn-text:hover,
 .dark .app-btn-text:focus-visible {
-  background-color: rgba(255, 255, 255, 0.07);
+  background-color: rgba(255, 255, 255, 0.08);
   color: #ffffff;
 }
 
-/* 6. FLOATING ACTION BUTTON (FAB): Elevación física para cámara */
+/* 6. FLOATING ACTION BUTTON (FAB): Botón circular flotante */
 .app-btn-fab {
   border-radius: 9999px;
   background-color: var(--accent-color, #059669);
   color: #ffffff !important;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.16);
+  border: none;
+  box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.18);
 }
 .app-btn-fab:hover {
   transform: translateY(-2px) scale(1.03);
-  filter: brightness(1.04);
-  box-shadow: 0 6px 18px 0 rgba(0, 0, 0, 0.22);
+  filter: brightness(1.08);
+  box-shadow: 0 6px 18px 0 rgba(0, 0, 0, 0.24);
 }
 
-/* 7. ICON BUTTON: 48×48px táctil ergonómico con micro-escala */
+/* 7. ICON BUTTON: 48×48px táctil y circular */
 .app-btn-icon {
   min-width: 48px;
   min-height: 48px;
   padding: 0.625rem;
-  border-radius: 0.75rem;
-  background-color: rgba(244, 244, 245, 0.85);
+  border-radius: 9999px;
+  background-color: #f4f4f5;
   color: #27272a;
-  border: 1px solid rgba(24, 24, 27, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.06);
 }
 .app-btn-icon:hover {
-  transform: scale(1.04);
+  transform: scale(1.05);
   background-color: #e4e4e7;
   color: #09090b;
 }
 .dark .app-btn-icon {
-  background-color: rgba(39, 39, 42, 0.85);
-  color: #e4e4e7;
+  background-color: #27272a;
+  color: #f4f4f5;
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 .dark .app-btn-icon:hover {
-  background-color: rgba(63, 63, 70, 0.95);
+  background-color: #3f3f46;
   color: #ffffff;
 }
 
@@ -370,28 +330,26 @@ p, body {
   background-color: rgba(0, 0, 0, 0.45);
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 .app-btn-icon-glass:hover {
-  transform: scale(1.04);
-  background-color: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.35);
+  transform: scale(1.05);
+  background-color: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
-/* 8. DESTRUCTIVE BUTTON: Rojo Apple con relieve sutil */
+/* 8. DESTRUCTIVE BUTTON: Rojo sólido normal */
 .app-btn-destructive {
   background-color: #dc2626;
   color: #ffffff !important;
-  border: 1px solid #b91c1c;
-  box-shadow: inset 0 1px 0.5px 0 rgba(255, 255, 255, 0.2),
-              0 1px 2px 0 rgba(0, 0, 0, 0.08);
+  border: none;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
 }
 .app-btn-destructive:hover {
+  background-color: #b91c1c;
   transform: translateY(-1px);
-  filter: brightness(1.04);
-  box-shadow: inset 0 1px 0.5px 0 rgba(255, 255, 255, 0.25),
-              0 4px 12px -2px rgba(220, 38, 38, 0.28);
+  box-shadow: 0 4px 10px 0 rgba(220, 38, 38, 0.25);
 }
 
 /* Danger secundario */
